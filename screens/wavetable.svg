@@ -1,0 +1,85 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="160px" viewBox="0 0 320 160">
+<line x1="4" y1="150" x2="316" y2="150" stroke="#6F7173" stroke-width="1.5"/>
+<path d="M10 14 L82 14 L58 62 L34 62 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="40" y1="62" x2="40" y2="76" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="52" y1="62" x2="52" y2="76" stroke="#AEB1DC" stroke-width="1.5"/>
+<g id="waves">
+<polyline points="18.5,21 23.1,20 27.7,19.3 32.2,19 36.8,19.3 41.4,20 46,21 50.6,22 55.2,22.7 59.8,23 64.3,22.7 68.9,22 73.5,21" fill="none" stroke="#4D9EFF" stroke-width="1.2"/>
+<polyline points="21.9,27.8 33.9,25.8 58,29.8 70.1,27.8" fill="none" stroke="#DFD9FF" stroke-width="1.2"/>
+<polyline points="25.3,34.6 46,32.6 46,36.6 66.7,34.6" fill="none" stroke="#00ED95" stroke-width="1.2"/>
+<polyline points="28.7,41.4 28.7,39.4 46,39.4 46,43.4 63.3,43.4 63.3,41.4" fill="none" stroke="#FFFFFF" stroke-width="1.2"/>
+<polyline points="32.1,48.2 34.4,47.5 36.7,46.7 39.1,46.4 41.4,46.6 43.7,46.9 46,48.2 48.3,49.7 50.6,48.9 53,47.6 55.3,48.5 57.6,49.1 59.9,48.2" fill="none" stroke="#DFD9FF" stroke-width="1.2"/>
+<polyline points="35.5,55 35.5,53 40.8,53 40.8,57 56.5,57 56.5,55" fill="none" stroke="#FF3A5D" stroke-width="1.2"/>
+</g>
+<line x1="34" y1="84" x2="144" y2="84" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="34" y1="96" x2="144" y2="96" stroke="#AEB1DC" stroke-width="1.5"/>
+<circle cx="34" cy="90" r="6" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<circle cx="34" cy="90" r="1.2" fill="#AEB1DC" stroke="#AEB1DC" stroke-width="1"/>
+<circle cx="144" cy="90" r="6" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<circle cx="144" cy="90" r="1.2" fill="#AEB1DC" stroke="#AEB1DC" stroke-width="1"/>
+<circle id="dot0" cx="62" cy="90" r="1.2" fill="#6F7173" stroke="#6F7173" stroke-width="1"/>
+<circle id="dot1" cx="89" cy="90" r="1.2" fill="#6F7173" stroke="#6F7173" stroke-width="1"/>
+<circle id="dot2" cx="116" cy="90" r="1.2" fill="#6F7173" stroke="#6F7173" stroke-width="1"/>
+<line x1="40" y1="97" x2="40" y2="150" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="138" y1="97" x2="138" y2="150" stroke="#6F7173" stroke-width="1.5"/>
+<g id="active">
+<polyline points="64,76 73,71 73,81 82,76 83.5,73.5 85,71.7 86.5,71 88,71.7 89.5,73.5 91,76 92.5,78.5 94,80.3 95.5,81 97,80.3 98.5,78.5 100,76" fill="none" stroke="#DFD9FF" stroke-width="2"/>
+</g>
+<path d="M60 104 L118 104 L118 136 L60 136 Z" fill="none" stroke="#6F7173" stroke-width="1.5"/>
+<g id="knob1">
+<path id="gear0" d="M83 119 L85 119 L85 121 L83 121 L82 123 L83 125 L82 126 L80 125 L79 127 L78 129 L77 129 L76 127 L74 127 L72 128 L71 127 L71 125 L70 124 L68 124 L67 122 L69 121 L69 119 L67 118 L68 116 L70 116 L71 115 L71 113 L72 112 L74 113 L76 113 L77 111 L78 111 L79 113 L80 115 L82 114 L83 115 L82 117 Z" fill="none" stroke="#00ED95" stroke-width="1.1"/>
+<circle cx="76" cy="120" r="1.5" fill="#00ED95" stroke="#00ED95" stroke-width="1"/>
+<path id="gear1" d="M107 119 L109 119 L109 121 L107 121 L106 123 L108 125 L107 126 L105 125 L103 126 L104 128 L102 129 L101 127 L99 127 L98 129 L96 128 L97 126 L95 125 L93 126 L92 125 L94 123 L93 121 L91 121 L91 119 L93 119 L94 117 L92 115 L93 114 L95 115 L97 114 L96 112 L98 111 L99 113 L101 113 L102 111 L104 112 L103 114 L105 115 L107 114 L108 115 L106 117 Z" fill="none" stroke="#00ED95" stroke-width="1.1"/>
+<circle cx="100" cy="120" r="1.5" fill="#00ED95" stroke="#00ED95" stroke-width="1"/>
+</g>
+<path d="M30.2 94.7 L70.4 127 M37.2 84.9 L80.8 112.4" fill="none" stroke="#6F7173" stroke-width="1.2"/>
+<path d="M76 111 L100 111 M76 129 L100 129" fill="none" stroke="#6F7173" stroke-width="1.2"/>
+<line x1="156" y1="38" x2="156" y2="70" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="206" y1="38" x2="206" y2="70" stroke="#6F7173" stroke-width="1.5"/>
+<g id="knob2">
+<g id="press">
+<line x1="181" y1="14" x2="181" y2="46" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="178" y1="22" x2="184" y2="25" stroke="#6F7173" stroke-width="1"/>
+<line x1="178" y1="28" x2="184" y2="31" stroke="#6F7173" stroke-width="1"/>
+<line x1="178" y1="34" x2="184" y2="37" stroke="#6F7173" stroke-width="1"/>
+<line x1="178" y1="40" x2="184" y2="43" stroke="#6F7173" stroke-width="1"/>
+<path d="M160 46 L202 46 L202 52 L160 52 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<line x1="175" y1="14" x2="187" y2="14" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+</g>
+</g>
+<path d="M150 70 L212 70 L190 112 L172 112 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<g id="filter">
+<polyline points="160,86 162.4,86 164.8,86 167.2,86 169.6,86 172,86 174.4,86 176.8,86 179.2,86 181.6,84.9 184,80.8 186.4,81.5 188.8,86 191.2,88.4 193.6,91.2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+</g>
+<line x1="168.5" y1="104" x2="193.5" y2="104" stroke="#6F7173" stroke-width="1"/>
+<line x1="172" y1="101" x2="172" y2="107" stroke="#6F7173" stroke-width="1"/>
+<line x1="177" y1="101" x2="177" y2="107" stroke="#6F7173" stroke-width="1"/>
+<line x1="182" y1="101" x2="182" y2="107" stroke="#6F7173" stroke-width="1"/>
+<line x1="187" y1="101" x2="187" y2="107" stroke="#6F7173" stroke-width="1"/>
+<line x1="191" y1="101" x2="191" y2="107" stroke="#6F7173" stroke-width="1"/>
+<line x1="181" y1="112" x2="181" y2="122" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="181" y1="122" x2="222" y2="122" stroke="#AEB1DC" stroke-width="1.5"/>
+<path d="M222 112 L280 112 L280 140 L222 140 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="222" y1="126" x2="236" y2="126" stroke="#AEB1DC" stroke-width="1"/>
+<line x1="272" y1="126" x2="280" y2="126" stroke="#AEB1DC" stroke-width="1"/>
+<g id="knob3">
+<polyline points="236,126 235.8,122.2 234.4,119.8 232.6,119.8 231.2,122.2 231,126 232.4,129.8 235,132.2 238,132.2 240.6,129.8 242,126 241.8,122.2 240.4,119.8 238.6,119.8 237.2,122.2 237,126 238.4,129.8 241,132.2 244,132.2 246.6,129.8 248,126 247.8,122.2 246.4,119.8 244.6,119.8 243.2,122.2 243,126 244.4,129.8 247,132.2 250,132.2 252.6,129.8 254,126 253.8,122.2 252.4,119.8 250.6,119.8 249.2,122.2 249,126 250.4,129.8 253,132.2 256,132.2 258.6,129.8 260,126 259.8,122.2 258.4,119.8 256.6,119.8 255.2,122.2 255,126 256.4,129.8 259,132.2 262,132.2 264.6,129.8 266,126 265.8,122.2 264.4,119.8 262.6,119.8 261.2,122.2 261,126 262.4,129.8 265,132.2 268,132.2 270.6,129.8 272,126" fill="none" stroke="#FF3A5D" stroke-width="1.2"/>
+</g>
+<line x1="228" y1="140" x2="228" y2="150" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="274" y1="140" x2="274" y2="150" stroke="#6F7173" stroke-width="1.5"/>
+<g id="knob0">
+<path d="M74.5 27 L80 23.5 L80 30.5 Z" fill="none" stroke="#4D9EFF" stroke-width="1.5"/>
+<line x1="80" y1="27" x2="86" y2="27" stroke="#4D9EFF" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<line id="bar0" x1="80" y1="25" x2="80" y2="24" stroke="#4D9EFF" stroke-width="1.2"/>
+<line id="bar1" x1="76" y1="113" x2="76" y2="112" stroke="#00ED95" stroke-width="1.2"/>
+<line id="bar2" x1="175.5" y1="14.5" x2="175.5" y2="13.5" stroke="#FFFFFF" stroke-width="1.2"/>
+<line id="bar3" x1="232" y1="120" x2="232" y2="119" stroke="#FF3A5D" stroke-width="1.2"/>
+<line x1="234" y1="112" x2="234" y2="96" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="240" y1="112" x2="240" y2="96" stroke="#6F7173" stroke-width="1.5"/>
+<circle id="bub0" cx="236" cy="90" r="3" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<circle id="bub1" cx="230" cy="82" r="4" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<circle id="bub2" cx="222" cy="72" r="5" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<path d="M280 122 L288 119 L288 129 L280 126 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<polyline id="out" points="290,124 291.9,121.4 293.7,119.3 295.6,118.2 297.4,118.2 299.3,119.3 301.1,121.4 303,124 304.9,126.6 306.7,128.7 308.6,129.8 310.4,129.8 312.3,128.7 314.1,126.6 316,124" fill="none" stroke="#DFD9FF" stroke-width="2"/>
+</svg>

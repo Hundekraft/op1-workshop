@@ -1,0 +1,510 @@
+{
+ "title": "OP-1 R246 custom firmware (synth SDK)",
+ "description": [
+  "op1r 2: custom synth engines with own screens (supersaw, fmbell, granular), iter lab screen,",
+  "tape echo + clouds granular FX with own screens, quad LFO (4 LFOs, voice/free),\n  euclid sequencer (6 slots), OP-Z controller mode (SysEx F0 00 20 76 00 01 03 F7).",
+  "Built with synth_sdk/make_firmware.py; see docs/."
+ ],
+ "original": {
+  "name": "op1_246.op1",
+  "sha256": "c5315218f825f143b415ca554516541898abee843d3a236df0b54c04e1fb13a9"
+ },
+ "patched_files": [
+  {
+   "path": "OP1_vdk.ldr",
+   "orig_sha256": "f79d299f6f9019c998013a4176223a6a1bc999a2d8c54451346861f6ea455c74",
+   "result_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+   "ops": [
+    {
+     "op": "replace",
+     "offset": 2,
+     "old": "7f",
+     "new": "9b"
+    },
+    {
+     "op": "replace",
+     "offset": 12,
+     "old": "d82221",
+     "new": "584324"
+    },
+    {
+     "op": "replace",
+     "offset": 313970,
+     "old": "522e203030323436",
+     "new": "206f703172203138"
+    },
+    {
+     "op": "replace",
+     "offset": 317152,
+     "old": "26bfa3",
+     "new": "4448e1"
+    },
+    {
+     "op": "replace",
+     "offset": 317276,
+     "old": "d0bfa3",
+     "new": "5048e1"
+    },
+    {
+     "op": "replace",
+     "offset": 317408,
+     "old": "78c0a3",
+     "new": "7a48e1"
+    },
+    {
+     "op": "replace",
+     "offset": 415208,
+     "old": "d4999b01000000008a9b9b010000000080999b01000000006c999b",
+     "new": "8004e00100000000e803e00100000000ec05e001000000008405e0"
+    },
+    {
+     "op": "replace",
+     "offset": 416328,
+     "old": "68ce9c010000000030ce9c",
+     "new": "8648e101000000005844e0"
+    },
+    {
+     "op": "replace",
+     "offset": 416360,
+     "old": "48d09c01000000002ece9c",
+     "new": "d248e10100000000ac44e0"
+    },
+    {
+     "op": "replace",
+     "offset": 416392,
+     "old": "04d19c01000000002cce9c",
+     "new": "ac48e101000000000045e0"
+    },
+    {
+     "op": "replace",
+     "offset": 417456,
+     "old": "34799e01000000000a789e",
+     "new": "7009e00100000000d407e0"
+    },
+    {
+     "op": "replace",
+     "offset": 417488,
+     "old": "e47e9e0100000000d0789e",
+     "new": "1808e001000000000008e0"
+    },
+    {
+     "op": "replace",
+     "offset": 421280,
+     "old": "40e2a5",
+     "new": "00d5e0"
+    },
+    {
+     "op": "replace",
+     "offset": 458076,
+     "old": "044841e1a0ff",
+     "new": "acd441e1e001"
+    },
+    {
+     "op": "replace",
+     "offset": 602162,
+     "old": "07e3c95a",
+     "new": "26e31317"
+    },
+    {
+     "op": "replace",
+     "offset": 620996,
+     "old": "07e3f432",
+     "new": "25e3caf0"
+    },
+    {
+     "op": "replace",
+     "offset": 777828,
+     "old": "06e3c403",
+     "new": "24e30ec0"
+    },
+    {
+     "op": "replace",
+     "offset": 880922,
+     "old": "05e3713a",
+     "new": "23e3bbf6"
+    },
+    {
+     "op": "replace",
+     "offset": 893344,
+     "old": "05e3201f",
+     "new": "23e3f6dc"
+    },
+    {
+     "op": "replace",
+     "offset": 1034004,
+     "old": "04e3660c",
+     "new": "22e33cca"
+    },
+    {
+     "op": "replace",
+     "offset": 1048526,
+     "old": "18300b32",
+     "new": "22e20bb0"
+    },
+    {
+     "op": "replace",
+     "offset": 1055476,
+     "old": "38080b10",
+     "new": "23e32440"
+    },
+    {
+     "op": "replace",
+     "offset": 1056444,
+     "old": "01080710",
+     "new": "23e3533e"
+    },
+    {
+     "op": "replace",
+     "offset": 1071160,
+     "old": "03e3d4c3",
+     "new": "22e3aa81"
+    },
+    {
+     "op": "replace",
+     "offset": 1108380,
+     "old": "18300b32",
+     "new": "22e24a37"
+    },
+    {
+     "op": "replace",
+     "offset": 1110328,
+     "old": "03e38c71",
+     "new": "22e3d437"
+    },
+    {
+     "op": "replace",
+     "offset": 1146750,
+     "old": "ffe39b9f",
+     "new": "21e32df4"
+    },
+    {
+     "op": "replace",
+     "offset": 1147092,
+     "old": "ffe3bc9e",
+     "new": "21e382f7"
+    },
+    {
+     "op": "replace",
+     "offset": 1175074,
+     "old": "ffe3bdff",
+     "new": "21e3d7b7"
+    },
+    {
+     "op": "replace",
+     "offset": 1175162,
+     "old": "ffe391ff",
+     "new": "21e3abb7"
+    },
+    {
+     "op": "replace",
+     "offset": 1261902,
+     "old": "01e3aa1d",
+     "new": "21e3470c"
+    },
+    {
+     "op": "replace",
+     "offset": 1269592,
+     "old": "00601000",
+     "new": "21e2b09d"
+    },
+    {
+     "op": "replace",
+     "offset": 1279908,
+     "old": "a5e60900",
+     "new": "21e29489"
+    },
+    {
+     "op": "replace",
+     "offset": 1281082,
+     "old": "03e3fdd6",
+     "new": "20e353f1"
+    },
+    {
+     "op": "replace",
+     "offset": 1285244,
+     "old": "02e3d224",
+     "new": "20e31ce1"
+    },
+    {
+     "op": "replace",
+     "offset": 1293484,
+     "old": "02e3ac11",
+     "new": "20e382cf"
+    },
+    {
+     "op": "replace",
+     "offset": 1299856,
+     "old": "02e33a05",
+     "new": "20e310c3"
+    },
+    {
+     "op": "replace",
+     "offset": 1333822,
+     "old": "02e33f59",
+     "new": "20e38d85"
+    },
+    {
+     "op": "replace",
+     "offset": 1403568,
+     "old": "ffe328fc",
+     "new": "1fe33cf7"
+    },
+    {
+     "op": "replace",
+     "offset": 1414414,
+     "old": "00e37dce",
+     "new": "1fe319e5"
+    },
+    {
+     "op": "replace",
+     "offset": 1450940,
+     "old": "ffe38801",
+     "new": "1fe30a9d"
+    },
+    {
+     "op": "replace",
+     "offset": 1516098,
+     "old": "00e3e75e",
+     "new": "1fe3bd1c"
+    },
+    {
+     "op": "replace",
+     "offset": 1582584,
+     "old": "ffe31ae0",
+     "new": "1ee3649c"
+    },
+    {
+     "op": "replace",
+     "offset": 1597100,
+     "old": "ffe3c0c3",
+     "new": "1ee30a80"
+    },
+    {
+     "op": "replace",
+     "offset": 1610274,
+     "old": "ffe3f7a6",
+     "new": "1ee3cd64"
+    },
+    {
+     "op": "replace",
+     "offset": 1642440,
+     "old": "fbe3d0f2",
+     "new": "1ee31029"
+    },
+    {
+     "op": "replace",
+     "offset": 1668444,
+     "old": "09e138a6",
+     "new": "1de2faf3"
+    },
+    {
+     "op": "replace",
+     "offset": 1670302,
+     "old": "ffe38bfc",
+     "new": "1de3ebef"
+    },
+    {
+     "op": "replace",
+     "offset": 1670732,
+     "old": "ffe3b4fb",
+     "new": "1de314ef"
+    },
+    {
+     "op": "replace",
+     "offset": 1670992,
+     "old": "ffe332fb",
+     "new": "1de392ee"
+    },
+    {
+     "op": "replace",
+     "offset": 1696356,
+     "old": "ffe3ea01",
+     "new": "1de334be"
+    },
+    {
+     "op": "replace",
+     "offset": 1945430,
+     "old": "ffe381f9",
+     "new": "1be3f5de"
+    },
+    {
+     "op": "insert",
+     "offset": 2171347,
+     "blob": "OP1_vdk.ldr.insert.bin",
+     "sha256": "12d49054d17ce21f7dc954536b6547c6d283300a258f1294f82a405538a172e0",
+     "size": 204928
+    }
+   ]
+  },
+  {
+   "path": "content/op1_factory.db",
+   "orig_sha256": "be4572298fe9dc83b106d5c4eaf1cc972280d97f028f3eaebc0c76dc68ac9cf0",
+   "result_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+   "ops": [
+    {
+     "op": "replace",
+     "offset": 27,
+     "old": "0c",
+     "new": "0d"
+    },
+    {
+     "op": "replace",
+     "offset": 95,
+     "old": "0c002e0928",
+     "new": "0d002e8dfb"
+    },
+    {
+     "op": "replace",
+     "offset": 1028,
+     "old": "0702880003c403860357031b02dd02b502880000000000000000",
+     "new": "0b01a500024e03c403860357031b02dd02b50288021a01db01a5"
+    },
+    {
+     "op": "replace",
+     "offset": 1445,
+     "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "new": "340d040019617265766572625b373132362c20393030302c2031313236342c2032333139312c2032313235312c20302c20302c20305d3d0c04001973636c6f7564735b373239362c2031323238382c2031363839362c2032303437392c2032313235302c2031363338342c2032323933382c20305d320b04001561746170655b353336312c2031303530302c20383235302c2031323639312c2032313234392c20302c20302c20305d38020400196966696c7465725b373534382c20302c20383237322c2031393537322c20383030302c20383030302c20383030302c20383030305d"
+    },
+    {
+     "op": "replace",
+     "offset": 2052,
+     "old": "0702dd",
+     "new": "0802a4"
+    },
+    {
+     "op": "replace",
+     "offset": 2070,
+     "old": "0000",
+     "new": "02a4"
+    },
+    {
+     "op": "replace",
+     "offset": 2724,
+     "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "new": "37080400156b717561645b31392c202d383139322c20372c202d32323532362c20322c202d393732372c2032343537362c202d32333136385d"
+    },
+    {
+     "op": "replace",
+     "offset": 3076,
+     "old": "0603b9",
+     "new": "0803a5"
+    },
+    {
+     "op": "replace",
+     "offset": 3092,
+     "old": "00000000",
+     "new": "03ae03a5"
+    },
+    {
+     "op": "replace",
+     "offset": 4005,
+     "old": "0000000000000000000000000000000000000000",
+     "new": "0708030015646f747309070300196575636c6964"
+    },
+    {
+     "op": "replace",
+     "offset": 4097,
+     "old": "024f000a01ee00",
+     "new": "0000000e015102"
+    },
+    {
+     "op": "replace",
+     "offset": 4124,
+     "old": "0000000000000000",
+     "new": "024f01ba01880151"
+    },
+    {
+     "op": "replace",
+     "offset": 4433,
+     "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "new": "350e04001d5f6772616e756c61725b343030302c20383030302c20333030302c2031323030302c2032313235312c20302c20302c20305d300d04001959666d62656c6c5b383139322c2031363030302c20383030302c20302c2032313235302c20302c20302c20305d320c04001d5973757065727361775b383030302c20302c2031323030302c20363030302c2032313234392c20302c20302c20305d"
+    },
+    {
+     "op": "replace",
+     "offset": 4687,
+     "old": "0000002f19536473796e74685b313531362c2031363730342c20302c2031353136382c20302c20302c20302c20",
+     "new": "2b0b04001553697465725b313531362c2031363730342c20302c2031353136382c20302c20302c20302c20305d"
+    }
+   ]
+  }
+ ],
+ "added_files": [
+  {
+   "path": "content/display/cloudsfx.svg",
+   "blob": "files/content_display_cloudsfx.svg",
+   "sha256": "79505bd520efc536ff7ae4948977aa384e2a1469911dd8b1cdb1b4720d666de5",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/dots.svg",
+   "blob": "files/content_display_dots.svg",
+   "sha256": "1fa3e15ea2cfcfc2be614b8960f8f6b4e6bac52b7db34dba1365af3d9f2ffb16",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/euclid.svg",
+   "blob": "files/content_display_euclid.svg",
+   "sha256": "93e265d5a939732b33d0f808149cee8f85ea0162ee67dd469ade9a39bf1794fe",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/fmbell.svg",
+   "blob": "files/content_display_fmbell.svg",
+   "sha256": "a4d2cddd8a286a47d9b5e4c62f976cce4c84097bdf0675398271daabf9b9e758",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/fxgeneric.svg",
+   "copy_of": "content/display/iter.svg",
+   "sha256": "d7716e5fd399c7462c5990379074fcffc1c2a5f702f8b76341d141310f192d37",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/granular.svg",
+   "blob": "files/content_display_granular.svg",
+   "sha256": "8817367a6a517b55b3ee1bb00d593a0833747ebe87a71bb756bf504fb10a24fd",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/iterlab.svg",
+   "blob": "files/content_display_iterlab.svg",
+   "sha256": "0aecb8ba7a1ae70e4add48b1c52df0268a200b09cc0334925483dc066d5c1309",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/kalireverb.svg",
+   "blob": "files/content_display_kalireverb.svg",
+   "sha256": "208ae710456a00785c2fef319ddc636a730e1b1865bfb82f1f6dd9afdb0bdb97",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/quadlfo.svg",
+   "blob": "files/content_display_quadlfo.svg",
+   "sha256": "97a28f6c391ca87272a1330c89d653a4c42b04070a7a7a84f7058017ea2dc62a",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/supersaw.svg",
+   "blob": "files/content_display_supersaw.svg",
+   "sha256": "f2e02a1a325e3ef9751c5ac15b7da890aab775facd38c808ca34f345392da7ce",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/sysmon.svg",
+   "blob": "files/content_display_sysmon.svg",
+   "sha256": "d360583247e632913ccd534a0bb4a3e288edfca00197d5f87e6fc551e0f30cf4",
+   "template": "content/display/adsr.svg"
+  },
+  {
+   "path": "content/display/tapeecho.svg",
+   "blob": "files/content_display_tapeecho.svg",
+   "sha256": "50c745dbd43356261e8283f69c0248dcaba0a1bd39b85dd73ff9e216d07a350b",
+   "template": "content/display/adsr.svg"
+  }
+ ],
+ "result": {
+  "tar_sha256": "0eae3169972953131b384eb9dd3cd56e35640eb4ef6823e182d1c17aa64209da",
+  "sha256": "ca667abb81f458f6039d9959383a0ecce56f34f8fb6e811392f0c787affb894a",
+  "size": 12841251
+ }
+}

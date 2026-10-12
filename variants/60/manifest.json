@@ -1,0 +1,257 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [],
+    "effects": [
+      "snowglobe"
+    ],
+    "preset_cap": 300
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 40724,
+    "memory_bytes": 176012
+  },
+  "presets": {
+    "count": 48,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "iter": 12
+    },
+    "sha256": "5359fc37bbc8d2f9b192770d8e3ec960bf1c208cc7ff8473dfac3d07d484c854",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "content/op1_factory.db",
+      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+      "result_sha256": "ad89720357db5a3382fa6521bb0ce5ef284b45ad4a107d6d6f31c14dd93810dc",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 27,
+          "old": "0d",
+          "new": "0e"
+        },
+        {
+          "op": "replace",
+          "offset": 95,
+          "old": "0d002e8dfb",
+          "new": "0e002e8df8"
+        },
+        {
+          "op": "replace",
+          "offset": 1028,
+          "old": "0b01a5",
+          "new": "0c016b"
+        },
+        {
+          "op": "replace",
+          "offset": 1054,
+          "old": "0000",
+          "new": "016b"
+        },
+        {
+          "op": "replace",
+          "offset": 1387,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "380e04001f63736e6f77676c6f62655b373239362c2031323238382c2031313236342c2032303438302c2032313235332c20302c20302c20305d"
+        }
+      ]
+    },
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+      "result_sha256": "c3ca44ee067fc5ea6208b92576b3c2a0a35e51b143071cbe82d899dd9d279d92",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "9b",
+          "new": "1e"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "5843",
+          "new": "7ce2"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "4448e1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "5048e1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 610878,
+          "old": "68db43e1dd",
+          "new": "bc2243e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 612854,
+          "old": "68db42e1dd",
+          "new": "bc2242e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e38d85",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1393008,
+          "old": "6400",
+          "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1405736,
+          "old": "6cdb46e1dd",
+          "new": "c02246e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1406054,
+          "old": "6cdb40e1dd",
+          "new": "c02240e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1406752,
+          "old": "6cdb45e1dd",
+          "new": "c02245e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1407564,
+          "old": "6cdb47e1dd",
+          "new": "c02247e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419094,
+          "old": "6cdb46e1dd",
+          "new": "c02246e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419506,
+          "old": "68db41e1dd",
+          "new": "bc2241e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419878,
+          "old": "3e01",
+          "new": "0602"
+        },
+        {
+          "op": "replace",
+          "offset": 1420238,
+          "old": "3e01",
+          "new": "0602"
+        },
+        {
+          "op": "replace",
+          "offset": 1420292,
+          "old": "6400",
+          "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1421928,
+          "old": "3e0100e168db40e1dd",
+          "new": "060200e1bc2240e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1422100,
+          "old": "3e0100e168db40e1dd",
+          "new": "060200e1bc2240e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "ac2040e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "insert",
+          "offset": 2344445,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "507859367d832621ef02d15aa399bdd10120015f12e26542894cba5f85ef1175",
+          "size": 40740
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/display/snowglobe.svg",
+      "blob": "content_display_snowglobe.svg",
+      "sha256": "6398fb5a24f45345ef48d852e59599db9b1e7c0ff9bb3b60d8809b1eded23f1a",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "result": {
+    "tar_sha256": "48ca87bbc8f61cb80b209ad54d4839461ec5ce907a72bae7b449adcdce5b2b7a"
+  }
+}

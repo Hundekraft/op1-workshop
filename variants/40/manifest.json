@@ -1,0 +1,211 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [],
+    "effects": [],
+    "preset_cap": 300
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 35032,
+    "memory_bytes": 35032
+  },
+  "presets": {
+    "count": 48,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "iter": 12
+    },
+    "sha256": "a5e7dbdc0cdb1c37d1f7455495df85f7c0009efaf17f90a72d721732ca105043",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+      "result_sha256": "9618a7b01170bec728dd8e7302cffcf1195fa4a888a3914de8d2a1b43eeba7a4",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "9b",
+          "new": "0c"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "5843",
+          "new": "40cc"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "4448e1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "5048e1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 610878,
+          "old": "68db43e1dd",
+          "new": "ec0c43e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 612854,
+          "old": "68db42e1dd",
+          "new": "ec0c42e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e38d85",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1393008,
+          "old": "6400",
+          "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1405736,
+          "old": "6cdb46e1dd",
+          "new": "f00c46e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1406054,
+          "old": "6cdb40e1dd",
+          "new": "f00c40e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1406752,
+          "old": "6cdb45e1dd",
+          "new": "f00c45e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1407564,
+          "old": "6cdb47e1dd",
+          "new": "f00c47e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419094,
+          "old": "6cdb46e1dd",
+          "new": "f00c46e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419506,
+          "old": "68db41e1dd",
+          "new": "ec0c41e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419878,
+          "old": "3e01",
+          "new": "0602"
+        },
+        {
+          "op": "replace",
+          "offset": 1420238,
+          "old": "3e01",
+          "new": "0602"
+        },
+        {
+          "op": "replace",
+          "offset": 1420292,
+          "old": "6400",
+          "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1421928,
+          "old": "3e0100e168db40e1dd",
+          "new": "060200e1ec0c40e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1422100,
+          "old": "3e0100e168db40e1dd",
+          "new": "060200e1ec0c40e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "240c40e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "insert",
+          "offset": 2344556,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "28da028e7ade41b0d27fe1979d874758f50b73b9be2d63d0c9ad702ce7efa7a1",
+          "size": 35048
+        }
+      ]
+    }
+  ],
+  "added_files": [],
+  "result": {
+    "tar_sha256": "d21dfc25b1ccbe809b7ca5cec1ede1a9797d97ccd42816ec68f79806d72ca762"
+  }
+}

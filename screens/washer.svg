@@ -1,0 +1,88 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="160px" viewBox="0 0 320 160">
+<line x1="4" y1="152" x2="316" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<path d="M104 16 L216 16 L220 20 L220 144 L216 148 L104 148 L100 144 L100 20 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="100" y1="40" x2="220" y2="40" stroke="#AEB1DC" stroke-width="1.5"/>
+<path d="M106 22 L132 22 L132 34 L106 34 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<line x1="112" y1="28" x2="126" y2="28" stroke="#6F7173" stroke-width="1"/>
+<line x1="108" y1="148" x2="108" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="212" y1="148" x2="212" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<circle cx="190" cy="28" r="6" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<line x1="190" y1="28" x2="190" y2="23" stroke="#AEB1DC" stroke-width="1.2" stroke-linecap="round"/>
+<g id="drum">
+<circle cx="160" cy="94" r="28" fill="none" stroke="#6F7173" stroke-width="1"/>
+<polyline points="157,122 158.5,115 161.5,115 163,122" fill="none" stroke="#AEB1DC" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="137.3,77.4 142.6,82.2 141.1,84.8 134.3,82.6" fill="none" stroke="#AEB1DC" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="185.7,82.6 178.9,84.8 177.4,82.2 182.7,77.4" fill="none" stroke="#AEB1DC" stroke-width="1.2" stroke-linecap="round"/>
+<circle cx="183.2" cy="100.2" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="177" cy="111" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="166.2" cy="117.2" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="153.8" cy="117.2" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="143" cy="111" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="136.8" cy="100.2" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="136.8" cy="87.8" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="143" cy="77" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="153.8" cy="70.8" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="166.2" cy="70.8" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="177" cy="77" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+<circle cx="183.2" cy="87.8" r="0.6" fill="#6F7173" stroke="#6F7173" stroke-width="0.8"/>
+</g>
+<g id="socks">
+<path d="M150.6 72.6 L155.1 74.7 L151.7 81.9 L151.8 84.2 L154.1 86.4 L157.7 88 L158.7 90.7 L155.8 92.1 L149.5 89.2 L146.5 86.1 L145.9 82.5 Z" fill="none" stroke="#DFD9FF" stroke-width="1.3"/>
+<polyline points="149.5,74.8 154.1,77" fill="none" stroke="#DFD9FF" stroke-width="1" stroke-linecap="round"/>
+<path d="M159.9 101.3 L161.6 96.6 L169.1 99.3 L171.4 99.1 L173.3 96.6 L174.7 92.9 L177.3 91.7 L178.9 94.4 L176.5 101 L173.8 104.2 L170.3 105.1 Z" fill="none" stroke="#AEB1DC" stroke-width="1.3"/>
+<polyline points="162.3,102.2 164,97.5" fill="none" stroke="#AEB1DC" stroke-width="1" stroke-linecap="round"/>
+</g>
+<g id="door">
+<circle cx="160" cy="94" r="37" fill="none" stroke="#AEB1DC" stroke-width="2"/>
+<circle cx="160" cy="94" r="31" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<line x1="140" y1="76" x2="148" y2="70" stroke="#DFD9FF" stroke-width="1" stroke-linecap="round"/>
+<line x1="137" y1="82" x2="139" y2="80" stroke="#DFD9FF" stroke-width="1" stroke-linecap="round"/>
+<path d="M119 88 L123 88 L123 100 L119 100 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+</g>
+<path d="M232 56 L244 56 L244 142 L232 142 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<line x1="230" y1="142" x2="246" y2="142" stroke="#AEB1DC" stroke-width="1.5"/>
+<g id="bubbles">
+<circle cx="116" cy="10" r="2.5" fill="none" stroke="#DFD9FF" stroke-width="1"/>
+<circle cx="126" cy="6" r="1.8" fill="none" stroke="#DFD9FF" stroke-width="1"/>
+<circle cx="108" cy="4" r="1.4" fill="none" stroke="#DFD9FF" stroke-width="1"/>
+</g>
+<path d="M44 150 L44 112 L50 104 L66 104 L72 112 L72 150 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="58" y1="104" x2="58" y2="96" stroke="#AEB1DC" stroke-width="1.5"/>
+<polyline points="58,99 50,99 50,102" fill="none" stroke="#AEB1DC" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="50" y1="126" x2="66" y2="126" stroke="#6F7173" stroke-width="1"/>
+<line x1="50" y1="132" x2="62" y2="132" stroke="#6F7173" stroke-width="1"/>
+<path d="M54 34 L66 34 L66 42 L54 42 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<polyline points="66,40 70,40 70,44" fill="none" stroke="#AEB1DC" stroke-width="1.2" stroke-linecap="round"/>
+<polyline points="70,44 74,54 84,58 94,54 100,50" fill="none" stroke="#6F7173" stroke-width="1.5" stroke-linecap="round"/>
+<polyline points="60,34 60,29" fill="none" stroke="#AEB1DC" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="56" y1="29" x2="64" y2="29" stroke="#AEB1DC" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="58" y1="96" x2="52" y2="96" stroke="#AEB1DC" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M202 88 L210 88 L210 101 L202 101 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<g id="knob0">
+<polyline points="120.5,79.6 123.3,73.5 127.1,68 131.6,63 136.9,58.9 142.8,55.7 149.1,53.4" fill="none" stroke="#4D9EFF" stroke-width="1.5" stroke-linecap="round"/>
+<polyline points="145.6,51.8 150.1,53.2 146.9,56.6" fill="none" stroke="#4D9EFF" stroke-width="1.5" stroke-linecap="round"/>
+<polyline points="199.5,108.4 196.7,114.5 192.9,120 188.4,125 183.1,129.1 177.2,132.3 170.9,134.6" fill="none" stroke="#4D9EFF" stroke-width="1.5" stroke-linecap="round"/>
+<polyline points="174.4,136.2 169.9,134.8 173.1,131.4" fill="none" stroke="#4D9EFF" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<g id="knob1">
+<polyline points="137.5,110 141.2,111.5 145,110.8 148.8,108.9 152.5,108.6 156.2,110.3 160,111.6 163.8,110.5 167.5,108.7 171.2,108.8 175,110.7 178.8,111.6 182.5,110.2" fill="none" stroke="#00ED95" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<g id="knob2">
+<circle cx="240" cy="134" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="236" cy="125" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="240" cy="116" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="236" cy="107" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="240" cy="98" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="236" cy="89" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="240" cy="80" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+<circle cx="236" cy="71" r="3.6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+</g>
+<g id="knob3">
+<path d="M265.4 134.8 L270.3 135.3 L269.5 143.2 L270.3 145.3 L273.2 146.6 L277.2 147.1 L278.9 149.3 L276.7 151.5 L269.7 150.8 L265.9 148.9 L264.2 145.7 Z" fill="none" stroke="#FF3A5D" stroke-width="1.3"/>
+<polyline points="265.1,137.2 270.1,137.8" fill="none" stroke="#FF3A5D" stroke-width="1" stroke-linecap="round"/>
+</g>
+<line id="bar0" x1="120.5" y1="80.6" x2="120.5" y2="79.6" stroke="#4D9EFF" stroke-width="1.2"/>
+<line id="bar1" x1="137.5" y1="110.5" x2="137.5" y2="109.5" stroke="#00ED95" stroke-width="1.2"/>
+<line id="bar2" x1="240" y1="131.4" x2="240" y2="130.4" stroke="#FFFFFF" stroke-width="1.2"/>
+<line id="bar3" x1="265" y1="136" x2="265" y2="135" stroke="#FF3A5D" stroke-width="1.2"/>
+</svg>

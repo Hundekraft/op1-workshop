@@ -1,0 +1,216 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [
+      "wavetable",
+      "pew",
+      "elg"
+    ],
+    "effects": [
+      "washer"
+    ],
+    "preset_cap": 100
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 28856,
+    "memory_bytes": 41168
+  },
+  "presets": {
+    "count": 90,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "wavetable": 14,
+      "pew": 14,
+      "elg": 14,
+      "iter": 12
+    },
+    "sha256": "81abb4c36729ea7e51547f34487391c72779f58ac9cab485a91b5c1953ead422",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "content/op1_factory.db",
+      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+      "result_sha256": "5c70c265f72ef4a4c224f4c5d140adf1fe3125c4a2eb5f4cd95ee1e914b0eb87",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 27,
+          "old": "0d",
+          "new": "11"
+        },
+        {
+          "op": "replace",
+          "offset": 95,
+          "old": "0d002e8dfb",
+          "new": "11002e8df8"
+        },
+        {
+          "op": "replace",
+          "offset": 1028,
+          "old": "0b01a5",
+          "new": "0c016e"
+        },
+        {
+          "op": "replace",
+          "offset": 1054,
+          "old": "0000",
+          "new": "016e"
+        },
+        {
+          "op": "replace",
+          "offset": 1390,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "350e040019637761736865725b373239362c2031323238382c2031313236342c2032303438302c2032313235322c20302c20302c20305d"
+        },
+        {
+          "op": "replace",
+          "offset": 4100,
+          "old": "0e0151",
+          "new": "1100be"
+        },
+        {
+          "op": "replace",
+          "offset": 4132,
+          "old": "000000000000",
+          "new": "011c00ed00be"
+        },
+        {
+          "op": "replace",
+          "offset": 4286,
+          "old": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "2d1104001359656c675b31363338342c20383139322c20302c20383139322c2032313235352c20302c20302c20305d2d10040013597065775b31363338342c20383139322c20302c20383139322c2032313235342c20302c20302c20305d330f04001f59776176657461626c655b31363338342c20383139322c20302c20383139322c2032313235322c20302c20302c20305d"
+        }
+      ]
+    },
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+      "result_sha256": "8652f44b71dd1cf30f3ecb3e2c86a095a8222854ca4464b9c3c88cfe61421fbb",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "9b",
+          "new": "14"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "5843",
+          "new": "20b4"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "4448e1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "5048e1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e38d85",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "943f40e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "insert",
+          "offset": 2370726,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "5ac9cabce0118887d455c54684cc2b940459e53b7bf20a8f31fb36fefddf0bc1",
+          "size": 28872
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/display/wavetable.svg",
+      "blob": "content_display_wavetable.svg",
+      "sha256": "f420bd676dda5208aa29abd3b60326e196c7e6b9bc2373ae127eb5c859674af9",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/pew.svg",
+      "blob": "content_display_pew.svg",
+      "sha256": "146b07730575f220b56c3cb846148e8e5d6581ab932949a6f83de08f7b24810f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/elg.svg",
+      "blob": "content_display_elg.svg",
+      "sha256": "d60f3e230412f8f04c8dd9c399028ce269fe9532f185fd0d859ba57f3a5d2d21",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/washer.svg",
+      "blob": "content_display_washer.svg",
+      "sha256": "3a1483a0c890718cb83f1dd49e70f954a4f67d2f39116ffb821cf656da7cb92d",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "result": {
+    "tar_sha256": "8c526d1342a9fe88af18752b806454724eb5636e9543e9856be243533e328233"
+  }
+}

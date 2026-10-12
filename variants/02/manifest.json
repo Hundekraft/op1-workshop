@@ -1,0 +1,174 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [
+      "taffy"
+    ],
+    "effects": [],
+    "preset_cap": 100
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 11664,
+    "memory_bytes": 11664
+  },
+  "presets": {
+    "count": 60,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "taffy": 12,
+      "iter": 12
+    },
+    "sha256": "71ce7320eba489678c60c3f77607489676e8a1de7b5c4d60cf05d175e4e4d121",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "content/op1_factory.db",
+      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+      "result_sha256": "36a6f8c34443cf1fbf68b0ca3162984997bdb6225a2bc3ca490ecca1b3353f31",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 27,
+          "old": "0d",
+          "new": "0e"
+        },
+        {
+          "op": "replace",
+          "offset": 95,
+          "old": "0d002e8dfb",
+          "new": "0e002e8df8"
+        },
+        {
+          "op": "replace",
+          "offset": 4100,
+          "old": "0e0151",
+          "new": "0f0120"
+        },
+        {
+          "op": "replace",
+          "offset": 4132,
+          "old": "0000",
+          "new": "0120"
+        },
+        {
+          "op": "replace",
+          "offset": 4384,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "2f0f0400175974616666795b31363338342c20383139322c20302c20383139322c2032313235332c20302c20302c20305d"
+        }
+      ]
+    },
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+      "result_sha256": "8649d7e265a614e5245dafdfbf117c82a63eefbc654e6c4616f9b08a65b17717",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "9b",
+          "new": "08"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "5843",
+          "new": "f870"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "4448e1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "5048e1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e38d85",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "701940e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "insert",
+          "offset": 2373440,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "90871f528a85ee35f543367d323b9a63e4b2ff550975e6717b62a456def73f25",
+          "size": 11680
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/display/taffy.svg",
+      "blob": "content_display_taffy.svg",
+      "sha256": "5fd4fc6a5d56b9aa987c8fc6f18787718ab6cc26d5e218634a6a6ad72e3e3d00",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "result": {
+    "tar_sha256": "bef96dcb888b53287278f24df235e47b4854e2ead9f807679f8f89aaf19a5478"
+  }
+}

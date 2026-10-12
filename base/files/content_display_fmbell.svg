@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 width="320px" height="160px" viewBox="0 0 320 160">
+<!-- fmbell: line-art bell in the centre; strike rings (green) and clapper swing are animated by code.
+     Corner dials: blue = ratio (TL), green = index (TR), white = decay (BL), red = feedback (BR). -->
+<!-- bell: crown loop, body, double lip -->
+<circle fill="none" stroke="#DFD9FF" stroke-width="1.5" cx="160" cy="27" r="4"/>
+<path fill="none" stroke="#DFD9FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M146,46C146,37 152,31 160,31C168,31 174,37 174,46L176,78C177,93 186,101 200,105L200,110L120,110L120,105C134,101 143,93 144,78Z"/>
+<line fill="none" stroke="#DFD9FF" stroke-width="1.5" stroke-linecap="round" x1="128" y1="115" x2="192" y2="115"/>
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="round" x1="145" y1="58" x2="175" y2="58"/>
+<!-- clapper: hangs from (160,46); code rotates the group around that point -->
+<g id="clapper">
+<line fill="none" stroke="#AEB1DC" stroke-width="1.5" stroke-linecap="round" x1="160" y1="46" x2="160" y2="98"/>
+<circle fill="#AEB1DC" cx="160" cy="102" r="3.5"/>
+</g>
+<!-- four corner dials: ticks at -135, 0, +135 degrees, needles rotated by code around the centre -->
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="28.2" y1="39.8" x2="26.8" y2="41.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="36.0" y1="21.0" x2="36.0" y2="19.0"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="43.8" y1="39.8" x2="45.2" y2="41.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="276.2" y1="39.8" x2="274.8" y2="41.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="284.0" y1="21.0" x2="284.0" y2="19.0"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="291.8" y1="39.8" x2="293.2" y2="41.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="28.2" y1="135.8" x2="26.8" y2="137.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="36.0" y1="117.0" x2="36.0" y2="115.0"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="43.8" y1="135.8" x2="45.2" y2="137.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="276.2" y1="135.8" x2="274.8" y2="137.2"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="284.0" y1="117.0" x2="284.0" y2="115.0"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="291.8" y1="135.8" x2="293.2" y2="137.2"/>
+<circle id="base0" fill="#4D9EFF" cx="36" cy="32" r="2.8"/>
+<circle id="base1" fill="#00ED95" cx="284" cy="32" r="2.8"/>
+<circle id="base2" fill="#FFFFFF" cx="36" cy="128" r="2.8"/>
+<circle id="base3" fill="#FF3A5D" cx="284" cy="128" r="2.8"/>
+<line id="bar0" fill="none" stroke="#4D9EFF" stroke-width="2" stroke-linecap="square" x1="36" y1="32" x2="36" y2="23"/>
+<line id="bar1" fill="none" stroke="#00ED95" stroke-width="2" stroke-linecap="square" x1="284" y1="32" x2="284" y2="23"/>
+<line id="bar2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" x1="36" y1="128" x2="36" y2="119"/>
+<line id="bar3" fill="none" stroke="#FF3A5D" stroke-width="2" stroke-linecap="square" x1="284" y1="128" x2="284" y2="119"/>
+</svg>

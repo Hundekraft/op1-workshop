@@ -1,0 +1,208 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [
+      "pew",
+      "elg"
+    ],
+    "effects": [
+      "snowglobe"
+    ],
+    "preset_cap": 100
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 22132,
+    "memory_bytes": 157420
+  },
+  "presets": {
+    "count": 76,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "pew": 14,
+      "elg": 14,
+      "iter": 12
+    },
+    "sha256": "ec41322ebb56ed3472b9743ec5f2e5563fdbdc4b4178a9a7f9b674de4089942d",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "content/op1_factory.db",
+      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+      "result_sha256": "bf9d3ca5d77b6936ff6ec4a4db9700d8b3f1d40e0a82987cb89e79a637e4e2ac",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 27,
+          "old": "0d",
+          "new": "10"
+        },
+        {
+          "op": "replace",
+          "offset": 95,
+          "old": "0d002e8dfb",
+          "new": "10002e8df8"
+        },
+        {
+          "op": "replace",
+          "offset": 1028,
+          "old": "0b01a5",
+          "new": "0c016b"
+        },
+        {
+          "op": "replace",
+          "offset": 1054,
+          "old": "0000",
+          "new": "016b"
+        },
+        {
+          "op": "replace",
+          "offset": 1387,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "380e04001f63736e6f77676c6f62655b373239362c2031323238382c2031313236342c2032303438302c2032313235332c20302c20302c20305d"
+        },
+        {
+          "op": "replace",
+          "offset": 4100,
+          "old": "0e0151",
+          "new": "1000f3"
+        },
+        {
+          "op": "replace",
+          "offset": 4132,
+          "old": "00000000",
+          "new": "012200f3"
+        },
+        {
+          "op": "replace",
+          "offset": 4339,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "2d1004001359656c675b31363338342c20383139322c20302c20383139322c2032313235352c20302c20302c20305d2d0f040013597065775b31363338342c20383139322c20302c20383139322c2032313235342c20302c20302c20305d"
+        }
+      ]
+    },
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+      "result_sha256": "eca725c1823e3a87b1f6aaab092395ec004b187a8d3c4611a9c84790069706cf",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "9b",
+          "new": "c5"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "5843",
+          "new": "dc99"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "4448e1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "5048e1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e38d85",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "e43640e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "insert",
+          "offset": 2370925,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "d8a9ddf90095697367e2d2e980f5dad3cbdf1c6074ac41f90b930786d82cf621",
+          "size": 22148
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/display/pew.svg",
+      "blob": "content_display_pew.svg",
+      "sha256": "146b07730575f220b56c3cb846148e8e5d6581ab932949a6f83de08f7b24810f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/elg.svg",
+      "blob": "content_display_elg.svg",
+      "sha256": "d60f3e230412f8f04c8dd9c399028ce269fe9532f185fd0d859ba57f3a5d2d21",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/snowglobe.svg",
+      "blob": "content_display_snowglobe.svg",
+      "sha256": "6398fb5a24f45345ef48d852e59599db9b1e7c0ff9bb3b60d8809b1eded23f1a",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "result": {
+    "tar_sha256": "8ab52380a5e67e7738665fe2a87a1f6febc5e8d41f2aba7007fcb0dc4e6e9759"
+  }
+}

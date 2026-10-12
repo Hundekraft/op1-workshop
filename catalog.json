@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "base": "op1r18",
+  "synths": [
+    {
+      "id": "wavetable",
+      "marker": 21252,
+      "name": "Wavetable",
+      "description": "Morphing waves. Analog ladder filter.",
+      "color": "blue",
+      "type": "wavetable + analog filter",
+      "controls": [
+        {
+          "name": "Wave",
+          "description": "Morph through eight wave shapes"
+        },
+        {
+          "name": "Detune",
+          "description": "Spread the two oscillators"
+        },
+        {
+          "name": "Cutoff",
+          "description": "Open the low-pass filter"
+        },
+        {
+          "name": "Resonance",
+          "description": "Add resonance and drive"
+        }
+      ]
+    },
+    {
+      "id": "taffy",
+      "marker": 21253,
+      "name": "Taffy",
+      "description": "Elastic, CZ-style phase distortion.",
+      "color": "green",
+      "type": "phase distortion synthesizer",
+      "controls": [
+        {
+          "name": "Wave",
+          "description": "Morph the CZ-style wave shape"
+        },
+        {
+          "name": "Distortion",
+          "description": "Bend the phase for brighter harmonics"
+        },
+        {
+          "name": "Envelope",
+          "description": "Add a bright attack to each note"
+        },
+        {
+          "name": "Resonance",
+          "description": "Blend in a resonant wave"
+        }
+      ]
+    },
+    {
+      "id": "pew",
+      "marker": 21254,
+      "name": "Pew",
+      "description": "Drawbar organ. Rotary speaker.",
+      "color": "orange",
+      "type": "drawbar organ + rotary speaker",
+      "controls": [
+        {
+          "name": "Low bars",
+          "description": "Sub, fundamental and fifth"
+        },
+        {
+          "name": "Mid bars",
+          "description": "Octave and upper harmonics"
+        },
+        {
+          "name": "High bars",
+          "description": "High harmonics and key click"
+        },
+        {
+          "name": "Rotor",
+          "description": "Slow chorale to fast rotation"
+        }
+      ]
+    },
+    {
+      "id": "elg",
+      "marker": 21255,
+      "name": "Elg",
+      "description": "Slow-moving drones with a low growl.",
+      "color": "red",
+      "type": "three-oscillator drone synthesizer",
+      "controls": [
+        {
+          "name": "Interval",
+          "description": "Choose the third oscillator\u2019s interval"
+        },
+        {
+          "name": "Detune",
+          "description": "Set the beating between voices"
+        },
+        {
+          "name": "Timbre",
+          "description": "Shape the filter and growl"
+        },
+        {
+          "name": "Movement",
+          "description": "Sweep and swell with slow modulation"
+        }
+      ]
+    }
+  ],
+  "effects": [
+    {
+      "id": "washer",
+      "marker": 21252,
+      "name": "Washer",
+      "description": "Chorus, ensemble and flanger.",
+      "color": "blue",
+      "type": "chorus / ensemble / flanger",
+      "controls": [
+        {
+          "name": "Spin",
+          "description": "Set the modulation speed"
+        },
+        {
+          "name": "Depth",
+          "description": "Widen the delay sweep"
+        },
+        {
+          "name": "Foam",
+          "description": "Move from chorus into flanging"
+        },
+        {
+          "name": "Mix",
+          "description": "Blend the wet signal with the dry"
+        }
+      ]
+    },
+    {
+      "id": "snowglobe",
+      "marker": 21253,
+      "name": "Snowglobe",
+      "description": "Shimmer reverb with a frozen heart.",
+      "color": "orange",
+      "type": "shimmer reverb + freeze",
+      "controls": [
+        {
+          "name": "Decay",
+          "description": "Lengthen the reverb tail"
+        },
+        {
+          "name": "Shimmer",
+          "description": "Feed octave-up echoes into the tail"
+        },
+        {
+          "name": "Size",
+          "description": "Change the space around the sound"
+        },
+        {
+          "name": "Mix / freeze",
+          "description": "Add reverb; turn fully up to freeze"
+        }
+      ]
+    }
+  ],
+  "preset_caps": [
+    100,
+    300
+  ]
+}

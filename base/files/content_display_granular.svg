@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 width="320px" height="160px" viewBox="0 0 320 160">
+<!-- sample window frame (waveform/grains are drawn by code inside x 20..300, y 22..98) -->
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="square" x1="20" y1="20" x2="300" y2="20"/>
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="square" x1="20" y1="100" x2="300" y2="100"/>
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="square" x1="20" y1="17" x2="20" y2="23"/>
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="square" x1="300" y1="17" x2="300" y2="23"/>
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="square" x1="20" y1="97" x2="20" y2="103"/>
+<line fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="square" x1="300" y1="97" x2="300" y2="103"/>
+<!-- four dials: ticks at -135, 0, +135 degrees -->
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="70" y1="120" x2="70" y2="122"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="130" y1="120" x2="130" y2="122"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="190" y1="120" x2="190" y2="122"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="250" y1="120" x2="250" y2="122"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="60.8" y1="142.2" x2="59.4" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="79.2" y1="142.2" x2="80.6" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="120.8" y1="142.2" x2="119.4" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="139.2" y1="142.2" x2="140.6" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="180.8" y1="142.2" x2="179.4" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="199.2" y1="142.2" x2="200.6" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="240.8" y1="142.2" x2="239.4" y2="143.6"/>
+<line fill="none" stroke="#6F7173" stroke-width="2" stroke-linecap="square" x1="259.2" y1="142.2" x2="260.6" y2="143.6"/>
+<circle id="base0" fill="#4D9EFF" cx="70" cy="133" r="2.8"/>
+<circle id="base1" fill="#00ED95" cx="130" cy="133" r="2.8"/>
+<circle id="base2" fill="#FFFFFF" cx="190" cy="133" r="2.8"/>
+<circle id="base3" fill="#FF3A5D" cx="250" cy="133" r="2.8"/>
+<!-- dial needles: drawn pointing up (12 o'clock) around (cx,133); code rotates them -->
+<line id="bar0" fill="none" stroke="#4D9EFF" stroke-width="2" stroke-linecap="square" x1="70" y1="133" x2="70" y2="124"/>
+<line id="bar1" fill="none" stroke="#00ED95" stroke-width="2" stroke-linecap="square" x1="130" y1="133" x2="130" y2="124"/>
+<line id="bar2" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" x1="190" y1="133" x2="190" y2="124"/>
+<line id="bar3" fill="none" stroke="#FF3A5D" stroke-width="2" stroke-linecap="square" x1="250" y1="133" x2="250" y2="124"/>
+</svg>

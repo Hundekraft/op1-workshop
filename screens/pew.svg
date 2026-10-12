@@ -1,0 +1,90 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="160px" viewBox="0 0 320 160">
+<line x1="4" y1="152" x2="316" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<path d="M16 64 L16 30 L32 12 L48 30 L48 64 Z" fill="none" stroke="#6F7173" stroke-width="1.2"/>
+<line x1="32" y1="12" x2="32" y2="64" stroke="#6F7173" stroke-width="1" stroke-linecap="round"/>
+<line x1="16" y1="40" x2="48" y2="40" stroke="#6F7173" stroke-width="1" stroke-linecap="round"/>
+<line x1="10" y1="118" x2="58" y2="118" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="12" y1="86" x2="12" y2="118" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="8" y1="86" x2="16" y2="86" stroke="#AEB1DC" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="16" y1="118" x2="16" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="54" y1="118" x2="54" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<g id="organist">
+<circle cx="38" cy="79" r="6" fill="none" stroke="#DFD9FF" stroke-width="1.5"/>
+<line x1="38" y1="85" x2="40" y2="114" stroke="#DFD9FF" stroke-width="1.5" stroke-linecap="round"/>
+<polyline points="39,93 52,101 76,97" fill="none" stroke="#DFD9FF" stroke-width="1.5" stroke-linecap="round"/>
+<polyline points="40,114 58,115 61,141 68,142" fill="none" stroke="#DFD9FF" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<g id="pipes">
+<path d="M71 62 L71 38 L77 38 L77 62 M82 62 L82 32 L88 32 L88 62 M93 62 L93 26 L99 26 L99 62 M104 62 L104 20 L110 20 L110 62 M115 62 L115 14 L121 14 L121 62 M126 62 L126 20 L132 20 L132 62 M137 62 L137 26 L143 26 L143 62 M148 62 L148 32 L154 32 L154 62 M159 62 L159 38 L165 38 L165 62" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<path d="M72 54 L74 51 L76 54 M83 54 L85 51 L87 54 M94 54 L96 51 L98 54 M105 54 L107 51 L109 54 M116 54 L118 51 L120 54 M127 54 L129 51 L131 54 M138 54 L140 51 L142 54 M149 54 L151 51 L153 54 M160 54 L162 51 L164 54" fill="none" stroke="#AEB1DC" stroke-width="1"/>
+</g>
+<path d="M64 62 L184 62 L184 136 L64 136 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="64" y1="88" x2="184" y2="88" stroke="#6F7173" stroke-width="1" stroke-linecap="round"/>
+<path d="M78 92 L170 92 L170 98 L78 98 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<path d="M84 93 L84 96 M90 93 L90 96 M96 93 L96 96 M102 93 L102 96 M108 93 L108 96 M114 93 L114 96 M120 93 L120 96 M126 93 L126 96 M132 93 L132 96 M138 93 L138 96 M144 93 L144 96 M150 93 L150 96 M156 93 L156 96 M162 93 L162 96" fill="none" stroke="#6F7173" stroke-width="1"/>
+<path d="M78 102 L170 102 L170 108 L78 108 Z" fill="none" stroke="#AEB1DC" stroke-width="1.2"/>
+<path d="M84 103 L84 106 M90 103 L90 106 M96 103 L96 106 M102 103 L102 106 M108 103 L108 106 M114 103 L114 106 M120 103 L120 106 M126 103 L126 106 M132 103 L132 106 M138 103 L138 106 M144 103 L144 106 M150 103 L150 106 M156 103 L156 106 M162 103 L162 106" fill="none" stroke="#6F7173" stroke-width="1"/>
+<path d="M72 146 L76 140 M80 146 L84 140 M88 146 L92 140 M96 146 L100 140 M104 146 L108 140 M112 146 L116 140 M120 146 L124 140 M128 146 L132 140 M136 146 L140 140 M144 146 L148 140 M152 146 L156 140 M160 146 L164 140 M168 146 L172 140 M176 146 L180 140" fill="none" stroke="#6F7173" stroke-width="1"/>
+<line x1="98" y1="70" x2="98" y2="86" stroke="#6F7173" stroke-width="1"/>
+<g id="knob0">
+<g id="draw0">
+<line x1="98" y1="76" x2="98" y2="86" stroke="#4D9EFF" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M94 71 L102 71 L102 76 L94 76 Z" fill="none" stroke="#4D9EFF" stroke-width="1.5"/>
+</g>
+</g>
+<line x1="124" y1="70" x2="124" y2="86" stroke="#6F7173" stroke-width="1"/>
+<g id="knob1">
+<g id="draw1">
+<line x1="124" y1="76" x2="124" y2="86" stroke="#00ED95" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M120 71 L128 71 L128 76 L120 76 Z" fill="none" stroke="#00ED95" stroke-width="1.5"/>
+</g>
+</g>
+<line x1="150" y1="70" x2="150" y2="86" stroke="#6F7173" stroke-width="1"/>
+<g id="knob2">
+<g id="draw2">
+<line x1="150" y1="76" x2="150" y2="86" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M146 71 L154 71 L154 76 L146 76 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+</g>
+</g>
+<path d="M176 50 L180 50 L180 62 L176 62 Z" fill="none" stroke="#DFD9FF" stroke-width="1.2"/>
+<g id="flame">
+<path d="M178 49 L175.5 45 L178 39 L180.5 45 Z" fill="none" stroke="#FF3A5D" stroke-width="1.2"/>
+</g>
+<polyline points="184,132 196,148 212,148 216,142" fill="none" stroke="#6F7173" stroke-width="1" stroke-linecap="round"/>
+<path d="M216 36 L266 36 L266 146 L216 146 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<line x1="216" y1="90" x2="266" y2="90" stroke="#AEB1DC" stroke-width="1.5"/>
+<path d="M222 46 L260 46 L260 80 L222 80 Z" fill="none" stroke="#6F7173" stroke-width="1"/>
+<path d="M222 98 L260 98 L260 136 L222 136 Z" fill="none" stroke="#6F7173" stroke-width="1"/>
+<line x1="222" y1="146" x2="222" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<line x1="260" y1="146" x2="260" y2="152" stroke="#6F7173" stroke-width="1.5"/>
+<g id="horn">
+<path d="M241 63 L226 56 L226 70 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<path d="M241 63 L256 58 L256 68 Z" fill="none" stroke="#AEB1DC" stroke-width="1.5"/>
+<circle cx="241" cy="63" r="2.5" fill="none" stroke="#FFFFFF" stroke-width="1.2"/>
+</g>
+<g id="drum">
+<path d="M229 103 L253 103 L253 131 L229 131 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<path d="M235 105 L235 129 M241 105 L241 129 M247 105 L247 129" fill="none" stroke="#6F7173" stroke-width="1"/>
+</g>
+<g id="puffs">
+<circle cx="280" cy="50" r="2.4" fill="#DFD9FF" stroke="#DFD9FF" stroke-width="1"/>
+<line x1="282.2" y1="50" x2="282.2" y2="40" stroke="#DFD9FF" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="282.2" y1="40" x2="286" y2="43" stroke="#DFD9FF" stroke-width="1.2" stroke-linecap="round"/>
+<circle cx="292" cy="34" r="2.4" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1"/>
+<line x1="294.2" y1="34" x2="294.2" y2="24" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="294.2" y1="24" x2="298" y2="27" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+<circle cx="304" cy="56" r="2.4" fill="#DFD9FF" stroke="#DFD9FF" stroke-width="1"/>
+<line x1="306.2" y1="56" x2="306.2" y2="46" stroke="#DFD9FF" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="306.2" y1="46" x2="310" y2="49" stroke="#DFD9FF" stroke-width="1.2" stroke-linecap="round"/>
+</g>
+<g id="knob3">
+<polyline points="226.3,55 228.7,52.8 231.7,51 235.1,49.8 238.8,49.1 242.6,49.1" fill="none" stroke="#FF3A5D" stroke-width="1.4" stroke-linecap="round"/>
+<polyline points="239.2,49.8 242.6,49.1 243.6,51.7" fill="none" stroke="#FF3A5D" stroke-width="1.4" stroke-linecap="round"/>
+<polyline points="255.7,71 253.3,73.2 250.3,75 246.9,76.2 243.2,76.9 239.4,76.9" fill="none" stroke="#FF3A5D" stroke-width="1.4" stroke-linecap="round"/>
+<polyline points="242.8,76.2 239.4,76.9 238.4,74.3" fill="none" stroke="#FF3A5D" stroke-width="1.4" stroke-linecap="round"/>
+</g>
+<line id="bar0" x1="94" y1="72" x2="94" y2="71" stroke="#4D9EFF" stroke-width="1.2"/>
+<line id="bar1" x1="120" y1="72" x2="120" y2="71" stroke="#00ED95" stroke-width="1.2"/>
+<line id="bar2" x1="146" y1="72" x2="146" y2="71" stroke="#FFFFFF" stroke-width="1.2"/>
+<line id="bar3" x1="226.3" y1="55.5" x2="226.3" y2="54.5" stroke="#FF3A5D" stroke-width="1.2"/>
+</svg>

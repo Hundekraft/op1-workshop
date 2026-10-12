@@ -1,0 +1,34 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [],
+    "effects": [],
+    "preset_cap": 100
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 0,
+    "memory_bytes": 0
+  },
+  "presets": {
+    "count": 48,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "iter": 12
+    },
+    "sha256": "937b51ac6f4970e057d6df14952c7cd8205277829abd20399714480c872af95f",
+    "exceeds_cap": false
+  },
+  "patched_files": [],
+  "added_files": [],
+  "result": {
+    "tar_sha256": "0eae3169972953131b384eb9dd3cd56e35640eb4ef6823e182d1c17aa64209da"
+  }
+}

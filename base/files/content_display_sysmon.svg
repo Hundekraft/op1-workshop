@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="320px" height="160px" viewBox="0 0 320 160">
+<g id="frame">
+<rect x="56" y="14" fill="none" stroke="#6F7173" stroke-width="1" width="180" height="10"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="101" y1="25" x2="101" y2="28"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="146" y1="25" x2="146" y2="28"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="191" y1="25" x2="191" y2="28"/>
+<rect x="56" y="38" fill="none" stroke="#6F7173" stroke-width="1" width="180" height="10"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="101" y1="49" x2="101" y2="52"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="146" y1="49" x2="146" y2="52"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="191" y1="49" x2="191" y2="52"/>
+<rect x="56" y="62" fill="none" stroke="#6F7173" stroke-width="1" width="180" height="10"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="101" y1="73" x2="101" y2="76"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="146" y1="73" x2="146" y2="76"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="191" y1="73" x2="191" y2="76"/>
+<rect x="56" y="86" fill="none" stroke="#6F7173" stroke-width="1" width="180" height="10"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="101" y1="97" x2="101" y2="100"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="146" y1="97" x2="146" y2="100"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="191" y1="97" x2="191" y2="100"/>
+<rect x="56" y="110" fill="none" stroke="#6F7173" stroke-width="1" width="86" height="10"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="77" y1="121" x2="77" y2="124"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="99" y1="121" x2="99" y2="124"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="120" y1="121" x2="120" y2="124"/>
+<rect x="150" y="110" fill="none" stroke="#6F7173" stroke-width="1" width="86" height="10"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="171" y1="121" x2="171" y2="124"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="193" y1="121" x2="193" y2="124"/>
+<line fill="none" stroke="#3A3B3D" stroke-width="1" x1="214" y1="121" x2="214" y2="124"/>
+</g>
+</svg>

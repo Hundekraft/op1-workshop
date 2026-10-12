@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OP–1 / Firmware workshop</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><span class="edition">ORIGINAL OP–1 · R246</span></header>
+<main>
+<section class="intro"><div class="eyebrow">FIRMWARE WORKSHOP / ORIGINAL OP–1</div><h1>Choose your instruments.</h1><p>Explore the engines. Get to know the controls. Build your own R246.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
+<form id="workshop">
+<div class="workspace">
+<div class="options">
+<section class="base"><div class="section-label"><span>00 / THE FOUNDATION</span><span class="included">ALWAYS INCLUDED</span></div><h2>op1r 18</h2><p>Stock R246, plus op1r’s synths, effects, sequencers, quad LFO and MIDI controls. <a href="#preset-pack">Plus 48 presets from our sound collection.</a></p><details class="base-details"><summary>What’s in the base bundle? <span>Explore 10 screen previews</span></summary><div class="base-gallery"><figure><img src="op1r-images/synth_supersaw.png" alt="Supersaw screen" loading="lazy"><figcaption><strong>Supersaw</strong><span>Layered saw oscillators with velocity.</span></figcaption></figure><figure><img src="op1r-images/synth_fmbell.png" alt="FM Bell screen" loading="lazy"><figcaption><strong>FM Bell</strong><span>FM tones with a bell-like character.</span></figcaption></figure><figure><img src="op1r-images/synth_granular.png" alt="Granular screen" loading="lazy"><figcaption><strong>Granular</strong><span>Grain textures from a loaded or recorded sample.</span></figcaption></figure><figure><img src="op1r-images/synth_iterlab.png" alt="Iter lab screen" loading="lazy"><figcaption><strong>Iter lab</strong><span>An animated lab screen for the stock Iter synth.</span></figcaption></figure><figure><img src="op1r-images/fx_tape.png" alt="Tape screen" loading="lazy"><figcaption><strong>Tape</strong><span>Tape echo, wow, flutter and age.</span></figcaption></figure><figure><img src="op1r-images/fx_clouds.png" alt="Clouds screen" loading="lazy"><figcaption><strong>Clouds</strong><span>Granular texture processing.</span></figcaption></figure><figure><img src="op1r-images/fx_reverb.png" alt="Reverb screen" loading="lazy"><figcaption><strong>Reverb</strong><span>Plate and hall reverb.</span></figcaption></figure><figure><img src="op1r-images/lfo_quad.png" alt="Quad LFO screen" loading="lazy"><figcaption><strong>Quad LFO</strong><span>Four modulation sources, including modulation of other LFOs.</span></figcaption></figure><figure><img src="op1r-images/seq_euclid.png" alt="Euclid screen" loading="lazy"><figcaption><strong>Euclid</strong><span>Six-slot Euclidean sequencing.</span></figcaption></figure><figure><img src="op1r-images/seq_dots.png" alt="Dots step sequencer screen captured in the emulator" loading="lazy"><figcaption><strong>Dots</strong><span>Six-slot sequencing with live recording, FX parameter locks and lock-only triggers.</span></figcaption></figure></div><p class="base-extra">Also included: resource monitor (clock → T1), improved MIDI start sync, MIDI CC control and OP-Z controller mode. Granular needs a sample loaded or recorded into its slot.</p><a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">Read the op1r notes ↗</a></details></section>
+<fieldset id="synths"><legend>01 / SYNTH ENGINES</legend><div class="feature-grid"></div></fieldset>
+<fieldset id="effects"><legend>02 / EFFECTS</legend><div class="feature-grid"></div></fieldset>
+<section class="preset-pack" id="preset-pack"><div class="section-label"><span>THE HUNDEKRAFT SOUND COLLECTION</span><span>MADE FOR THESE ENGINES</span></div><div class="preset-heading"><strong id="preset-total">112</strong><h2>Sounds to<br>start something.</h2></div><p>From bell keys and drawbar organs to soft pads, frozen textures and slow-moving drones. We’ve made a collection for op1r and our own engines—your pack includes only the sounds your build can play.</p><div id="preset-breakdown" class="preset-breakdown"></div><p class="preset-examples">Lab Flute · Warm Ensemble · Frozen Toffee · Midnight Mass · Aurora</p><a id="preset-pack-download" class="preset-link" download>Download matching preset pack ↓</a><small>Separate download. Install through disk mode after updating the firmware. The preset limit includes sounds already on your instrument. Granular presets need a sample loaded or recorded into the slot.</small><p id="preset-warning" role="status" hidden></p></section>
+<fieldset class="capacity"><legend>03 / ROOM TO EXPLORE</legend><label><input type="checkbox" id="expanded" checked disabled><span><strong>300 user synth presets</strong><small>More space for your sounds. Uncheck to keep the stock limit of 100.</small></span><span class="capacity-number" aria-hidden="true">300</span></label></fieldset>
+</div>
+<aside class="build-panel">
+<div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
+<div class="build-number">R<span>246</span><small>+ OP1R 18</small></div>
+<dl><div><dt>Added synths</dt><dd id="synth-count">4</dd></div><div><dt>Added effects</dt><dd id="effect-count">2</dd></div><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
+<div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
+<p class="privacy">The firmware stays in this browser. No account, no upload, no device key.</p>
+<button id="build" type="submit" disabled>Build my firmware <span>↗</span></button>
+<button id="cancel" type="button" hidden>Cancel build</button>
+<p id="status" role="status" aria-live="polite">Loading the feature catalog…</p>
+<div id="downloads" hidden><a id="download-firmware" class="download">Download firmware ↓</a><a id="download-presets">Download matching preset pack</a><a id="download-report">Download build record</a></div>
+<details class="activity"><summary>Build activity</summary><pre id="log" aria-live="off"></pre></details>
+<div class="config-actions"><button type="button" id="export" disabled>Save choices</button><label for="import">Load choices<input type="file" id="import" accept=".json" hidden disabled></label></div>
+</aside>
+</div>
+</form>
+<section class="after"><span>04 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
+</main>
+<footer><span>An independent firmware workshop.</span><span>op1r + hundekraft · Not affiliated with Teenage Engineering.</span></footer>
+</body>
+</html>

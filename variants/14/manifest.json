@@ -1,0 +1,200 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [
+      "pew"
+    ],
+    "effects": [
+      "washer"
+    ],
+    "preset_cap": 100
+  },
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 16116,
+    "memory_bytes": 28428
+  },
+  "presets": {
+    "count": 62,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "pew": 14,
+      "iter": 12
+    },
+    "sha256": "bc8b18fa2935e15a644ffea694ca1fbac0eed6970a1340fea69f4c8c49e335b8",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "content/op1_factory.db",
+      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+      "result_sha256": "d9535322645c64b3713cf9971fc3e0c9ab4fe2c35743a9ef66483a78ecd61f59",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 27,
+          "old": "0d",
+          "new": "0f"
+        },
+        {
+          "op": "replace",
+          "offset": 95,
+          "old": "0d002e8dfb",
+          "new": "0f002e8df8"
+        },
+        {
+          "op": "replace",
+          "offset": 1028,
+          "old": "0b01a5",
+          "new": "0c016e"
+        },
+        {
+          "op": "replace",
+          "offset": 1054,
+          "old": "0000",
+          "new": "016e"
+        },
+        {
+          "op": "replace",
+          "offset": 1390,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "350e040019637761736865725b373239362c2031323238382c2031313236342c2032303438302c2032313235322c20302c20302c20305d"
+        },
+        {
+          "op": "replace",
+          "offset": 4100,
+          "old": "0e0151",
+          "new": "0f0122"
+        },
+        {
+          "op": "replace",
+          "offset": 4132,
+          "old": "0000",
+          "new": "0122"
+        },
+        {
+          "op": "replace",
+          "offset": 4386,
+          "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "2d0f040013597065775b31363338342c20383139322c20302c20383139322c2032313235342c20302c20302c20305d"
+        }
+      ]
+    },
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
+      "result_sha256": "29ab737b16f9dbbc66a520726853b993b9403d2fce2b423c8bc3dbd4ac1e0347",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "9b",
+          "new": "5e"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "5843",
+          "new": "5c82"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "4448e1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "5048e1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e38d85",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "182240e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "insert",
+          "offset": 2371262,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "23d1a70526f49c1aa7fb48d79893ae51be93666cc39d49c786676c1be0952f88",
+          "size": 16132
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/display/pew.svg",
+      "blob": "content_display_pew.svg",
+      "sha256": "146b07730575f220b56c3cb846148e8e5d6581ab932949a6f83de08f7b24810f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/washer.svg",
+      "blob": "content_display_washer.svg",
+      "sha256": "3a1483a0c890718cb83f1dd49e70f954a4f67d2f39116ffb821cf656da7cb92d",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "result": {
+    "tar_sha256": "30b87f91832caba8e1916c6b09fa9c6aa0aceaad9b2a334ed5647b8fdc3271cd"
+  }
+}

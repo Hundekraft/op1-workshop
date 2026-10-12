@@ -1,0 +1,2740 @@
+{
+  "schema": 1,
+  "release": {
+    "id": "37f71ad3cc694cad",
+    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "catalog": {
+    "schema": 1,
+    "base": "op1r18",
+    "synths": [
+      {
+        "id": "wavetable",
+        "marker": 21252,
+        "name": "Wavetable",
+        "description": "Morphing waves. Analog ladder filter.",
+        "color": "blue",
+        "type": "wavetable + analog filter",
+        "controls": [
+          {
+            "name": "Wave",
+            "description": "Morph through eight wave shapes"
+          },
+          {
+            "name": "Detune",
+            "description": "Spread the two oscillators"
+          },
+          {
+            "name": "Cutoff",
+            "description": "Open the low-pass filter"
+          },
+          {
+            "name": "Resonance",
+            "description": "Add resonance and drive"
+          }
+        ]
+      },
+      {
+        "id": "taffy",
+        "marker": 21253,
+        "name": "Taffy",
+        "description": "Elastic, CZ-style phase distortion.",
+        "color": "green",
+        "type": "phase distortion synthesizer",
+        "controls": [
+          {
+            "name": "Wave",
+            "description": "Morph the CZ-style wave shape"
+          },
+          {
+            "name": "Distortion",
+            "description": "Bend the phase for brighter harmonics"
+          },
+          {
+            "name": "Envelope",
+            "description": "Add a bright attack to each note"
+          },
+          {
+            "name": "Resonance",
+            "description": "Blend in a resonant wave"
+          }
+        ]
+      },
+      {
+        "id": "pew",
+        "marker": 21254,
+        "name": "Pew",
+        "description": "Drawbar organ. Rotary speaker.",
+        "color": "orange",
+        "type": "drawbar organ + rotary speaker",
+        "controls": [
+          {
+            "name": "Low bars",
+            "description": "Sub, fundamental and fifth"
+          },
+          {
+            "name": "Mid bars",
+            "description": "Octave and upper harmonics"
+          },
+          {
+            "name": "High bars",
+            "description": "High harmonics and key click"
+          },
+          {
+            "name": "Rotor",
+            "description": "Slow chorale to fast rotation"
+          }
+        ]
+      },
+      {
+        "id": "elg",
+        "marker": 21255,
+        "name": "Elg",
+        "description": "Slow-moving drones with a low growl.",
+        "color": "red",
+        "type": "three-oscillator drone synthesizer",
+        "controls": [
+          {
+            "name": "Interval",
+            "description": "Choose the third oscillator\u2019s interval"
+          },
+          {
+            "name": "Detune",
+            "description": "Set the beating between voices"
+          },
+          {
+            "name": "Timbre",
+            "description": "Shape the filter and growl"
+          },
+          {
+            "name": "Movement",
+            "description": "Sweep and swell with slow modulation"
+          }
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "id": "washer",
+        "marker": 21252,
+        "name": "Washer",
+        "description": "Chorus, ensemble and flanger.",
+        "color": "blue",
+        "type": "chorus / ensemble / flanger",
+        "controls": [
+          {
+            "name": "Spin",
+            "description": "Set the modulation speed"
+          },
+          {
+            "name": "Depth",
+            "description": "Widen the delay sweep"
+          },
+          {
+            "name": "Foam",
+            "description": "Move from chorus into flanging"
+          },
+          {
+            "name": "Mix",
+            "description": "Blend the wet signal with the dry"
+          }
+        ]
+      },
+      {
+        "id": "snowglobe",
+        "marker": 21253,
+        "name": "Snowglobe",
+        "description": "Shimmer reverb with a frozen heart.",
+        "color": "orange",
+        "type": "shimmer reverb + freeze",
+        "controls": [
+          {
+            "name": "Decay",
+            "description": "Lengthen the reverb tail"
+          },
+          {
+            "name": "Shimmer",
+            "description": "Feed octave-up echoes into the tail"
+          },
+          {
+            "name": "Size",
+            "description": "Change the space around the sound"
+          },
+          {
+            "name": "Mix / freeze",
+            "description": "Add reverb; turn fully up to freeze"
+          }
+        ]
+      }
+    ],
+    "preset_caps": [
+      100,
+      300
+    ]
+  },
+  "runtime_sha256": "0082f8a87340c22bcdaa36b6cbc4818769964fede87a119fb628e60d2d40cb0e",
+  "base_sha256": "5a9aa35c53149b0100b1856232fe90c68ca8a340bb615b46741ef56c38b432b4",
+  "variants": {
+    "00": {
+      "sha256": "dd4ee951badc098929397dd6affc5d6e1c38bb6bceaae5ffd537dba470bc0a10",
+      "sizes": {
+        "image_bytes": 0,
+        "memory_bytes": 0
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "937b51ac6f4970e057d6df14952c7cd8205277829abd20399714480c872af95f",
+        "exceeds_cap": false
+      }
+    },
+    "01": {
+      "sha256": "276d4c9ad2045a1b4a86baa7d8b062c325ecf77fdde14df4dd3d2f6d648a4008",
+      "sizes": {
+        "image_bytes": 15492,
+        "memory_bytes": 15492
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "iter": 12
+        },
+        "sha256": "59231748df971d97dc925404d3d8fb04be533ff23511c3afc330fa686fd8d4cc",
+        "exceeds_cap": false
+      }
+    },
+    "02": {
+      "sha256": "4da95df654fbf5a9f108860392dae583ffe602aff243ae7c78751da05816e11c",
+      "sizes": {
+        "image_bytes": 11664,
+        "memory_bytes": 11664
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "iter": 12
+        },
+        "sha256": "71ce7320eba489678c60c3f77607489676e8a1de7b5c4d60cf05d175e4e4d121",
+        "exceeds_cap": false
+      }
+    },
+    "03": {
+      "sha256": "83e29c2fa8e52bfd48588c8f895073dd8e29ee7c3c6fe98e5d6952a2c361f0a4",
+      "sizes": {
+        "image_bytes": 21084,
+        "memory_bytes": 21084
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "iter": 12
+        },
+        "sha256": "702596ae418396737ec33e310744d856b8bd85be793706c573b14166685866af",
+        "exceeds_cap": false
+      }
+    },
+    "04": {
+      "sha256": "655159ce15b9ec059e5e89f0a5848105bd8152df4155d14f021fb673d51a6fc6",
+      "sizes": {
+        "image_bytes": 13160,
+        "memory_bytes": 13160
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "d468de4c12a6ab8bd6f85f727be90fc3638fe6362064410c375036f0f298e8dd",
+        "exceeds_cap": false
+      }
+    },
+    "05": {
+      "sha256": "0577147735253b7b97a7632eb33ad0c67467b2d5322c7feeb72e3033a657dce0",
+      "sizes": {
+        "image_bytes": 22516,
+        "memory_bytes": 22516
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "c9ae4afe99af392e7a8556f56d8ed91ad448ded08f4415eadc12584dc03b89c6",
+        "exceeds_cap": false
+      }
+    },
+    "06": {
+      "sha256": "7c9e2ec08dbe7c45cb110bbb66994e7ff204e898e307b3e4a552bdac293d40f4",
+      "sizes": {
+        "image_bytes": 18776,
+        "memory_bytes": 18776
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "3f8ffd426816a8eeca8ed818e1965561601a4c5be90f4f3934c3547669bcd1e3",
+        "exceeds_cap": false
+      }
+    },
+    "07": {
+      "sha256": "9cb8c16c78d0b1ea011bee91083b78fe438aceb9db7fae058fec56749f7080d6",
+      "sizes": {
+        "image_bytes": 28108,
+        "memory_bytes": 28108
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "2faf5b8136236a7bbb766c9aca3e3f0fa4f0cd69033ad88695cb764fd755c464",
+        "exceeds_cap": false
+      }
+    },
+    "08": {
+      "sha256": "25899d5ff8b1787a9b4a88674cd0c25dd4b9c09dc17e962e1bb03c426fcfa6c4",
+      "sizes": {
+        "image_bytes": 9556,
+        "memory_bytes": 9556
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "4ebb22751a42d8ef70b224c4ff543ccc8f89969f5431026afd82fc0aacf949a8",
+        "exceeds_cap": false
+      }
+    },
+    "09": {
+      "sha256": "9d4d7d4bf380b3337ddc46c2faf7711dfdc90fc3e541264a62e04f333a57c53f",
+      "sizes": {
+        "image_bytes": 18900,
+        "memory_bytes": 18900
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "78f3e1bd0414e7a1fcf1cd6cae566ed3df1ca95fe29d4f09dc5de282cf8199a0",
+        "exceeds_cap": false
+      }
+    },
+    "0a": {
+      "sha256": "8661634714a720c6427b1cff96b5457010cd75950206305988da63eb51ebe627",
+      "sizes": {
+        "image_bytes": 15148,
+        "memory_bytes": 15148
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "7f45e49e9f67b5fff79d1932c0d124f16bf2149eccfb7e5ab7fffce3d45223da",
+        "exceeds_cap": false
+      }
+    },
+    "0b": {
+      "sha256": "9b3267b327922cb6e511f0712288b92b5e866c4fd6dd74da1211a3deeec317bc",
+      "sizes": {
+        "image_bytes": 24492,
+        "memory_bytes": 24492
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "c07ac18f3852aa28670803d3a7be692b7009a61d93b29ff5ed49ea1f570a8f53",
+        "exceeds_cap": false
+      }
+    },
+    "0c": {
+      "sha256": "71a19a1b16322a25f759980f2467905fc34cac4ff201bdcb9dd27f65d29d366e",
+      "sizes": {
+        "image_bytes": 16592,
+        "memory_bytes": 16592
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "eefb541d78496cc59569f79aa601cc6c6792d458582ea5cbb523e78b7d687f63",
+        "exceeds_cap": false
+      }
+    },
+    "0d": {
+      "sha256": "afe4abe70ca09a364dd402dc891b0acf8c856686de501a9e4835ffdd5024e320",
+      "sizes": {
+        "image_bytes": 25924,
+        "memory_bytes": 25924
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "de8d5aefbcf710065556631c87ef5c73bc1c14cd14dff197d42bef3da757bdd3",
+        "exceeds_cap": false
+      }
+    },
+    "0e": {
+      "sha256": "1401f24442794a08e40fc03012f99ec834c374cb561d018ce86fa571dce1b677",
+      "sizes": {
+        "image_bytes": 22184,
+        "memory_bytes": 22184
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "57bdb312f8d41a533d637d63ec20b4179c5bce02129b4e16e14152f5023a9b4a",
+        "exceeds_cap": false
+      }
+    },
+    "0f": {
+      "sha256": "7422a0050c54b0cadb7b8c62fb75f23d23477e2b7d04939c1238ef9b9c562369",
+      "sizes": {
+        "image_bytes": 31516,
+        "memory_bytes": 31516
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "130771cda6f4274f96f2ea7fc9afde3fb673d9e4a11eb824e1fce585068eb25f",
+        "exceeds_cap": false
+      }
+    },
+    "10": {
+      "sha256": "6e7e38303ebc4b055b168646e41d6ebf3409db9366d3795779ed4d154dd53041",
+      "sizes": {
+        "image_bytes": 9088,
+        "memory_bytes": 21400
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "788b55b5cea764f3bb3069e65e4fd847de4055024b3c6c134c22d66b03188ef6",
+        "exceeds_cap": false
+      }
+    },
+    "11": {
+      "sha256": "cf7663fe7412d7f81e44b1338f152bfb6ad2d5294005119ee53a5037af2e0a95",
+      "sizes": {
+        "image_bytes": 18432,
+        "memory_bytes": 30744
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "iter": 12
+        },
+        "sha256": "e5490f9959e80ccfe6c51aa6e8a2a087ac40594910fdcc31e8822907d66fb27e",
+        "exceeds_cap": false
+      }
+    },
+    "12": {
+      "sha256": "3145972e0cbb0e6f7a4406ac27105d77215a6101347c32702fa961277f9c37ff",
+      "sizes": {
+        "image_bytes": 14680,
+        "memory_bytes": 26992
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "8fbda1bf8e1e8a73a327200033a4b5317a565c3089d2dd1bcf4e84e93d0e73fc",
+        "exceeds_cap": false
+      }
+    },
+    "13": {
+      "sha256": "9e0c7947ccbbaf06918a6f0759c0bd3009b3cf3e618abd48cc3b244302304f9d",
+      "sizes": {
+        "image_bytes": 24024,
+        "memory_bytes": 36336
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "eda43e64a5b028c3ed9cbb8737eb9b8fca8308d3886a077a512701b1a290465f",
+        "exceeds_cap": false
+      }
+    },
+    "14": {
+      "sha256": "b2f8af37f14e286e1566189ca4899cfcb319496dc83935fbeb659c11e850f68c",
+      "sizes": {
+        "image_bytes": 16116,
+        "memory_bytes": 28428
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "bc8b18fa2935e15a644ffea694ca1fbac0eed6970a1340fea69f4c8c49e335b8",
+        "exceeds_cap": false
+      }
+    },
+    "15": {
+      "sha256": "84659a8db6caaa851740f55f9543ea08e2356d029b2252ee26d38d9f72b84b18",
+      "sizes": {
+        "image_bytes": 25448,
+        "memory_bytes": 37760
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "a1958a6868bfe0ec81184357bf78b786ba5c5dfae9c09baf0b41e06ec77d241d",
+        "exceeds_cap": false
+      }
+    },
+    "16": {
+      "sha256": "72abaa4bd8025d0470a1a239591353b75514e0f3347703274eca0b8190fc12db",
+      "sizes": {
+        "image_bytes": 21708,
+        "memory_bytes": 34020
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "de1fddd80083d3e92d61163d53527977aff903aa4714f9bcff1344a74e5886d2",
+        "exceeds_cap": false
+      }
+    },
+    "17": {
+      "sha256": "03b930efb95ad193feec875c0c4369844c5616ee6c57f9c18ac783f3b012014c",
+      "sizes": {
+        "image_bytes": 31040,
+        "memory_bytes": 43352
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "ef6c7db09bfbb1f06f728122b963cc1c7f821d7bef8dbdd4ad5e1a1c91d1d8a1",
+        "exceeds_cap": false
+      }
+    },
+    "18": {
+      "sha256": "90c2a570d5f430f3ce0dd597bec63c3d6b88a6be0f2193dd61ae9bf8bd4a1de8",
+      "sizes": {
+        "image_bytes": 12496,
+        "memory_bytes": 24808
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "e49a7c077dea5fa4865911a9aecde510f7decb142765548f97f4a4f741b2d7c5",
+        "exceeds_cap": false
+      }
+    },
+    "19": {
+      "sha256": "0a7a4a7a827e4a597a25e88d963305e7f37ee8e93260a5d1cce6ee94b845f6eb",
+      "sizes": {
+        "image_bytes": 21840,
+        "memory_bytes": 34152
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "2605c1d6d452ff34cd5a851526c51d8250a42747c5ad9fcd854865151d5dceee",
+        "exceeds_cap": false
+      }
+    },
+    "1a": {
+      "sha256": "0667fd61706b26944b1ccd196dce1d3cb1e58a51653819773c90860b6d96be85",
+      "sizes": {
+        "image_bytes": 18088,
+        "memory_bytes": 30400
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "090dd13745324c23e71cab11b6dda4e116069e26ad8d4c6d3e37f9b1acb58d38",
+        "exceeds_cap": false
+      }
+    },
+    "1b": {
+      "sha256": "b18c961b284c694c2330d3f8b3984dc571311423bb350a10361e24b6be29f6f1",
+      "sizes": {
+        "image_bytes": 27432,
+        "memory_bytes": 39744
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "0e56e5518a6476edd6e506fc0fa8833f00f7817133cfd29a5ec930883d2dd0d7",
+        "exceeds_cap": false
+      }
+    },
+    "1c": {
+      "sha256": "1607605205602ea55d971703fd67020b8148e6e99b4b627edac2c13ccf64bbb0",
+      "sizes": {
+        "image_bytes": 19524,
+        "memory_bytes": 31836
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "a849f4139579e5eefb44e689780e394e00b14e41d65bb4d8c11bbb5d778586ea",
+        "exceeds_cap": false
+      }
+    },
+    "1d": {
+      "sha256": "2428fe068251204f9c5cb75bee5ab4b9a9d9bf50d39810df403ce3304b004d1a",
+      "sizes": {
+        "image_bytes": 28856,
+        "memory_bytes": 41168
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "81abb4c36729ea7e51547f34487391c72779f58ac9cab485a91b5c1953ead422",
+        "exceeds_cap": false
+      }
+    },
+    "1e": {
+      "sha256": "b3d6e1fc254bcf3819f18d6b4a87437d4951a829a988ba78151ab49ecd1abc67",
+      "sizes": {
+        "image_bytes": 25116,
+        "memory_bytes": 37428
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "b30a18a958f2f388f9390c1440b92c70e9cd923700bd727dccdebba4b0da3e2f",
+        "exceeds_cap": false
+      }
+    },
+    "1f": {
+      "sha256": "3e0b0372b849c679359b971b7c2145337ec42a700130c591c1616093ad628350",
+      "sizes": {
+        "image_bytes": 34448,
+        "memory_bytes": 46760
+      },
+      "presets": {
+        "count": 104,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "4645affec75f79d20bd7da88d48568aff2fa60c2dfd1645c8bce8974d507fe69",
+        "exceeds_cap": true
+      }
+    },
+    "20": {
+      "sha256": "28a789edd2374614d2ad786551891d38b599e7e2bd666dda0263f8166ec78d27",
+      "sizes": {
+        "image_bytes": 11708,
+        "memory_bytes": 146996
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "d1b6b0231e91df9c41b1569fb989b0bba044ebe5f35c907cf764005bfd2833b4",
+        "exceeds_cap": false
+      }
+    },
+    "21": {
+      "sha256": "25acf0d88a685d2ddc41546d9958c9c3d90a491d91646169bbf92c9c544eac9e",
+      "sizes": {
+        "image_bytes": 19696,
+        "memory_bytes": 154984
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "iter": 12
+        },
+        "sha256": "a454ba0bdb2bebfcfa4797d325b4e5fbab37d68214ff550259c8522bbb02ad79",
+        "exceeds_cap": false
+      }
+    },
+    "22": {
+      "sha256": "24df75970a09bbdd23c44103f62a6ce45e6564eadb3c297ea9031baddc915d64",
+      "sizes": {
+        "image_bytes": 17300,
+        "memory_bytes": 152588
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "0da52b23afc4442c603e501d1d085b2440a1e6770fe8f857aceb7698fe3b0179",
+        "exceeds_cap": false
+      }
+    },
+    "23": {
+      "sha256": "164c80caa95dfcea9b240edac1308cee2ca39b4b4dd85946ab0bc7d32c9222d0",
+      "sizes": {
+        "image_bytes": 25288,
+        "memory_bytes": 160576
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "bd8645942939a54ede9899de3672c9228516671fdb158826432fb3c75ddbdea8",
+        "exceeds_cap": false
+      }
+    },
+    "24": {
+      "sha256": "bbe492e3772890eceeb6a42712b58a75e97b6eaa1a5b781044b064e4f5b9b4bc",
+      "sizes": {
+        "image_bytes": 18724,
+        "memory_bytes": 154012
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "58b05859caa30d954cf72c7ee1e1b7206710406b7117d1d02bd97cbf3ed07671",
+        "exceeds_cap": false
+      }
+    },
+    "25": {
+      "sha256": "b5f6a48f845e8e1e40f6a66051a80ac45f1bd16feb4806cf91d345ee1f9ff256",
+      "sizes": {
+        "image_bytes": 26712,
+        "memory_bytes": 162000
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "1818e18abdb5aa37cfa6159da4810c71eeb2d09d72ae9c06c3a5a3c0d40701d5",
+        "exceeds_cap": false
+      }
+    },
+    "26": {
+      "sha256": "f78f8ec442b1d8eeea5004df03571e8e6ac9efb7b7bbe86480b4aca08c22a6b3",
+      "sizes": {
+        "image_bytes": 24316,
+        "memory_bytes": 159604
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "a70cbedc4cbcac9da729e30333a59d61ec9a54fac24f5382cd05d341f7e07fb1",
+        "exceeds_cap": false
+      }
+    },
+    "27": {
+      "sha256": "aeb60bd05f4217d0769553f1d6dc40b286a4a177e77f5b53b044b329e5149016",
+      "sizes": {
+        "image_bytes": 32304,
+        "memory_bytes": 167592
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "6131d38b67d8216436e1a71430c9e0593ea0a6dbd339826dbcff6a0172556e7b",
+        "exceeds_cap": false
+      }
+    },
+    "28": {
+      "sha256": "55b771ac0a601d2632e23cde0582ece545c718ee56e231b45947e89f2bb80cbb",
+      "sizes": {
+        "image_bytes": 15116,
+        "memory_bytes": 150404
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "b8dcb9b19ef3daedc4c48461c00ab66bc5891a5c639ebc5c51c886fdf32dd823",
+        "exceeds_cap": false
+      }
+    },
+    "29": {
+      "sha256": "73dc1048da8876d873313edd26dbd278a736491c133cac6deca9ed634337bffc",
+      "sizes": {
+        "image_bytes": 23104,
+        "memory_bytes": 158392
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "240c3fd79e3562e032ef06ef40a3b567adfe88ef8608375e8b5c3fe40931270d",
+        "exceeds_cap": false
+      }
+    },
+    "2a": {
+      "sha256": "2cb3888484b12fb02cf34f470155927f51cd10bf9559efc8539485bc94ca6c96",
+      "sizes": {
+        "image_bytes": 20708,
+        "memory_bytes": 155996
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "f93e8592b1a22cdf722264fa6cd00d62872ccf7290aeaa8e52035a791fad1e34",
+        "exceeds_cap": false
+      }
+    },
+    "2b": {
+      "sha256": "1f48f6019286bf21e0137013bbe446f7d06b61c58fb0edfe50397a43fe040379",
+      "sizes": {
+        "image_bytes": 28696,
+        "memory_bytes": 163984
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "f40d2e16a1534a0b1ba99d575db6cd774c3fd5ed3afeaf2fda3153e9680380c5",
+        "exceeds_cap": false
+      }
+    },
+    "2c": {
+      "sha256": "4c2833034687c5228eefd209f1feb0c62657ff4350d8a731a8eae100fec00636",
+      "sizes": {
+        "image_bytes": 22132,
+        "memory_bytes": 157420
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "ec41322ebb56ed3472b9743ec5f2e5563fdbdc4b4178a9a7f9b674de4089942d",
+        "exceeds_cap": false
+      }
+    },
+    "2d": {
+      "sha256": "d4a0e49fc6dc06affb00da0c6ef941174b5b1e9fe28a000cd541891f5b773446",
+      "sizes": {
+        "image_bytes": 30120,
+        "memory_bytes": 165408
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "d9fceb9f87f9b676b399b011ba134916555a7c1de87efc3cb899087eb388030e",
+        "exceeds_cap": false
+      }
+    },
+    "2e": {
+      "sha256": "2ef9e9cd9c962e81e9f71fe0661a10ac1b29fc575b642e602b926a298bd9538f",
+      "sizes": {
+        "image_bytes": 27724,
+        "memory_bytes": 163012
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "95388c528d0bb06d4e067bc1c871fec8715768e77601a105c59569ab7571b7b1",
+        "exceeds_cap": false
+      }
+    },
+    "2f": {
+      "sha256": "545348c7fdce7c32c21175c01bef10a29f9fdbed2b016001651440effc0905e4",
+      "sizes": {
+        "image_bytes": 35712,
+        "memory_bytes": 171000
+      },
+      "presets": {
+        "count": 104,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "6742229b3c34f66536563f5774d7c95cf59394df10517376ed8a7d78bed48f6e",
+        "exceeds_cap": true
+      }
+    },
+    "30": {
+      "sha256": "22e9819a21d60cae8a4aa3b127aa4b4c911eabdc2924fd2f126111b470fd82f0",
+      "sizes": {
+        "image_bytes": 14648,
+        "memory_bytes": 162248
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "17ee08620c6a435ed37b70a1f6a127751a5d5a13884ebbc898c776ec836ae96f",
+        "exceeds_cap": false
+      }
+    },
+    "31": {
+      "sha256": "56f4b4833a7b0448990d9de6b9da23cf3be46991bb2ce0fb8c1d064fe3490310",
+      "sizes": {
+        "image_bytes": 22636,
+        "memory_bytes": 170236
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "iter": 12
+        },
+        "sha256": "3b23dbcec41bc9f941511aca6e86a528f7a9df64c297efd14346e74c65d06cb6",
+        "exceeds_cap": false
+      }
+    },
+    "32": {
+      "sha256": "6eb5750d6392e4e7a153177414bce090a5c8bf462122beb03162d3f8f1db86a4",
+      "sizes": {
+        "image_bytes": 20240,
+        "memory_bytes": 167840
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "iter": 12
+        },
+        "sha256": "518e8e138c24283e0f740d970d65d2953f598ce2c765695a2ccff8cf23d1b3e3",
+        "exceeds_cap": false
+      }
+    },
+    "33": {
+      "sha256": "453a819b30242032e54318d753906764382d7b6621ba42f6652d42edcef81610",
+      "sizes": {
+        "image_bytes": 28228,
+        "memory_bytes": 175828
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "iter": 12
+        },
+        "sha256": "0e88477784034e349d09b3e9798c996b151b675fca29a343a84c30a9d673a5e9",
+        "exceeds_cap": false
+      }
+    },
+    "34": {
+      "sha256": "81df7f9e7b95cae37a0aa8595c6399ccee765860973b5a78b720e945a0978af9",
+      "sizes": {
+        "image_bytes": 21656,
+        "memory_bytes": 169256
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "f97ff62b1c375da227494579594fdffe2a2b05bc89300408b0db4c1df3877f7f",
+        "exceeds_cap": false
+      }
+    },
+    "35": {
+      "sha256": "148d4d22b51fa8fe284c817f4a7bda801ec8a4464e89342343aac65836d04c47",
+      "sizes": {
+        "image_bytes": 29644,
+        "memory_bytes": 177244
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "a42b2f9a023ce48989ef77afbae0d6149fea7e619657887956e59830f4af0051",
+        "exceeds_cap": false
+      }
+    },
+    "36": {
+      "sha256": "8709a6d4b05dac9bc3a6f0f8fa921e021f8665cb93210d61235a069d7f71f3dc",
+      "sizes": {
+        "image_bytes": 27248,
+        "memory_bytes": 174848
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "c60894967772b395192abc4baf09a3829c7c936afa3de19aad15c4c9edbfa4c4",
+        "exceeds_cap": false
+      }
+    },
+    "37": {
+      "sha256": "01cbe5e3e52af90b453644709e001f50b06e7ccd6dd6792cf698845c74f89241",
+      "sizes": {
+        "image_bytes": 35236,
+        "memory_bytes": 182836
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "1fca03ffb01e7b68778eb3d6d647e5f854c6e8790432a37acaba1e7a578f84a6",
+        "exceeds_cap": false
+      }
+    },
+    "38": {
+      "sha256": "4d19b57fcf1d9bfcc1878dc8a9d4f7b65e495847903d34fa13f6c7c43ea8cc9d",
+      "sizes": {
+        "image_bytes": 18056,
+        "memory_bytes": 165656
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "d2dcbd5deed6ded64fe1343ca6af27e7a3c5099c709dd47b37d3d813ae2795fb",
+        "exceeds_cap": false
+      }
+    },
+    "39": {
+      "sha256": "0a9af2a1b0e664b5cc19a6e4c5a193fd17914671da742b5c9ab3f2eaaa615d7f",
+      "sizes": {
+        "image_bytes": 26044,
+        "memory_bytes": 173644
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "e928e9caef51f3e9583565ea903c835388c9b2d7abc7e77687e3f76d1f23c10d",
+        "exceeds_cap": false
+      }
+    },
+    "3a": {
+      "sha256": "af6f92751c366db83bc054ca3cc1f9c01982efdd488087f8bd77f515e7b83787",
+      "sizes": {
+        "image_bytes": 23648,
+        "memory_bytes": 171248
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "1d1526428d8c251da90590823bae7548edd25973aec3a5170124254acc5be4d2",
+        "exceeds_cap": false
+      }
+    },
+    "3b": {
+      "sha256": "e7c528785367847dab07da7a8d0e1eb5e5ec9aa82ef2619bbd7e86a0da4a1b7f",
+      "sizes": {
+        "image_bytes": 31636,
+        "memory_bytes": 179236
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "bad9a2fbf90149629710c6e8f06dff1438ee6b6ea49837c2248874ee53e86f70",
+        "exceeds_cap": false
+      }
+    },
+    "3c": {
+      "sha256": "cd00a37e760c5d1f864331d43fde2693acdc84dc24b3d111a62a0ee7ee0c0443",
+      "sizes": {
+        "image_bytes": 25064,
+        "memory_bytes": 172664
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "77a8a0b7074f4f4759c5f2a29f7c9e190c7ab3ab1a39cee97f14c23bdddb4eb7",
+        "exceeds_cap": false
+      }
+    },
+    "3d": {
+      "sha256": "db6637aa54f9d65db0cf89677747ce7d008392254195a3d4783c589ff05ebcf9",
+      "sizes": {
+        "image_bytes": 33052,
+        "memory_bytes": 180652
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "38cfead5037329bebf70c894bd508306f3c3edfde23dca97a7ece4a1935fd692",
+        "exceeds_cap": false
+      }
+    },
+    "3e": {
+      "sha256": "7552d557556b2f3b6f84f93388574ab34ea1643064659df98350ca4d737665e9",
+      "sizes": {
+        "image_bytes": 30656,
+        "memory_bytes": 178256
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "ce95b019b1d3388287fcff7f80240f610c9d6d816d7835fa87ffb87826ee17c7",
+        "exceeds_cap": false
+      }
+    },
+    "3f": {
+      "sha256": "4ab90da910f72a16860bf3ba17fae1a6b517e0331915779f1da5fce82b0ed9a9",
+      "sizes": {
+        "image_bytes": 38644,
+        "memory_bytes": 186244
+      },
+      "presets": {
+        "count": 112,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "644c03a1731ed49ca4d3dd5ce3285d65b6d099e1dab4a41a945f1ce3df5ac4bc",
+        "exceeds_cap": true
+      }
+    },
+    "40": {
+      "sha256": "a640c5c0e30bee3d281dd6153df4d7f47889b80b499e411e449034fdd0ab33c2",
+      "sizes": {
+        "image_bytes": 35032,
+        "memory_bytes": 35032
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "a5e7dbdc0cdb1c37d1f7455495df85f7c0009efaf17f90a72d721732ca105043",
+        "exceeds_cap": false
+      }
+    },
+    "41": {
+      "sha256": "c338af66f32711b5a6ec54b6149a8d1d80946f16100cd43749787af816eecca3",
+      "sizes": {
+        "image_bytes": 44508,
+        "memory_bytes": 44508
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "iter": 12
+        },
+        "sha256": "d2d5d4c7c0c376545296b5e286c55943e54af279358906f581be5501946663da",
+        "exceeds_cap": false
+      }
+    },
+    "42": {
+      "sha256": "738337f054ef8b2b04c9050d9c13243f846037c8299fc7d3a38634336ac224bd",
+      "sizes": {
+        "image_bytes": 40680,
+        "memory_bytes": 40680
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "iter": 12
+        },
+        "sha256": "5aab99aae3ac7c1ac74dc7b5cc6245319f439eff50880405c78239cae06004bc",
+        "exceeds_cap": false
+      }
+    },
+    "43": {
+      "sha256": "c1333a326fede3380502cbaf46660004863beb86398374342840dbadf41b762b",
+      "sizes": {
+        "image_bytes": 50100,
+        "memory_bytes": 50100
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "iter": 12
+        },
+        "sha256": "3319c58e5d1de8925d090f3bbe48f3ad9a347df3f35f35afa60c77d1c12135bb",
+        "exceeds_cap": false
+      }
+    },
+    "44": {
+      "sha256": "a19550895ab7f212be7257648880e0e61358387aa01ad4d2d0f5a6edc4597288",
+      "sizes": {
+        "image_bytes": 42176,
+        "memory_bytes": 42176
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "55c33cae02a806105aeacbef10cfd9bfd894fbcfbd70c08f625df67583d04972",
+        "exceeds_cap": false
+      }
+    },
+    "45": {
+      "sha256": "aa04e19f6225c9f7b2e52576af7f24c87a99460b73889152628e5585e0d034c9",
+      "sizes": {
+        "image_bytes": 51532,
+        "memory_bytes": 51532
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "63ca975d754e2022104cfb3f90413144493886c4f55d43574cdae1b0fc83fe22",
+        "exceeds_cap": false
+      }
+    },
+    "46": {
+      "sha256": "fa33abcbca7fd9dfb45f78839e8a69a06874b29cd044edeaf5c01c48aae9ec97",
+      "sizes": {
+        "image_bytes": 47792,
+        "memory_bytes": 47792
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "a895a7bd1196d85ef34002cb5c5ab7190985d3fd34d0ee1083ebe4a3d7a44351",
+        "exceeds_cap": false
+      }
+    },
+    "47": {
+      "sha256": "4c78dc1dc8a9a333c05e9e70ff5f2536f15759926cacc67d320bd7e021f47e1a",
+      "sizes": {
+        "image_bytes": 57124,
+        "memory_bytes": 57124
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "pew": 12,
+          "iter": 12
+        },
+        "sha256": "6065b98ce9a41a6489b4b8aaeeb4fdb146783a97097f1ac2bd81048a83d0c34a",
+        "exceeds_cap": false
+      }
+    },
+    "48": {
+      "sha256": "be5cd72ee262ae50aaf3fb6885cb2764ccc0a647808eda6b253a277304499dc6",
+      "sizes": {
+        "image_bytes": 38572,
+        "memory_bytes": 38572
+      },
+      "presets": {
+        "count": 60,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "8194dbdfcdbd40565955a41c0f0e1a71b9f4326eba76cc2181cf3535e5014fb5",
+        "exceeds_cap": false
+      }
+    },
+    "49": {
+      "sha256": "9e3b31dbb71f70202571147c602f26a3097f50fe4794828a1aaaf2678fb3ea77",
+      "sizes": {
+        "image_bytes": 47916,
+        "memory_bytes": 47916
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "69f74c08d31ded65933b7c4ee754d794dff7658e8a140e8a7f3224d42dfed8e9",
+        "exceeds_cap": false
+      }
+    },
+    "4a": {
+      "sha256": "9fd1e594f74c5f0853faa8b523ec4c4e9d9214be121babefa11183d82524250b",
+      "sizes": {
+        "image_bytes": 44164,
+        "memory_bytes": 44164
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "5f733bfdd0596072ad2b4dacfc4c932921e10c2fef5ba52200a60d1f1de454d5",
+        "exceeds_cap": false
+      }
+    },
+    "4b": {
+      "sha256": "73d2c128bfe415fa47889168af57b2e1b7340a5b896e75668eab81a646aaafd0",
+      "sizes": {
+        "image_bytes": 53508,
+        "memory_bytes": 53508
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "c5d4033737128a1ef90ca5a0c718842ba52e821b2a031410b9ebe45211596886",
+        "exceeds_cap": false
+      }
+    },
+    "4c": {
+      "sha256": "882fa1e5e7436fa189caf1d6aa6893ebd64f11fde634beaabddf0df5236bab44",
+      "sizes": {
+        "image_bytes": 45608,
+        "memory_bytes": 45608
+      },
+      "presets": {
+        "count": 72,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "00972c24b5bdb6ec050a042cd0bb96197c5da0171064904578a298e9ee16d1ca",
+        "exceeds_cap": false
+      }
+    },
+    "4d": {
+      "sha256": "094fe5d671abddcc821f934be98f253782259d9d2a0cd7e044143e30cee995c0",
+      "sizes": {
+        "image_bytes": 54940,
+        "memory_bytes": 54940
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "b17e84be48a068ef40e6098ee07a215e97efd8fde4db58fb3f1740ee318aee57",
+        "exceeds_cap": false
+      }
+    },
+    "4e": {
+      "sha256": "1d541f3c37fd89d00a12e560a55ff8d6cd6543c15df8a6e976800d251890feb1",
+      "sizes": {
+        "image_bytes": 51200,
+        "memory_bytes": 51200
+      },
+      "presets": {
+        "count": 84,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "1c35f9c16907b1e5bceafbaee042d3256ed061142467f96ad7324291c20e69d3",
+        "exceeds_cap": false
+      }
+    },
+    "4f": {
+      "sha256": "303d7c7eca73154691396a504fa1024722859f2cfe52acc3ec9d6bf3055bff91",
+      "sizes": {
+        "image_bytes": 60532,
+        "memory_bytes": 60532
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 12,
+          "taffy": 12,
+          "pew": 12,
+          "elg": 12,
+          "iter": 12
+        },
+        "sha256": "d9425f6a9dd5a117ed75153811f03ef9661db593b9358c890276cdf8d03d41b1",
+        "exceeds_cap": false
+      }
+    },
+    "50": {
+      "sha256": "c91bb255da8174b9e19926fefed0bf6f609b3753951e68aa2ffdace1edf39c55",
+      "sizes": {
+        "image_bytes": 38104,
+        "memory_bytes": 50416
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "1ee0fdfc79d425c0a5e8407cccf8ba4204a13a78828ab7e739aaeb26937ce687",
+        "exceeds_cap": false
+      }
+    },
+    "51": {
+      "sha256": "9b9ee545c03eec8d2ad098774fd8c66bdc2a08a13d2a920be261137eed6d2460",
+      "sizes": {
+        "image_bytes": 47448,
+        "memory_bytes": 59760
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "iter": 12
+        },
+        "sha256": "23e5e8ee2e8133fee27214b522abbcf17539fb46ca82edcb45ee0044bfd4cd0f",
+        "exceeds_cap": false
+      }
+    },
+    "52": {
+      "sha256": "edb26f60bbb49946466652ec5f0f5a99a976b0d0e4e0a7e457204ab6ced723c5",
+      "sizes": {
+        "image_bytes": 43696,
+        "memory_bytes": 56008
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "a374ed731763cc6bba8a2de9b02631c9eafb3a724ab1d135f92b94f23126980d",
+        "exceeds_cap": false
+      }
+    },
+    "53": {
+      "sha256": "1ce581a521ebc0191c61b86c9308f61f9d38f052888b98b810efcf214afc5b29",
+      "sizes": {
+        "image_bytes": 53040,
+        "memory_bytes": 65352
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "9afcf3fd29784ca98dfeaeb065e99ecff7c678913bf5baa8ff34eba9c318d01e",
+        "exceeds_cap": false
+      }
+    },
+    "54": {
+      "sha256": "72ae48912e9c873d6e7f3a7e28f3a717a496a3b99efd213dc354419dec6b1f53",
+      "sizes": {
+        "image_bytes": 45132,
+        "memory_bytes": 57444
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "9d4d5b8b688e59bad8c5b84f6299e89e3f86f7cf369376535feb59c61f735719",
+        "exceeds_cap": false
+      }
+    },
+    "55": {
+      "sha256": "a37aa2fb5ed485521b50ece6a55896f1bf2aec15d37246b46e062e316cb14148",
+      "sizes": {
+        "image_bytes": 54464,
+        "memory_bytes": 66776
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "9a2477cde9b5951dc28d240880ec181a5f8c9f2e4b2054a5d664a53075d2ad97",
+        "exceeds_cap": false
+      }
+    },
+    "56": {
+      "sha256": "983a31e9befe2084d55bff3f9aa9f1d87d2c4490ff641ad263e26dc1c229c346",
+      "sizes": {
+        "image_bytes": 50724,
+        "memory_bytes": 63036
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "e8b68c231c094ce232285f80a5245cd9953cf2f5c11594dfec076401966453e3",
+        "exceeds_cap": false
+      }
+    },
+    "57": {
+      "sha256": "b0cf539831761c53e9375c8bd0e181be6e183f1ce6f1c3a4a606b009a2fa225a",
+      "sizes": {
+        "image_bytes": 60056,
+        "memory_bytes": 72368
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "f7f8210a29ad902b3cf8f6181fde5a8c977915c1d3ad0e563555754ef077132c",
+        "exceeds_cap": false
+      }
+    },
+    "58": {
+      "sha256": "5a60d8231d7750ef10739e35f1f63be61bc652e6b966f8410a98a0bbbfbf0566",
+      "sizes": {
+        "image_bytes": 41512,
+        "memory_bytes": 53824
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "b707a65af7a8d3184ec99813baa67be09cb7b8adcdbe014cbddd2a76021fdc05",
+        "exceeds_cap": false
+      }
+    },
+    "59": {
+      "sha256": "6a13fa83c5b135b4c12bc3be2ad61488515e97ce392d5cab63f49ec15577b18a",
+      "sizes": {
+        "image_bytes": 50856,
+        "memory_bytes": 63168
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "aef5145f8692f28eea3cb9cfceaaf2e1abf4d816406891494a44927775618a87",
+        "exceeds_cap": false
+      }
+    },
+    "5a": {
+      "sha256": "05d29e17d9207d619f1810c72c4d9e8bbb74f5a23eaa59776e31a28acc4f6a1c",
+      "sizes": {
+        "image_bytes": 47104,
+        "memory_bytes": 59416
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "d186100bd7fa5b753392423431db6fd6d99f00115aa127ea694c80afc3aeb1c0",
+        "exceeds_cap": false
+      }
+    },
+    "5b": {
+      "sha256": "513772b8d2e6d104c54a6669c8b64220fcd2a0ce78aa561467eda39f3304f58b",
+      "sizes": {
+        "image_bytes": 56448,
+        "memory_bytes": 68760
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "7521ee75959777be8652302b0fbabf0f1b989872028bb338bc68bd96813a6cd0",
+        "exceeds_cap": false
+      }
+    },
+    "5c": {
+      "sha256": "0c7dd547f70ba859682787f462b40f7116a88bf22fa80bf6d4b473b76ebd5a4e",
+      "sizes": {
+        "image_bytes": 48540,
+        "memory_bytes": 60852
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "3f2ee41a9317eeffeb201fafb8e3bf984753267e633c5e38f1a62816dd1ebba0",
+        "exceeds_cap": false
+      }
+    },
+    "5d": {
+      "sha256": "f1120762f092a6f380758e022f714ae714859a7a1d581e5792cfe889e78198bb",
+      "sizes": {
+        "image_bytes": 57872,
+        "memory_bytes": 70184
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "a34343a0d4a4242a6b7cf953986a15d57168f44c66866cd7ca0a7e276d58db96",
+        "exceeds_cap": false
+      }
+    },
+    "5e": {
+      "sha256": "840c466594defdb025fce90114d9f7a8de2bb562c1c4e14c7df1d83e8f74ee5a",
+      "sizes": {
+        "image_bytes": 54132,
+        "memory_bytes": 66444
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "e2ebdf80b0cb31bf67e25a7eb0b28223c06f21b6d367f65470930f88a2f632b6",
+        "exceeds_cap": false
+      }
+    },
+    "5f": {
+      "sha256": "88034eaf4ea33452ab14b7d7adfdf0049a852fd9ee77def71161a0eb620cf28e",
+      "sizes": {
+        "image_bytes": 63464,
+        "memory_bytes": 75776
+      },
+      "presets": {
+        "count": 104,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "a251a260b9273ab431c4b4c822516b5568e2feaacdc9afa48b9211b5b5eaafd8",
+        "exceeds_cap": false
+      }
+    },
+    "60": {
+      "sha256": "c1f8ae0a19d9c6ad055c03615fec6d18ed9d7509eee59dfb559b78255443a1ff",
+      "sizes": {
+        "image_bytes": 40724,
+        "memory_bytes": 176012
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "5359fc37bbc8d2f9b192770d8e3ec960bf1c208cc7ff8473dfac3d07d484c854",
+        "exceeds_cap": false
+      }
+    },
+    "61": {
+      "sha256": "d9d639ec9437d8b55d7f5e6b72a6a8a5c6740a4b2f7905c04d42c50d9d764032",
+      "sizes": {
+        "image_bytes": 48712,
+        "memory_bytes": 184000
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "iter": 12
+        },
+        "sha256": "a9fb213a04644efac01482a1285e10b2deaba0b7be970fd7a7b7a6a6255a4998",
+        "exceeds_cap": false
+      }
+    },
+    "62": {
+      "sha256": "a2edfb6ce1abb1ab5c300b4964752d9130efc5500e69db60ffc1f22d0fdf4756",
+      "sizes": {
+        "image_bytes": 46316,
+        "memory_bytes": 181604
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "cde7a495c7c81f674e1a8b13a980a6270caefbbaeb43c33d238d1642308e77b1",
+        "exceeds_cap": false
+      }
+    },
+    "63": {
+      "sha256": "407dcabf2bcd8adb21c1e37fbccd93be190498d8f4f9967b727987e8010eb451",
+      "sizes": {
+        "image_bytes": 54304,
+        "memory_bytes": 189592
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "iter": 12
+        },
+        "sha256": "a1edec973c15b81c2f2e67fe2fd3b58df3f6620b31b9fbcec34f60518b3d6e90",
+        "exceeds_cap": false
+      }
+    },
+    "64": {
+      "sha256": "513fa791508b120aa99183e7460d1666e3c12a47f9988d03bc7b253d4f6289c6",
+      "sizes": {
+        "image_bytes": 47740,
+        "memory_bytes": 183028
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "35cd3b4437c502df754f1ba05b816c69f97e9c0a17c780aee68ddf4ce03de2c1",
+        "exceeds_cap": false
+      }
+    },
+    "65": {
+      "sha256": "0a929d97a2e273d068ec6d942d8037a265e1c59e7d5f1b4bac23ca6293cddd35",
+      "sizes": {
+        "image_bytes": 55728,
+        "memory_bytes": 191016
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "eb90b1daf109c42ed234d61eabce5341c577e0fe93ebdd98fecbc39df18d74f8",
+        "exceeds_cap": false
+      }
+    },
+    "66": {
+      "sha256": "003de8698bca3f7f8087268037e5baf455d1d9c53a0ba164ab84c3920c79e88a",
+      "sizes": {
+        "image_bytes": 53332,
+        "memory_bytes": 188620
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "16b32ea057d50b4cf401f895cd33e543663baf696ab294f458d0f81472ca83e1",
+        "exceeds_cap": false
+      }
+    },
+    "67": {
+      "sha256": "0457097663ce384cb7a5c018468c17f5563f23351ae6d39b823405510236c249",
+      "sizes": {
+        "image_bytes": 61320,
+        "memory_bytes": 196608
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "iter": 12
+        },
+        "sha256": "c20cb0a941aeaef8c37732563c335da1c39f4476b3103ed3cd837a7c7a22c1c6",
+        "exceeds_cap": false
+      }
+    },
+    "68": {
+      "sha256": "7b58939951f067c1b80f8b05b5b26e5532df0d450d0afa3aa277db2efcbd60da",
+      "sizes": {
+        "image_bytes": 44132,
+        "memory_bytes": 179420
+      },
+      "presets": {
+        "count": 62,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "22afad5cab083e146ae0d30fbbcfe25089b654b72176d125a07b7b5b0cf29da8",
+        "exceeds_cap": false
+      }
+    },
+    "69": {
+      "sha256": "a5d3e3145e5d57c048cac3a650745f59e5e3d9cf20c541b50d3e9d58449c109b",
+      "sizes": {
+        "image_bytes": 52120,
+        "memory_bytes": 187408
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "80b2f0dba14f8d9e71a07ea2f539db0ff2b57f3544f00638bfc2bd9654b69e6e",
+        "exceeds_cap": false
+      }
+    },
+    "6a": {
+      "sha256": "b82dfafe46c0843afd06758f4397f30f197ba37694202c20990733f5e9a9395a",
+      "sizes": {
+        "image_bytes": 49724,
+        "memory_bytes": 185012
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "6dd419d3562374c292e044ad9cc469bb9a138193016b1a77bf7f4b9cd4e81ecb",
+        "exceeds_cap": false
+      }
+    },
+    "6b": {
+      "sha256": "5e4e07e3b66fba42e465bdbd2a0ac6ee70a9bdb06d8c38808a8846ed5ce1a6fa",
+      "sizes": {
+        "image_bytes": 57712,
+        "memory_bytes": 193000
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "b2f65527603543488cf8e504dd6a45ab3e3d5f0789dc8db15d93509d37025f7e",
+        "exceeds_cap": false
+      }
+    },
+    "6c": {
+      "sha256": "841dab58769be060ca7764045dc943005824c60b1e5d95f95546a72c87725865",
+      "sizes": {
+        "image_bytes": 51148,
+        "memory_bytes": 186436
+      },
+      "presets": {
+        "count": 76,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "c78ed22fa71b5e955f3c5533441cc278329f564b8951aa24733838552004d3f1",
+        "exceeds_cap": false
+      }
+    },
+    "6d": {
+      "sha256": "47788414088431b1210f321388df4bed667b6a830db4adac1bb4ea87e9f97bc0",
+      "sizes": {
+        "image_bytes": 59136,
+        "memory_bytes": 194424
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "309d42fcfdc1db64e3faf6e23867fa8deba052b5c51669fd9387d5c5e32acbb4",
+        "exceeds_cap": false
+      }
+    },
+    "6e": {
+      "sha256": "8d754673918e32de10c926ec7c3bd6a6432c2b0c90000a1fb34b1e2054f4258c",
+      "sizes": {
+        "image_bytes": 56740,
+        "memory_bytes": 192028
+      },
+      "presets": {
+        "count": 90,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "5fed41c0aa2bfb90693c6f316c743c510f282380e9a549fd308eee83264c0ef3",
+        "exceeds_cap": false
+      }
+    },
+    "6f": {
+      "sha256": "2726c4f5ca5294fb65d69564d59001a64a99af4c72658297b071240ed0a92037",
+      "sizes": {
+        "image_bytes": 64728,
+        "memory_bytes": 200016
+      },
+      "presets": {
+        "count": 104,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 14,
+          "taffy": 14,
+          "pew": 14,
+          "elg": 14,
+          "iter": 12
+        },
+        "sha256": "c59193b55dd9d8726d7f2cbdcfadc471a59444e8eae0024b3385ef5bfe96603f",
+        "exceeds_cap": false
+      }
+    },
+    "70": {
+      "sha256": "a1e1f743268b8982edc86c0f849e3c4712a262ac92d283b6f0391f0c5708ab98",
+      "sizes": {
+        "image_bytes": 43664,
+        "memory_bytes": 191264
+      },
+      "presets": {
+        "count": 48,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "iter": 12
+        },
+        "sha256": "4d6c14b8d8e541968893306022a6bc6d2fb3a89e4e45223936d626f40368a539",
+        "exceeds_cap": false
+      }
+    },
+    "71": {
+      "sha256": "bc6709b5c1233cf198f928b61ee0fe0507991d808199150ef62c345d4271bccb",
+      "sizes": {
+        "image_bytes": 51652,
+        "memory_bytes": 199252
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "iter": 12
+        },
+        "sha256": "8016f6890e5bbdbd86dfd7b2d6bf9918da2c1835dc31e049e235e6e96f53ed62",
+        "exceeds_cap": false
+      }
+    },
+    "72": {
+      "sha256": "78ff54ae4f84c2acb21610740dd81b25ec2c9777d161a7076f73fdb9087c0db2",
+      "sizes": {
+        "image_bytes": 49256,
+        "memory_bytes": 196856
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "iter": 12
+        },
+        "sha256": "b05358b014ea6d39ee8c32d0aa6217b3d438dbb030dbb9ca75f0cd41492c1f2c",
+        "exceeds_cap": false
+      }
+    },
+    "73": {
+      "sha256": "cf4923c8d9bd7ae1c14d88205c749cf6488dcd6eb80f7f8cc0fd0c3335f4c26a",
+      "sizes": {
+        "image_bytes": 57244,
+        "memory_bytes": 204844
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "iter": 12
+        },
+        "sha256": "243eb63898cc5fe373e0ffb9dc165730cee4e0f7eacda4d11dddd4a9c4d37fab",
+        "exceeds_cap": false
+      }
+    },
+    "74": {
+      "sha256": "113ebc94df48707a6b6be8e1b9c2aae9e2dd7dcd8bbc1766bc242ad1a4a33e24",
+      "sizes": {
+        "image_bytes": 50672,
+        "memory_bytes": 198272
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "5c00895e05622dc7484b66aa7a8a327d3f3116b28cac0697fff461f357325986",
+        "exceeds_cap": false
+      }
+    },
+    "75": {
+      "sha256": "c569a95472eaa3a90005757082eab957d8cf8ce81a481141d56e2cf7724ff240",
+      "sizes": {
+        "image_bytes": 58660,
+        "memory_bytes": 206260
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "6e922bc5ba3b8f4fb907b0e01df6a4480de2dd12e09056d0159e99748baeca8d",
+        "exceeds_cap": false
+      }
+    },
+    "76": {
+      "sha256": "654fa9f7d4d33b8f0796f42b5c96df764de7b33cc71d94904cecb77f26278447",
+      "sizes": {
+        "image_bytes": 56264,
+        "memory_bytes": 203864
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "70709b802ab9b4ca083ba53929ffa50c11f975ecf6ea22a4a8f9648158e9df28",
+        "exceeds_cap": false
+      }
+    },
+    "77": {
+      "sha256": "3a2173190afb9ab9f0dce8e1eda120737bb1037ce601eaf6c091153b552fac4f",
+      "sizes": {
+        "image_bytes": 64252,
+        "memory_bytes": 211852
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "pew": 16,
+          "iter": 12
+        },
+        "sha256": "ee64bb3245683cab8889cc92a17253becbef3526ffe82228818e18650108f97a",
+        "exceeds_cap": false
+      }
+    },
+    "78": {
+      "sha256": "fee8930e7214b893f7c2cf1b416df5d7b9b642717e46bd1f488fb8db80c13651",
+      "sizes": {
+        "image_bytes": 47072,
+        "memory_bytes": 194672
+      },
+      "presets": {
+        "count": 64,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "7593e5e6559fc0f7b2bc6cc56fa409214be7904a4d5e964cb47540882693476a",
+        "exceeds_cap": false
+      }
+    },
+    "79": {
+      "sha256": "38085dd92dc7087889f4fc12526638a413139ee3c4047bc8a5f05bd70d5335c8",
+      "sizes": {
+        "image_bytes": 55060,
+        "memory_bytes": 202660
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "7ea9d91417073f278a38400b78441f6a18a586563d7ee84839930aa6ab7fab30",
+        "exceeds_cap": false
+      }
+    },
+    "7a": {
+      "sha256": "944465cfd96a3f84396da5aa0ee29e6b90fd42ed319c57549f6f71ed7d017920",
+      "sizes": {
+        "image_bytes": 52664,
+        "memory_bytes": 200264
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "fb7a0762873407a97b50c67aaf8ac26201b81802a80daf68df593a312eb7311d",
+        "exceeds_cap": false
+      }
+    },
+    "7b": {
+      "sha256": "c184469cd1f250f9dc96ae704c27bbcf5d06f56ef9661c3b800965de26883290",
+      "sizes": {
+        "image_bytes": 60652,
+        "memory_bytes": 208252
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "60b62f65668eed041463901aedd11835afff36dafce01bed9b731f274a3da676",
+        "exceeds_cap": false
+      }
+    },
+    "7c": {
+      "sha256": "18638ce4404e2ba8f9dabb76950c7b6faba7d441a13b58b9b22b7cb5b8432c1b",
+      "sizes": {
+        "image_bytes": 54080,
+        "memory_bytes": 201680
+      },
+      "presets": {
+        "count": 80,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "38b826904bfeff7cb723fd157f20d06788edb77db46e956e69912dac2bd447a1",
+        "exceeds_cap": false
+      }
+    },
+    "7d": {
+      "sha256": "7e0b4aa8f36ae6b4568fcdec09a9726b74156012b4232e8d1c4f67ea034457d1",
+      "sizes": {
+        "image_bytes": 62068,
+        "memory_bytes": 209668
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "7e999037150665d097c41cad36c2db484334b9e12069c451034b26a79bb879ef",
+        "exceeds_cap": false
+      }
+    },
+    "7e": {
+      "sha256": "d6d8299020aaca682b8e9d4ac657579c39b2ff457f46aff8653ffd841f639251",
+      "sizes": {
+        "image_bytes": 59672,
+        "memory_bytes": 207272
+      },
+      "presets": {
+        "count": 96,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "taffy": 16,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "5cbcc6ea5fdc5b8e07a4b70177ce3a425b67b92fb79d1539ceeaed8f62914ea3",
+        "exceeds_cap": false
+      }
+    },
+    "7f": {
+      "sha256": "9f45db7c8e1422acb0c58b0d60b6a42abac9245a031658aeea642b406d161521",
+      "sizes": {
+        "image_bytes": 67660,
+        "memory_bytes": 215260
+      },
+      "presets": {
+        "count": 112,
+        "by_engine": {
+          "supersaw": 12,
+          "fmbell": 12,
+          "granular": 12,
+          "wavetable": 16,
+          "taffy": 16,
+          "pew": 16,
+          "elg": 16,
+          "iter": 12
+        },
+        "sha256": "aaf3b65c11af3c04f0e5b2ca7e153f92296968f6e4c3550211909b3c1985be0a",
+        "exceeds_cap": false
+      }
+    }
+  }
+}
