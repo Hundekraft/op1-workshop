@@ -1,4 +1,4 @@
-# hundekraft 2.0 — OP-1 Firmware Workshop
+# hundekraft 2.1 — OP-1 Firmware Workshop
 
 [Open the workshop](https://hundekraft.github.io/op1-workshop/)
 
@@ -10,7 +10,9 @@ This repository contains the generated static release: frontend, checked patch m
 
 ## Release
 
-Product: **hundekraft 2.0**. Asset release: `e7c263ef51264127`. Includes 256 selectable configurations. Downloads retain the selection ID, for example `hundekraft-2.0-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
+Product: **hundekraft 2.1**. Asset release: `a9e68a7f267eac5f`. Includes 256 selectable configurations. Downloads retain the selection ID, for example `hundekraft-2.1-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
+
+What changed: [CHANGELOG.md](CHANGELOG.md).
 
 ## Credits
 

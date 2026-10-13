@@ -13,24 +13,24 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "e7c263ef51264127",
+    "id": "a9e68a7f267eac5f",
     "product": {
       "name": "hundekraft",
-      "version": "2.0",
-      "label": "hundekraft 2.0",
-      "slug": "hundekraft-2.0"
+      "version": "2.1",
+      "label": "hundekraft 2.1",
+      "slug": "hundekraft-2.1"
     },
     "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
     "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
-    "image_bytes": 56264,
-    "memory_bytes": 203864,
+    "image_bytes": 58484,
+    "memory_bytes": 206084,
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.0-76.op1",
+  "filename": "hundekraft-2.1-76.op1",
   "presets": {
     "count": 80,
     "by_engine": {
@@ -103,19 +103,19 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "4db7f9625e4786af8be8f6e8e2f287708df6e86a06794eaa29ba22c85ea3d990",
+      "result_sha256": "971c67c6df8793b32f1db90b35ae096ebbb75194fa223e767f698b2c55bcf870",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
           "old": "17",
-          "new": "5a"
+          "new": "c1"
         },
         {
           "op": "replace",
           "offset": 12,
           "old": "50c724",
-          "new": "78a325"
+          "new": "ecac25"
         },
         {
           "op": "replace",
@@ -157,13 +157,19 @@
           "op": "replace",
           "offset": 610878,
           "old": "68db43e1dd",
-          "new": "f85543e1f0"
+          "new": "006643e1f0"
         },
         {
           "op": "replace",
           "offset": 612854,
           "old": "68db42e1dd",
-          "new": "f85542e1f0"
+          "new": "006642e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 805746,
+          "old": "ffe3b9fe",
+          "new": "2ce3df03"
         },
         {
           "op": "replace",
@@ -193,37 +199,37 @@
           "op": "replace",
           "offset": 1405736,
           "old": "6cdb46e1dd",
-          "new": "fc5546e1f0"
+          "new": "046646e1f0"
         },
         {
           "op": "replace",
           "offset": 1406054,
           "old": "6cdb40e1dd",
-          "new": "fc5540e1f0"
+          "new": "046640e1f0"
         },
         {
           "op": "replace",
           "offset": 1406752,
           "old": "6cdb45e1dd",
-          "new": "fc5545e1f0"
+          "new": "046645e1f0"
         },
         {
           "op": "replace",
           "offset": 1407564,
           "old": "6cdb47e1dd",
-          "new": "fc5547e1f0"
+          "new": "046647e1f0"
         },
         {
           "op": "replace",
           "offset": 1419094,
           "old": "6cdb46e1dd",
-          "new": "fc5546e1f0"
+          "new": "046646e1f0"
         },
         {
           "op": "replace",
           "offset": 1419506,
           "old": "68db41e1dd",
-          "new": "f85541e1f0"
+          "new": "006641e1f0"
         },
         {
           "op": "replace",
@@ -247,13 +253,13 @@
           "op": "replace",
           "offset": 1421928,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1f85540e1f0"
+          "new": "060200e1006640e1f0"
         },
         {
           "op": "replace",
           "offset": 1422100,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1f85540e1f0"
+          "new": "060200e1006640e1f0"
         },
         {
           "op": "replace",
@@ -269,10 +275,10 @@
         },
         {
           "op": "insert",
-          "offset": 2410063,
+          "offset": 2410064,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "607e4943c464c3bbd1ed0492c3ea14797c9415a6b3fee528dbbda9ff7ec91d40",
-          "size": 56360
+          "sha256": "ad4566cfc7ac055973ae78ef0644bca913b5e8b29276127eaa39ad504fbaa69d",
+          "size": 58780
         }
       ]
     }
@@ -304,6 +310,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "cb93aa758a6a76b3813cea40035da2e80573bfd2fe9871f4b2e919f67d451d1f"
+    "tar_sha256": "7e6618e3a828a49b955f9058c2b7ee7a1f890bb88428a05b7366df3f120f6644"
   }
 }

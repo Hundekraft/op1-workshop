@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 2.0 / Firmware workshop</title>
+<title>hundekraft 2.1 / Firmware workshop</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="style.css?v=hundekraft-2.0-bold"><link rel="stylesheet" href="preview.css?v=hundekraft-2.0">
+<link rel="stylesheet" href="style.css?v=hundekraft-2.1"><link rel="stylesheet" href="preview.css?v=hundekraft-2.1">
 <script type="module" src="app.js"></script>
 </head>
 <body>
 <header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main>
-<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.0</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
+<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.1</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
 <form id="workshop">
 <div class="workspace">
 <div class="options">
@@ -25,12 +25,12 @@
 <fieldset id="effects"><legend>02 / EFFECTS</legend><div class="feature-grid"></div></fieldset>
 
 
-<section class="preset-pack" id="preset-pack"><div class="section-label"><span>THE HUNDEKRAFT SOUND COLLECTION</span><span>MADE FOR THESE ENGINES</span></div><div class="preset-heading"><strong id="preset-total">112</strong><h2>Sounds to<br>start something.</h2></div><p>From bell keys and drawbar organs to soft pads, frozen textures and slow-moving drones. We’ve made a collection for op1r and our own engines—your pack includes only the sounds your build can play.</p><div id="preset-breakdown" class="preset-breakdown"></div><p class="preset-examples">Lab Flute · Warm Ensemble · Frozen Toffee · Midnight Mass · Aurora</p><a id="preset-pack-download" class="preset-link" download>Download matching preset pack ↓</a><small>Separate download. Install through disk mode after updating the firmware. The preset limit includes sounds already on your instrument. Granular presets need a sample loaded or recorded into the slot.</small><p id="preset-warning" role="status" hidden></p></section>
+<section class="preset-pack" id="preset-pack"><div class="section-label"><span>THE HUNDEKRAFT SOUND COLLECTION</span><span>MADE FOR THESE ENGINES</span></div><div class="preset-heading"><strong id="preset-total">112</strong><h2>Sounds to<br>start something.</h2></div><p class="preset-tagline">Wanna be startin’ somethin’.</p><p>From bell keys and drawbar organs to soft pads, frozen textures and slow-moving drones. We’ve made a collection for op1r and our own engines—your pack includes only the sounds your build can play.</p><div id="preset-breakdown" class="preset-breakdown"></div><p class="preset-examples">Lab Flute · Warm Ensemble · Frozen Toffee · Midnight Mass · Aurora</p><a id="preset-pack-download" class="preset-link" download>Download matching preset pack ↓</a><small>Separate download. Install through disk mode after updating the firmware. The preset limit includes sounds already on your instrument. Granular presets need a sample loaded or recorded into the slot.</small><p id="preset-warning" role="status" hidden></p></section>
 <fieldset class="capacity"><legend>03 / ROOM TO EXPLORE</legend><label><input type="checkbox" id="expanded" checked disabled><span><strong>300 user synth presets</strong><small>More space for your sounds. Uncheck to keep the stock limit of 100.</small></span><span class="capacity-number" aria-hidden="true">300</span></label></fieldset>
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 2.0</div><p id="build-upstreams" class="build-upstreams"></p>
+<div class="build-brand" data-release-label>hundekraft 2.1</div><p id="build-upstreams" class="build-upstreams"></p>
 <dl><div><dt>Added synths</dt><dd id="synth-count">4</dd></div><div><dt>Added effects</dt><dd id="effect-count">2</dd></div><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
 <p class="privacy">The firmware stays in this browser. No account, no upload, no device key.</p>
@@ -45,6 +45,20 @@
 </div>
 </form>
 <section class="after"><span>04 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
+<section class="after changelog" id="changelog"><span>05 / CHANGELOG</span><div>
+<h3>2.1</h3><ul>
+<li>Fixes crashes in Dots (press REC, then add a note) and Euclid (hold Shift and press note keys). The OP–1 keeps settings and sequences in an SQLite database with a fixed amount of working memory. With a lot of saved sounds, that memory could fill up and the firmware stopped on an error screen. 2.1 limits how much of the database is kept in memory.</li>
+<li>Knobs on Wavetable, Taffy, PEW and Elg are smoother. Turning one while notes play no longer clicks or steps.</li>
+</ul>
+<h3>2.0</h3><ul>
+<li>Base updated to op1r 22.</li>
+<li>Adds Maiko’s #249 toolkit (tape undo/redo, snapshot naming, scale mode, storage overview), optional and on by default.</li>
+</ul>
+<h3>1.0</h3><ul>
+<li>First release, on op1r 18.</li>
+<li>Hundekraft synths (Wavetable, Taffy, PEW, Elg) and effects (Washer, Snowglobe), plus a choice of 100 or 300 user presets.</li>
+<li>A matching collection of up to 112 presets.</li>
+</ul></div></section>
 </main>
 <footer><span>An independent firmware workshop.</span><span><a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">op1r</a> + <a href="https://maikopruett.com/op-1" target="_blank" rel="noopener noreferrer">Maiko Pruett</a> + hundekraft · Not affiliated with Teenage Engineering.</span></footer>
 </body>

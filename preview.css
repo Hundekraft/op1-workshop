@@ -5,3 +5,6 @@
 @media(max-width:640px){.bundle-gallery{grid-template-columns:1fr}.bundle .section-label{gap:12px}.bundle .section-label span:last-child{font-size:8px}}
 
 .history-card .undo-frames{display:block;aspect-ratio:auto}.history-card .undo-frames img+img{border-top:1px solid #393c37}
+/* Changelog below the install note. */
+.changelog{margin-top:0}.changelog h3{font-size:18px;font-weight:500;letter-spacing:-.3px;margin:0 0 8px}.changelog h3+ul{margin:0 0 22px}.changelog ul{max-width:570px;padding-left:18px;font-size:13px;line-height:1.7;color:var(--muted)}.changelog li+li{margin-top:6px}
+.preset-tagline{font-style:italic;font-size:14px;color:var(--muted);margin:-4px 0 14px}

@@ -17,27 +17,27 @@
     "preset_cap": 100
   },
   "release": {
-    "id": "e7c263ef51264127",
+    "id": "a9e68a7f267eac5f",
     "product": {
       "name": "hundekraft",
-      "version": "2.0",
-      "label": "hundekraft 2.0",
-      "slug": "hundekraft-2.0"
+      "version": "2.1",
+      "label": "hundekraft 2.1",
+      "slug": "hundekraft-2.1"
     },
     "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
     "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
-    "image_bytes": 14680,
-    "memory_bytes": 26992,
+    "image_bytes": 15876,
+    "memory_bytes": 28188,
     "utility_image_bytes": 222552,
     "utility_memory_bytes": 2061412,
     "utility_source_sha256": "b7adf5c0fdd523a726e81880e683eda48061a261944dfa1a7a52c57ebfc41066",
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.0-792.op1",
+  "filename": "hundekraft-2.1-792.op1",
   "presets": {
     "count": 62,
     "by_engine": {
@@ -109,19 +109,19 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "77c018c73d47bb44120ec827ccf985baf278b8c379b860b9d4d2120383686f8a",
+      "result_sha256": "ad90e42e7198adb023cdc4bd951753df382db2bd7f6745cf3d0215e53e873dbf",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
           "old": "17",
-          "new": "7a"
+          "new": "e4"
         },
         {
           "op": "replace",
           "offset": 12,
           "old": "50c724",
-          "new": "906628"
+          "new": "046c28"
         },
         {
           "op": "replace",
@@ -188,6 +188,12 @@
           "offset": 465240,
           "old": "09e13073",
           "new": "29e20c2a"
+        },
+        {
+          "op": "replace",
+          "offset": 805746,
+          "old": "ffe3b9fe",
+          "new": "2ce3df03"
         },
         {
           "op": "replace",
@@ -317,10 +323,10 @@
         },
         {
           "op": "insert",
-          "offset": 2410063,
+          "offset": 2410064,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "793fcde4e72329ca430894dd5cc3ac1cdfe71a2c452dd698be6d192d4325d5d9",
-          "size": 237376
+          "sha256": "3928d5546198b19482854b545ff0ed65cfe7508bfb12cd028e7391e55c397283",
+          "size": 238772
         }
       ]
     }
@@ -340,6 +346,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "69b5fdb8b01e3d19fd869b92b5405c0e1386baaa533c82acbd88afdd6c062e9f"
+    "tar_sha256": "b037b7c2b5147977b76e08cfa4af1d92a405226eeaec87384a30cd13d63867c1"
   }
 }

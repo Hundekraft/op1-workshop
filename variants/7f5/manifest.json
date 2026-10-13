@@ -19,27 +19,27 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "e7c263ef51264127",
+    "id": "a9e68a7f267eac5f",
     "product": {
       "name": "hundekraft",
-      "version": "2.0",
-      "label": "hundekraft 2.0",
-      "slug": "hundekraft-2.0"
+      "version": "2.1",
+      "label": "hundekraft 2.1",
+      "slug": "hundekraft-2.1"
     },
     "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
     "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
-    "image_bytes": 58676,
-    "memory_bytes": 206276,
+    "image_bytes": 60036,
+    "memory_bytes": 207636,
     "utility_image_bytes": 222552,
     "utility_memory_bytes": 2061412,
     "utility_source_sha256": "b7adf5c0fdd523a726e81880e683eda48061a261944dfa1a7a52c57ebfc41066",
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.0-7f5.op1",
+  "filename": "hundekraft-2.1-7f5.op1",
   "presets": {
     "count": 80,
     "by_engine": {
@@ -112,19 +112,19 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "9d262ca5c821a2753f75561384267c79d9cc50c7a640ab6c266eef0e845fd4a1",
+      "result_sha256": "e85156ee79ee45240818e780d977cc8d65f7378de5d1bbbe041338515f19435e",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
           "old": "17",
-          "new": "f3"
+          "new": "11"
         },
         {
           "op": "replace",
           "offset": 12,
           "old": "50c724",
-          "new": "6c1229"
+          "new": "841829"
         },
         {
           "op": "replace",
@@ -196,13 +196,19 @@
           "op": "replace",
           "offset": 610878,
           "old": "68db43e1dd",
-          "new": "f05e43e1f0"
+          "new": "546b43e1f0"
         },
         {
           "op": "replace",
           "offset": 612854,
           "old": "68db42e1dd",
-          "new": "f05e42e1f0"
+          "new": "546b42e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 805746,
+          "old": "ffe3b9fe",
+          "new": "2ce3df03"
         },
         {
           "op": "replace",
@@ -298,37 +304,37 @@
           "op": "replace",
           "offset": 1405736,
           "old": "6cdb46e1dd",
-          "new": "f45e46e1f0"
+          "new": "586b46e1f0"
         },
         {
           "op": "replace",
           "offset": 1406054,
           "old": "6cdb40e1dd",
-          "new": "f45e40e1f0"
+          "new": "586b40e1f0"
         },
         {
           "op": "replace",
           "offset": 1406752,
           "old": "6cdb45e1dd",
-          "new": "f45e45e1f0"
+          "new": "586b45e1f0"
         },
         {
           "op": "replace",
           "offset": 1407564,
           "old": "6cdb47e1dd",
-          "new": "f45e47e1f0"
+          "new": "586b47e1f0"
         },
         {
           "op": "replace",
           "offset": 1419094,
           "old": "6cdb46e1dd",
-          "new": "f45e46e1f0"
+          "new": "586b46e1f0"
         },
         {
           "op": "replace",
           "offset": 1419506,
           "old": "68db41e1dd",
-          "new": "f05e41e1f0"
+          "new": "546b41e1f0"
         },
         {
           "op": "replace",
@@ -352,13 +358,13 @@
           "op": "replace",
           "offset": 1421928,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1f05e40e1f0"
+          "new": "060200e1546b40e1f0"
         },
         {
           "op": "replace",
           "offset": 1422100,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1f05e40e1f0"
+          "new": "060200e1546b40e1f0"
         },
         {
           "op": "replace",
@@ -404,10 +410,10 @@
         },
         {
           "op": "insert",
-          "offset": 2410063,
+          "offset": 2410064,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "60fe4fa8a98ae6f5f109ac16f4a11b825bf86285927c69a7974197b1a7652e42",
-          "size": 281372
+          "sha256": "29b36d1be970bbe6f5ec5705a6d8d31f00e65470a08643024cb3f37367e83093",
+          "size": 282932
         }
       ]
     }
@@ -439,6 +445,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "7056efcf94c25b7566913733342e53d885af2ce282bcd5154bedb62ed667d00b"
+    "tar_sha256": "89b6a9e965f1b3dd5b5d2a03a80a82e8075c02df0dbd196a3ea257e6d1ff1d2d"
   }
 }

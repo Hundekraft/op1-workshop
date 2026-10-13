@@ -13,12 +13,12 @@
     "preset_cap": 100
   },
   "release": {
-    "id": "e7c263ef51264127",
+    "id": "a9e68a7f267eac5f",
     "product": {
       "name": "hundekraft",
-      "version": "2.0",
-      "label": "hundekraft 2.0",
-      "slug": "hundekraft-2.0"
+      "version": "2.1",
+      "label": "hundekraft 2.1",
+      "slug": "hundekraft-2.1"
     },
     "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
     "experimental": true,
@@ -33,7 +33,7 @@
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.0-780.op1",
+  "filename": "hundekraft-2.1-780.op1",
   "presets": {
     "count": 48,
     "by_engine": {
@@ -49,19 +49,19 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "b3a75030bd99e61c56af080441e8ff54c776d759109d8cf6022594ae7d54767d",
+      "result_sha256": "2c31ec21de56fd8acf33fc8f4358e171521a8ceeac09ef58d0d77dc5ef5261b2",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
           "old": "17",
-          "new": "89"
+          "new": "51"
         },
         {
           "op": "replace",
           "offset": 12,
           "old": "50c724",
-          "new": "282d28"
+          "new": "f02d28"
         },
         {
           "op": "replace",
@@ -92,6 +92,12 @@
           "offset": 465240,
           "old": "09e13073",
           "new": "29e20c2a"
+        },
+        {
+          "op": "replace",
+          "offset": 805746,
+          "old": "ffe3b9fe",
+          "new": "2ce3df03"
         },
         {
           "op": "replace",
@@ -197,16 +203,16 @@
         },
         {
           "op": "insert",
-          "offset": 2410063,
+          "offset": 2410064,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "3f8960e877e870497351a9c2712bf7d91a3c294a17e583ed365e66d687e12942",
-          "size": 222680
+          "sha256": "3b654d4abc76f44bbb83b6ad0f8c40134292546c0ffe52c4db424d9f6d8db185",
+          "size": 222880
         }
       ]
     }
   ],
   "added_files": [],
   "result": {
-    "tar_sha256": "752aa3399eb762cf5bdf1b76fbbd3283dc4dd92a09079587da93695dadbf4bd0"
+    "tar_sha256": "5eeec7465b3efeac04eeff0eaee1cff0f32fafae2c9156b1a71713feba03fd7c"
   }
 }
