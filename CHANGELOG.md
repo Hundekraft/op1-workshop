@@ -2,7 +2,7 @@
 
 ## 2.1
 
-- Fixes crashes in Dots (press REC, then add a note) and Euclid (hold Shift and press note keys). The OP-1 keeps settings and sequences in an SQLite database with a fixed amount of working memory. With a lot of saved sounds, that memory could fill up and the firmware stopped on an error screen. 2.1 limits how much of the database is kept in memory.
+- Fixes crashes in Dots (press REC, then add a note) and Euclid (hold Shift and press note keys). The OP-1 keeps settings, sounds and sequences in an SQLite database with a fixed amount of working memory. With a lot of saved sounds and sequences, that memory could fill up and the firmware stopped on an error screen. 2.1 limits how much of the database is kept in memory.
 - Knobs on Wavetable, Taffy, PEW and Elg are smoother. Turning one while notes play no longer clicks or steps.
 
 ## 2.0
