@@ -16,8 +16,10 @@ function configId(c, withHidden = true) {
 }
 function clearDownloads() { urls.forEach(URL.revokeObjectURL); urls = []; $('downloads').hidden = true; }
 function update() {
-  $('synth-count').textContent = selected('synths').length;
-  $('effect-count').textContent = selected('effects').length;
+  // Ours plus the op1r synths/effects left in.
+  const op1r = kind => release ? (release.catalog.op1r_plugins || []).filter(f => f.kind === kind && !hiddenPlugins().includes(f.id)).length : 0;
+  $('synth-count').textContent = selected('synths').length + op1r('synth');
+  $('effect-count').textContent = selected('effects').length + op1r('fx');
   $('cap-count').textContent = $('expanded').checked ? 300 : 100;
   document.querySelector('.capacity-number').textContent = $('cap-count').textContent;
   $('build').disabled = busy || !release || !file;
