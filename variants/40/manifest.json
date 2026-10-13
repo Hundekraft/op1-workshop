@@ -1,30 +1,30 @@
 {
   "config": {
     "schema": 1,
-    "base": "op1r22",
+    "base": "op1r27-plugins",
     "synths": [],
     "effects": [],
     "preset_cap": 300
   },
   "release": {
-    "id": "a9e68a7f267eac5f",
+    "id": "4fa02833716aea10",
     "product": {
       "name": "hundekraft",
-      "version": "2.1",
-      "label": "hundekraft 2.1",
-      "slug": "hundekraft-2.1"
+      "version": "2.5",
+      "label": "hundekraft 2.5",
+      "slug": "hundekraft-2.5"
     },
-    "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
+    "op1r_commit": "d02d60c6a76fa62ba40d75269124d650f5233be0",
     "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
-    "image_bytes": 35032,
-    "memory_bytes": 35032,
-    "branding_bytes": 64,
+    "image_bytes": 0,
+    "memory_bytes": 29008,
+    "branding_bytes": 108,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.1-40.op1",
+  "filename": "hundekraft-2.5-40.op1",
   "presets": {
     "count": 48,
     "by_engine": {
@@ -33,98 +33,38 @@
       "granular": 12,
       "iter": 12
     },
-    "sha256": "f70b46f5796d1923885c0614f66c99d4790bfca02cab985a350ae95c6c240b83",
+    "sha256": "e3792e4c54b247385da2cc9b0344d32bbe3c2a5b9447c514c479322136a9bb64",
     "exceeds_cap": false
   },
   "patched_files": [
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "1a16c77942790305ece3e19a37677619271ed8db042560593216c446da5d3580",
+      "orig_sha256": "594c8ce7492bd01d030b8ef05ff619f6a0fa0e9a9a30c7b9d2453be9d039e5d7",
+      "result_sha256": "3d3a2d3f9b7da25acc3b703f3760909b8c70911dfba97de333333ef8b4bf8f5e",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "17",
-          "new": "80"
+          "old": "3f",
+          "new": "8c"
         },
         {
           "op": "replace",
-          "offset": 13,
-          "old": "c724",
-          "new": "5125"
-        },
-        {
-          "op": "replace",
-          "offset": 317152,
-          "old": "006ee1",
-          "new": "3800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 317276,
-          "old": "0c6ee1",
-          "new": "1800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 415208,
-          "old": "8004e00100000000e803e0",
-          "new": "0000f001000000000400f0"
-        },
-        {
-          "op": "replace",
-          "offset": 415232,
-          "old": "8405e0",
-          "new": "0800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 417456,
-          "old": "7009e00100000000d407e0",
-          "new": "2400f001000000002800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 417488,
-          "old": "1808e001000000000008e0",
-          "new": "2c00f001000000003000f0"
+          "offset": 12,
+          "old": "9827",
+          "new": "2428"
         },
         {
           "op": "replace",
           "offset": 610878,
           "old": "68db43e1dd",
-          "new": "ec0c43e1f0"
+          "new": "000043e1f0"
         },
         {
           "op": "replace",
           "offset": 612854,
           "old": "68db42e1dd",
-          "new": "ec0c42e1f0"
-        },
-        {
-          "op": "replace",
-          "offset": 805746,
-          "old": "ffe3b9fe",
-          "new": "2ce3df03"
-        },
-        {
-          "op": "replace",
-          "offset": 1048526,
-          "old": "22e20bb0",
-          "new": "2ae253a9"
-        },
-        {
-          "op": "replace",
-          "offset": 1108380,
-          "old": "22e24a37",
-          "new": "2ae25834"
-        },
-        {
-          "op": "replace",
-          "offset": 1333822,
-          "old": "20e31d86",
-          "new": "28e3217c"
+          "new": "000042e1f0"
         },
         {
           "op": "replace",
@@ -136,37 +76,37 @@
           "op": "replace",
           "offset": 1405736,
           "old": "6cdb46e1dd",
-          "new": "f00c46e1f0"
+          "new": "040046e1f0"
         },
         {
           "op": "replace",
           "offset": 1406054,
           "old": "6cdb40e1dd",
-          "new": "f00c40e1f0"
+          "new": "040040e1f0"
         },
         {
           "op": "replace",
           "offset": 1406752,
           "old": "6cdb45e1dd",
-          "new": "f00c45e1f0"
+          "new": "040045e1f0"
         },
         {
           "op": "replace",
           "offset": 1407564,
           "old": "6cdb47e1dd",
-          "new": "f00c47e1f0"
+          "new": "040047e1f0"
         },
         {
           "op": "replace",
           "offset": 1419094,
           "old": "6cdb46e1dd",
-          "new": "f00c46e1f0"
+          "new": "040046e1f0"
         },
         {
           "op": "replace",
           "offset": 1419506,
           "old": "68db41e1dd",
-          "new": "ec0c41e1f0"
+          "new": "000041e1f0"
         },
         {
           "op": "replace",
@@ -190,13 +130,13 @@
           "op": "replace",
           "offset": 1421928,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1ec0c40e1f0"
+          "new": "060200e1000040e1f0"
         },
         {
           "op": "replace",
           "offset": 1422100,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1ec0c40e1f0"
+          "new": "060200e1000040e1f0"
         },
         {
           "op": "replace",
@@ -205,23 +145,17 @@
           "new": "000040e1ef"
         },
         {
-          "op": "replace",
-          "offset": 1642440,
-          "old": "1ee31029",
-          "new": "26e35c21"
-        },
-        {
           "op": "insert",
-          "offset": 2410064,
+          "offset": 2369175,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "1d96bdd280d5757649513c9b45eadeeff54287b38c2cd8f036c61183c05a12fa",
-          "size": 35328
+          "sha256": "96132901d03888ccdc96d9083c17eb73e30a23cc56e5910574ae8ea4b63ddd6f",
+          "size": 140
         }
       ]
     }
   ],
   "added_files": [],
   "result": {
-    "tar_sha256": "00156a50b39d55286b28fb4b9886575b02ba30d30c3e3cac84588a041d03f3c2"
+    "tar_sha256": "f0e18448a07d4e0a00363213a6b6493ad6dbb669e31ba04c7cb3155fbe378ddd"
   }
 }

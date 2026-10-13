@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "base": "op1r22",
+  "base": "op1r27-plugins",
   "synths": [
     {
       "id": "wavetable",
@@ -197,6 +197,51 @@
       "color": "orange",
       "type": "record, edit, undo",
       "screen": "undo.png"
+    }
+  ],
+  "op1r_plugins_bit": 11,
+  "op1r_plugins": [
+    {
+      "id": "supersaw",
+      "kind": "synth",
+      "name": "Supersaw",
+      "type": "supersaw synth",
+      "description": "Detuned saw stack."
+    },
+    {
+      "id": "fmbell",
+      "kind": "synth",
+      "name": "FM Bell",
+      "type": "FM bell synth",
+      "description": "FM bells."
+    },
+    {
+      "id": "granular",
+      "kind": "synth",
+      "name": "Granular",
+      "type": "granular sampler",
+      "description": "Plays the slot's sample as grains."
+    },
+    {
+      "id": "tape",
+      "kind": "fx",
+      "name": "Tape",
+      "type": "tape echo",
+      "description": "Vintage tape echo."
+    },
+    {
+      "id": "clouds",
+      "kind": "fx",
+      "name": "Clouds",
+      "type": "granular effect",
+      "description": "Granular textures, after Mutable Instruments Clouds."
+    },
+    {
+      "id": "reverb",
+      "kind": "fx",
+      "name": "Reverb",
+      "type": "plate / hall reverb",
+      "description": "Plate and hall reverb, after Mutable Instruments Elements."
     }
   ]
 }

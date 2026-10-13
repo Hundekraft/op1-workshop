@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.5
+
+- Base updated to op1r 27. Our synths and effects are now built into op1r's own engine system.
+- Pick which of op1r's synths and effects to include: Supersaw, FM Bell, Granular, Tape, Clouds and Reverb.
+- New screens for Wavetable, Taffy, PEW, Elg, Washer and Snowglobe.
+- Quad LFO no longer crackles next to heavy effects like Reverb and Snowglobe.
+- Washer's white knob now shortens the delay smoothly across its whole range. Before, the upper half jumped.
+
 ## 2.1
 
 - Fixes crashes in Dots (press REC, then add a note) and Euclid (hold Shift and press note keys). The OP-1 keeps settings, sounds and sequences in an SQLite database with a fixed amount of working memory. With a lot of saved sounds and sequences, that memory could fill up and the firmware stopped on an error screen. 2.1 limits how much of the database is kept in memory.

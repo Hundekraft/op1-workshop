@@ -21,9 +21,9 @@ with:
     flutter, age)
   - **clouds**: granular texture FX, a port of Mutable Instruments Clouds (position, size, pitch, density;
     encoder presses switch to a second page, red press freezes)
-  - **reverb**: lush plate/hall reverb, a port of the Mutable Instruments Elements reverb (time, mix, diffusion,
-    tone); its own screen (Kali: graphics by DAN76): blue shows 1–6 arms, green lights the mix scale, white brightens the skulls,
-    red fades in the fire
+  - **reverb**: lush plate/hall reverb, a port of the Mutable Instruments Elements reverb (time, tone, diffusion,
+    mix); its own screen (Kali: graphics by DAN76): blue shows 1–6 arms, green fades in the fire (tone), white brightens the skulls,
+    red lights the mix scale
 - **quad** LFO: four LFOs in one slot, one row each: live output, frequency, amount, target and type
   - blue frequency (0.05–20 Hz) or tempo division, green amount (±100 %), white target (synth / drum engine knob,
     envelope A D S R, FX knob, or another LFO's frequency / amount / phase offset (F / A / O), shown as a
@@ -51,6 +51,20 @@ with:
     pattern
   - runs at the OP-1 tempo, plays polyphonically and sends MIDI; slot settings and mutes are saved (slots come
     back stopped)
+- **punch in / out at markers**: hold **tape** and press **REC** to arm punch mode (markers turn red, `[o]` around
+  the record circle). While playing, forward or in reverse, the next marker starts recording, the one after stops
+  it, then punch mode turns off. PLAY while punched in: 1st press ends punch mode (recording continues), 2nd press
+  stops recording. STOP stops; armed and stopped, STOP disarms. Tape + REC again cancels
+- **sample editor** (synth sampler): on the sampler page hold **synth** and press **scissors**. Blue / green move
+  start / end (the sampler's own markers, so keys play the range at once), white zooms (Shift: move the selection),
+  red scrolls (Shift: attenuate the whole sample, applied on close), red press snaps to zero crossings / transients /
+  off. T1 trim (Shift: DC offset), T2 zero (Shift: fade mode: in / out / both, linear / power, length on blue),
+  T3 normalize, T4 reverse; Shift + left undoes a trim. Lift / scissors / drop copy, cut and paste the selection
+  (paste also onto the tape or another sampler slot). Shift shows the alternate key labels. Closing saves
+- **drum sample editor**: on the drum page hold **drum** and press **scissors**: the same editor for the pad played
+  last (exact to the sample; pressing a key selects and shows its pad). T1 `fit` trims the pad's silence, Shift + T3
+  `auto` cuts the kit into pads (first 24 hits, or 24 equal slices; preview, sensitivity on blue, Shift + left undoes).
+  Cut zeroes, drop overwrites. A red line shows the play position (also in the synth editor)
 - **count-in**: with the tape stopped, hold **REC** and press **metronome**: 4 / 8 / 16 metronome clicks, then
   recording starts on the next beat and runs until STOP (REC can be released). STOP or REC + metronome again cancels.
   Audible even with the metronome level at 0. The number of beats is set on the settings page: clock / card + **T3**
@@ -122,9 +136,9 @@ Rendered on the PC from the same screen code that runs on the OP-1 (host harness
 | ![quad LFO](docs/images/lfo_quad.png) **quad** LFO | ![euclid](docs/images/seq_euclid.png) **euclid** sequencer |
 | ![dots](docs/images/seq_dots.png) **dots** sequencer (record mode: notes, lock triggers as hollow squares, a note with an FX lock) | |
 
-| Resource monitor | |
+| Resource monitor | Sample editor |
 |---|---|
-| ![resource monitor](docs/images/sysmon.png) clock screen + **T1** (text in the OP-1 font on the device) | |
+| ![resource monitor](docs/images/sysmon.png) clock screen + **T1** (text in the OP-1 font on the device) | ![sample editor](docs/images/sampedit.png) synth + **scissors** on the sampler page: selection, transient snap (`tr`), key labels (OP-1 font on the device) |
 
 The repository contains no Teenage Engineering firmware. You provide the original update file, and the
 patcher applies only the differences stored in `data/`. These are our code, our screen SVGs and small
@@ -139,7 +153,13 @@ git clone https://github.com/pcppcp/op1r.git && cd op1r
 python3 patch_op1.py /path/to/op1_246.op1            # -> /path/to/op1_246-custom.op1
 python3 patch_op1.py /path/to/op1_246.op1 -o op1-custom.op1
 python3 patch_op1.py --info                          # what the patch contains + checksums
+python3 patch_op1.py /path/to/op1_246.op1 --without clouds,granular   # hide synths / FX you don't want
 ```
+
+**Choosing synths and FX:** `--without` (or unticking them in the web patcher) hides custom synths / FX from the
+OP-1's selection lists. Their code stays in the firmware, so presets that already use them still load and play.
+`--info` lists the names. The result is then not the reference build: every file is verified first, and only the
+selection lists change afterwards, so its checksum differs from the one below.
 
 The patcher:
 1. Checks the input SHA-256 against the original R246 image and refuses anything else.
@@ -154,7 +174,7 @@ version. The firmware content is still verified identical, and `--accept-recompr
 | | SHA-256 |
 |---|---|
 | input `op1_246.op1` (original R246) | `c5315218f825f143b415ca554516541898abee843d3a236df0b54c04e1fb13a9` |
-| output (reference build) | `5b20c4e874597b68f9b4d67ecceab8546e4746b468173bb621909aeb1a0db559` (also `python3 patch_op1.py --info`) |
+| output (reference build) | `bc3249bc56fd64ddb1a635e551a85595250781bee6b7eef563e2732e5645c07f` (also `python3 patch_op1.py --info`) |
 
 Install the result like any OP-1 update (bootloader update mode). The bootloader is not modified, so the
 original `op1_246.op1` can always be flashed back. **Use at your own risk.**
@@ -184,3 +204,18 @@ It then runs the patcher once. It writes the reference image (`<custom tree>-pat
 `--reference <file>`) and its checksums to `data/manifest.json`, and checks that the reference unpacks to exactly the custom tree.
 Flash-test the reference image before publishing a new patch, and commit `data/` together with the
 updated output checksum in this README.
+
+## License
+
+op1r is free software under the **GNU General Public License v3.0 or later** ([LICENSE](LICENSE)), with an
+additional permission to combine it with the OP-1 firmware ([NOTICE](NOTICE)). In short: use it, modify it and
+patch your own firmware freely; if you **distribute** op1r or anything built on it (a modified patcher, another
+firmware mod, a product containing this code), you must release its complete source under the same license.
+
+**Source code:** [op1r-src](https://github.com/pcppcp/op1r-src): the firmware code, the synth SDK, and how to write
+your own synth / effect plugin ([PLUGINS.md](https://github.com/pcppcp/op1r-src/blob/main/synth_sdk/PLUGINS.md)).
+Releases from op1r 27 on are built from it.
+
+Not covered: the Teenage Engineering firmware (never included here) and the Oblique Strategies card texts (Brian Eno
+and Peter Schmidt). Third-party parts (MIT): Mutable Instruments Clouds / Elements reverb ports (Emilie Gillet),
+op1repacker's iter-lab.svg and LZMA settings (op1hacks), svgfont.py (Martin Mairinger). Details in [NOTICE](NOTICE).

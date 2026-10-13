@@ -1,7 +1,9 @@
 """Firmware patch application shared by CPython CLI and browser Pyodide worker.
 
-No compiler, database library, device key, or subprocess is needed here. Release
-manifests contain checked byte edits and our added code/screens, never a firmware.
+No compiler, device key, or subprocess is needed here. Release manifests contain
+checked byte edits and our added code/screens, never a firmware. Hiding op1r's own
+plugins (config "hidden") edits the factory database at patch time and is the only
+step that needs sqlite3 (in the standard library, also in Pyodide v314).
 """
 import binascii
 import copy
@@ -15,7 +17,7 @@ import tarfile
 LZMA_FILTERS = [{'id': lzma.FILTER_LZMA1, 'preset': 9, 'lc': 3, 'lp': 1,
                  'pb': 2, 'dict_size': 2 ** 23}]
 MAX_PACKAGE = 15_000_000
-PRODUCT = {"name": "hundekraft", "version": "2.1", "label": "hundekraft 2.1", "slug": "hundekraft-2.1"}
+PRODUCT = {"name": "hundekraft", "version": "2.5", "label": "hundekraft 2.5", "slug": "hundekraft-2.5"}
 
 
 def sha256(data):
@@ -24,7 +26,7 @@ def sha256(data):
 
 def normalize(config, catalog):
     fields = {'schema', 'base', 'synths', 'effects', 'preset_cap'}
-    if not isinstance(config, dict) or set(config) not in (fields, fields | {'utilities'}):
+    if not isinstance(config, dict) or not fields <= set(config) <= fields | {'utilities', 'hidden'}:
         raise ValueError('Configuration must contain exactly: ' + ', '.join(sorted(fields)))
     if type(config['schema']) is not int or config['schema'] != 1 or config['base'] != catalog['base']:
         raise ValueError('Unsupported configuration schema or base bundle')
@@ -41,7 +43,21 @@ def normalize(config, catalog):
     if type(cap) is not int or cap not in catalog['preset_caps']:
         raise ValueError('Preset capacity must be 100 or 300')
     out['preset_cap'] = cap
+    # op1r's own synths/FX to leave out of the picker lists; kept only when non-empty, so IDs and variants of
+    # configurations without it stay as they were.
+    hidden = config.get('hidden', [])
+    valid = [f['id'] for f in catalog.get('op1r_plugins', [])]
+    if (not isinstance(hidden, list) or any(not isinstance(v, str) for v in hidden)
+            or len(set(hidden)) != len(hidden) or any(v not in valid for v in hidden)):
+        raise ValueError('Unknown or duplicate hidden plugins')
+    if hidden:
+        out['hidden'] = [v for v in valid if v in hidden]
     return out
+
+
+def without_hidden(config):
+    """The prebuilt variant a configuration is patched from (hiding is applied on top of it)."""
+    return {k: v for k, v in config.items() if k != 'hidden'}
 
 
 def config_id(config, catalog):
@@ -49,7 +65,13 @@ def config_id(config, catalog):
     flags = [f['id'] in c[g] for g in ('synths', 'effects') for f in catalog[g]]
     flags.append(c['preset_cap'] == 300)
     flags.extend(f['id'] in c.get('utilities', []) for f in catalog.get('utilities', []))
-    return f'{sum(int(v) << i for i, v in enumerate(flags)):02x}'
+    mask = sum(int(v) << i for i, v in enumerate(flags))
+    # Fixed position, so a shorter utilities list (public catalog) cannot move these bits.
+    bit = catalog.get('op1r_plugins_bit', 0)
+    for i, f in enumerate(catalog.get('op1r_plugins', [])):
+        if f['id'] in c.get('hidden', []):
+            mask |= 1 << (bit + i)
+    return f'{mask:02x}'
 
 
 def unpack(op1):
@@ -157,7 +179,44 @@ def validate_ldr(data):
         raise ValueError('Invalid LDR block chain')
 
 
-def patch(op1, base, variant, read_base, read_variant, log=lambda s: None):
+def hide_plugins(db, catalog, hidden):
+    """factory DB bytes -> without the picker rows of these op1r synths/FX (their code stays, so saved sounds that
+    use them still load). Each row must exist exactly once."""
+    import os, sqlite3, tempfile
+    kinds = {f['id']: f['kind'] for f in catalog.get('op1r_plugins', [])}
+    fd, path = tempfile.mkstemp(suffix='.db')
+    try:
+        os.write(fd, db)
+        os.close(fd)
+        con = sqlite3.connect(path)
+        for name in hidden:
+            table = 'fx_types' if kinds[name] == 'fx' else 'synth_types'
+            if con.execute(f'DELETE FROM {table} WHERE type=?', (name,)).rowcount != 1:
+                raise ValueError('Base does not list ' + name)
+        con.commit()
+        if con.execute('PRAGMA integrity_check').fetchone() != ('ok',):
+            raise ValueError('Database integrity check failed')
+        con.close()
+        with open(path, 'rb') as f:
+            return f.read()
+    finally:
+        os.remove(path)
+
+
+def apply_hidden(members, catalog, hidden):
+    if not hidden:
+        return members
+    out = []
+    for info, data in members:
+        if info.name == 'content/op1_factory.db':
+            info = copy.copy(info)
+            data = hide_plugins(data, catalog, hidden)
+            info.size = len(data)
+        out.append((info, data))
+    return out
+
+
+def patch(op1, base, variant, read_base, read_variant, log=lambda s: None, catalog=None, hidden=()):
     checked(op1, base['original']['sha256'], 'Select the original, unmodified R246 firmware')
     log('Verified original R246. Applying ' + variant['config']['base'] + '…')
     original = unpack(op1)
@@ -169,11 +228,17 @@ def patch(op1, base, variant, read_base, read_variant, log=lambda s: None):
     if files['te-boot.ldr'] != dict((m.name, d) for m, d in original)['te-boot.ldr']:
         raise ValueError('Bootloader changed')
     raw = pack_tar(members)
+    checked(raw, variant['result']['tar_sha256'], 'Selected features')
+    if hidden:
+        log('Hiding ' + ', '.join(hidden) + '…')
+        members = apply_hidden(members, catalog, hidden)
+        raw = pack_tar(members)
     log('Compressing and verifying your firmware…')
     out = pack_op1(raw)
     # Verify the compressed stream as well as the exact archive before handing it out.
-    checked(lzma.decompress(out[4:], format=lzma.FORMAT_ALONE), variant['result']['tar_sha256'], 'Output')
-    report = {'schema': 1, 'config': variant['config'], 'release': variant['release'],
+    checked(lzma.decompress(out[4:], format=lzma.FORMAT_ALONE), sha256(raw), 'Output')
+    config = dict(variant['config'], **({'hidden': list(hidden)} if hidden else {}))
+    report = {'schema': 1, 'config': config, 'release': variant['release'],
               'product': variant['release'].get('product'),
               'upstream': {'stock': 'R246', 'op1r': variant['config']['base'],
                            'op1r_commit': variant['release']['op1r_commit'],

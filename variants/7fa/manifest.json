@@ -1,7 +1,7 @@
 {
   "config": {
     "schema": 1,
-    "base": "op1r22",
+    "base": "op1r27-plugins",
     "synths": [
       "taffy",
       "elg"
@@ -19,27 +19,27 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "a9e68a7f267eac5f",
+    "id": "4fa02833716aea10",
     "product": {
       "name": "hundekraft",
-      "version": "2.1",
-      "label": "hundekraft 2.1",
-      "slug": "hundekraft-2.1"
+      "version": "2.5",
+      "label": "hundekraft 2.5",
+      "slug": "hundekraft-2.5"
     },
-    "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
+    "op1r_commit": "d02d60c6a76fa62ba40d75269124d650f5233be0",
     "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
-    "image_bytes": 54172,
-    "memory_bytes": 201772,
+    "image_bytes": 0,
+    "memory_bytes": 29008,
     "utility_image_bytes": 222552,
     "utility_memory_bytes": 2061412,
     "utility_source_sha256": "b7adf5c0fdd523a726e81880e683eda48061a261944dfa1a7a52c57ebfc41066",
-    "branding_bytes": 64,
+    "branding_bytes": 116,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.1-7fa.op1",
+  "filename": "hundekraft-2.5-7fa.op1",
   "presets": {
     "count": 80,
     "by_engine": {
@@ -50,42 +50,42 @@
       "elg": 16,
       "iter": 12
     },
-    "sha256": "70f0e446f4f5b7f5fecff9fcfcf49347f8d30d717a4caf3342743132a87bcde9",
+    "sha256": "61d520c0650b5197bb34f68036824289aef43589b9bcfc4611f81da43d3acc58",
     "exceeds_cap": false
   },
   "patched_files": [
     {
       "path": "content/op1_factory.db",
-      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
-      "result_sha256": "b0c78b65ea80deabb94abb8406ea0a8787b2536a86c20d5aa327c79475b5c678",
+      "orig_sha256": "c114f05daf3a552dabff2e2a9d21f941681c38226877eed9ade0599a2bc06f15",
+      "result_sha256": "3e043bbc0b578e876514575966317ac6296d5f05d0b02f945091a5d1501b219c",
       "ops": [
         {
           "op": "replace",
           "offset": 27,
-          "old": "0d",
-          "new": "11"
+          "old": "0e",
+          "new": "12"
         },
         {
           "op": "replace",
           "offset": 95,
-          "old": "0d002e8dfb",
-          "new": "11002e8df8"
+          "old": "0e",
+          "new": "12"
         },
         {
           "op": "replace",
           "offset": 1028,
-          "old": "0b01a5",
-          "new": "0d0134"
+          "old": "0b01a4",
+          "new": "0d0133"
         },
         {
           "op": "replace",
-          "offset": 1054,
-          "old": "00000000",
-          "new": "016e0134"
+          "offset": 1055,
+          "old": "33",
+          "new": "6d"
         },
         {
           "op": "replace",
-          "offset": 1332,
+          "offset": 1331,
           "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
           "new": "380f04001f63736e6f77676c6f62655b373239362c2031323238382c2031313236342c2032303438302c2032313235332c20302c20302c20305d350e040019637761736865725b373239362c2031323238382c2031313236342c2032303438302c2032313235322c20302c20302c20305d"
         },
@@ -98,7 +98,7 @@
         {
           "op": "replace",
           "offset": 4132,
-          "old": "00000000",
+          "old": "008d008d",
           "new": "012000f1"
         },
         {
@@ -111,62 +111,26 @@
     },
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "503e4019694b69ddc644d177fa89d2fba5c96c0c4bba9650849140ee431ccef6",
+      "orig_sha256": "594c8ce7492bd01d030b8ef05ff619f6a0fa0e9a9a30c7b9d2453be9d039e5d7",
+      "result_sha256": "d543aaa149cae3533ad530c134c79ebcc041a20f5cc3273a3f91e493f14d3b57",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "17",
-          "new": "10"
+          "old": "3f",
+          "new": "ba"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "50c724",
-          "new": "9c0129"
-        },
-        {
-          "op": "replace",
-          "offset": 317152,
-          "old": "006ee1",
-          "new": "3800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 317276,
-          "old": "0c6ee1",
-          "new": "1800f0"
+          "old": "982724",
+          "new": "b48d27"
         },
         {
           "op": "replace",
           "offset": 333704,
           "old": "b88ea501d68ea5",
           "new": "4a00e4015000e4"
-        },
-        {
-          "op": "replace",
-          "offset": 415208,
-          "old": "8004e00100000000e803e0",
-          "new": "0000f001000000000400f0"
-        },
-        {
-          "op": "replace",
-          "offset": 415232,
-          "old": "8405e0",
-          "new": "0800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 417456,
-          "old": "7009e00100000000d407e0",
-          "new": "2400f001000000002800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 417488,
-          "old": "1808e001000000000008e0",
-          "new": "2c00f001000000003000f0"
         },
         {
           "op": "replace",
@@ -196,31 +160,19 @@
           "op": "replace",
           "offset": 610878,
           "old": "68db43e1dd",
-          "new": "6c5443e1f0"
+          "new": "000043e1f0"
         },
         {
           "op": "replace",
           "offset": 612854,
           "old": "68db42e1dd",
-          "new": "6c5442e1f0"
-        },
-        {
-          "op": "replace",
-          "offset": 805746,
-          "old": "ffe3b9fe",
-          "new": "2ce3df03"
+          "new": "000042e1f0"
         },
         {
           "op": "replace",
           "offset": 968752,
           "old": "00e3a042",
           "new": "25e3ce49"
-        },
-        {
-          "op": "replace",
-          "offset": 1048526,
-          "old": "22e20bb0",
-          "new": "2ae253a9"
         },
         {
           "op": "replace",
@@ -260,27 +212,15 @@
         },
         {
           "op": "replace",
-          "offset": 1108380,
-          "old": "22e24a37",
-          "new": "2ae25834"
-        },
-        {
-          "op": "replace",
           "offset": 1146750,
-          "old": "21e327f5",
+          "old": "21e32df6",
           "new": "23e35bec"
         },
         {
           "op": "replace",
           "offset": 1147092,
-          "old": "21e338fa",
+          "old": "21e354fc",
           "new": "23e3e2eb"
-        },
-        {
-          "op": "replace",
-          "offset": 1333822,
-          "old": "20e31d86",
-          "new": "28e3217c"
         },
         {
           "op": "replace",
@@ -304,37 +244,37 @@
           "op": "replace",
           "offset": 1405736,
           "old": "6cdb46e1dd",
-          "new": "705446e1f0"
+          "new": "040046e1f0"
         },
         {
           "op": "replace",
           "offset": 1406054,
           "old": "6cdb40e1dd",
-          "new": "705440e1f0"
+          "new": "040040e1f0"
         },
         {
           "op": "replace",
           "offset": 1406752,
           "old": "6cdb45e1dd",
-          "new": "705445e1f0"
+          "new": "040045e1f0"
         },
         {
           "op": "replace",
           "offset": 1407564,
           "old": "6cdb47e1dd",
-          "new": "705447e1f0"
+          "new": "040047e1f0"
         },
         {
           "op": "replace",
           "offset": 1419094,
           "old": "6cdb46e1dd",
-          "new": "705446e1f0"
+          "new": "040046e1f0"
         },
         {
           "op": "replace",
           "offset": 1419506,
           "old": "68db41e1dd",
-          "new": "6c5441e1f0"
+          "new": "000041e1f0"
         },
         {
           "op": "replace",
@@ -358,25 +298,19 @@
           "op": "replace",
           "offset": 1421928,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e16c5440e1f0"
+          "new": "060200e1000040e1f0"
         },
         {
           "op": "replace",
           "offset": 1422100,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e16c5440e1f0"
+          "new": "060200e1000040e1f0"
         },
         {
           "op": "replace",
           "offset": 1593130,
           "old": "587340e18f",
           "new": "000040e1ef"
-        },
-        {
-          "op": "replace",
-          "offset": 1642440,
-          "old": "1ee31029",
-          "new": "26e35c21"
         },
         {
           "op": "replace",
@@ -410,10 +344,10 @@
         },
         {
           "op": "insert",
-          "offset": 2410064,
+          "offset": 2369175,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "88e5bcd3523e1680280b0e2df282a314b1e76c1d2bc5715d08b74cb771e4c40d",
-          "size": 277068
+          "sha256": "9fb311a1ba4d3a62b8d6b5bf9e3edec369dca51ae5c2b4330ba1a4a37735f592",
+          "size": 222748
         }
       ]
     }
@@ -422,29 +356,29 @@
     {
       "path": "content/display/taffy.svg",
       "blob": "content_display_taffy.svg",
-      "sha256": "5fd4fc6a5d56b9aa987c8fc6f18787718ab6cc26d5e218634a6a6ad72e3e3d00",
+      "sha256": "6bb096f239967c50153bf4a324ce232769cd288c0dc5425771916efafcf7393d",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/display/elg.svg",
       "blob": "content_display_elg.svg",
-      "sha256": "d60f3e230412f8f04c8dd9c399028ce269fe9532f185fd0d859ba57f3a5d2d21",
+      "sha256": "e5fa967f5c276b4320b6f91c591fd49c41ad701291df2372c9cb58e744808684",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/display/washer.svg",
       "blob": "content_display_washer.svg",
-      "sha256": "3a1483a0c890718cb83f1dd49e70f954a4f67d2f39116ffb821cf656da7cb92d",
+      "sha256": "497be259dc9c5221dd2b3848e095a2e4544d103b7a4b14d3da5b860dc1d285c3",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/display/snowglobe.svg",
       "blob": "content_display_snowglobe.svg",
-      "sha256": "6398fb5a24f45345ef48d852e59599db9b1e7c0ff9bb3b60d8809b1eded23f1a",
+      "sha256": "e4f37c3a7666126a93e2ac85ce2e51822fe5457cab92b8612d3c882c3e294ef8",
       "template": "content/display/iter.svg"
     }
   ],
   "result": {
-    "tar_sha256": "4f47dbe7746728c24119210aa15b891c2296518fd33fcd509d4150c6da4ae19d"
+    "tar_sha256": "f0d9c3bf28088768ed78be844e1b742ac1b299a9f2cc3809584964909e1c3989"
   }
 }

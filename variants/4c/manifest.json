@@ -1,7 +1,7 @@
 {
   "config": {
     "schema": 1,
-    "base": "op1r22",
+    "base": "op1r27-plugins",
     "synths": [
       "pew",
       "elg"
@@ -10,24 +10,24 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "a9e68a7f267eac5f",
+    "id": "4fa02833716aea10",
     "product": {
       "name": "hundekraft",
-      "version": "2.1",
-      "label": "hundekraft 2.1",
-      "slug": "hundekraft-2.1"
+      "version": "2.5",
+      "label": "hundekraft 2.5",
+      "slug": "hundekraft-2.5"
     },
-    "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
+    "op1r_commit": "d02d60c6a76fa62ba40d75269124d650f5233be0",
     "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
-    "image_bytes": 46944,
-    "memory_bytes": 46944,
-    "branding_bytes": 64,
+    "image_bytes": 0,
+    "memory_bytes": 29008,
+    "branding_bytes": 108,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.1-4c.op1",
+  "filename": "hundekraft-2.5-4c.op1",
   "presets": {
     "count": 72,
     "by_engine": {
@@ -38,26 +38,26 @@
       "elg": 12,
       "iter": 12
     },
-    "sha256": "46f7fb91eb6f796de6e72a2810ff5b2403668986a1855b54d339cbd74cd7876d",
+    "sha256": "aba841c9d4b235644f044cfeb2d4236a2d59a54f2dee2c49dacb10a8a2213ec1",
     "exceeds_cap": false
   },
   "patched_files": [
     {
       "path": "content/op1_factory.db",
-      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
-      "result_sha256": "0f6c77106552a444604bfef35b9db465c0edef5fa5a9d544c18da617966fcfe0",
+      "orig_sha256": "c114f05daf3a552dabff2e2a9d21f941681c38226877eed9ade0599a2bc06f15",
+      "result_sha256": "13d3b8b110c2c7cf2fbefa871fcfbf54184b7a22ef25a0455d22eba5b098dee8",
       "ops": [
         {
           "op": "replace",
           "offset": 27,
-          "old": "0d",
-          "new": "0f"
+          "old": "0e",
+          "new": "10"
         },
         {
           "op": "replace",
           "offset": 95,
-          "old": "0d002e8dfb",
-          "new": "0f002e8df8"
+          "old": "0e",
+          "new": "10"
         },
         {
           "op": "replace",
@@ -68,7 +68,7 @@
         {
           "op": "replace",
           "offset": 4132,
-          "old": "00000000",
+          "old": "008d008d",
           "new": "012200f3"
         },
         {
@@ -81,92 +81,32 @@
     },
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
-      "result_sha256": "ed8490caa5f975f13527f23715bbd0452b80b2e29b92db822a70f1492ea8f9d1",
+      "orig_sha256": "594c8ce7492bd01d030b8ef05ff619f6a0fa0e9a9a30c7b9d2453be9d039e5d7",
+      "result_sha256": "3d3a2d3f9b7da25acc3b703f3760909b8c70911dfba97de333333ef8b4bf8f5e",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "17",
-          "new": "26"
+          "old": "3f",
+          "new": "8c"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "50c724",
-          "new": "d87f25"
-        },
-        {
-          "op": "replace",
-          "offset": 317152,
-          "old": "006ee1",
-          "new": "3800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 317276,
-          "old": "0c6ee1",
-          "new": "1800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 415208,
-          "old": "8004e00100000000e803e0",
-          "new": "0000f001000000000400f0"
-        },
-        {
-          "op": "replace",
-          "offset": 415232,
-          "old": "8405e0",
-          "new": "0800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 417456,
-          "old": "7009e00100000000d407e0",
-          "new": "2400f001000000002800f0"
-        },
-        {
-          "op": "replace",
-          "offset": 417488,
-          "old": "1808e001000000000008e0",
-          "new": "2c00f001000000003000f0"
+          "old": "9827",
+          "new": "2428"
         },
         {
           "op": "replace",
           "offset": 610878,
           "old": "68db43e1dd",
-          "new": "c03843e1f0"
+          "new": "000043e1f0"
         },
         {
           "op": "replace",
           "offset": 612854,
           "old": "68db42e1dd",
-          "new": "c03842e1f0"
-        },
-        {
-          "op": "replace",
-          "offset": 805746,
-          "old": "ffe3b9fe",
-          "new": "2ce3df03"
-        },
-        {
-          "op": "replace",
-          "offset": 1048526,
-          "old": "22e20bb0",
-          "new": "2ae253a9"
-        },
-        {
-          "op": "replace",
-          "offset": 1108380,
-          "old": "22e24a37",
-          "new": "2ae25834"
-        },
-        {
-          "op": "replace",
-          "offset": 1333822,
-          "old": "20e31d86",
-          "new": "28e3217c"
+          "new": "000042e1f0"
         },
         {
           "op": "replace",
@@ -178,37 +118,37 @@
           "op": "replace",
           "offset": 1405736,
           "old": "6cdb46e1dd",
-          "new": "c43846e1f0"
+          "new": "040046e1f0"
         },
         {
           "op": "replace",
           "offset": 1406054,
           "old": "6cdb40e1dd",
-          "new": "c43840e1f0"
+          "new": "040040e1f0"
         },
         {
           "op": "replace",
           "offset": 1406752,
           "old": "6cdb45e1dd",
-          "new": "c43845e1f0"
+          "new": "040045e1f0"
         },
         {
           "op": "replace",
           "offset": 1407564,
           "old": "6cdb47e1dd",
-          "new": "c43847e1f0"
+          "new": "040047e1f0"
         },
         {
           "op": "replace",
           "offset": 1419094,
           "old": "6cdb46e1dd",
-          "new": "c43846e1f0"
+          "new": "040046e1f0"
         },
         {
           "op": "replace",
           "offset": 1419506,
           "old": "68db41e1dd",
-          "new": "c03841e1f0"
+          "new": "000041e1f0"
         },
         {
           "op": "replace",
@@ -232,13 +172,13 @@
           "op": "replace",
           "offset": 1421928,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1c03840e1f0"
+          "new": "060200e1000040e1f0"
         },
         {
           "op": "replace",
           "offset": 1422100,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1c03840e1f0"
+          "new": "060200e1000040e1f0"
         },
         {
           "op": "replace",
@@ -247,17 +187,11 @@
           "new": "000040e1ef"
         },
         {
-          "op": "replace",
-          "offset": 1642440,
-          "old": "1ee31029",
-          "new": "26e35c21"
-        },
-        {
           "op": "insert",
-          "offset": 2410064,
+          "offset": 2369175,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "86626c80c29a2d0d8fecc0d5349e3ee461d34d0bace61679ea503b508e806400",
-          "size": 47240
+          "sha256": "96132901d03888ccdc96d9083c17eb73e30a23cc56e5910574ae8ea4b63ddd6f",
+          "size": 140
         }
       ]
     }
@@ -266,17 +200,17 @@
     {
       "path": "content/display/pew.svg",
       "blob": "content_display_pew.svg",
-      "sha256": "146b07730575f220b56c3cb846148e8e5d6581ab932949a6f83de08f7b24810f",
+      "sha256": "0f43fdcfc988a54788bf93de84b9f70433909e926dee4337c536fd540b9f5b5a",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/display/elg.svg",
       "blob": "content_display_elg.svg",
-      "sha256": "d60f3e230412f8f04c8dd9c399028ce269fe9532f185fd0d859ba57f3a5d2d21",
+      "sha256": "e5fa967f5c276b4320b6f91c591fd49c41ad701291df2372c9cb58e744808684",
       "template": "content/display/iter.svg"
     }
   ],
   "result": {
-    "tar_sha256": "2f0a57c8d36af356818123ddbffb5d75cfd9e7dc83769b3e0715829733c8212b"
+    "tar_sha256": "43cc48753b0f1406fd86cb705c8a3b0f00de33575a95b303e20a942f5a8ae800"
   }
 }

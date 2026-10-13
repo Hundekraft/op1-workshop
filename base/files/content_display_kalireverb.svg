@@ -30,8 +30,8 @@
 <circle cx="43.06" cy="49.05" r="1.3" fill="#4d9eff" stroke-width="1"/>
 <line id="kdiff" x1="43.06" y1="95.81" x2="28.14" y2="95.81" fill="none" stroke="#ffffff" stroke-width=".75" stroke-linecap="round"/>
 <circle cx="43.06" cy="95.81" r="1.3" fill="#ffffff" stroke-width="1"/>
-<line id="ktone" x1="43.06" y1="139.27" x2="28.14" y2="139.27" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="43.06" cy="139.27" r="1.3" fill="#ff3a5d" stroke-width="1"/>
+<line id="ktone" x1="43.06" y1="139.27" x2="28.14" y2="139.27" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="43.06" cy="139.27" r="1.3" fill="#00ed95" stroke-width="1"/>
 <g>
 <line x1="43.06" y1="34.14" x2="43.06" y2="37.72" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 <line x1="32.51" y1="38.51" x2="35.04" y2="41.04" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,10 +69,10 @@
 <path d="M49.49,26.68l0-7.14l3.53,0l0,0.2l-3.35,0l0,3.09l3.25,0l0,0.2l-3.25,0l0,3.46l3.5,0l0,0.2l-3.68,0z" fill="none" stroke="#4e4a9e" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmixtitle">
-<rect x="266.17" y="20.4" width="33.49" height="17.51" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M279.9,33.95l0-8.39l-0.05,0l-3.5,8.39l-0.35,0l-3.7-8.44l-0.05,0l0,8.44l-0.24,0l0-8.68l0.44,0l3.72,8.5l3.53-8.5l0.43,0l0,8.68l-0.24,0z" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M283.45,33.95l0-8.68l0.24,0l0,8.68l-0.24,0z" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M292.59,33.95l-3.04-4.24l-2.93,4.24l-0.3,0l3.12-4.51l-3.05-4.16l0.29,0l2.89,3.96l2.77-3.96l0.29,0l-2.95,4.2l3.2,4.48l-0.3,0z" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="266.17" y="20.4" width="33.49" height="17.51" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M279.9,33.95l0-8.39l-0.05,0l-3.5,8.39l-0.35,0l-3.7-8.44l-0.05,0l0,8.44l-0.24,0l0-8.68l0.44,0l3.72,8.5l3.53-8.5l0.43,0l0,8.68l-0.24,0z" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M283.45,33.95l0-8.68l0.24,0l0,8.68l-0.24,0z" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M292.59,33.95l-3.04-4.24l-2.93,4.24l-0.3,0l3.12-4.51l-3.05-4.16l0.29,0l2.89,3.96l2.77-3.96l0.29,0l-2.95,4.2l3.2,4.48l-0.3,0z" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g>
 <path d="M275.42,50.45l15,0" fill="none" stroke="#00475b" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -87,34 +87,34 @@
 <path d="M275.42,101.47l15,0" fill="none" stroke="#00475b" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix0">
-<path d="M275.42,50.45l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,50.45l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix1">
-<path d="M275.42,56.12l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,56.12l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix2">
-<path d="M275.42,61.79l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,61.79l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix3">
-<path d="M275.42,67.45l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,67.45l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix4">
-<path d="M275.42,73.12l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,73.12l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix5">
-<path d="M275.42,78.79l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,78.79l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix6">
-<path d="M275.42,84.46l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,84.46l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix7">
-<path d="M275.42,90.13l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,90.13l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix8">
-<path d="M275.42,95.8l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,95.8l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kmix9">
-<path d="M275.42,101.47l15,0" fill="none" stroke="#00ed95" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M275.42,101.47l15,0" fill="none" stroke="#ff3a5d" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <g id="kdry">
 <path d="M278.66,116.24c0,0.78-0.1,1.42-0.31,1.93c-0.21,0.51-0.48,0.91-0.82,1.2c-0.34,0.29-0.73,0.5-1.17,0.62c-0.44,0.12-0.88,0.18-1.34,0.18l-1.52,0l0-7.74l1.62,0c0.16,0,0.31,0,0.45,0.01c0.14,0,0.27,0.02,0.4,0.04c0.13,0.02,0.25,0.04,0.38,0.08c0.13,0.04,0.26,0.08,0.41,0.13c0.25,0.1,0.5,0.24,0.72,0.42c0.23,0.18,0.43,0.41,0.6,0.7c0.17,0.29,0.31,0.64,0.41,1.04c0.1,0.4,0.15,0.87,0.15,1.41zM278.46,116.25c0-0.66-0.08-1.21-0.23-1.68c-0.15-0.47-0.38-0.83-0.66-1.12c-0.28-0.29-0.63-0.5-1.04-0.63c-0.41-0.13-0.85-0.19-1.35-0.19l-1.48,0l0,7.31l1.25,0c0.63,0,1.17-0.09,1.61-0.26c0.44-0.17,0.81-0.42,1.09-0.74c0.28-0.32,0.49-0.71,0.62-1.17c0.13-0.46,0.2-0.97,0.2-1.53z" fill="none" stroke="#00475b" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round"/>

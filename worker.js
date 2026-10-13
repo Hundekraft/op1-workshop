@@ -33,28 +33,31 @@ onmessage = async ({data:{bytes,config,release}}) => {
     const py = await loadPyodide({indexURL:PYODIDE});
     py.FS.writeFile('/runtime.py', await get('runtime.py', release.runtime_sha256));
     py.globals.set('config_json', JSON.stringify(config)); py.globals.set('catalog_json', JSON.stringify(release.catalog));
-    const id = py.runPython("import sys; sys.path.insert(0, '/'); import json, runtime as R; config = R.normalize(json.loads(config_json), json.loads(catalog_json)); R.config_id(config, json.loads(catalog_json))");
-    if (!release.variants[id]) throw Error('This configuration is not available in this release.');
-    const variantBytes = await get(`variants/${id}/manifest.json`, release.variants[id].sha256);
+    // The prebuilt variant never hides op1r plugins; hiding is applied on top of it (runtime.patch).
+    // sqlite3 for hiding is part of this Pyodide's standard library (no package to load).
+    const [id, variantId] = py.runPython("import sys; sys.path.insert(0, '/'); import json, runtime as R; catalog = json.loads(catalog_json); config = R.normalize(json.loads(config_json), catalog); [R.config_id(config, catalog), R.config_id(R.without_hidden(config), catalog)]").toJs();
+    if (!release.variants[variantId]) throw Error('This configuration is not available in this release.');
+    const variantBytes = await get(`variants/${variantId}/manifest.json`, release.variants[variantId].sha256);
     const variant = JSON.parse(new TextDecoder().decode(variantBytes));
     if (variant.release.id !== release.release.id) throw Error('Mixed patch release. Reload the page.');
     await assets(py, base, 'base', '/base');
-    await assets(py, variant, `variants/${id}`, '/variant');
+    await assets(py, variant, `variants/${variantId}`, '/variant');
     py.FS.writeFile('/base.json', baseBytes); py.FS.writeFile('/variant.json', variantBytes);
     py.FS.writeFile('/input.op1', new Uint8Array(bytes)); py.globals.set('progress', log);
     py.runPython(`
 base = json.load(open('/base.json'))
 variant = json.load(open('/variant.json'))
-if variant['config'] != config:
+if variant['config'] != R.without_hidden(config):
     raise ValueError('Configuration does not match the patch')
 out, report = R.patch(open('/input.op1','rb').read(), base, variant,
     lambda n: open('/base/' + n,'rb').read(),
-    lambda n: open('/variant/' + n,'rb').read(), progress)
+    lambda n: open('/variant/' + n,'rb').read(), progress,
+    catalog=catalog, hidden=config.get('hidden', []))
 open('/output.op1','wb').write(out)
 open('/report.json','w').write(json.dumps(report, indent=2) + '\\n')
 `);
     const out = py.FS.readFile('/output.op1');
-    const presets = await get(`variants/${id}/presets.zip`, variant.presets.sha256);
+    const presets = await get(`variants/${variantId}/presets.zip`, variant.presets.sha256);
     postMessage({type:'done', out, presets, id, report:py.FS.readFile('/report.json',{encoding:'utf8'})}, [out.buffer, presets.buffer]);
   } catch (error) { postMessage({type:'error', text:String(error.message || error)}); }
 };
