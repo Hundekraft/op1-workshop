@@ -3,7 +3,7 @@ let release, file, worker, busy = false, urls = [], fileCheck = 0;
 // Exact original R246 bytes; the worker and Python runtime independently check again.
 const ORIGINAL_R246_SHA256 = 'c5315218f825f143b415ca554516541898abee843d3a236df0b54c04e1fb13a9';
 const status = (text, error = false) => { $('status').textContent = text; $('status').classList.toggle('error', error); };
-const choices = () => ({ schema: 1, base: 'op1r18', synths: selected('synths'), effects: selected('effects'), preset_cap: $('expanded').checked ? 300 : 100 });
+const choices = () => ({ schema: 1, base: release.catalog.base, synths: selected('synths'), effects: selected('effects'), utilities: $('maiko-bundle').checked ? release.catalog.utilities.map(f => f.id) : [], preset_cap: $('expanded').checked ? 300 : 100 });
 const selected = group => [...$(group).querySelectorAll('input:checked')].map(input => input.value);
 function clearDownloads() { urls.forEach(URL.revokeObjectURL); urls = []; $('downloads').hidden = true; }
 function update() {
@@ -14,7 +14,9 @@ function update() {
   $('build').disabled = busy || !release || !file;
   for (const id of ['export', 'import', 'expanded']) $(id).disabled = busy || !release;
   if (release) {
-    const c = choices(), flags = [...release.catalog.synths.map(f => c.synths.includes(f.id)), ...release.catalog.effects.map(f => c.effects.includes(f.id)), c.preset_cap === 300];
+    const c = choices();
+    if ($('build-upstreams')) $('build-upstreams').textContent = `Original R246 · ${release.catalog.base.replace('op1r','op1r ')}${c.utilities?.length ? ' · Maiko #249' : ''}`;
+    const flags = [...release.catalog.synths.map(f => c.synths.includes(f.id)), ...release.catalog.effects.map(f => c.effects.includes(f.id)), c.preset_cap === 300, ...release.catalog.utilities.map(f => c.utilities.includes(f.id))];
     const id = flags.reduce((sum, flag, i) => sum + (flag ? 1 << i : 0), 0).toString(16).padStart(2,'0');
     const presets = release.variants[id]?.presets;
     if (presets) {
@@ -24,7 +26,7 @@ function update() {
         const item = document.createElement('span'); item.textContent = `${engine} / ${count}`; $('preset-breakdown').append(item);
       }
       $('preset-pack-download').href = `variants/${id}/presets.zip`;
-      $('preset-pack-download').download = `op1-hundekraft-${id}-presets.zip`;
+      $('preset-pack-download').download = `${release.release.product?.slug || "op1-hundekraft"}-${id}.presets.zip`;
       $('preset-warning').hidden = !presets.exceeds_cap;
       $('preset-warning').textContent = `This pack has ${presets.count} presets; your selected limit is 100. Enable 300 presets below, or install a subset. Existing user presets also count toward the limit.`;
     }
@@ -32,7 +34,7 @@ function update() {
 }
 function lock(value) {
   busy = value;
-  document.querySelectorAll('fieldset input, #firmware, #export, #import').forEach(el => el.disabled = value);
+  document.querySelectorAll('fieldset input, #maiko-bundle, #firmware, #export, #import').forEach(el => el.disabled = value);
   $('cancel').hidden = !value;
   update();
 }
@@ -90,7 +92,7 @@ $('workshop').addEventListener('submit', async e => {
     if (data.type === 'log') { status(data.text); $('log').textContent += data.text + '\n'; }
     if (data.type === 'error') fail(data.text);
     if (data.type === 'done') {
-      const stem = `op1_246-op1r18-${data.id}`;
+      const stem = `${release.release.product?.slug || 'op1_246-' + release.catalog.base}-${data.id}`;
       link('download-firmware', new Blob([data.out], {type:'application/octet-stream'}), stem + '.op1');
       link('download-presets', new Blob([data.presets], {type:'application/zip'}), stem + '.presets.zip');
       link('download-report', new Blob([data.report], {type:'application/json'}), stem + '.build.json');
@@ -103,17 +105,20 @@ $('workshop').addEventListener('submit', async e => {
 });
 $('export').addEventListener('click', () => {
   const a = document.createElement('a'), url = URL.createObjectURL(new Blob([JSON.stringify(choices(), null, 2) + '\n'], {type:'application/json'}));
-  a.href = url; a.download = 'op1-workshop.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  a.href = url; a.download = `${release.release.product?.slug || 'op1-workshop'}-choices.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 $('import').addEventListener('change', async e => {
   if (busy || !release || !e.target.files[0]) return;
   try {
     const c = JSON.parse(await e.target.files[0].text()), keys = ['base','effects','preset_cap','schema','synths'];
-    if (!c || Array.isArray(c) || Object.keys(c).sort().join() !== keys.join() || c.schema !== 1 || c.base !== 'op1r18' || ![100,300].includes(c.preset_cap)) throw Error('This workshop requires an op1r 18 configuration. Re-select your choices if they were saved for an older base.');
-    for (const group of ['synths','effects']) {
+    if (!c || Array.isArray(c) || Object.keys(c).filter(k => k !== 'utilities').sort().join() !== keys.join() || c.schema !== 1 || c.base !== release.catalog.base || ![100,300].includes(c.preset_cap)) throw Error('This workshop requires an op1r 22 configuration. Re-select your choices if they were saved for an older base.');
+    if (!Object.hasOwn(c, 'utilities')) c.utilities = [];
+    for (const group of ['synths','effects','utilities']) {
       if (!Array.isArray(c[group]) || new Set(c[group]).size !== c[group].length || c[group].some(id => !release.catalog[group].some(f => f.id === id))) throw Error('Unknown or duplicate features.');
     }
+    if (c.utilities.length !== 0 && c.utilities.length !== release.catalog.utilities.length) throw Error('Maiko features are included as one bundle. Select the full bundle or none.');
     for (const group of ['synths','effects']) $(group).querySelectorAll('input').forEach(el => el.checked = c[group].includes(el.value));
+    $('maiko-bundle').checked = c.utilities.length > 0;
     $('expanded').checked = c.preset_cap === 300; clearDownloads(); update(); status('Choices loaded.');
   } catch (error) { status('Could not load choices: ' + error.message, true); }
   e.target.value = '';
@@ -122,6 +127,8 @@ try {
   const response = await fetch('release.json', {cache:'no-cache'});
   if (!response.ok) throw Error('The patch release is unavailable. Run the release builder, then serve its output directory.');
   release = await response.json();
+  document.querySelectorAll('[data-release-label]').forEach(el => el.textContent = release.release.product?.label || 'Firmware workshop');
+  document.title = `${release.release.product?.label || 'OP–1'} / Firmware workshop`;
   for (const group of ['synths','effects']) for (const feature of release.catalog[group]) {
     const label = document.createElement('label'); label.className = 'feature'; label.style.setProperty('--accent', `var(--${feature.color})`);
     const input = document.createElement('input'); input.type = 'checkbox'; input.value = feature.id; input.checked = true; input.setAttribute('aria-label', `Include ${feature.name}`);

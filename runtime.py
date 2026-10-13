@@ -15,6 +15,7 @@ import tarfile
 LZMA_FILTERS = [{'id': lzma.FILTER_LZMA1, 'preset': 9, 'lc': 3, 'lp': 1,
                  'pb': 2, 'dict_size': 2 ** 23}]
 MAX_PACKAGE = 15_000_000
+PRODUCT = {"name": "hundekraft", "version": "2.0", "label": "hundekraft 2.0", "slug": "hundekraft-2.0"}
 
 
 def sha256(data):
@@ -23,18 +24,19 @@ def sha256(data):
 
 def normalize(config, catalog):
     fields = {'schema', 'base', 'synths', 'effects', 'preset_cap'}
-    if not isinstance(config, dict) or set(config) != fields:
+    if not isinstance(config, dict) or set(config) not in (fields, fields | {'utilities'}):
         raise ValueError('Configuration must contain exactly: ' + ', '.join(sorted(fields)))
     if type(config['schema']) is not int or config['schema'] != 1 or config['base'] != catalog['base']:
         raise ValueError('Unsupported configuration schema or base bundle')
     out = {'schema': 1, 'base': catalog['base']}
-    for group in ('synths', 'effects'):
-        values = config[group]
+    for group in ('synths', 'effects', 'utilities'):
+        values = config.get(group, [])
         valid = [f['id'] for f in catalog[group]]
         if (not isinstance(values, list) or any(not isinstance(v, str) for v in values)
                 or len(set(values)) != len(values) or any(v not in valid for v in values)):
             raise ValueError('Unknown or duplicate ' + group)
-        out[group] = [v for v in valid if v in values]
+        if group != 'utilities' or values:
+            out[group] = [v for v in valid if v in values]
     cap = config['preset_cap']
     if type(cap) is not int or cap not in catalog['preset_caps']:
         raise ValueError('Preset capacity must be 100 or 300')
@@ -46,6 +48,7 @@ def config_id(config, catalog):
     c = normalize(config, catalog)
     flags = [f['id'] in c[g] for g in ('synths', 'effects') for f in catalog[g]]
     flags.append(c['preset_cap'] == 300)
+    flags.extend(f['id'] in c.get('utilities', []) for f in catalog.get('utilities', []))
     return f'{sum(int(v) << i for i, v in enumerate(flags)):02x}'
 
 
@@ -156,7 +159,7 @@ def validate_ldr(data):
 
 def patch(op1, base, variant, read_base, read_variant, log=lambda s: None):
     checked(op1, base['original']['sha256'], 'Select the original, unmodified R246 firmware')
-    log('Verified original R246. Applying op1r 18…')
+    log('Verified original R246. Applying ' + variant['config']['base'] + '…')
     original = unpack(op1)
     members = apply_manifest(original, base, read_base)
     log('Applying selected features…')
@@ -171,6 +174,11 @@ def patch(op1, base, variant, read_base, read_variant, log=lambda s: None):
     # Verify the compressed stream as well as the exact archive before handing it out.
     checked(lzma.decompress(out[4:], format=lzma.FORMAT_ALONE), variant['result']['tar_sha256'], 'Output')
     report = {'schema': 1, 'config': variant['config'], 'release': variant['release'],
+              'product': variant['release'].get('product'),
+              'upstream': {'stock': 'R246', 'op1r': variant['config']['base'],
+                           'op1r_commit': variant['release']['op1r_commit'],
+                           'maiko': '#249' if variant['config'].get('utilities') else None},
+              'filename': variant.get('filename'),
               'input_sha256': sha256(op1), 'output_sha256': sha256(out),
               'tar_sha256': sha256(raw), 'bytes': len(out), 'presets': variant.get('presets')}
     return out, report

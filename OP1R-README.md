@@ -51,9 +51,27 @@ with:
     pattern
   - runs at the OP-1 tempo, plays polyphonically and sends MIDI; slot settings and mutes are saved (slots come
     back stopped)
+- **count-in**: with the tape stopped, hold **REC** and press **metronome**: 4 / 8 / 16 metronome clicks, then
+  recording starts on the next beat and runs until STOP (REC can be released). STOP or REC + metronome again cancels.
+  Audible even with the metronome level at 0. The number of beats is set on the settings page: clock / card + **T3**
+- **metronome accent**: beat 1 of each 4/4 bar clicks an octave higher (bars follow the tape; after a count-in
+  they start where the recording started)
+- **Oblique Strategies cards**: **Shift + help** shows a random card from Brian Eno and Peter Schmidt's *Oblique
+  Strategies* in the clock's place; Shift + help again shows the clock, again a new card (the last view is
+  remembered). T1 / T2 (monitor, USB out) work from both. Idea and card list from
+  [ultralazr/op1-oblique-strategies](https://github.com/ultralazr/op1-oblique-strategies) (code MIT, Martin
+  Mairinger; the card texts are Eno / Schmidt's and not covered by that licence)
 - **resource monitor**: on the clock screen (**Shift + help**) press **T1** to switch to a page with CPU load,
   audio processing load (both with a peak marker), RAM and disk usage and the MIDI in / out buffer fill; T1 again
   goes back to the clock
+- **USB track outs**: the OP-1 shows up as a 6-channel USB audio input (24 bit, 44.1 kHz): main L/R on channels
+  1–2, tape tracks 1–4 on channels 3–6 (pre-fader, following tape speed and reverse). Clock screen + **T2**: the blue
+  knob switches between **MASTER** (track channels silent, saves 5–7 % CPU; default) and **MASTER + TRACKS**; the
+  setting is saved. Tested on Linux and macOS (Windows untested: if the OP-1 still shows 2 channels, remove the old
+  OP-1 device entry once)
+- **tape markers**: on the tape screen, press **red** to set a marker at the cursor, **Shift + red** press removes the
+  marker under the cursor, **Shift + red** turn jumps to the next / previous marker (wraps around; works while
+  playing). Up to 32 markers, shown as green ticks above the tracks, saved
 - **MIDI CC control** (USB MIDI, on the OP-1's MIDI channel):
   - keys: CC = key code + 5 as in the OP-1's own CTRL mode, value ≥ 64 press / < 64 release: 5 help, 6 metronome,
     7–10 synth/drum/tape/mixer, 11–14 T1–T4, 15–17 lift/drop/scissors, 21–25 and 50–52 the keys 1–8,
@@ -102,6 +120,11 @@ Rendered on the PC from the same screen code that runs on the OP-1 (host harness
 | LFO | Sequencer |
 |---|---|
 | ![quad LFO](docs/images/lfo_quad.png) **quad** LFO | ![euclid](docs/images/seq_euclid.png) **euclid** sequencer |
+| ![dots](docs/images/seq_dots.png) **dots** sequencer (record mode: notes, lock triggers as hollow squares, a note with an FX lock) | |
+
+| Resource monitor | |
+|---|---|
+| ![resource monitor](docs/images/sysmon.png) clock screen + **T1** (text in the OP-1 font on the device) | |
 
 The repository contains no Teenage Engineering firmware. You provide the original update file, and the
 patcher applies only the differences stored in `data/`. These are our code, our screen SVGs and small
@@ -131,7 +154,7 @@ version. The firmware content is still verified identical, and `--accept-recompr
 | | SHA-256 |
 |---|---|
 | input `op1_246.op1` (original R246) | `c5315218f825f143b415ca554516541898abee843d3a236df0b54c04e1fb13a9` |
-| output (reference build) | `ca667abb81f458f6039d9959383a0ecce56f34f8fb6e811392f0c787affb894a` (also `python3 patch_op1.py --info`) |
+| output (reference build) | `5b20c4e874597b68f9b4d67ecceab8546e4746b468173bb621909aeb1a0db559` (also `python3 patch_op1.py --info`) |
 
 Install the result like any OP-1 update (bootloader update mode). The bootloader is not modified, so the
 original `op1_246.op1` can always be flashed back. **Use at your own risk.**

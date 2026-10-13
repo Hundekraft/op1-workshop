@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "base": "op1r18",
+  "base": "op1r22",
   "synths": [
     {
       "id": "wavetable",
@@ -164,5 +164,39 @@
   "preset_caps": [
     100,
     300
+  ],
+  "utilities": [
+    {
+      "id": "files",
+      "name": "File / storage",
+      "description": "See how much space tape, sounds, factory content and the system use. Shift + COM, then turn the blue encoder to FILE.",
+      "color": "blue",
+      "type": "storage overview",
+      "screen": "files.png"
+    },
+    {
+      "id": "scale",
+      "name": "Scale mode",
+      "description": "Play scales on the white keys. In synth mode, press T2 and hold Shift: white chooses the key, orange chooses the scale. Select OFF to play normally.",
+      "color": "orange",
+      "type": "key + scale quantization",
+      "screen": "scale.png"
+    },
+    {
+      "id": "naming",
+      "name": "Snapshot naming",
+      "description": "Name synth and drum snapshots with up to 12 letters or digits. Hold a sound-slot key, choose characters with blue and green, push blue to insert, and use the left arrow to delete. Press the same slot to save.",
+      "color": "green",
+      "type": "name your sounds",
+      "screen": "naming.png"
+    },
+    {
+      "id": "undo",
+      "name": "Tape undo / redo",
+      "description": "Hold TAPE and press left to undo or right to redo recordings and tape edits. Keeps up to seven history levels across restarts; available history depends on free storage.",
+      "color": "orange",
+      "type": "record, edit, undo",
+      "screen": "undo.png"
+    }
   ]
 }

@@ -1,20 +1,30 @@
 {
   "config": {
     "schema": 1,
-    "base": "op1r18",
+    "base": "op1r22",
     "synths": [],
     "effects": [],
     "preset_cap": 100
   },
   "release": {
-    "id": "37f71ad3cc694cad",
-    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "id": "e7c263ef51264127",
+    "product": {
+      "name": "hundekraft",
+      "version": "2.0",
+      "label": "hundekraft 2.0",
+      "slug": "hundekraft-2.0"
+    },
+    "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
+    "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
     "image_bytes": 0,
-    "memory_bytes": 0
+    "memory_bytes": 0,
+    "branding_bytes": 64,
+    "branding_address": "0x1ef0000"
   },
+  "filename": "hundekraft-2.0-00.op1",
   "presets": {
     "count": 48,
     "by_engine": {
@@ -23,12 +33,45 @@
       "granular": 12,
       "iter": 12
     },
-    "sha256": "937b51ac6f4970e057d6df14952c7cd8205277829abd20399714480c872af95f",
+    "sha256": "feb8371a34a2b5a4a9050dda6abc99038d7809bfe0af712c55ba7ec6c519f5ac",
     "exceeds_cap": false
   },
-  "patched_files": [],
+  "patched_files": [
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
+      "result_sha256": "3d8d5b8270c4ef2954359c88a60663511ac4c7ca70e2657a392db637bc27b585",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "17",
+          "new": "e7"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "50",
+          "new": "a0"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "000040e1ef"
+        },
+        {
+          "op": "insert",
+          "offset": 2410063,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "ad0766d63295df5b7f5b7f5487b3793072e0f6b8c3ca7d70770ee9b5abc0354d",
+          "size": 80
+        }
+      ]
+    }
+  ],
   "added_files": [],
   "result": {
-    "tar_sha256": "0eae3169972953131b384eb9dd3cd56e35640eb4ef6823e182d1c17aa64209da"
+    "tar_sha256": "36791a86bf8e1c5cf1700d419a14ef48f564f9042280e7a4c45ab78bbab37dfa"
   }
 }

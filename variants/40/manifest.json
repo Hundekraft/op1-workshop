@@ -1,20 +1,30 @@
 {
   "config": {
     "schema": 1,
-    "base": "op1r18",
+    "base": "op1r22",
     "synths": [],
     "effects": [],
     "preset_cap": 300
   },
   "release": {
-    "id": "37f71ad3cc694cad",
-    "op1r_commit": "fb06689142726d48d7307c4c9eeb687e943ef92d",
+    "id": "e7c263ef51264127",
+    "product": {
+      "name": "hundekraft",
+      "version": "2.0",
+      "label": "hundekraft 2.0",
+      "slug": "hundekraft-2.0"
+    },
+    "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
+    "experimental": true,
     "compiler": "bfin-elf-gcc (GCC) 13.3.0"
   },
   "sizes": {
     "image_bytes": 35032,
-    "memory_bytes": 35032
+    "memory_bytes": 35032,
+    "branding_bytes": 64,
+    "branding_address": "0x1ef0000"
   },
+  "filename": "hundekraft-2.0-40.op1",
   "presets": {
     "count": 48,
     "by_engine": {
@@ -23,37 +33,37 @@
       "granular": 12,
       "iter": 12
     },
-    "sha256": "a5e7dbdc0cdb1c37d1f7455495df85f7c0009efaf17f90a72d721732ca105043",
+    "sha256": "f70b46f5796d1923885c0614f66c99d4790bfca02cab985a350ae95c6c240b83",
     "exceeds_cap": false
   },
   "patched_files": [
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "4208e11f0f0c009a6a36fb6bc218001bf49fdec34da40cbee6ca7eac27c7803a",
-      "result_sha256": "9618a7b01170bec728dd8e7302cffcf1195fa4a888a3914de8d2a1b43eeba7a4",
+      "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
+      "result_sha256": "3a3acd0bdd641db9f041e32c8c1fbf473c977d5d990c40464df5080f7bb775a1",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "9b",
-          "new": "0c"
+          "old": "17",
+          "new": "59"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "5843",
-          "new": "40cc"
+          "old": "50c724",
+          "new": "885025"
         },
         {
           "op": "replace",
           "offset": 317152,
-          "old": "4448e1",
+          "old": "006ee1",
           "new": "3800f0"
         },
         {
           "op": "replace",
           "offset": 317276,
-          "old": "5048e1",
+          "old": "0c6ee1",
           "new": "1800f0"
         },
         {
@@ -107,7 +117,7 @@
         {
           "op": "replace",
           "offset": 1333822,
-          "old": "20e38d85",
+          "old": "20e31d86",
           "new": "28e3217c"
         },
         {
@@ -186,7 +196,7 @@
           "op": "replace",
           "offset": 1593130,
           "old": "587340e18f",
-          "new": "240c40e1f0"
+          "new": "000040e1ef"
         },
         {
           "op": "replace",
@@ -196,16 +206,16 @@
         },
         {
           "op": "insert",
-          "offset": 2344556,
+          "offset": 2410063,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "28da028e7ade41b0d27fe1979d874758f50b73b9be2d63d0c9ad702ce7efa7a1",
-          "size": 35048
+          "sha256": "26f6dfa7c77744cf41b87ea648a16b427c035fcaea2b79ccdeb668a12b33a0aa",
+          "size": 35128
         }
       ]
     }
   ],
   "added_files": [],
   "result": {
-    "tar_sha256": "d21dfc25b1ccbe809b7ca5cec1ede1a9797d97ccd42816ec68f79806d72ca762"
+    "tar_sha256": "e18e72ae90baa87066f6791014b1f96f6b538b7e51211ba103b066c88602ceab"
   }
 }

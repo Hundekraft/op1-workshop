@@ -1,0 +1,436 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "op1r22",
+    "synths": [
+      "taffy"
+    ],
+    "effects": [
+      "washer",
+      "snowglobe"
+    ],
+    "utilities": [
+      "files",
+      "scale",
+      "naming",
+      "undo"
+    ],
+    "preset_cap": 300
+  },
+  "release": {
+    "id": "e7c263ef51264127",
+    "product": {
+      "name": "hundekraft",
+      "version": "2.0",
+      "label": "hundekraft 2.0",
+      "slug": "hundekraft-2.0"
+    },
+    "op1r_commit": "3a3e9d78dcd388e8fa493c9cfedfd96ebfc705c6",
+    "experimental": true,
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 49256,
+    "memory_bytes": 196856,
+    "utility_image_bytes": 222552,
+    "utility_memory_bytes": 2061412,
+    "utility_source_sha256": "b7adf5c0fdd523a726e81880e683eda48061a261944dfa1a7a52c57ebfc41066",
+    "branding_bytes": 64,
+    "branding_address": "0x1ef0000"
+  },
+  "filename": "hundekraft-2.0-7f2.op1",
+  "presets": {
+    "count": 64,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "taffy": 16,
+      "iter": 12
+    },
+    "sha256": "48d117fc93c89136ee09480816635caf04b538a2254e96e1494e55ec015bc4e9",
+    "exceeds_cap": false
+  },
+  "patched_files": [
+    {
+      "path": "content/op1_factory.db",
+      "orig_sha256": "3e04adcc897dec9b36903c37556f331f73befdbb72e704904e53a441bff5490d",
+      "result_sha256": "66a3212931fc183bf62aba7ba69535545d32189c057a40ea1913b5cac55d7c9b",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 27,
+          "old": "0d",
+          "new": "10"
+        },
+        {
+          "op": "replace",
+          "offset": 95,
+          "old": "0d002e8dfb",
+          "new": "10002e8df8"
+        },
+        {
+          "op": "replace",
+          "offset": 1028,
+          "old": "0b01a5",
+          "new": "0d0134"
+        },
+        {
+          "op": "replace",
+          "offset": 1054,
+          "old": "00000000",
+          "new": "016e0134"
+        },
+        {
+          "op": "replace",
+          "offset": 1332,
+          "old": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "380f04001f63736e6f77676c6f62655b373239362c2031323238382c2031313236342c2032303438302c2032313235332c20302c20302c20305d350e040019637761736865725b373239362c2031323238382c2031313236342c2032303438302c2032313235322c20302c20302c20305d"
+        },
+        {
+          "op": "replace",
+          "offset": 4100,
+          "old": "0e0151",
+          "new": "0f0120"
+        },
+        {
+          "op": "replace",
+          "offset": 4132,
+          "old": "0000",
+          "new": "0120"
+        },
+        {
+          "op": "replace",
+          "offset": 4384,
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "2f0f0400175974616666795b31363338342c20383139322c20302c20383139322c2032313235332c20302c20302c20305d"
+        }
+      ]
+    },
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "b0112f73c8a93e9c38dfeea6a9ef06dd1004c88b4f52184a105c1a807716a8be",
+      "result_sha256": "c31838e05b2018b46e47e5d8a178b73fba411214db49cc496aa992325565f23f",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "17",
+          "new": "c1"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "50c724",
+          "new": "a0ed28"
+        },
+        {
+          "op": "replace",
+          "offset": 317152,
+          "old": "006ee1",
+          "new": "3800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 317276,
+          "old": "0c6ee1",
+          "new": "1800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 333704,
+          "old": "b88ea501d68ea5",
+          "new": "4a00e4015000e4"
+        },
+        {
+          "op": "replace",
+          "offset": 415208,
+          "old": "8004e00100000000e803e0",
+          "new": "0000f001000000000400f0"
+        },
+        {
+          "op": "replace",
+          "offset": 415232,
+          "old": "8405e0",
+          "new": "0800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417456,
+          "old": "7009e00100000000d407e0",
+          "new": "2400f001000000002800f0"
+        },
+        {
+          "op": "replace",
+          "offset": 417488,
+          "old": "1808e001000000000008e0",
+          "new": "2c00f001000000003000f0"
+        },
+        {
+          "op": "replace",
+          "offset": 460934,
+          "old": "09e39dc9",
+          "new": "29e31d45"
+        },
+        {
+          "op": "replace",
+          "offset": 461476,
+          "old": "09e3e0c7",
+          "new": "29e3d443"
+        },
+        {
+          "op": "replace",
+          "offset": 461816,
+          "old": "09e38cc8",
+          "new": "29e3a243"
+        },
+        {
+          "op": "replace",
+          "offset": 465240,
+          "old": "09e13073",
+          "new": "29e20c2a"
+        },
+        {
+          "op": "replace",
+          "offset": 610878,
+          "old": "68db43e1dd",
+          "new": "504343e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 612854,
+          "old": "68db42e1dd",
+          "new": "504342e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 968752,
+          "old": "00e3a042",
+          "new": "25e3ce49"
+        },
+        {
+          "op": "replace",
+          "offset": 1048526,
+          "old": "22e20bb0",
+          "new": "2ae253a9"
+        },
+        {
+          "op": "replace",
+          "offset": 1054600,
+          "old": "ffe3b4fd",
+          "new": "24e3b2c5"
+        },
+        {
+          "op": "replace",
+          "offset": 1055824,
+          "old": "ffe350fb",
+          "new": "24e34ec3"
+        },
+        {
+          "op": "replace",
+          "offset": 1056758,
+          "old": "ffe3a1fa",
+          "new": "24e3cdc1"
+        },
+        {
+          "op": "replace",
+          "offset": 1057888,
+          "old": "07e3f27d",
+          "new": "24e3feb9"
+        },
+        {
+          "op": "replace",
+          "offset": 1058790,
+          "old": "07e32f7c",
+          "new": "24e33bb8"
+        },
+        {
+          "op": "replace",
+          "offset": 1079504,
+          "old": "04e3484a",
+          "new": "24e34a70"
+        },
+        {
+          "op": "replace",
+          "offset": 1108380,
+          "old": "22e24a37",
+          "new": "2ae25834"
+        },
+        {
+          "op": "replace",
+          "offset": 1146750,
+          "old": "21e327f5",
+          "new": "23e35bec"
+        },
+        {
+          "op": "replace",
+          "offset": 1147092,
+          "old": "21e338fa",
+          "new": "23e3e2eb"
+        },
+        {
+          "op": "replace",
+          "offset": 1333822,
+          "old": "20e31d86",
+          "new": "28e3217c"
+        },
+        {
+          "op": "replace",
+          "offset": 1334422,
+          "old": "f9e39b55",
+          "new": "22e3497e"
+        },
+        {
+          "op": "replace",
+          "offset": 1334440,
+          "old": "fde32ae3",
+          "new": "22e3f89c"
+        },
+        {
+          "op": "replace",
+          "offset": 1393008,
+          "old": "6400",
+          "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1405736,
+          "old": "6cdb46e1dd",
+          "new": "544346e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1406054,
+          "old": "6cdb40e1dd",
+          "new": "544340e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1406752,
+          "old": "6cdb45e1dd",
+          "new": "544345e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1407564,
+          "old": "6cdb47e1dd",
+          "new": "544347e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419094,
+          "old": "6cdb46e1dd",
+          "new": "544346e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419506,
+          "old": "68db41e1dd",
+          "new": "504341e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1419878,
+          "old": "3e01",
+          "new": "0602"
+        },
+        {
+          "op": "replace",
+          "offset": 1420238,
+          "old": "3e01",
+          "new": "0602"
+        },
+        {
+          "op": "replace",
+          "offset": 1420292,
+          "old": "6400",
+          "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1421928,
+          "old": "3e0100e168db40e1dd",
+          "new": "060200e1504340e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1422100,
+          "old": "3e0100e168db40e1dd",
+          "new": "060200e1504340e1f0"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "000040e1ef"
+        },
+        {
+          "op": "replace",
+          "offset": 1642440,
+          "old": "1ee31029",
+          "new": "26e35c21"
+        },
+        {
+          "op": "replace",
+          "offset": 1741192,
+          "old": "00e80000",
+          "new": "1fe25675"
+        },
+        {
+          "op": "replace",
+          "offset": 1743560,
+          "old": "00ce0602aaa80000",
+          "new": "1fe3fc5b03c00018"
+        },
+        {
+          "op": "replace",
+          "offset": 1743618,
+          "old": "02e3a12b",
+          "new": "1fe3fb5b"
+        },
+        {
+          "op": "replace",
+          "offset": 1743968,
+          "old": "ffe35eff",
+          "new": "1fe3527b"
+        },
+        {
+          "op": "replace",
+          "offset": 1744302,
+          "old": "ffe365ff",
+          "new": "1fe3e57a"
+        },
+        {
+          "op": "insert",
+          "offset": 2410063,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "1305bb1cf37783216f46fd5bb9bdd172f1c7d90bb933703835e4d08e76441d10",
+          "size": 271952
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/display/taffy.svg",
+      "blob": "content_display_taffy.svg",
+      "sha256": "5fd4fc6a5d56b9aa987c8fc6f18787718ab6cc26d5e218634a6a6ad72e3e3d00",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/washer.svg",
+      "blob": "content_display_washer.svg",
+      "sha256": "3a1483a0c890718cb83f1dd49e70f954a4f67d2f39116ffb821cf656da7cb92d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/snowglobe.svg",
+      "blob": "content_display_snowglobe.svg",
+      "sha256": "6398fb5a24f45345ef48d852e59599db9b1e7c0ff9bb3b60d8809b1eded23f1a",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "result": {
+    "tar_sha256": "d380c8c12c7cf401acaf36bced492c402126843355fa79a28d95f5c3bf26c6d5"
+  }
+}
