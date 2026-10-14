@@ -11,12 +11,12 @@
     "preset_cap": 100
   },
   "release": {
-    "id": "5a23026bd3493337",
+    "id": "e54c1d91d24a5130",
     "product": {
       "name": "hundekraft",
-      "version": "2.6.1",
-      "label": "hundekraft 2.6.1",
-      "slug": "hundekraft-2.6.1"
+      "version": "2.6.2",
+      "label": "hundekraft 2.6.2",
+      "slug": "hundekraft-2.6.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -28,7 +28,7 @@
     "branding_bytes": 108,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.6.1-24.op1",
+  "filename": "hundekraft-2.6.2-24.op1",
   "presets": {
     "count": 62,
     "by_engine": {
@@ -99,8 +99,8 @@
     },
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "4debc1c1259352809b789a982ed0bbe59985b55c0d22e3e141d28afb0c3d3453",
-      "result_sha256": "386ddbb388c64efde94569ed77cc5853e4ed478b24b2ae738b1026868ed26619",
+      "orig_sha256": "b1f4fb652a03514c718ffabc58110e0b86476b363c7ae808161b4af17dbbb7a3",
+      "result_sha256": "940ebc0a16f5fe5ed041fcfd801b0c39efc4b2581ba80b4aba4a342953374e3c",
       "ops": [
         {
           "op": "replace",
@@ -124,7 +124,7 @@
           "op": "insert",
           "offset": 2391999,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "f96cfcbeaf4cec93fc4e3c6e39ab6d62297f7cf134b68bfe38abdb34fa72754a",
+          "sha256": "8a17bb0f8bc97a0db85393b7488b8aa5784310a7fc0b9b8c75acf0f0b8b4add4",
           "size": 124
         }
       ]
@@ -169,6 +169,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "9d207e43d2e869ffbfdbdc26ffe8d2ed9494e52133a4daa6435f6e2ff4842426"
+    "tar_sha256": "1ae88e33a22589d6d60a5f8fa03727dfb7988041ec7ccee258161fb92823e631"
   }
 }

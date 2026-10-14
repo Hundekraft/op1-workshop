@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.2
+
+- Wavetable and Taffy are quieter, so chords no longer crackle. They were louder than the OP-1's own synths, and pads with five or more notes clipped the synth mix. Turn the volume up a little if you want the old level back.
+
 ## 2.6.1
 
 - Fixed: builds without all four Hundekraft synths and both effects froze on the boot screen. Every combination boots now.
