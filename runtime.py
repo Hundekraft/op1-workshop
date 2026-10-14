@@ -17,7 +17,7 @@ import tarfile
 LZMA_FILTERS = [{'id': lzma.FILTER_LZMA1, 'preset': 9, 'lc': 3, 'lp': 1,
                  'pb': 2, 'dict_size': 2 ** 23}]
 MAX_PACKAGE = 15_000_000
-PRODUCT = {"name": "hundekraft", "version": "2.7", "label": "hundekraft 2.7", "slug": "hundekraft-2.7"}
+PRODUCT = {"name": "hundekraft", "version": "2.7.1", "label": "hundekraft 2.7.1", "slug": "hundekraft-2.7.1"}
 
 
 def sha256(data):

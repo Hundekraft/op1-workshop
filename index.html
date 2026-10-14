@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 2.7 / Firmware workshop</title>
+<title>hundekraft 2.7.1 / Firmware workshop</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="style.css?v=hundekraft-2.7-b"><link rel="stylesheet" href="preview.css?v=hundekraft-2.7">
+<link rel="stylesheet" href="style.css?v=hundekraft-2.7-b"><link rel="stylesheet" href="preview.css?v=hundekraft-2.7.1">
 <script type="module" src="app.js"></script>
 </head>
 <body>
 <header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main>
-<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.7</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
+<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.7.1</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
 <form id="workshop">
 <div class="workspace">
 <div class="options">
@@ -32,7 +32,7 @@
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 2.7</div><p id="build-upstreams" class="build-upstreams"></p>
+<div class="build-brand" data-release-label>hundekraft 2.7.1</div><p id="build-upstreams" class="build-upstreams"></p>
 <dl><div><dt>Synths</dt><dd id="synth-count">7</dd></div><div><dt>Effects</dt><dd id="effect-count">5</dd></div><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
 <p class="privacy">The firmware stays in this browser. No account, no upload, no device key.</p>
@@ -48,6 +48,9 @@
 </form>
 <section class="after"><span>04 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
 <section class="after changelog" id="changelog"><span>05 / CHANGELOG</span><div>
+<h3>2.7.1</h3><ul>
+<li>Musica Obscura now comes straight from op1r, which merged ultralazr’s modules into its own source, together with op1r’s small fixes since then. Everything sounds and works the same.</li>
+</ul>
 <h3>2.7</h3><ul>
 <li>New: chord mode. Every key you play becomes a chord in the key and scale you choose, on any synth. It stays off until you switch it on.<ul><li>Open it on the clock screen: press Shift + help, then T4. Press T4 again to close the page.</li><li>Orange: push to switch chords on or off, turn to choose degree or step mode.</li><li>Degree mode: each key plays the chord that belongs to it in your scale. Hold Shift for a dominant 7th on that key instead.</li><li>Step mode: each key press plays the next chord of a progression, and the key you press sets how high it sounds. Shift + a key steps back.</li><li>Blue: turn to set the root note, push to change the chord colour in degree mode (triad, sus4, sus2, 7th, add9).</li><li>Green: turn to pick one of 13 scales. Push to choose what out-of-scale keys play: a leading chord into the next scale chord, a passing diminished chord or a borrowed chord. Shift + push switches voice leading on or off.</li><li>White: turn to pick one of 16 progressions or your own. To record your own, push white in degree mode, play up to 16 chords and push again; it becomes “mine”. Shift + push clears it. In step mode, push to start the progression over.</li><li>Your settings are kept after a restart. MIDI out still sends only the key you pressed.</li><li>With Maiko’s scale mode on, keys snap to the scale before chord mode sees them, so out-of-scale chords don’t play.</li></ul><img src="chord-images/chord_mode.png" alt="Chord mode page: C major, degree mode, the C chord lit on the keyboard" width="400" height="200" loading="lazy"></li>
 <li>New: Musica Obscura by ultralazr. Mixtur is a subharmonic organ after Oskar Sala’s Mixtur-Trautonium, Arc is Duddell’s singing arc lamp from 1899, Palme adds the sympathetic strings of the Ondes Martenot, and In a room loops your sound through a room, like Alvin Lucier’s piece. Oracle and Peal are sequencers based on geomancy and English bell ringing. Untick any of the four sounds you don’t want in your OP–1’s lists.</li>

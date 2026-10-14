@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1
+
+- Musica Obscura now comes straight from op1r, which merged ultralazr's modules into its own source, together with op1r's small fixes since then. Everything sounds and works the same.
+
 ## 2.7
 
 - New: chord mode. Every key you play becomes a chord in the key and scale you choose, on any synth. It stays off until you switch it on.
