@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6
+
+- Base updated to op1r 30. The big addition is drum+: per-pad envelope, pitch envelope, retrig, choke, filter, drive and velocity routing on top of a stock drum kit. In drum mode, press Shift + T1 and pick DRUM+. op1r 28–30 also bring loop points, volume and fade curves to the sample editor, equal slices in auto-cut, and a much faster tape erase.
+- Elg and Washer now use about half the CPU they did, Wavetable about a third less, and Snowglobe less too. They sound the same.
+- Elg no longer bursts into harsh noise with the white knob high on high notes.
+- Maiko's tape undo still works with the faster tape erase.
+
 ## 2.5
 
 - Base updated to op1r 27. Our synths and effects are now built into op1r's own engine system.

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "base": "op1r27-plugins",
+  "base": "op1r30-plugins",
   "synths": [
     {
       "id": "wavetable",

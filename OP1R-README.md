@@ -56,14 +56,17 @@ with:
   it, then punch mode turns off. PLAY while punched in: 1st press ends punch mode (recording continues), 2nd press
   stops recording. STOP stops; armed and stopped, STOP disarms. Tape + REC again cancels
 - **sample editor** (synth sampler): on the sampler page hold **synth** and press **scissors**. Blue / green move
-  start / end (the sampler's own markers, so keys play the range at once), white zooms (Shift: move the selection),
-  red scrolls (Shift: attenuate the whole sample, applied on close), red press snaps to zero crossings / transients /
-  off. T1 trim (Shift: DC offset), T2 zero (Shift: fade mode: in / out / both, linear / power, length on blue),
+  start / end (the sampler's own markers, so keys play the range at once); a blue press switches blue / green to the
+  loop points (shown in grey, in blue / green while edited), white zooms (Shift: move the selection),
+  red sets the volume of the whole sample (−60 to +24 dB, applied on close; louder clips peaks above full scale), Shift + red scrolls (with transient snap
+  on: sets the detection sensitivity, shown as `tr 1`…`tr 7`), red press snaps to zero crossings / transients /
+  off. T1 trim (Shift: DC offset), T2 zero (Shift: fade mode: in / out / both, linear / power / exp, length on blue),
   T3 normalize, T4 reverse; Shift + left undoes a trim. Lift / scissors / drop copy, cut and paste the selection
   (paste also onto the tape or another sampler slot). Shift shows the alternate key labels. Closing saves
 - **drum sample editor**: on the drum page hold **drum** and press **scissors**: the same editor for the pad played
   last (exact to the sample; pressing a key selects and shows its pad). T1 `fit` trims the pad's silence, Shift + T3
-  `auto` cuts the kit into pads (first 24 hits, or 24 equal slices; preview, sensitivity on blue, Shift + left undoes).
+  `auto` cuts the kit into pads (first 24 hits, or 1–24 equal slices; preview, blue sets the sensitivity (`hits 1`…`hits 7`) or the number of slices (equal),
+  Shift + left undoes).
   Cut zeroes, drop overwrites. A red line shows the play position (also in the synth editor)
 - **count-in**: with the tape stopped, hold **REC** and press **metronome**: 4 / 8 / 16 metronome clicks, then
   recording starts on the next beat and runs until STOP (REC can be released). STOP or REC + metronome again cancels.
@@ -174,7 +177,7 @@ version. The firmware content is still verified identical, and `--accept-recompr
 | | SHA-256 |
 |---|---|
 | input `op1_246.op1` (original R246) | `c5315218f825f143b415ca554516541898abee843d3a236df0b54c04e1fb13a9` |
-| output (reference build) | `bc3249bc56fd64ddb1a635e551a85595250781bee6b7eef563e2732e5645c07f` (also `python3 patch_op1.py --info`) |
+| output (reference build) | `047d37d46fb98c81a871018efd834872fb56a047972dcf62e1816e96205aeada` (also `python3 patch_op1.py --info`) |
 
 Install the result like any OP-1 update (bootloader update mode). The bootloader is not modified, so the
 original `op1_246.op1` can always be flashed back. **Use at your own risk.**
