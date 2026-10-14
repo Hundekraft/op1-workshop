@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "base": "op1r30-plugins",
+  "base": "op1r30mo-chord-plugins",
   "synths": [
     {
       "id": "wavetable",
@@ -242,6 +242,54 @@
       "name": "Reverb",
       "type": "plate / hall reverb",
       "description": "Plate and hall reverb, after Mutable Instruments Elements."
+    },
+    {
+      "id": "mixtur",
+      "kind": "synth",
+      "name": "Mixtur",
+      "type": "subharmonic organ",
+      "description": "Undertones below every key, after Oskar Sala's Mixtur-Trautonium. By ultralazr.",
+      "image": "mo-images/synth_mixtur.png",
+      "bases": [
+        "op1r30mo-plugins",
+        "op1r30mo-chord-plugins"
+      ]
+    },
+    {
+      "id": "arc",
+      "kind": "synth",
+      "name": "Arc",
+      "type": "singing arc lamp",
+      "description": "Duddell's singing arc from 1899: an unstable, buzzing oscillator with a second lamp to couple. By ultralazr.",
+      "image": "mo-images/synth_arc.png",
+      "bases": [
+        "op1r30mo-plugins",
+        "op1r30mo-chord-plugins"
+      ]
+    },
+    {
+      "id": "palme",
+      "kind": "fx",
+      "name": "Palme",
+      "type": "sympathetic strings",
+      "description": "Twelve tuned strings that ring along and turn into a gong, after the Ondes Martenot. Push orange for an endless drone. By ultralazr.",
+      "image": "mo-images/fx_palme.png",
+      "bases": [
+        "op1r30mo-plugins",
+        "op1r30mo-chord-plugins"
+      ]
+    },
+    {
+      "id": "in a room",
+      "kind": "fx",
+      "name": "In a room",
+      "type": "room loop",
+      "description": "Every pass of the loop goes through a room, after Alvin Lucier's I am sitting in a room. By ultralazr.",
+      "image": "mo-images/fx_in_a_room.png",
+      "bases": [
+        "op1r30mo-plugins",
+        "op1r30mo-chord-plugins"
+      ]
     }
   ]
 }

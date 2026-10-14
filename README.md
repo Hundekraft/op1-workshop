@@ -1,4 +1,4 @@
-# hundekraft 2.6.2 — OP-1 Firmware Workshop
+# hundekraft 2.7 — OP-1 Firmware Workshop
 
 [Open the workshop](https://hundekraft.github.io/op1-workshop/)
 
@@ -10,13 +10,13 @@ This repository contains the generated static release: frontend, checked patch m
 
 ## Release
 
-Product: **hundekraft 2.6.2**. Asset release: `e54c1d91d24a5130`. Includes 256 prebuilt configurations; the choice of op1r synths and effects is applied in the browser on top of them. Downloads retain the selection ID, for example `hundekraft-2.6.2-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
+Product: **hundekraft 2.7**. Asset release: `94aa8dba5911f29b`. Includes 256 prebuilt configurations; the choice of op1r synths and effects is applied in the browser on top of them. Downloads retain the selection ID, for example `hundekraft-2.7-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
 
 What changed: [CHANGELOG.md](CHANGELOG.md).
 
 ## Credits
 
-Built on [pcppcp/op1r](https://github.com/pcppcp/op1r), pinned to [release 30](https://github.com/pcppcp/op1r/commit/6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01). See [upstream notes and credits](OP1R-README.md). Tape undo/redo, snapshot naming, scale mode and the storage display come from [Maiko Pruett’s #249 firmware](https://maikopruett.com/op-1). Additional synths, effects and presets by Hundekraft.
+Built on [pcppcp/op1r](https://github.com/pcppcp/op1r), pinned to [release 30](https://github.com/pcppcp/op1r/commit/6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01). See [upstream notes and credits](OP1R-README.md). Tape undo/redo, snapshot naming, scale mode and the storage display come from [Maiko Pruett’s #249 firmware](https://maikopruett.com/op-1). Mixtur, Arc, Palme, In a room, Oracle and Peal are [ultralazr’s Musica Obscura](https://github.com/ultralazr/op1-musica-obscura). Additional synths, effects and presets by Hundekraft.
 
 Independent project; not affiliated with Teenage Engineering. This targets the original OP-1, not the OP-1 field.
 

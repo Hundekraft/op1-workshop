@@ -170,7 +170,7 @@ try {
     const strong = document.createElement('strong'); strong.textContent = feature.name;
     heading.append(input, strong);
     const kind = document.createElement('span'); kind.className = 'feature-type'; kind.textContent = feature.type;
-    const img = document.createElement('img'); img.src = `op1r-images/${feature.kind === 'fx' ? 'fx' : 'synth'}_${feature.id}.png`; img.alt = `${feature.name} screen`; img.width = 320; img.height = 160; img.loading = 'lazy';
+    const img = document.createElement('img'); img.src = feature.image || `op1r-images/${feature.kind === 'fx' ? 'fx' : 'synth'}_${feature.id}.png`; img.alt = `${feature.name} screen`; img.width = 320; img.height = 160; img.loading = 'lazy';
     const description = document.createElement('span'); description.className = 'feature-description'; description.textContent = feature.description;
     label.append(heading, kind, img, description); $('op1r-engines').querySelector('.feature-grid').append(label);
   }
