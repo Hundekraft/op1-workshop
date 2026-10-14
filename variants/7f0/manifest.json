@@ -16,12 +16,12 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "d97446888e3b4f8e",
+    "id": "5a23026bd3493337",
     "product": {
       "name": "hundekraft",
-      "version": "2.6",
-      "label": "hundekraft 2.6",
-      "slug": "hundekraft-2.6"
+      "version": "2.6.1",
+      "label": "hundekraft 2.6.1",
+      "slug": "hundekraft-2.6.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -36,7 +36,7 @@
     "branding_bytes": 116,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.6-7f0.op1",
+  "filename": "hundekraft-2.6.1-7f0.op1",
   "presets": {
     "count": 48,
     "by_engine": {
@@ -89,7 +89,7 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "4debc1c1259352809b789a982ed0bbe59985b55c0d22e3e141d28afb0c3d3453",
-      "result_sha256": "99e8dcc24dc6d394facc6d58404764311cbfbf9a073ecaa4fee43b6ec975ef14",
+      "result_sha256": "1dfc95fd70dc26ba221342434b8a131157d671127632559ee7cdf79d0c99177f",
       "ops": [
         {
           "op": "replace",
@@ -323,13 +323,37 @@
           "op": "insert",
           "offset": 2391999,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "519feb7791c868e3b5a599ae7d46421ecf9cf3f405fde8a166ac54e60aa601ba",
+          "sha256": "ca97fe099c354afc657b7179821e60b7117c5ea2f9554727604111389d1eeab5",
           "size": 222748
         }
       ]
     }
   ],
   "added_files": [
+    {
+      "path": "content/display/wavetable.svg",
+      "blob": "content_display_wavetable.svg",
+      "sha256": "74e2405c2593456ac1bc9b8643f118c902fab1b71591c12119a568b6db4fb184",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/taffy.svg",
+      "blob": "content_display_taffy.svg",
+      "sha256": "6bb096f239967c50153bf4a324ce232769cd288c0dc5425771916efafcf7393d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/pew.svg",
+      "blob": "content_display_pew.svg",
+      "sha256": "0f43fdcfc988a54788bf93de84b9f70433909e926dee4337c536fd540b9f5b5a",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/elg.svg",
+      "blob": "content_display_elg.svg",
+      "sha256": "e5fa967f5c276b4320b6f91c591fd49c41ad701291df2372c9cb58e744808684",
+      "template": "content/display/iter.svg"
+    },
     {
       "path": "content/display/washer.svg",
       "blob": "content_display_washer.svg",
@@ -344,6 +368,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "642e89898add31a382d96cb1111aa33c8549a4d3ab38ddf929b1692e1ae64146"
+    "tar_sha256": "eff00e9737986b0a1c972c729b0271531a03820fa4aee9b8e4f80a3fd5f52d8e"
   }
 }

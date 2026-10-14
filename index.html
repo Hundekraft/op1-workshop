@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 2.6 / Firmware workshop</title>
+<title>hundekraft 2.6.1 / Firmware workshop</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="style.css?v=hundekraft-2.6"><link rel="stylesheet" href="preview.css?v=hundekraft-2.6">
+<link rel="stylesheet" href="style.css?v=hundekraft-2.6.1"><link rel="stylesheet" href="preview.css?v=hundekraft-2.6.1">
 <script type="module" src="app.js"></script>
 </head>
 <body>
 <header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main>
-<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.6</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
+<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.6.1</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><a class="preset-intro" href="#preset-pack"><strong>112</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
 <form id="workshop">
 <div class="workspace">
 <div class="options">
@@ -31,7 +31,7 @@
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 2.6</div><p id="build-upstreams" class="build-upstreams"></p>
+<div class="build-brand" data-release-label>hundekraft 2.6.1</div><p id="build-upstreams" class="build-upstreams"></p>
 <dl><div><dt>Synths</dt><dd id="synth-count">7</dd></div><div><dt>Effects</dt><dd id="effect-count">5</dd></div><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
 <p class="privacy">The firmware stays in this browser. No account, no upload, no device key.</p>
@@ -47,6 +47,10 @@
 </form>
 <section class="after"><span>04 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
 <section class="after changelog" id="changelog"><span>05 / CHANGELOG</span><div>
+<h3>2.6.1</h3><ul>
+<li>Fixed: builds without all four Hundekraft synths and both effects froze on the boot screen. Every combination boots now.</li>
+<li>Stuck on the boot screen? Hold COM while you switch the OP–1 on, choose firmware update and install a new build. Your tapes, album and presets stay where they are.</li>
+</ul>
 <h3>2.6</h3><ul>
 <li>Base updated to op1r 30. The big addition is drum+: per-pad envelope, pitch envelope, retrig, choke, filter, drive and velocity routing on top of a stock drum kit. In drum mode, press Shift + T1 and pick DRUM+. op1r 28–30 also bring loop points, volume and fade curves to the sample editor, equal slices in auto-cut, and a much faster tape erase.</li>
 <li>Elg and Washer now use about half the CPU they did, Wavetable about a third less, and Snowglobe less too. They sound the same.</li>

@@ -1,4 +1,4 @@
-# hundekraft 2.6 — OP-1 Firmware Workshop
+# hundekraft 2.6.1 — OP-1 Firmware Workshop
 
 [Open the workshop](https://hundekraft.github.io/op1-workshop/)
 
@@ -10,7 +10,7 @@ This repository contains the generated static release: frontend, checked patch m
 
 ## Release
 
-Product: **hundekraft 2.6**. Asset release: `d97446888e3b4f8e`. Includes 256 prebuilt configurations; the choice of op1r synths and effects is applied in the browser on top of them. Downloads retain the selection ID, for example `hundekraft-2.6-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
+Product: **hundekraft 2.6.1**. Asset release: `5a23026bd3493337`. Includes 256 prebuilt configurations; the choice of op1r synths and effects is applied in the browser on top of them. Downloads retain the selection ID, for example `hundekraft-2.6.1-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
 
 What changed: [CHANGELOG.md](CHANGELOG.md).
 

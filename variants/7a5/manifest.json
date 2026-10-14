@@ -18,12 +18,12 @@
     "preset_cap": 100
   },
   "release": {
-    "id": "d97446888e3b4f8e",
+    "id": "5a23026bd3493337",
     "product": {
       "name": "hundekraft",
-      "version": "2.6",
-      "label": "hundekraft 2.6",
-      "slug": "hundekraft-2.6"
+      "version": "2.6.1",
+      "label": "hundekraft 2.6.1",
+      "slug": "hundekraft-2.6.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -38,7 +38,7 @@
     "branding_bytes": 116,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.6-7a5.op1",
+  "filename": "hundekraft-2.6.1-7a5.op1",
   "presets": {
     "count": 76,
     "by_engine": {
@@ -111,7 +111,7 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "4debc1c1259352809b789a982ed0bbe59985b55c0d22e3e141d28afb0c3d3453",
-      "result_sha256": "947d129ffed48d0e2c63d2cf9e3f574f02e06fc9198736d7431012cdcb87b78f",
+      "result_sha256": "695931ef1148af2c091079f4431e6bfe07411697e4bcb868968e098cac8ccc99",
       "ops": [
         {
           "op": "replace",
@@ -261,7 +261,7 @@
           "op": "insert",
           "offset": 2391999,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "1616dee3610b4d266a665d249a7b0b707103af2fd729c3863749c28f5edc42dd",
+          "sha256": "3234e71b25bb57426269f01e54baa87b7dc0521555f76247b6c8f45ee652b73c",
           "size": 222732
         }
       ]
@@ -275,9 +275,27 @@
       "template": "content/display/iter.svg"
     },
     {
+      "path": "content/display/taffy.svg",
+      "blob": "content_display_taffy.svg",
+      "sha256": "6bb096f239967c50153bf4a324ce232769cd288c0dc5425771916efafcf7393d",
+      "template": "content/display/iter.svg"
+    },
+    {
       "path": "content/display/pew.svg",
       "blob": "content_display_pew.svg",
       "sha256": "0f43fdcfc988a54788bf93de84b9f70433909e926dee4337c536fd540b9f5b5a",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/elg.svg",
+      "blob": "content_display_elg.svg",
+      "sha256": "e5fa967f5c276b4320b6f91c591fd49c41ad701291df2372c9cb58e744808684",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/display/washer.svg",
+      "blob": "content_display_washer.svg",
+      "sha256": "497be259dc9c5221dd2b3848e095a2e4544d103b7a4b14d3da5b860dc1d285c3",
       "template": "content/display/iter.svg"
     },
     {
@@ -288,6 +306,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "b942c474cfadc7741ad313de3c4876a3661713217d0b85b7992521d4baa5b856"
+    "tar_sha256": "932eb1ec9a8be762e700b217c920cd5f5b58fd7ade34c6bf0f015f46a19ade03"
   }
 }

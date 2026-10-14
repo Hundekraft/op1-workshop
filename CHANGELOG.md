@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.6.1
+
+- Fixed: builds without all four Hundekraft synths and both effects froze on the boot screen. Every combination boots now.
+- Stuck on the boot screen? Hold COM while you switch the OP-1 on, choose firmware update and install a new build. Your tapes, album and presets stay where they are.
+
 ## 2.6
 
 - Base updated to op1r 30. The big addition is drum+: per-pad envelope, pitch envelope, retrig, choke, filter, drive and velocity routing on top of a stock drum kit. In drum mode, press Shift + T1 and pick DRUM+. op1r 28–30 also bring loop points, volume and fade curves to the sample editor, equal slices in auto-cut, and a much faster tape erase.
