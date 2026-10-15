@@ -144,8 +144,8 @@ h3.engine{font-size:46px;font-weight:600;letter-spacing:-2px;line-height:1;margi
   .manual-grid{display:block;border:0}
   .chapter{break-before:page}
 }
-/* Buy me a coffee: OP-1 orange (the record key / orange knob colour); dark text keeps the contrast */
-.support>a{background:var(--knob-o,#fe813b);border-color:var(--knob-o,#fe813b);color:#252926;font-weight:600}
-.support>a:hover{background:#e5672a;border-color:#e5672a;color:#252926}
-.qs-coffee{display:inline-flex;align-items:center;background:var(--knob-o,#fe813b);color:#252926;font-weight:600;font-size:15px;padding:13px 20px;text-decoration:none}
-.qs-coffee:hover{background:#e5672a}
+/* Buy me a coffee: OP-1 green (the green encoder colour); dark text keeps the contrast */
+.support>a{background:var(--knob-g,#70d28a);border-color:var(--knob-g,#70d28a);color:#252926;font-weight:600}
+.support>a:hover{background:#4fbf6e;border-color:#4fbf6e;color:#252926}
+.qs-coffee{display:inline-flex;align-items:center;background:var(--knob-g,#70d28a);color:#252926;font-weight:600;font-size:15px;padding:13px 20px;text-decoration:none}
+.qs-coffee:hover{background:#4fbf6e}
