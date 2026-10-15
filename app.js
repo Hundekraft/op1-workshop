@@ -15,7 +15,18 @@ function configId(c, withHidden = true) {
   return id.toString(16).padStart(2, '0');
 }
 function clearDownloads() { urls.forEach(URL.revokeObjectURL); urls = []; $('downloads').hidden = true; }
+// The Manual tab shows only what this selection contains (manual.html reads it; see tools/manual/page.html).
+function shareWithManual() {
+  if (!release) return;
+  const c = choices(), json = JSON.stringify({synths: c.synths, effects: c.effects, utilities: c.utilities, hidden: c.hidden || []});
+  try { localStorage.setItem('hundekraft-build', json); } catch (e) { /* private mode: the link below still carries it */ }
+  const code = btoa(json).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  document.querySelectorAll('a[href^="manual.html"]').forEach(a => { a.href = 'manual.html?build=' + code + (a.hash || ''); });
+}
+// any change in the form (the Maiko bundle too) reaches the manual
+document.addEventListener('change', e => { if (e.target.closest('#workshop')) shareWithManual(); });
 function update() {
+  shareWithManual();
   // Ours plus the op1r synths/effects left in.
   const op1r = kind => release ? (release.catalog.op1r_plugins || []).filter(f => f.kind === kind && !hiddenPlugins().includes(f.id)).length : 0;
   $('synth-count').textContent = selected('synths').length + op1r('synth');
