@@ -508,6 +508,7 @@ toc.querySelector('summary').addEventListener('click',e=>{if(!narrow.matches)e.p
   const maiko=(build.utilities||[]).length>0;
   const off=subs.length-on.length;
   document.getElementById('buildbar-text').innerHTML=`<b>Showing your build</b> ${n('synth')} added synths, ${n('fx')} added effects, ${maiko?'Maiko toolkit':'no Maiko toolkit'}`+(off?` <span>· ${off} section${off>1?'s':''} hidden</span>`:'');
+  if(!off) return;  // the build contains everything: no bar, no switch
   bar.hidden=false;
   function apply(){
     const showAll=all.checked;
