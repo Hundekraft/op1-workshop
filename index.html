@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 2.7.1 / Firmware workshop</title>
+<title>hundekraft 2.7.2 / Firmware workshop</title>
 <link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" href="favicon-32.png?v=3"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="stylesheet" href="style.css?v=hundekraft-2.7-b"><link rel="stylesheet" href="preview.css?v=hundekraft-2.7.1"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-2.7.1-m18">
+<link rel="stylesheet" href="style.css?v=hundekraft-2.7-b"><link rel="stylesheet" href="preview.css?v=hundekraft-2.7.2"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-2.7.1-m18">
 <script type="module" src="app.js"></script>
 </head>
 <body>
 <header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><nav class="tabs" aria-label="Pages"><a href="index.html" aria-current="page">Workshop</a><a href="manual.html">Manual</a></nav><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main>
-<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.7.1</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><details class="quickstart"><summary><span class="qs-cta">New here? Get started in 5 steps</span><a class="qs-coffee" href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Buy me a coffee ↗</a><span class="qs-hint">Build, install, add presets</span></summary>
+<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 2.7.2</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><details class="quickstart"><summary><span class="qs-cta">New here? Get started in 5 steps</span><a class="qs-coffee" href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Buy me a coffee ↗</a><span class="qs-hint">Build, install, add presets</span></summary>
 <ol class="qs-steps">
 <li><b>Get the firmware file</b><p>You need Teenage Engineering’s original OP-1 firmware, <code>op1_246.op1</code>. The workshop only accepts that exact file.</p></li>
 <li><b>Choose your sounds</b><p>Pick synths, effects and extras below, or keep the defaults.</p></li>
@@ -41,7 +41,7 @@
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 2.7.1</div><p id="build-upstreams" class="build-upstreams"></p>
+<div class="build-brand" data-release-label>hundekraft 2.7.2</div><p id="build-upstreams" class="build-upstreams"></p>
 <dl><div><dt>Synths</dt><dd id="synth-count">7</dd></div><div><dt>Effects</dt><dd id="effect-count">5</dd></div><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
 <p class="privacy">The firmware stays in this browser. No account, no upload, no device key.</p>
@@ -57,6 +57,11 @@
 </form>
 <section class="after"><span>04 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
 <section class="after changelog" id="changelog"><span>05 / CHANGELOG</span><div>
+<h3>2.7.2</h3><ul>
+<li>Fixed: the OP-1 could stop on an error screen at start-up (“Invalid drum patch … error 12”). In drum+, switching a pad back to gate saved a value the OP-1’s own check rejects, so the kit failed to load on the next start. Gate is now saved with a value it accepts, and kits saved with 2.6 to 2.7.1 load again, still on gate.</li>
+<li>Fixed: a sound with an effect or LFO the OP-1 doesn’t know no longer stops it on an error screen (“Invalid synth patch … error 22”). An unknown effect plays as the filter and keeps its name, so it comes back on a build that has that effect. If the sound still won’t load, its effect and LFO are set to delay and element, both off.</li>
+<li>Stuck on the error screen? Hold COM while you switch the OP-1 on, choose firmware update and install 2.7.2. Your tapes, album and presets stay where they are.</li>
+</ul>
 <h3>2.7.1</h3><ul>
 <li>Musica Obscura now comes straight from op1r, which merged ultralazr’s modules into its own source, together with op1r’s small fixes since then. Everything sounds and works the same.</li>
 </ul>

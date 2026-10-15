@@ -9,12 +9,12 @@
     "preset_cap": 100
   },
   "release": {
-    "id": "cecfdc6611df762a",
+    "id": "840b01d874f157f3",
     "product": {
       "name": "hundekraft",
-      "version": "2.7.1",
-      "label": "hundekraft 2.7.1",
-      "slug": "hundekraft-2.7.1"
+      "version": "2.7.2",
+      "label": "hundekraft 2.7.2",
+      "slug": "hundekraft-2.7.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -26,7 +26,7 @@
     "branding_bytes": 108,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.7.1-04.op1",
+  "filename": "hundekraft-2.7.2-04.op1",
   "presets": {
     "count": 60,
     "by_engine": {
@@ -73,20 +73,20 @@
     },
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "7974789513f912118d195ee5c884cea53910262d85dcdb819f6a9a5f31b9489f",
-      "result_sha256": "6fb169a9b13a6e2550843e43b2db2be5f5dd8647f4094c61016b919d6c510ffc",
+      "orig_sha256": "da26f170035566ae4a0f6e37a132c4f793150af8fd4fc975e3f6232b51ef14c4",
+      "result_sha256": "75981c73b6adeae652da89996f1388d23cacf0032944723d617977afd26cc0bb",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "a7",
-          "new": "22"
+          "old": "83",
+          "new": "06"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "fcda",
-          "new": "78db"
+          "old": "dcde",
+          "new": "58df"
         },
         {
           "op": "replace",
@@ -96,9 +96,9 @@
         },
         {
           "op": "insert",
-          "offset": 2480634,
+          "offset": 2481626,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "e9e0d37b972132482b7c74ceea0caed1e89920bff41470a7107a701828974287",
+          "sha256": "5bc0ad5435ef6a4aada0eee31bad1cb27ac1a6d5cc521ad98a8b970700380f9e",
           "size": 124
         }
       ]
@@ -143,6 +143,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "38ab6242c5ae7b5d05859a07d1677eced75301bb4cffdc1acf5ae1a4b9fb5efc"
+    "tar_sha256": "6e4f8c0639a429c8c0840b77ef1f84df581cea2f0609df7a95c39d9e2d1f99d8"
   }
 }
