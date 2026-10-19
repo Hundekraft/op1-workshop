@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+<line x1="8" y1="-4" x2="104" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="104" y1="107" x2="15" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="29.71" y1="-4" x2="111" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="111" y1="107" x2="35.71" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="51.43" y1="-4" x2="118" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="118" y1="107" x2="56.43" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="73.14" y1="-4" x2="125" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="125" y1="107" x2="77.14" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="94.86" y1="-4" x2="132" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="132" y1="107" x2="97.86" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="116.57" y1="-4" x2="139" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="139" y1="107" x2="118.57" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="138.29" y1="-4" x2="146" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="146" y1="107" x2="139.29" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="160" y1="-4" x2="153" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="153" y1="107" x2="160" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="181.71" y1="-4" x2="160" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="160" y1="107" x2="180.71" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="203.43" y1="-4" x2="167" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="167" y1="107" x2="201.43" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="225.14" y1="-4" x2="174" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="174" y1="107" x2="222.14" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="246.86" y1="-4" x2="181" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="181" y1="107" x2="242.86" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="268.57" y1="-4" x2="188" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="188" y1="107" x2="263.57" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="290.29" y1="-4" x2="195" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="195" y1="107" x2="284.29" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="312" y1="-4" x2="202" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="202" y1="107" x2="305" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="8" y1="-4" x2="312" y2="-4" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="104" y1="107" x2="202" y2="107" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="30.08" y1="8.19" x2="286.7" y2="8.19" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="83.53" y1="115.51" x2="225.69" y2="115.51" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="48.32" y1="18.26" x2="265.8" y2="18.26" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="66.62" y1="122.54" x2="245.26" y2="122.54" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="63.68" y1="26.74" x2="248.2" y2="26.74" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="52.38" y1="128.46" x2="261.74" y2="128.46" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="77.12" y1="34.16" x2="232.8" y2="34.16" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="39.92" y1="133.64" x2="276.16" y2="133.64" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="87.68" y1="39.99" x2="220.7" y2="39.99" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="30.13" y1="137.71" x2="287.49" y2="137.71" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="96.32" y1="44.76" x2="210.8" y2="44.76" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="22.12" y1="141.04" x2="296.76" y2="141.04" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="104" y1="49" x2="202" y2="49" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="15" y1="144" x2="305" y2="144" stroke="#28595f" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="104" y1="49" x2="104" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="114" y1="49" x2="114" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="124" y1="49" x2="124" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="134" y1="49" x2="134" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="144" y1="49" x2="144" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="154" y1="49" x2="154" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="164" y1="49" x2="164" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="174" y1="49" x2="174" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="184" y1="49" x2="184" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="194" y1="49" x2="194" y2="107" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="104" y1="49" x2="202" y2="49" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="104" y1="59" x2="202" y2="59" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="104" y1="69" x2="202" y2="69" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="104" y1="79" x2="202" y2="79" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="104" y1="89" x2="202" y2="89" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<line x1="104" y1="99" x2="202" y2="99" stroke="#28595f" stroke-width="0.65" stroke-linecap="round"/>
+<g id="gate_person">
+<path d="M108.5 65 L108.41 66.17 L108.16 67.3 L107.74 68.33 L107.18 69.24 L106.5 69.99 L105.72 70.54 L104.88 70.88 L104 71 L103.12 70.88 L102.28 70.54 L101.5 69.99 L100.82 69.24 L100.26 68.33 L99.84 67.3 L99.59 66.17 L99.5 65 L99.59 63.83 L99.84 62.7 L100.26 61.67 L100.82 60.76 L101.5 60.01 L102.28 59.46 L103.12 59.12 L104 59 L104.88 59.12 L105.72 59.46 L106.5 60.01 L107.18 60.76 L107.74 61.67 L108.16 62.7 L108.41 63.83 Z" fill="#010101" stroke="#00ef94" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M100 72 L95 76 L94 91 L97 91 L98 106 L103 106 L105 106 L110 106 L111 91 L114 91 L113 76 L108 72 Z" fill="#010101" stroke="#00ef94" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M15 72 L58 72 L58 107 L15 107 Z" fill="#010101" stroke="#aeb1c2" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M18 75 L55 75 L55 104 L18 104 Z" fill="none" stroke="#aeb1c2" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23 88 L49 88 L51 96 L21 96 Z" fill="none" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M30 92 L29.77 93.15 L29.12 94.12 L28.15 94.77 L27 95 L25.85 94.77 L24.88 94.12 L24.23 93.15 L24 92 L24.23 90.85 L24.88 89.88 L25.85 89.23 L27 89 L28.15 89.23 L29.12 89.88 L29.77 90.85 Z" fill="none" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M48 92 L47.77 93.15 L47.12 94.12 L46.15 94.77 L45 95 L43.85 94.77 L42.88 94.12 L42.23 93.15 L42 92 L42.23 90.85 L42.88 89.88 L43.85 89.23 L45 89 L46.15 89.23 L47.12 89.88 L47.77 90.85 Z" fill="none" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="23" y1="100" x2="49" y2="100" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="22" y1="77" x2="23.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="26" y1="77" x2="27.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="30" y1="77" x2="31.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="34" y1="77" x2="35.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="38" y1="77" x2="39.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="42" y1="77" x2="43.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="46" y1="77" x2="47.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<line x1="50" y1="77" x2="51.6" y2="77" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round"/>
+<path d="M21 104 L20.92 104.38 L20.71 104.71 L20.38 104.92 L20 105 L19.62 104.92 L19.29 104.71 L19.08 104.38 L19 104 L19.08 103.62 L19.29 103.29 L19.62 103.08 L20 103 L20.38 103.08 L20.71 103.29 L20.92 103.62 Z" fill="none" stroke="#aeb1c2" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M27 104 L26.92 104.38 L26.71 104.71 L26.38 104.92 L26 105 L25.62 104.92 L25.29 104.71 L25.08 104.38 L25 104 L25.08 103.62 L25.29 103.29 L25.62 103.08 L26 103 L26.38 103.08 L26.71 103.29 L26.92 103.62 Z" fill="none" stroke="#aeb1c2" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M48 104 L47.92 104.38 L47.71 104.71 L47.38 104.92 L47 105 L46.62 104.92 L46.29 104.71 L46.08 104.38 L46 104 L46.08 103.62 L46.29 103.29 L46.62 103.08 L47 103 L47.38 103.08 L47.71 103.29 L47.92 103.62 Z" fill="none" stroke="#aeb1c2" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M54 104 L53.92 104.38 L53.71 104.71 L53.38 104.92 L53 105 L52.62 104.92 L52.29 104.71 L52.08 104.38 L52 104 L52.08 103.62 L52.29 103.29 L52.62 103.08 L53 103 L53.38 103.08 L53.71 103.29 L53.92 103.62 Z" fill="none" stroke="#aeb1c2" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M37.1 101 L37.02 101.42 L36.78 101.78 L36.42 102.02 L36 102.1 L35.58 102.02 L35.22 101.78 L34.98 101.42 L34.9 101 L34.98 100.58 L35.22 100.22 L35.58 99.98 L36 99.9 L36.42 99.98 L36.78 100.22 L37.02 100.58 Z" fill="none" stroke="#aeb1c2" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="18,108 22,112 29,112 32,109 39,110 43,114 50,113 56,115" fill="none" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="18,110 20,115 26,116 31,112 37,113 42,117 49,115 56,116" fill="none" stroke="#aeb1c2" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="face">
+<path d="M178 64 L177.99 65.19 L177.95 66.38 L177.88 67.57 L177.78 68.76 L177.66 69.94 L177.51 71.11 L177.34 72.27 L177.14 73.42 L176.91 74.56 L176.66 75.69 L176.38 76.8 L176.08 77.9 L175.75 78.98 L175.4 80.04 L175.02 81.09 L174.62 82.11 L174.2 83.11 L173.75 84.08 L173.29 85.03 L172.8 85.96 L172.29 86.85 L171.76 87.72 L171.21 88.56 L170.64 89.37 L170.06 90.15 L169.46 90.9 L168.84 91.61 L168.2 92.29 L167.55 92.94 L166.89 93.54 L166.21 94.12 L165.52 94.65 L164.82 95.15 L164.11 95.61 L163.38 96.03 L162.65 96.41 L161.91 96.75 L161.16 97.05 L160.41 97.31 L159.65 97.53 L158.89 97.71 L158.12 97.84 L157.35 97.94 L156.58 97.99 L155.81 98 L155.04 97.97 L154.26 97.89 L153.5 97.78 L152.73 97.62 L151.97 97.42 L151.21 97.19 L150.46 96.9 L149.72 96.58 L148.98 96.22 L148.25 95.82 L147.54 95.38 L146.83 94.9 L146.13 94.39 L145.45 93.83 L144.78 93.24 L144.12 92.62 L143.48 91.96 L142.85 91.26 L142.24 90.53 L141.65 89.77 L141.07 88.97 L140.51 88.15 L139.97 87.29 L139.45 86.41 L138.96 85.5 L138.48 84.56 L138.02 83.6 L137.59 82.61 L137.18 81.6 L136.79 80.57 L136.42 79.52 L136.08 78.44 L135.77 77.36 L135.48 76.25 L135.21 75.13 L134.97 73.99 L134.76 72.85 L134.57 71.69 L134.41 70.52 L134.27 69.35 L134.17 68.17 L134.08 66.98 L134.03 65.79 L134 64.6 L134 63.4 L134.03 62.21 L134.08 61.02 L134.17 59.83 L134.27 58.65 L134.41 57.48 L134.57 56.31 L134.76 55.15 L134.97 54.01 L135.21 52.87 L135.48 51.75 L135.77 50.64 L136.08 49.56 L136.42 48.48 L136.79 47.43 L137.18 46.4 L137.59 45.39 L138.02 44.4 L138.48 43.44 L138.96 42.5 L139.45 41.59 L139.97 40.71 L140.51 39.85 L141.07 39.03 L141.65 38.23 L142.24 37.47 L142.85 36.74 L143.48 36.04 L144.12 35.38 L144.78 34.76 L145.45 34.17 L146.13 33.61 L146.83 33.1 L147.54 32.62 L148.25 32.18 L148.98 31.78 L149.72 31.42 L150.46 31.1 L151.21 30.81 L151.97 30.58 L152.73 30.38 L153.5 30.22 L154.26 30.11 L155.04 30.03 L155.81 30 L156.58 30.01 L157.35 30.06 L158.12 30.16 L158.89 30.29 L159.65 30.47 L160.41 30.69 L161.16 30.95 L161.91 31.25 L162.65 31.59 L163.38 31.97 L164.11 32.39 L164.82 32.85 L165.52 33.35 L166.21 33.88 L166.89 34.46 L167.55 35.06 L168.2 35.71 L168.84 36.39 L169.46 37.1 L170.06 37.85 L170.64 38.63 L171.21 39.44 L171.76 40.28 L172.29 41.15 L172.8 42.04 L173.29 42.97 L173.75 43.92 L174.2 44.89 L174.62 45.89 L175.02 46.91 L175.4 47.96 L175.75 49.02 L176.08 50.1 L176.38 51.2 L176.66 52.31 L176.91 53.44 L177.14 54.58 L177.34 55.73 L177.51 56.89 L177.66 58.06 L177.78 59.24 L177.88 60.43 L177.95 61.62 L177.99 62.81 Z" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M134 57 L136 67 L141 70 L149 70 L153 67 L153 58 L136 58 Z" fill="#010101" stroke="#010101" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M159 58 L159 67 L163 70 L173 70 L177 67 L178 57 Z" fill="#010101" stroke="#010101" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="134,54 134.55,53.09 135.26,52.24 136.12,51.45 137.12,50.72 138.25,50.04 139.49,49.43 140.84,48.87 142.28,48.38 143.81,47.94 145.41,47.55 148.8,46.97 152.36,46.62 156,46.5 159.64,46.62 163.2,46.97 166.59,47.55 168.19,47.94 169.72,48.38 171.16,48.87 172.51,49.43 173.75,50.04 174.88,50.72 175.88,51.45 176.74,52.24 177.45,53.09 178,54" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="134" y1="56" x2="178" y2="56" stroke="#62a9c4" stroke-width="1" stroke-linecap="round"/>
+<polyline points="134,57 136,67 141,70 149,70 153,67 153,58 136,58" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="159,58 159,67 163,70 173,70 177,67 178,57 159,58" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="153" y1="60" x2="159" y2="60" stroke="#62a9c4" stroke-width="1" stroke-linecap="round"/>
+<line x1="140" y1="62" x2="144" y2="62" stroke="#62a9c4" stroke-width="1" stroke-linecap="round"/>
+<line x1="164" y1="62" x2="168" y2="62" stroke="#62a9c4" stroke-width="1" stroke-linecap="round"/>
+<line x1="130" y1="58" x2="135" y2="58" stroke="#62a9c4" stroke-width="1" stroke-linecap="round"/>
+<line x1="177" y1="58" x2="182" y2="58" stroke="#62a9c4" stroke-width="1" stroke-linecap="round"/>
+<polyline points="134,62 130,63 130,71 135,75" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="178,62 182,63 182,71 177,75" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="145,94 145,104 139,107 110,111 99,118 95,128 95,138" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="167,94 167,104 173,107 202,111 213,118 217,128 217,138" fill="none" stroke="#62a9c4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
+   KNPL  Ôr  ½Ob  father              @  fFf&               /       /     /       ´%  d?  „n  X   ¤r     ¨r         Ò>  ÿÿÿÿÀr   2ãJá« è 
+á ‹GD—ZU‘(01æ 2æ EIá  	áX/ O[2@á   á\/2@á   áŒ/‚ÆŒ†Q ™V2YZLá  KáÞ 0å âlá@]`á4/A”_ˆB4!ŸZ•Y¨Š`R‚Æx†QRR°½q½2½ ãÊ!áÿÌ@2­   Ì	Âq­  Ì °­  “O09A!4D4’d!l`ž Ÿ `d3lÐ2Há  áX/`2ä ˆZ›âh²Zò¼E01ä  ã‘2Já  
+á(/(äSXºZ“Já  
+á /(äUXš\—Já  
+áL/ºZ‘d“fmw'£ 4ˆB"’Bž‘»/`Ä ¶/  g†oò°`ÿãXÿ†l'   Å(2Já«
+á ‹g¦oª^‘  ã
+Já  
+áX/ªZ `›fl'…   ä4(2‚ÎÎp®  $áÿ%á €&áÿ)á@ ²à!§Tˆ0
+R T2‘"2d•\S•‚ÆPMARÄÄB‚Æ	PMPÄ ¥\Ì@—   ’¤   
+2ãOæo2å K‘ 2!2B0k4Z4Ogžò²7¯6“0°£@OúM046›00ä ‚á €{N‚RAhu¯Z69‘m49á €1áÿ4$áÿ7áÿq“À0˜0˜Xé0ÒBªPð£Â@â4cž‚Æ
+™0«0»0ýMNTP½XÙ0ÒBšP6õ£ê@©0‚Æ
+®U–QxM~M†S4¾0ÇP‚Æ€O0RP‚Æ«XM=}0—R¢T0øg%á÷(
+4
+2¿0ûT|0gˆ\Ah²à‚ÆëR”PåþÿRè@@MPRŠ0Ê@2‚Æ
+©0iTQPyMAP’{0óP7‘ÿgElm7“¢ñ®2¯Ã00O•0P“&l“w£ L2o}0Bh²à! ‚Æë‚ÆÂR T2øg TRCóPØ]2}•dØ]x•(RÐ@@M(PRŠ0Ê@©0‚Æ
+iTQPyMAP	’7‘ÿgElm7“iÇ/  Já  22
+áhk `²à šøc æQX æRX áÿ æUX@á7ž á¹y æAX@án< áró æBX@á¦Ú á+m æCX@áÝx áäæ æDX@á á` æEX@áLµ áVÚ æFX@á„S áT æGX@á»ñ áÈÍ æHX ã è 2å% 2æ$  2#áÿ?‘‚Î:€P¬  $áÿP´J 
+‚Æˆ‡ á€ ó³ á N“ Ã@'áÿ‚Æ8TPxM#áØP á–Ð@@\‚Î³²  Q02O}UEQ‚Î
+Ó   8TPxM"á@ P äQX€}M@4ò²3æ ù#S4æ "äRX‚ªø#*0d%æRX0O0æ  ` æSX á--O 2 áM-O24ä$ Z#ä@X0ç LZMá Há ±¿3³1æ 	24æ 00`&áÿá á !*á@ ²à 1U2H”G#:2|•Ü\ë[ÃZ8——Ä €Ä ˆÀBäBÄ Ä	ddJá "äTX
+áea”Z	Q™c#0dMRIC æTX!#„` 	Já 
+áea”Z `›ø`	M#‚ÆúP e˜#0F#*áYXRD `”Z›Já  
+á³°’Z”Z› ` æXX áÿ!äUXK1æ p²3£kS"áÿUU2Má á Ká á !”\jZH• æZZšZ)á[ZP•ID æšZLZ	`øi²à  äRXRPT2	d”\ê[x•’šZP•æ? 0å  áAd0@Oð¼P"áã 1£ÿã ý1å  áI@OPñ¼"á1£ÿã”ý²¯ áQ@OPò¼"áQ1£ÿã‰ý³¯ áY@OPó¼"áÏ1£ÿã~ý á@ 82 á-,O"å@X2 áAXOºZ"ç@XZ¬Z„Q-áhB$á D0Ká  <24ç á,e2x0%á  0ç j2 0³¢p±‚ÎÀ3²   e3£ô½·½ð°‚ÎÄ3±  00ÿãxý á ÇQ á©	2,QE0(áI  &dÇ[[Þ4å 3£ ákÿP!äRXR!áM,O	21ä$ 0å 41ä L[92DM0ág3ä NIá  Já  	d4´¢3ä W6%äVX&äWX"áÿ™á€'áÿ	á€
+á€€2á®þ$45å 3467å Û2²à1ˆ0|”	´²Q"k•6Ê0	!äUXs¢™I"Ù0S‚ÆÜKP!æUX0AgY0yTAd0LP25áðþY•‚Æñ	!ábÿÈPûTJ0AL0ÙP2Š0[•MQÈPûTI0AL0ÙP2[•#MS#á¸ýØP{T2“EÜZ[•#MQ#áŽÿØP{T2xT‹EÜZ[•2M“EÜZY•MËP0HPyT25áþ“EÜZY•!MËR0HPyT2‹EÜZY•!MËPëRŒ0Ë@‚ÆQTÙP{M]QôR¤0ã@‚ÆQTYPyMŽQ%æVX&æWXä ËPäÿ ËRäKR)4ä¿ ä? YPä?YRä¿S00ùNYP	MYP‚Æ	‡KP‚ÆùëP!á €Ä‚ÆƒaP	M!Q‚Æƒ!Q‚ÆüqP$á €Äâ0ÄFÄ
+B#åUXc0Ü@0ûMÓTãPc0Ì@0ùMQTaP{MyMkž£04M<4´¢ãR§0ã@‚Æ	UÜP{M´¢ãP$á €Äà0aR§0Ì@0ùMQTaPyMà0aP$á €Ä 0ÄFÄ
+B{æÿÿ  )—Ä†#åSXc0œ#æSX2Ä‚[0	!æSXld áM,O 2ñ£@á  !O áLZð¾0å Pp³ `°²&á €"áÿ@4p£ 2´¢d7á µ¢@”04À¨ 4ð¢44C¨A©+4q²³¢‚ÎD‚5¯  ož7á 3dnž944‚ÎC‚°¢  2@O±¢P Op¿6ð®‡0 Q%d$O)á ÿ‚ÆEŽ<4b0ZïQ\P@6'O!O(á@ 66ð¿À2‰2“2š2	ÏPÏSDP92Z42@6€2S!áÿE0ÈT@4‚Æõ:ZS42@0‚ÆƒAP	MÄ†0Ä
+BÁ@2‚Æ	TPxMK0PI4É2EÄ LZÄ@—'P‚ÆƒAP	MÄ…0Ä
+BÁ@‚Æ	TP­CMxM2(PE:DÄ J0LZÄ@—‚Î	ñ¯  HP	MÄ„0Ä
+BÁ@‚Æ	TPxMK0PÓ2‚EÄ çS”ZÌ@t¢  —‚Æ8P‚ÆøÄÄ
+Bá@Â0A‚Æ	2TPxM(PùoÌ ñ¿  „ZÄ@A—loò®+á °¢šZò¾j°¯`°²@4#/ 0»,ù`	ç,Já 
+áea”Z`›˜0ë,*áYXRD”Z™ €Já  
+á³°’Z”Z`›Já 
+áea”Z™ a äXX!á@ ˆ	 f  æXXØ,``s²4æ Ü,0¡,ˆ0¼,*áYXRD”Z™ 7`›Já  
+á³°’Z `”Z› ` æXX·,´¢6°-t¢!	¼-ó¢Ë@ÓP{MYR!æUX´-3ä æm#æQXFmw'£ 3ä `#æQX04æ ,*	*0
+,ýg,Já  
+á³°’Z”Z™ …,™/ 0 áÿ RÀ@á&”xMÈ@!áäxMP(P™/`› ` æXX|/  ãg'á Ð¦n 02:P!áÿ5ä 	205å ýQ	€,á 	 "áM ZO	|	v"2S0]0SR‚ÎÆq±  ûM³±\0R‚Î Æ±¡  ûM‚Î Äó°  p¡ ãœµS±±‚ÎÂp±  ùMñ°‚ÎÄp¡  ±¡ ã³2ÓZ á ÌEQ á™ PO
+1!áÿ&áM 	]0 á S0^O0Rp±0>RúM‚Î Æ²±  ûM‚Î Äó°  p¡±¡ ãfT0úS±±‚ÎÂp±  ùMñ°‚ÎÄp¡  ±¡ ã|2>0U[V00ä 0±N00ä Já¢ð°ó½4¾u¾·²"eád0
+áLJb fm'£  2¯/  ãJá  g
+á43‘000
+00Fo
+d%3ä 3å 4ä “f2'á¤ ï@Má  Bá  áô/áü/U[×Q*™CDá  %Oá¤/,Pc2(2 2K2zh²à	 I˜@˜ C  ,P2™å å  CJá¦
+á¬K00b hzh²à `˜C(š	l,Q2 `JZ›Æl'Bá  Já¦00á%
+áœ%£R ¡gPOJá¦r±4±‚ÎÄó°  0
+á0b `(›­/Æl'£   ýgMá£Aá  ¦oá€µá\%80e Já  
+á03Aá  “áh%0e 2B `æP fl'½ ã è6 Jáß1æ@ 
+á<N‘Jáß
+á8N00æ? ‘ÿã²þ2`TCá€ÿAá€ÿQ¬ áDáÄA (áˆ Oá€ÿPá€ÿ[• h4áØ?`áÔ$áÿ h
+¶#I0
+²#‘ ¥#‚ÆHƒaP2Â$ChDúhS	˜#Já 
+áÿÿJ0T¸JK0H@ –l!løo@ÚsåE  á 0Ã !áÿsæ.  ãóJá  
+á03‘0æ ß#*á˜ !á –Z1å  `1æ& 1æ* 1æ. 2ç J0Jáž0æ' 0æ( 0æ) 0æ+ 0æ- 1ç, 0
+áX­b  á-Ppæ0  á_ °æb  áb©pæ2  b°æf  áÈápæ4 €cwåF °æj  áfF	(áp +ád [(ág s[&áš¹)á` *áh 0Z$áb ·QlÎ[ÖZ°¾`Cl|™aCRø@!áfF ãˆ°® P šlh    l˜`Cìl™äÿÿRð@!á™9 ãs°® P šlhîøc°æs !ác påD Ã !áÿ?PxN0æ 3ä  áÒØ@!ád  ãU&áZ†SJá£ á”1ä@ 
+áÈ´Ä00ä? b Já£
+á´b Há  áÀ%p³0ç 0ç -á ¢0å Ã¡³²õ°¢OÀg1å N2`‰­)`za3æ ±¿yOZO
+l²à ]0H Pð@@MP3ä ÄÄB3æ Al áÿAPAPQM‚ÆQŠ3ä +	ÆhLá ·¯hò¾á xS Mð®yhH
+IÈb9‘POAPñ@AMñ±Éb‘QOPð@lò¡@MRð¿ð®‚Î Äð²  %SúM)áØ ‚ÎÂ2³  ùMqZA^ð¢ñ°‚ÎÄ1£  1ç s² ãûs¢ûR1³‚ÎÂð²  ùM‚ÎÄñ°  ð¢1£ ã:a1å ò¯ó¡bO0PHP	æðÿò¾°®GlC E0L0l ÇQ÷@GMQC0±¢ ã½O2°¯E0T0¥ˆZS ÃPó@CMSP––°®GlCâñ®IBó®(áœ [`ûo£à0 0"‘T202²à2äÿÿ	ùg’ h)áØ qZ^0æðÿd$lûg‚ÆûO2(á  0Z3å 'á€[Iá  	á¼%±½w±5±X ð°‘‚ÎÄp£  Clÿãªü\î á EQ3ä +	<3å Há  áÐ%ClX3ç ü29aaO#á³  h‰^Q\A0HO@MHP‚Î¦€ñ³  0RO0RHOya@MYOHPIá  ±³	áÀ%³²ð¾%á ¢aK‘h_OMáÿÿ(áp X 0Zá d$á hPU0‘°½t±PÚ ªPò@ð@Oá BMá pºP_02±@Mš P]0šPñ@ò@_0AMBMšPyPò°0‚Î Âp£  ÿãAü°®lCl`Ìñ®A{ó®rhDð®1å lAlð¾1ç úoBf ákŽ0æ  áï”@O0æ øc0æ @á]ÿ áÿ:0æ  Q`0ä  ã®80Q`0ä  ãÒ‡e€eC@CC@OVpæ6 Já   `°æn 
+á43 `“(át @á  †Zg` áp%r½0±÷°º`q`p£ÿã†ü+ál )á| N[žZð`u½2½ð°:aq`p£ÿãwü(áx @á  †Z á|%r½0±÷°"áŠ q`p£ÿãgü@á   á„%u½0±÷°"áŠ !áp£ÿãYü)á€ @á  N[ áŒ%0±÷°º`!áp£u½ÿãIüwapåG Ã¸ áÿ?ÇQ@áÿ áP&á— La+á„ (á 0æ! ^O€á žZ0Z\O%á $Lá¢0æ% M6æ$ 6æ& 4æ' 2½õ°áLJ2ä H0p£d ïpå.  •Jáß
+á<N‘ 2Já  
+á /!áÿ¾`š\P•€BR2fO$á Lá¢áLJ’^B0XO ãð 3ä ³Q(áx Oá «a)á á  F[[OqZI0‚Î Ês²  7ç% 3æ' 2ä p£6æ$ 6æ& 5½ô°ï`d gO0ä (á øQs¢0ZH07ç% 3æ' 2ä p£7æ$ 7æ& 5½ô°d )á qZ7ç% 7ç' p£6æ$ 7æ& 5½ô°2ä I0d .POá 2oSá `,á W07½‚ÎÂp£  µ½t±ó¼ÿãöú7½W0µ½t±÷°‚ÎÂp£  ÿãëúHá ç[á ìGä)áØ Ž[w'£  ` –l!løo@J,p,@‚092‘8T OP2«ZP•ë/1å K ³²LŠ.@0O2Ká  áˆ(U0±¯ÂošZP hP‘Pñ@ð@ò¯_0AM@M(áp yPP0Z‚ÎÄt±  ‚Î Âp£  °½1½ò¼ÿã˜ú_.  8‘8TÈ/@á€ÿ áÄÅ/ á^ 8R!á ÐPO)á PqZ0æ% 6æ$ 6æ& 4æ' 5½õ°2ä I0p£d ù. áÿ–/(á˜ Z0ç @,`û.  gG‚C€ŠC
+×Y ã	 C7'    i£à	 `‚ÆÀ‚ÆÆ‹R‹	‚ÆÀÀC   gÿãïÿ0' g@AÿãÓÿ21Â@R'   €ÈDó   ÈL4“  Ä?€!1ƒÀ ƒÀ€À1ƒÆ€QÀNÀX1ƒÆ€QÄ?€	1Æ "Ì‚4‘     ã è 2 290202æ 0ä `€€CíC¶CR .2d0?2h>
+˜ƒáÿÿ
+ùcAáÿ 
+À``0A@2Iá  	á .QZ	™PaR
+L0—@A@–@yVd0.292”@E0€NM02ÉB!20G0ÿãÿ00K0G0ÿãlÿL0Á@80‚Æ„…‚Æ†€V
+
+]0P0
+úg
+¾:0ˆS0K0ÿãdÿ82K00äBÿãNÿT0Â@0G0€O V
+
+e0P0
+ûg
+›0‚Æ‡€V` 8
+` `¶C€C–S0Ælw'£ áÿÿ
+¡ûcCáÿ 
+Â``0Q@2Iá  	á .QZ	™QPaÊR
+;2á¸	]d0&
+ `Ó/EvJá  
+áÿÿU
+uJáÿ 
+áÿÿU
+À``M0A@2Iá  	á .QZ	™PaRmE0M0ÇSÉB€N 22`L00ÿãìþ82L00ÿã×þK0Á@80G0€O‚Æ„…V
+
+]0P0
+úg
+&:0ˆR‚ÎÀò°  L0ÿãÌþ82ò L00äBÿãµþK0Á@0G0€O V
+
+e0P0
+ûg
+0‚Æ‡€Vm/J0	R0¿C’C"2ÏSýcë. áÿ 
+  KOþ.``ÿã‹þ(2*áÿ U
+  KOŽ/"áÿ 
+KOa/]0“@+2'0D@t0<2—@F@ƒN¾W}0d0ÿB#220G0”@ÿãwþ80L0G0ÿãbþK0Á@0‚Æ†‡‚Æ‡€V
+}08P0
+ûg­
+«òg8PR82L0ò°öBÿãWþ80L0G0ÿãBþK0Á@‡O÷W9
+ò u0÷Q0>
+ûgŒ9
+Šðg÷Q‚OÏS‚WN/&0˜@L@WD00H@Ÿ@8V‚Æ„2J@(2‚ÎÂò°  0ž@ãBs±ÿã%þò 80K00ÿãþ0p¡Ð@M0‚Æ‡†NËV
+
+ãP
+0
+ùgY
+WògãPÃRK0‚ÎÀò°  3±ÿãþ3¡80K00ÿãíý0p¡È@]0‡OÛBßW8
+ò 
+çQ0<
+ûg38
+1ñgçQÇS‚Æ‚€VÉBòB‚Æ€‡†N!0Ô@ñ@Ú@ó@QP‚Æ„ŽQ2
+	`OËP‚Æ†ƒYP	`‡.L00†OäB¹@¦Q±	÷øg`|.``y.0Ñ/0x/0«/0W/ñgf.ògý.÷gPÚ.÷gPB.\  H            w    •  K  S  {
+  [  HÝ9›-Ÿ#˜Œ,Hí9«-¯#¢“VH:Û-Ý#I2¾©œHi:+.+$pîÎýHÕ:™.–$íÇ1wI^;&/ %g6‡D
+J<Ð/Æ%ü½ò—³JÁ<–0ˆ&«]oúrK˜=v1e'sm	DL†>o2[(Tã¨ò	(Mˆ?3i)MÉb‡
+N@£4*]Æ0/OÃAÛ5Ç+‚Øè%P÷B$7-¼ þ	´9Q7D{8p."8‘UREà9Ü/f#„/uSÓFO;U1Õ$â^ƒšT+HÆ<Ú2Q&O ž—ÀUˆIE>g4Û'Ë!ï»çVçJÈ?ü5o)T#OðXFLOA—7+ç$½51Y¦M×B69²,…&9ˆSZO^D×:^.*(¿êp[]PåEy<0Ö)QX‰\´QiG>Á1‡+ë Ò]SéH¹?u3<-"Vª^QTeJUA)5ó.5$ã²_–UÛKíBÝ6«0ã%x³`ÕVKM€DŽ8c2“' ­aX´NF<:4G)¶! b<YP”Gæ;Í5û*\#ŒcdZoQI‹=}7°,%pdƒ[ÁRŒJ*?)9d.°&Ne›\
+TýKÃ@Ð:0\($fª]JUdMUBr<Å1*óf±^‚VÄNàC>p3²+»g°_²WPbE¡?5\-|h§`ØXhQÝF.Aº6/6i–aöY­RPH´BW8¥0êi}b[êSºI1Dî9E2—j\c\UK§E;à3>k4d]GVtLG=u5ßke^iWÄMyH‹>7zlÍe_‚XOÕI@8mf÷_’YIP)K{A:ŸmJgÛ`šZQuLçB’;)nÿg·aš[¬R¸MLD	=¯n­hb’\ÑSòN¨Ey>/oUi[c‚]îT$PýFâ?«oøi"dk^VNQJHDA"p”jâdL_WpRIžB•p+kœe&`XŠSÌJñCq½kPfù`YœTL=EnqJlþfÅaZ¦U/MFÔqÑl¦gŠbóZ©VUN¾G7rTmHhJcÚ[¤WsOôH—rÓmähdº\˜XŠP"JórMn|i¶d“]…YšQIKKsÂnjcef^kZ¢RiL¡s4oœjf2_K[¤S‚Mós¢o%k®fø_$\ŸT•NCtp©kKg¹`÷\“U Otrp)lãgsaÃ]€V¥PÙtÕp¥lwh(bŠ^gW£Q!u5qmi×bK_HX›Rfu‘q‘mi‚c`#YŒS©uëqnj'd¼`øYxTéuArmn˜jÇdmaÇZ]U(v•rÖnkbeb[=Vdvær<okùe¿bT\Wžv4sŸolŒfac]ëWÖv€sþoxlgÿcÍ]ºXwÉs[pçl¤g—d^ƒYBwt´pRm*h,e1_GZuwUtq»m¬h¼eÜ_[¦w—t_q n*iHf‚`Á[ÖwØt±qƒn¥iÑf$aw\xu rânjUgÂa(]1xSuMr>ojÖg[bÔ]]xŽu—r˜o kShñb|^‡xÇuàrðonkÍh‚c _°xþu&sDpØkCidÀ_Øx4vjs—p?l¶išd\`þxhv¬sçp¤l&j eó`#y›vìs4qm“j£e‡aHyÌv+t€qemþj#fbkyûvgtÉqÁmekŸf¤by*w¢trnÉkg.c®yWwÛtVrsn+lŽg³cÎy‚wušrÈn‹lh6dîy­wIuÛroçlqhµdzÖw~usloBmÞh1e*zþw±uZs»ošmHi«eFz%xãu–spðm°i!fbzKxvÑsRpCnj”f}zpxCv
+t›p•nxjg˜z”xqvBtápänÙjsg²z·xvyt'q2o7kÞgËzÚxÉv®tjq}o“kGhãzûxóvât¬qÇoìk­hûzywuìqpCli{;yEwEu*rUp™lsi){YylwuugršpìlÒi>{wy“w¤u¢rÜp=m0jT{•y¸wÑuÜrqm‹ji{±yÜwþus]qÚmäj}{Íy x)vLs›q&n;k‘{èy"xSv‚sØqpnk¤{zDx|v·sr¹nãk·{zex¥vêsMrÿn4lÉ{5z…xÌvt…rDoƒlÛ{Mz¥xòvMt½rˆoÑlí{ezÄxw}tórÊomþ{}záx<w¬t'spgm|”zÿx`wÚt[sJp°m|ªzyƒwusˆp÷m/|Àz7y¥w2u¾sÄp=n>|ÕzSyÇw]uïsÿpnN|êzmyçw‡ut9qÄn\|þz‡yx°uLtqqok|{¡y&xØuyt©qEoy|%{ºyExÿu¥tßqƒo‡|8{Òycx%vÐtrÁo”|K{êy€xJvútHrýo¢|]{zxov$u{r7p¯|n{z¸x“vLu­rqp»|€{.zÔx¶vtuÝr©pÈ|‘{DzïxØv›usàpÔ|¡{Yz	yúvÁu<sqgate_person face    distance    gate    color   mix                                  $  h  ÿˆ(  ³   °'      '     h'     0'      '     '      '     ð&     à&     À&      &     h&     0&      §   j   §   t   ­   w   Ê   {   Õ   ‚   Ù   Œ   Ù   –   ‘   j   ‘   t   ‹   w   n   {   c   ‚   _   Œ   _   –   ²   J   ¶   K   ¶   S   ±   W   †   J   ‚   K   ‚   S   ‡   W   ±   F   ¶   F   ‚   F   ‡   F   ¤   J   ¨   J   Œ   J      J   ™   H   Ÿ   H   Ÿ   F   Ÿ   O   £   R   ­   R   ±   O   ²   E   Ÿ   F   †   E   ˆ   O      R   •   R   ™   O   ™   F   ˆ   F   †   D   ²   D   †   B  †  A  C‡  >@   ˆ  t?  ‰  ¸>  ?Š  >  }‹  n=  ÖŒ  à<  HŽ  `<  Ï  ð;  j‘  Ž;  Í”  ø:  \˜  ž:   œ  €:  ¤Ÿ  ž:  3£  ø:  –¦  Ž;  1¨  ð;  ¸©  `<  *«  à<  ƒ¬  n=  Á­  >  á®  ¸>  à¯  t?  ½°  >@  s±  A   ²   B   ²   L  ý±  1M  ò±  cN  á±  “O  É±  ÂP  ©±  ðQ  „±  S  W±  ET  #±  lU  é°  V  ©°  ±W  a°  ÎX  °  çY  À¯  ûZ  f¯  \  ¯  ]  Ÿ®  ^  3®  _  Á­  `  I­  a  Ì¬  õa  J¬  Ûb  Â«  ¹c  6«  d  ¥ª  `e  ª  'f  u©  æf  Ö¨  g  4¨  Jh  §  ïh  ã¦  ‹i  6¦  j  …¥  §j  Ò¤  &k  ¤  œk  b£  l  §¢  il  é¡  Àl  *¡  m  i   Om  §Ÿ  ‡m  ãž  µm  ž  ×m  Z  ðm  ”œ  ým  Ï›   n  	›  øm  Dš  åm  ™  Çm  »˜  Ÿm  ø—  mm  6—  /m  v–  èl  ¸•  –l  û”  9l  A”  Ók  ‰“  bk  Ô’  èj  "’  cj  s‘  Öi  Ç  >i    žh  z  õg  ÚŽ  Bg  =Ž  ‡f  ¥  Äe    ùd  ƒŒ  &d  ù‹  Kc  t‹  ib  õŠ  a  zŠ  `  Š  ™_  —‰  œ^  -‰  ™]  Êˆ  ‘\  mˆ  „[  ˆ  rZ  Å‡  [Y  z‡  @X  6‡  !W  ù†  ÿU  Â†  ÙT  ’†  ±S  i†  †R  F†  YQ  *†  +P  †  ûN  †  ÊM  †  ™L  †  gK  †  6J  †  I  *†  ÕG  F†  §F  i†  zE  ’†  OD  Â†  'C  ù†  B  6‡  ß@  z‡  À?  Å‡  ¥>  ˆ  Ž=  mˆ  |<  Êˆ  o;  -‰  g:  —‰  d9  Š  g8  zŠ  q7  õŠ  6  t‹  —5  ù‹  µ4  ƒŒ  Ú3    3  ¥  <2  =Ž  y1  ÚŽ  ¾0  z  0    b/  Ç  Â.  s‘  *.  "’  -  Ô’  -  ‰“  ž,  A”  -,  û”  Ç+  ¸•  j+  v–  +  6—  Ñ*  ø—  “*  »˜  a*  ™  9*  Dš  *  	›  *  Ï›   *  ”œ  *  Z  *  ž  )*  ãž  K*  §Ÿ  y*  i   ±*  *¡  ó*  é¡  @+  §¢  —+  b£  ù+  ¤  d,  Ò¤  Ú,  …¥  Y-  6¦  â-  ã¦  u.  §  /  4¨  ¶/  Ö¨  c0  u©  1  ª  Ù1  ¥ª   2  6«  p3  Â«  G4  J¬  %5  Ì¬  6  I­  ø6  Á­  ë7  3®  å8  Ÿ®  å9  ¯  ê:  f¯  õ;  À¯  =  °  >  a°  2?  ©°  O@  é°  pA  #±  ”B  W±  »C  „±  äD  ©±  F  É±  >G  á±  mH  ò±  I  ý±  ÏJ   &    ÿÿX/  *    ÿÿX/  4    ÿÿ\/  8    ÿÿ\/  >    ÿÿŒ/  B    ÿÿŒ/  R    ÿÿ4/  h    ÿÿ4/  Ò    ÿÿX/  Ö    ÿÿX/  ö    ÿÿ(/  ú    ÿÿ(/     ÿÿ /  
+   ÿÿ /     ÿÿL/     ÿÿL/  z   ÿÿX/  ~   ÿÿX/  È   ÿÿ,  Ò   ÿÿ,  Ö	   ÿÿL  Ü	   ÿÿL  (   ÿÿ43  .   ÿÿ43  Z   ÿÿô/  ^   ÿÿü/  b   ÿÿô/  f   ÿÿü/  t   ÿÿ¤/  z   ÿÿ¤/  à   ÿÿ%  ì   ÿÿ%  .   ÿÿ\%  8   ÿÿ\%  @   ÿÿ03  D   ÿÿ03  H   ÿÿh%  N   ÿÿh%  Ž         D   ÿÿ03  H   ÿÿ03  ª   ÿÿÀ%  ®   ÿÿÀ%  €   ÿÿ¼%  „   ÿÿ¼%  ¸   ÿÿÐ%  ¼   ÿÿÐ%  ú   ÿÿÀ%      ÿÿÀ%  ì   ÿÿ43  ö   ÿÿ43     ÿÿp%  
+   ÿÿp%  @   ÿÿ|%  F   ÿÿ|%  \   ÿÿ„%  `   ÿÿ„%  |   ÿÿŒ%  ‚   ÿÿŒ%     ÿÿ /     ÿÿ /  ~   ÿÿˆ(  ‚   ÿÿˆ(  4   ÿÿ .  8   ÿÿ .      ÿÿ .  $   ÿÿ .  l   ÿÿ .  p   ÿÿ .     ÿÿ\      ÿÿH  (   ÿÿ    ´%   ÿÿ$  ¸%   ÿÿh  À%   ÿÿˆ(  È%   ÿÿ°'  Ð%   ÿÿ '  Ø%   ÿÿh'  à%   ÿÿ0'  è%   ÿÿ '  ð%   ÿÿ'  ø%   ÿÿ '   &   ÿÿð&  &   ÿÿà&  &   ÿÿÀ&  &   ÿÿ &   &   ÿÿh&  (&   ÿÿ0&      _read_fx_param_safe      Hundekraft      

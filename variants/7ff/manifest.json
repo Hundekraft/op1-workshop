@@ -1,7 +1,7 @@
 {
   "config": {
     "schema": 1,
-    "base": "op1r30mo-chord-plugins",
+    "base": "kennel30-plugins",
     "synths": [
       "wavetable",
       "taffy",
@@ -13,7 +13,7 @@
       "snowglobe"
     ],
     "utilities": [
-      "files",
+      "file",
       "scale",
       "naming",
       "undo"
@@ -21,12 +21,12 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "840b01d874f157f3",
+    "id": "b96524528869c1b5",
     "product": {
       "name": "hundekraft",
-      "version": "2.7.2",
-      "label": "hundekraft 2.7.2",
-      "slug": "hundekraft-2.7.2"
+      "version": "3.0",
+      "label": "hundekraft 3.0",
+      "slug": "hundekraft-3.0"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -35,15 +35,13 @@
   "sizes": {
     "image_bytes": 0,
     "memory_bytes": 29008,
-    "utility_image_bytes": 222552,
-    "utility_memory_bytes": 2061412,
-    "utility_source_sha256": "b7adf5c0fdd523a726e81880e683eda48061a261944dfa1a7a52c57ebfc41066",
-    "branding_bytes": 116,
+    "plugin_file_bytes": 1626592,
+    "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-2.7.2-7ff.op1",
+  "filename": "hundekraft-3.0-7ff.op1",
   "presets": {
-    "count": 112,
+    "count": 152,
     "by_engine": {
       "supersaw": 12,
       "fmbell": 12,
@@ -52,107 +50,642 @@
       "taffy": 16,
       "pew": 16,
       "elg": 16,
-      "iter": 12
+      "iter": 12,
+      "eva": 8,
+      "mbira": 8,
+      "oxbow": 16,
+      "sid": 8
     },
-    "sha256": "1c1ace82f87a47cf9e81060ce8aef60c7dcce933ea1708444d916dcad0cd6c5b",
-    "exceeds_cap": false
+    "sha256": "896edff94a3cf62fe5a34861148f8d5265f2fc7abe7121cbc7d23ca163c99ba5",
+    "exceeds_cap": false,
+    "items": [
+      [
+        "supersaw",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "warble"
+      ],
+      [
+        "supersaw",
+        "plate"
+      ],
+      [
+        "supersaw",
+        "nitro"
+      ],
+      [
+        "fmbell",
+        "plate"
+      ],
+      [
+        "fmbell",
+        "delay"
+      ],
+      [
+        "fmbell",
+        "phone"
+      ],
+      [
+        "fmbell",
+        "plate"
+      ],
+      [
+        "granular",
+        "spring"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "granular",
+        ""
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "nitro"
+      ],
+      [
+        "supersaw",
+        "father"
+      ],
+      [
+        "supersaw",
+        "punch"
+      ],
+      [
+        "supersaw",
+        "spring"
+      ],
+      [
+        "supersaw",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "grid"
+      ],
+      [
+        "supersaw",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "crush"
+      ],
+      [
+        "fmbell",
+        "warble"
+      ],
+      [
+        "fmbell",
+        "delay"
+      ],
+      [
+        "fmbell",
+        "cwo"
+      ],
+      [
+        "fmbell",
+        ""
+      ],
+      [
+        "fmbell",
+        "spring"
+      ],
+      [
+        "fmbell",
+        "snowglobe"
+      ],
+      [
+        "fmbell",
+        "grid"
+      ],
+      [
+        "fmbell",
+        "nitro"
+      ],
+      [
+        "granular",
+        "spring"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "granular",
+        "father"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "granular",
+        ""
+      ],
+      [
+        "granular",
+        "phone"
+      ],
+      [
+        "granular",
+        "cwo"
+      ],
+      [
+        "granular",
+        ""
+      ],
+      [
+        "wavetable",
+        "father"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "spring"
+      ],
+      [
+        "wavetable",
+        "nitro"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "spring"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "cwo"
+      ],
+      [
+        "wavetable",
+        "plate"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "nitro"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "warble"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "punch"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "spring"
+      ],
+      [
+        "taffy",
+        "cwo"
+      ],
+      [
+        "taffy",
+        "spring"
+      ],
+      [
+        "taffy",
+        ""
+      ],
+      [
+        "taffy",
+        "crush"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "pew",
+        ""
+      ],
+      [
+        "pew",
+        "warble"
+      ],
+      [
+        "pew",
+        "nitro"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "pew",
+        ""
+      ],
+      [
+        "pew",
+        "delay"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "pew",
+        "nitro"
+      ],
+      [
+        "pew",
+        "phone"
+      ],
+      [
+        "pew",
+        "delay"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "elg",
+        "spring"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "nitro"
+      ],
+      [
+        "elg",
+        "spring"
+      ],
+      [
+        "elg",
+        "cwo"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "punch"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "warble"
+      ],
+      [
+        "elg",
+        "spring"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "grid"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        ""
+      ],
+      [
+        "iter",
+        "delay"
+      ],
+      [
+        "iter",
+        "nitro"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        "cwo"
+      ],
+      [
+        "iter",
+        "delay"
+      ],
+      [
+        "iter",
+        "punch"
+      ],
+      [
+        "iter",
+        "cwo"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        "grid"
+      ],
+      [
+        "wavetable",
+        "washer"
+      ],
+      [
+        "wavetable",
+        "washer"
+      ],
+      [
+        "wavetable",
+        "snowglobe"
+      ],
+      [
+        "wavetable",
+        "plate"
+      ],
+      [
+        "taffy",
+        "washer"
+      ],
+      [
+        "taffy",
+        "washer"
+      ],
+      [
+        "taffy",
+        "snowglobe"
+      ],
+      [
+        "taffy",
+        "snowglobe"
+      ],
+      [
+        "pew",
+        "washer"
+      ],
+      [
+        "pew",
+        "washer"
+      ],
+      [
+        "pew",
+        "father"
+      ],
+      [
+        "pew",
+        "snowglobe"
+      ],
+      [
+        "elg",
+        "washer"
+      ],
+      [
+        "elg",
+        "washer"
+      ],
+      [
+        "elg",
+        "snowglobe"
+      ],
+      [
+        "elg",
+        "snowglobe"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "mbira",
+        "crush"
+      ],
+      [
+        "mbira",
+        "warble"
+      ],
+      [
+        "mbira",
+        "delay"
+      ],
+      [
+        "mbira",
+        "spring"
+      ],
+      [
+        "mbira",
+        "stutter"
+      ],
+      [
+        "mbira",
+        ""
+      ],
+      [
+        "mbira",
+        "plate"
+      ],
+      [
+        "mbira",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        "crush"
+      ],
+      [
+        "oxbow",
+        "plate"
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        "warble"
+      ],
+      [
+        "oxbow",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        "warble"
+      ],
+      [
+        "sid",
+        "spring"
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        "plate"
+      ],
+      [
+        "sid",
+        "delay"
+      ],
+      [
+        "sid",
+        "crush"
+      ]
+    ]
   },
   "patched_files": [
     {
-      "path": "content/op1_factory.db",
-      "orig_sha256": "4ffb948fc33ac0ece3a75acb6ad2bcc48d28184c4d7b64de3f8b164d5b0a727e",
-      "result_sha256": "f1419e0291093354082eb4f4268f5083d93e5eb66d4d8860026ef5c1b0900421",
-      "ops": [
-        {
-          "op": "replace",
-          "offset": 27,
-          "old": "0e",
-          "new": "14"
-        },
-        {
-          "op": "replace",
-          "offset": 95,
-          "old": "0e",
-          "new": "14"
-        },
-        {
-          "op": "replace",
-          "offset": 1025,
-          "old": "0133000d",
-          "new": "0000000f"
-        },
-        {
-          "op": "replace",
-          "offset": 1058,
-          "old": "00b600b6",
-          "new": "016d0133"
-        },
-        {
-          "op": "replace",
-          "offset": 1331,
-          "old": "0000007100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-          "new": "381304001f63736e6f77676c6f62655b373239362c2031323238382c2031313236342c2032303438302c2032313235332c20302c20302c20305d3512040019637761736865725b373239362c2031323238382c2031313236342c2032303438302c2032313235322c20302c20302c20305d"
-        },
-        {
-          "op": "replace",
-          "offset": 108548,
-          "old": "0103ce0003ce0000000000000000",
-          "new": "05030a0003ce039903680339030a"
-        },
-        {
-          "op": "replace",
-          "offset": 109322,
-          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-          "new": "2d1804001359656c675b31363338342c20383139322c20302c20383139322c2032313235352c20302c20302c20305d2d17040013597065775b31363338342c20383139322c20302c20383139322c2032313235342c20302c20302c20305d2f160400175974616666795b31363338342c20383139322c20302c20383139322c2032313235332c20302c20302c20305d331504001f59776176657461626c655b31363338342c20383139322c20302c20383139322c2032313235322c20302c20302c20305d"
-        }
-      ]
-    },
-    {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "da26f170035566ae4a0f6e37a132c4f793150af8fd4fc975e3f6232b51ef14c4",
-      "result_sha256": "d343e42f123833a35025bd8544c114c9a0309e49895106b722b2758705d2eb8a",
+      "orig_sha256": "15aa0afbb993f9b0f52a5b1eb054eaf29cd24e219f525bda5502a0d4c4f349c0",
+      "result_sha256": "fe900863cb66b3e1d5d77527b8f6fb4e0d8e447fed716844f334c3b8880ef5a5",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "83",
-          "new": "31"
+          "old": "74",
+          "new": "d4"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "dcde25",
-          "new": "f84429"
-        },
-        {
-          "op": "replace",
-          "offset": 333704,
-          "old": "b88ea501d68ea5",
-          "new": "4a00e4015000e4"
-        },
-        {
-          "op": "replace",
-          "offset": 460934,
-          "old": "09e39dc9",
-          "new": "29e31d45"
-        },
-        {
-          "op": "replace",
-          "offset": 461476,
-          "old": "09e3e0c7",
-          "new": "29e3d443"
-        },
-        {
-          "op": "replace",
-          "offset": 461816,
-          "old": "28e3760e",
-          "new": "29e3a243"
-        },
-        {
-          "op": "replace",
-          "offset": 465240,
-          "old": "09e13073",
-          "new": "29e20c2a"
+          "old": "70",
+          "new": "d0"
         },
         {
           "op": "replace",
@@ -165,72 +698,6 @@
           "offset": 612854,
           "old": "68db42e1dd",
           "new": "000042e1f0"
-        },
-        {
-          "op": "replace",
-          "offset": 968752,
-          "old": "00e3a042",
-          "new": "25e3ce49"
-        },
-        {
-          "op": "replace",
-          "offset": 1054600,
-          "old": "ffe3b4fd",
-          "new": "24e3b2c5"
-        },
-        {
-          "op": "replace",
-          "offset": 1055824,
-          "old": "ffe350fb",
-          "new": "24e34ec3"
-        },
-        {
-          "op": "replace",
-          "offset": 1056758,
-          "old": "ffe3a1fa",
-          "new": "24e3cdc1"
-        },
-        {
-          "op": "replace",
-          "offset": 1057888,
-          "old": "07e3f27d",
-          "new": "24e3feb9"
-        },
-        {
-          "op": "replace",
-          "offset": 1058790,
-          "old": "07e32f7c",
-          "new": "24e33bb8"
-        },
-        {
-          "op": "replace",
-          "offset": 1079504,
-          "old": "04e3484a",
-          "new": "24e34a70"
-        },
-        {
-          "op": "replace",
-          "offset": 1146750,
-          "old": "21e313f9",
-          "new": "23e35bec"
-        },
-        {
-          "op": "replace",
-          "offset": 1147092,
-          "old": "22e36401",
-          "new": "23e3e2eb"
-        },
-        {
-          "op": "replace",
-          "offset": 1334422,
-          "old": "f9e39b55",
-          "new": "22e3497e"
-        },
-        {
-          "op": "replace",
-          "offset": 1334440,
-          "old": "fde32ae3",
-          "new": "22e3f89c"
         },
         {
           "op": "replace",
@@ -311,84 +778,346 @@
           "new": "000040e1ef"
         },
         {
-          "op": "replace",
-          "offset": 1741192,
-          "old": "00e80000",
-          "new": "1fe25675"
-        },
-        {
-          "op": "replace",
-          "offset": 1743560,
-          "old": "00ce0602aaa80000",
-          "new": "1fe3fc5b03c00018"
-        },
-        {
-          "op": "replace",
-          "offset": 1743618,
-          "old": "02e3a12b",
-          "new": "1fe3fb5b"
-        },
-        {
-          "op": "replace",
-          "offset": 1743968,
-          "old": "ffe35eff",
-          "new": "1fe3527b"
-        },
-        {
-          "op": "replace",
-          "offset": 1744302,
-          "old": "ffe365ff",
-          "new": "1fe3e57a"
-        },
-        {
           "op": "insert",
-          "offset": 2481626,
+          "offset": 2327149,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "8406c0391f123909dcfc0546b48cd332710049dedd750667fe9c3a2a4814a77b",
-          "size": 222748
+          "sha256": "543a607f1054b2c42a3b5511a36cbcf10b8d0299817c9d84a9bcd11287ed547b",
+          "size": 96
         }
       ]
     }
   ],
   "added_files": [
     {
-      "path": "content/display/wavetable.svg",
-      "blob": "content_display_wavetable.svg",
-      "sha256": "74e2405c2593456ac1bc9b8643f118c902fab1b71591c12119a568b6db4fb184",
+      "path": "content/aether.knl",
+      "blob": "content_aether.knl",
+      "sha256": "83cab579ef46d0cd8b192ff439dcb73928b25b61de5487b68552a825f7df2aec",
       "template": "content/display/iter.svg"
     },
     {
-      "path": "content/display/taffy.svg",
-      "blob": "content_display_taffy.svg",
-      "sha256": "6bb096f239967c50153bf4a324ce232769cd288c0dc5425771916efafcf7393d",
+      "path": "content/arc.knl",
+      "blob": "content_arc.knl",
+      "sha256": "86bd0dc39cf429c01499c7cf1c3b8716eaa4ffcb2325b15b61daa77e827fb4f5",
       "template": "content/display/iter.svg"
     },
     {
-      "path": "content/display/pew.svg",
-      "blob": "content_display_pew.svg",
-      "sha256": "0f43fdcfc988a54788bf93de84b9f70433909e926dee4337c536fd540b9f5b5a",
+      "path": "content/c64arp.knl",
+      "blob": "content_c64arp.knl",
+      "sha256": "9f733536d10d6b1dcde2201c772549d6f9a1846caca75c49a0ef8f639f8d2a67",
       "template": "content/display/iter.svg"
     },
     {
-      "path": "content/display/elg.svg",
-      "blob": "content_display_elg.svg",
-      "sha256": "e5fa967f5c276b4320b6f91c591fd49c41ad701291df2372c9cb58e744808684",
+      "path": "content/chord.knl",
+      "blob": "content_chord.knl",
+      "sha256": "14b35197fd137d2d69aa84adcca2f32c71261ac92eed9d85aacbf36975fdc27c",
       "template": "content/display/iter.svg"
     },
     {
-      "path": "content/display/washer.svg",
-      "blob": "content_display_washer.svg",
-      "sha256": "497be259dc9c5221dd2b3848e095a2e4544d103b7a4b14d3da5b860dc1d285c3",
+      "path": "content/clouds.knl",
+      "blob": "content_clouds.knl",
+      "sha256": "f31479ee7677c099fb5c92f3ea07502090e763c1cc71324da371a9e4324e0f13",
       "template": "content/display/iter.svg"
     },
     {
-      "path": "content/display/snowglobe.svg",
-      "blob": "content_display_snowglobe.svg",
-      "sha256": "e4f37c3a7666126a93e2ac85ce2e51822fe5457cab92b8612d3c882c3e294ef8",
+      "path": "content/countin.knl",
+      "blob": "content_countin.knl",
+      "sha256": "aa94edc61566fdc8f30465c0a50203e85b1415bac042889f95b617b94e8f3bfe",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/crush.knl",
+      "blob": "content_crush.knl",
+      "sha256": "7cfa0f86cef5d02c8c5f408acac58bfce70c8907774c67f84b1ff128b9be4783",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/dots.knl",
+      "blob": "content_dots.knl",
+      "sha256": "700080b6b0509ff02004b078cadfba9801b8b81cf8a7f5c9ad034b176cb78451",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/drumplus.knl",
+      "blob": "content_drumplus.knl",
+      "sha256": "8a46160182bea9d1920c5a2f8c2a9aadb4664a751664f83008ca19b22cded4cc",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/elg.knl",
+      "blob": "content_elg.knl",
+      "sha256": "997c184b64c8e01c395c23134840bd27b0e30c767befd26d78854758dc65d1c7",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/euclid.knl",
+      "blob": "content_euclid.knl",
+      "sha256": "2b3d1bf7173788d20611a8121d6c5a41cf2a469cfc66483ab983e582fca138a0",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/eva.knl",
+      "blob": "content_eva.knl",
+      "sha256": "8fc99da30a5ffa9084c695190d0021ead6c15ee0980c7b9a005a00aafc1be417",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/fasterase.knl",
+      "blob": "content_fasterase.knl",
+      "sha256": "22bb484142ebf5bc7ced651cbbce7fe27851c2bd78b9a67a1e8d2917b9d25aeb",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/father.knl",
+      "blob": "content_father.knl",
+      "sha256": "4da8376bc7185880424e220150239db1bb2d20a71a16fcf36ccfd5c7aab78c5a",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/file.knl",
+      "blob": "content_file.knl",
+      "sha256": "3433b56afffd2498fdea2a39b08fc9958b61ecd3e64220cc25a8bd6ae5bfc0bf",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/fmbell.knl",
+      "blob": "content_fmbell.knl",
+      "sha256": "99114cf0666f183482f58b66f0b2a87e9f2e898003ad88084c85f855b43038f0",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/gin.knl",
+      "blob": "content_gin.knl",
+      "sha256": "bcaf786f841beab6c67532b3aa205a0e4bc4db7e92c2d40f6f6dfc42768c752f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/granular.knl",
+      "blob": "content_granular.knl",
+      "sha256": "5de96821f64c19c7c91d702b2594ae8ec3af723331146d7cca3f891f5b5ebf1c",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/hail.knl",
+      "blob": "content_hail.knl",
+      "sha256": "53234eec3bb77534a7b472072acd151f343ba7045bca546e7abcbf96d43c8c6e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/in_a_room.knl",
+      "blob": "content_in_a_room.knl",
+      "sha256": "5080b011c04942dce198102efdef4226029d9f1a2dbfd1539c25e7a1626200ab",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/markers.knl",
+      "blob": "content_markers.knl",
+      "sha256": "af1ee7635535fdafabe1952bb9841621673b7f4bcd780bca7127663258ccc47d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/mbira.knl",
+      "blob": "content_mbira.knl",
+      "sha256": "c4b2aabb8646c14cf2c45037200c1091e941f9803accb192806417c0c9c5e169",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/midicc.knl",
+      "blob": "content_midicc.knl",
+      "sha256": "aba71cb9dc83af63b35d04d1cee8480a697d29d489adb1e74c00bce51df5cd7e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/midiseq.knl",
+      "blob": "content_midiseq.knl",
+      "sha256": "c118d146ae4273db6cbdcb4c2e84be0d96efdd318e84ce2c4b979c06d85113cb",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/mixtur.knl",
+      "blob": "content_mixtur.knl",
+      "sha256": "92133796b446870575b37178f6ae27c977634bd5610ee7947505f823a041399a",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/naming.knl",
+      "blob": "content_naming.knl",
+      "sha256": "cb5e9a508fdff654a888563989e213aa7f400224f2fce53e8c454e151731006e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/oblique.knl",
+      "blob": "content_oblique.knl",
+      "sha256": "185827e64b55c8ce541ea0a14439f7966556412f3bf275429c361328a4f3ff17",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/oracle.knl",
+      "blob": "content_oracle.knl",
+      "sha256": "fb1d98cedf8edf5c882d647da152869e31720d51f989c8a905f614da33518306",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/oxbow.knl",
+      "blob": "content_oxbow.knl",
+      "sha256": "1bbb0ed3b0d85f006bd28d101a2a5db128b0462821ed047c20b628dd739884c4",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/palme.knl",
+      "blob": "content_palme.knl",
+      "sha256": "7fc21627aecb90c165af4f939a93a4da24d5c112073c6c3d74bb4e9d8f0834b0",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/peal.knl",
+      "blob": "content_peal.knl",
+      "sha256": "b4bf4d616c8015a1e9014edb6169cb0f57a32ca7c815bd626307483b3122b8b3",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/pew.knl",
+      "blob": "content_pew.knl",
+      "sha256": "dd3f215f30bb18d30db6416d66e4473fc86425630eaaf1d24fd29c29153809d3",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/plate.knl",
+      "blob": "content_plate.knl",
+      "sha256": "705b134efe4885c2de8a6f756c7cd79a369033426e4c36c878d884832f39dc70",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/punch.knl",
+      "blob": "content_punch.knl",
+      "sha256": "b69d1f56c423c81c082974ca0db4277dcced8b6b97ae78a9a584827265b3490c",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/quad.knl",
+      "blob": "content_quad.knl",
+      "sha256": "76cb28d64fa3b05832a038a2721eaf73091084ec76938c3f5db985f9ded68745",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/randomiser.knl",
+      "blob": "content_randomiser.knl",
+      "sha256": "16538b2787eaf3e97f0a93dbe35d5c27bc9ee38831d520c941cff23876c3331d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/reverb.knl",
+      "blob": "content_reverb.knl",
+      "sha256": "f1c8d25fe7e425894f990273edd33dbad4754b817adbbfc0583fc7446cb0dd4f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/samplerplus.knl",
+      "blob": "content_samplerplus.knl",
+      "sha256": "18de48fff3836c3ca1d86d9a1b3250442759d2bcc926b616617c02530f94a7e0",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sampletools.knl",
+      "blob": "content_sampletools.knl",
+      "sha256": "41ec347a0724ab676401eb8d6379c35c9b79c4e30ed6e8f322e3f58e9580cbd5",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/scale.knl",
+      "blob": "content_scale.knl",
+      "sha256": "7c0c453f3f39104e32425d19589efa29d93833b6b3e3fa52740163802779fa37",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sid.knl",
+      "blob": "content_sid.knl",
+      "sha256": "ed51a2397646dd0ab852aa6029dae85ce5e6bbf2376558a04c7513771eb90ed3",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/snowglobe.knl",
+      "blob": "content_snowglobe.knl",
+      "sha256": "c959c34952e694e6b517d1877d71f923933a20699117752d60916789fb171c3f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/stutter.knl",
+      "blob": "content_stutter.knl",
+      "sha256": "11d3f125a3f78a7c6ffe3474f8dc364a174415ddf412e7febc5616dcc4929c27",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/supersaw.knl",
+      "blob": "content_supersaw.knl",
+      "sha256": "151e315b150afb0ad6b0943dbf2dfcd5e48ec9d120ba25da083e4fc6f7536c8f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sysmon.knl",
+      "blob": "content_sysmon.knl",
+      "sha256": "d8f16f6e8e48f1369ebb837c0009adc2116e9a5144678bdbe7c41d0064f6331e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/taffy.knl",
+      "blob": "content_taffy.knl",
+      "sha256": "022acfe40687f23736c7a628d35ee3f0bfeba7cb50c51db10b5785c2ee6774f9",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/tape.knl",
+      "blob": "content_tape.knl",
+      "sha256": "91518454a081a8d3d0ac49b2af3bf368e62907071cbbb0aeb1a3f58233d034c7",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/tapes.knl",
+      "blob": "content_tapes.knl",
+      "sha256": "209f75fe9bbe72f72a35bb0781131ceb9e06953eb16bee3f648111353bcb12b1",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/undo.knl",
+      "blob": "content_undo.knl",
+      "sha256": "96ac1f767b2abf7673066c879503e1a71165f86de15f998c33b2d4e17e54205e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/usbout.knl",
+      "blob": "content_usbout.knl",
+      "sha256": "95d106b8fa4132039fcf33b62283d719d6e049b3c78445e14fa9810fc9e92e9f",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/warble.knl",
+      "blob": "content_warble.knl",
+      "sha256": "391ba06c2b1983889b7fb56bffb89a0b153ce0af6ebb7ececaffc180f574d7ac",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/washer.knl",
+      "blob": "content_washer.knl",
+      "sha256": "ea83e43cff9ed8991df2ec8a82c4643307ed35dfcbdecdccd5305bfe611efa1d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/wavetable.knl",
+      "blob": "content_wavetable.knl",
+      "sha256": "263fe50f7758481cca50aa1165a462e4b88d67e59a21d1468a663f073b17147f",
       "template": "content/display/iter.svg"
     }
   ],
+  "added_directories": [
+    {
+      "path": "op1r_stage",
+      "template": "content"
+    },
+    {
+      "path": "kennel_recovery",
+      "template": "content"
+    }
+  ],
   "result": {
-    "tar_sha256": "ecdf891369c85e9de5bb76b3ea02371bbd6ca61022f17902a745319d17c02799"
+    "tar_sha256": "d88ed09ce78af27bbbcf6d805fb274effb3edd32e713e906091bc584cc63b25d"
   }
 }

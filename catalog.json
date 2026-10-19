@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "base": "op1r30mo-chord-plugins",
+  "base": "kennel30-plugins",
   "synths": [
     {
       "id": "wavetable",
@@ -26,7 +26,9 @@
           "name": "Resonance",
           "description": "Add resonance and drive"
         }
-      ]
+      ],
+      "file": "wavetable.knl",
+      "needs": []
     },
     {
       "id": "taffy",
@@ -52,7 +54,9 @@
           "name": "Resonance",
           "description": "Blend in a resonant wave"
         }
-      ]
+      ],
+      "file": "taffy.knl",
+      "needs": []
     },
     {
       "id": "pew",
@@ -78,7 +82,9 @@
           "name": "Rotor",
           "description": "Slow chorale to fast rotation"
         }
-      ]
+      ],
+      "file": "pew.knl",
+      "needs": []
     },
     {
       "id": "elg",
@@ -104,7 +110,9 @@
           "name": "Movement",
           "description": "Sweep and swell with slow modulation"
         }
-      ]
+      ],
+      "file": "elg.knl",
+      "needs": []
     }
   ],
   "effects": [
@@ -132,7 +140,9 @@
           "name": "Mix",
           "description": "Blend the wet signal with the dry"
         }
-      ]
+      ],
+      "file": "washer.knl",
+      "needs": []
     },
     {
       "id": "snowglobe",
@@ -158,21 +168,25 @@
           "name": "Mix / freeze",
           "description": "Add reverb; turn fully up to freeze"
         }
-      ]
+      ],
+      "file": "snowglobe.knl",
+      "needs": []
     }
   ],
   "preset_caps": [
-    100,
     300
   ],
   "utilities": [
     {
-      "id": "files",
+      "id": "file",
       "name": "File / storage",
-      "description": "See how much space tape, sounds, factory content and the system use. Shift + COM, then turn the blue encoder to FILE.",
+      "description": "See how much space tape, sounds, factory content and the system use. Press Shift + COM twice. Push blue there for a flash check.",
       "color": "blue",
       "type": "storage overview",
-      "screen": "files.png"
+      "screen": "files.png",
+      "file": "file.knl",
+      "needs": [],
+      "saved": "file"
     },
     {
       "id": "scale",
@@ -180,7 +194,9 @@
       "description": "Play scales on the white keys. In synth mode, press T2 and hold Shift: white chooses the key, orange chooses the scale. Select OFF to play normally.",
       "color": "orange",
       "type": "key + scale quantization",
-      "screen": "scale.png"
+      "screen": "scale.png",
+      "file": "scale.knl",
+      "needs": []
     },
     {
       "id": "naming",
@@ -188,7 +204,9 @@
       "description": "Name synth and drum snapshots with up to 12 letters or digits. Hold a sound-slot key, choose characters with blue and green, push blue to insert, and use the left arrow to delete. Press the same slot to save.",
       "color": "green",
       "type": "name your sounds",
-      "screen": "naming.png"
+      "screen": "naming.png",
+      "file": "naming.knl",
+      "needs": []
     },
     {
       "id": "undo",
@@ -196,7 +214,9 @@
       "description": "Hold TAPE and press left to undo or right to redo recordings and tape edits. Keeps up to seven history levels across restarts; available history depends on free storage.",
       "color": "orange",
       "type": "record, edit, undo",
-      "screen": "undo.png"
+      "screen": "undo.png",
+      "file": "undo.knl",
+      "needs": []
     }
   ],
   "op1r_plugins_bit": 11,
@@ -206,42 +226,54 @@
       "kind": "synth",
       "name": "Supersaw",
       "type": "supersaw synth",
-      "description": "Detuned saw stack."
+      "description": "Detuned saw stack.",
+      "file": "supersaw.knl",
+      "needs": []
     },
     {
       "id": "fmbell",
       "kind": "synth",
       "name": "FM Bell",
       "type": "FM bell synth",
-      "description": "FM bells."
+      "description": "FM bells.",
+      "file": "fmbell.knl",
+      "needs": []
     },
     {
       "id": "granular",
       "kind": "synth",
       "name": "Granular",
       "type": "granular sampler",
-      "description": "Plays the slot's sample as grains."
+      "description": "Plays the slot's sample as grains.",
+      "file": "granular.knl",
+      "needs": []
     },
     {
       "id": "tape",
       "kind": "fx",
       "name": "Tape",
       "type": "tape echo",
-      "description": "Vintage tape echo."
+      "description": "Vintage tape echo.",
+      "file": "tape.knl",
+      "needs": []
     },
     {
       "id": "clouds",
       "kind": "fx",
       "name": "Clouds",
       "type": "granular effect",
-      "description": "Granular textures, after Mutable Instruments Clouds."
+      "description": "Granular textures, after Mutable Instruments Clouds.",
+      "file": "clouds.knl",
+      "needs": []
     },
     {
       "id": "reverb",
       "kind": "fx",
       "name": "Reverb",
       "type": "plate / hall reverb",
-      "description": "Plate and hall reverb, after Mutable Instruments Elements."
+      "description": "Plate and hall reverb, after Mutable Instruments Elements.",
+      "file": "reverb.knl",
+      "needs": []
     },
     {
       "id": "mixtur",
@@ -252,7 +284,9 @@
       "image": "mo-images/synth_mixtur.png",
       "bases": [
         "op1r30mo-chord-plugins"
-      ]
+      ],
+      "file": "mixtur.knl",
+      "needs": []
     },
     {
       "id": "arc",
@@ -263,7 +297,9 @@
       "image": "mo-images/synth_arc.png",
       "bases": [
         "op1r30mo-chord-plugins"
-      ]
+      ],
+      "file": "arc.knl",
+      "needs": []
     },
     {
       "id": "palme",
@@ -274,10 +310,12 @@
       "image": "mo-images/fx_palme.png",
       "bases": [
         "op1r30mo-chord-plugins"
-      ]
+      ],
+      "file": "palme.knl",
+      "needs": []
     },
     {
-      "id": "in a room",
+      "id": "in_a_room",
       "kind": "fx",
       "name": "In a room",
       "type": "room loop",
@@ -285,7 +323,381 @@
       "image": "mo-images/fx_in_a_room.png",
       "bases": [
         "op1r30mo-chord-plugins"
+      ],
+      "file": "in_a_room.knl",
+      "needs": [],
+      "saved": "in a room"
+    },
+    {
+      "id": "eva",
+      "kind": "synth",
+      "name": "EVA",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "eva.knl",
+      "needs": []
+    },
+    {
+      "id": "mbira",
+      "kind": "synth",
+      "name": "MBIRA",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "mbira.knl",
+      "needs": []
+    },
+    {
+      "id": "stutter",
+      "kind": "fx",
+      "name": "STUTTER",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "stutter.knl",
+      "needs": []
+    },
+    {
+      "id": "hail",
+      "kind": "fx",
+      "name": "HAIL",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "hail.knl",
+      "needs": []
+    },
+    {
+      "id": "tapes",
+      "kind": "feature",
+      "name": "Four tapes",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "tapes.knl",
+      "needs": []
+    },
+    {
+      "id": "sampletools",
+      "kind": "feature",
+      "name": "Sampler tools",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "sampletools.knl",
+      "needs": []
+    },
+    {
+      "id": "barcount",
+      "kind": "feature",
+      "name": "Bar counter",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "reserved": true
+    },
+    {
+      "id": "harmout",
+      "kind": "feature",
+      "name": "Harm out",
+      "reserved": true,
+      "bases": [
+        "kennel30-plugins"
       ]
+    },
+    {
+      "id": "midiseq",
+      "kind": "feature",
+      "name": "MIDI sequencer",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "midiseq.knl",
+      "needs": []
+    },
+    {
+      "id": "midicc",
+      "kind": "feature",
+      "name": "MIDI CC control",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "midicc.knl",
+      "needs": []
+    },
+    {
+      "id": "chord",
+      "kind": "feature",
+      "name": "Chord mode",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "chord.knl",
+      "needs": []
+    },
+    {
+      "id": "drumplus",
+      "kind": "feature",
+      "name": "Drum+",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "drumplus.knl",
+      "needs": [],
+      "saved": "drum+"
+    },
+    {
+      "id": "euclid",
+      "kind": "feature",
+      "name": "Euclid",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "euclid.knl",
+      "needs": []
+    },
+    {
+      "id": "dots",
+      "kind": "feature",
+      "name": "Dots",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "dots.knl",
+      "needs": []
+    },
+    {
+      "id": "oracle",
+      "kind": "feature",
+      "name": "Oracle",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "oracle.knl",
+      "needs": []
+    },
+    {
+      "id": "peal",
+      "kind": "feature",
+      "name": "Peal",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "peal.knl",
+      "needs": []
+    },
+    {
+      "id": "quad",
+      "kind": "feature",
+      "name": "Quad LFO",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "quad.knl",
+      "needs": []
+    },
+    {
+      "id": "countin",
+      "kind": "feature",
+      "name": "Count-in",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "countin.knl",
+      "needs": []
+    },
+    {
+      "id": "markers",
+      "kind": "feature",
+      "name": "Tape markers",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "markers.knl",
+      "needs": []
+    },
+    {
+      "id": "punch",
+      "kind": "feature",
+      "name": "Punch in",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "punch.knl",
+      "needs": []
+    },
+    {
+      "id": "fasterase",
+      "kind": "feature",
+      "name": "Fast tape erase",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "fasterase.knl",
+      "needs": []
+    },
+    {
+      "id": "oblique",
+      "kind": "feature",
+      "name": "Oblique strategies",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "oblique.knl",
+      "needs": []
+    },
+    {
+      "id": "sysmon",
+      "kind": "feature",
+      "name": "System monitor",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "sysmon.knl",
+      "needs": []
+    },
+    {
+      "id": "usbout",
+      "kind": "feature",
+      "name": "USB out",
+      "always": true,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "usbout.knl",
+      "needs": []
+    },
+    {
+      "id": "oxbow",
+      "kind": "synth",
+      "name": "Oxbow",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "oxbow.knl",
+      "needs": []
+    },
+    {
+      "id": "crush",
+      "kind": "fx",
+      "name": "Crush",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "crush.knl",
+      "needs": []
+    },
+    {
+      "id": "warble",
+      "kind": "fx",
+      "name": "Warble",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "warble.knl",
+      "needs": []
+    },
+    {
+      "id": "plate",
+      "kind": "fx",
+      "name": "Plate",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "plate.knl",
+      "needs": []
+    },
+    {
+      "id": "sid",
+      "kind": "synth",
+      "name": "SID",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "sid.knl",
+      "needs": []
+    },
+    {
+      "id": "c64arp",
+      "kind": "seq",
+      "name": "C64 arpeggiator",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "c64arp.knl",
+      "needs": []
+    },
+    {
+      "id": "father",
+      "kind": "fx",
+      "name": "Father",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "father.knl",
+      "needs": []
+    },
+    {
+      "id": "randomiser",
+      "kind": "feature",
+      "name": "Randomiser",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "randomiser.knl",
+      "needs": []
+    },
+    {
+      "id": "aether",
+      "kind": "synth",
+      "name": "Aether",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "aether.knl",
+      "needs": []
+    },
+    {
+      "id": "samplerplus",
+      "kind": "feature",
+      "name": "Sampler+",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "samplerplus.knl",
+      "needs": []
+    },
+    {
+      "id": "gin",
+      "kind": "drum",
+      "name": "Gin",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "gin.knl",
+      "needs": []
+    }
+  ],
+  "core_options": [
+    {
+      "id": "lander",
+      "bit": 64,
+      "default": false
     }
   ]
 }

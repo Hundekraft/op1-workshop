@@ -1,25 +1,27 @@
-# hundekraft 2.7.2 — OP-1 Firmware Workshop
+# hundekraft 3.0 — OP-1 Firmware Workshop
 
-[Open the workshop](https://hundekraft.github.io/op1-workshop/)
+Build your own Hundekraft 3.0 firmware for the original OP-1 at [the workshop](https://hundekraft.github.io/op1-workshop/).
 
-A browser-based firmware configurator for the original Teenage Engineering OP-1. Start from the original R246 update, keep op1r 30 as the base, add Maiko’s #249 toolkit if you want it (it’s on by default), choose Hundekraft synths, effects and the 100 or 300 user-preset limit, and pick which of op1r’s own synths and effects to include.
+A firmware configurator for the original Teenage Engineering OP-1. Supply the original R246 update, select synths, effects and tools, and build firmware locally in the browser. The kennel core loads individual plugin files; every build supports 300 user synth presets. The current collection contains 152 presets, filtered to each build's synths and active effects.
 
-Firmware is verified and patched locally in your browser. The site does not upload your firmware or require a device key. Download a matching collection of up to 112 presets separately.
+Current 3.0 includes native kennel ports of op1r features through version 40: Randomiser, sampler+, Aether and the latest DSP, editor and monitor refinements. The manual and workshop cards use current kennel emulator captures for those additions; unchanged pages can retain older captures. 
 
-This repository contains the generated static release: frontend, checked patch manifests and payloads, screen previews, and preset packs. It contains no complete original or patched firmware, NAND images, or device keys. The Python browser runtime loads from jsDelivr on first use.
+A normal update does not require Format drive. Factory reset clears user data; imported plugin files can survive it and a normal install. Connect the OP-1 and open Your plugins to review and remove an unwanted import. Back up before destructive recovery.
 
-## Release
+After installing 3.0 once through the boot menu, the workshop can send later updates over USB MIDI. Matching cores need only changed plugin files. Update OP–1 checks the release’s linked core fingerprint first. A mismatch automatically prepares and reviews a full USB MIDI firmware update from the selected original R246; matching cores retain build-free plugin management. The review identifies the scope before transfer. Own .knl/.op1p files up to 512 KB can be added, replaced or removed through a reviewed send plan. Catalog choices use localStorage; own file bytes and pending operations use IndexedDB, scoped to this browser, site address and base.
 
-Product: **hundekraft 2.7.2**. Asset release: `840b01d874f157f3`. Includes 256 prebuilt configurations; the choice of op1r synths and effects is applied in the browser on top of them. Downloads retain the selection ID, for example `hundekraft-2.7.2-7ff.op1`; build records list the upstream versions, selected features and firmware hashes.
+Firmware is never uploaded. Versioned patch assets and Pyodide are downloaded on first use. Original firmware input is not saved between sessions. Export/Import choices backs up catalog choices only, not plugin bytes.
 
-What changed: [CHANGELOG.md](CHANGELOG.md).
+The current release ID, source variant, package counts and hashes live in release.json and its referenced manifests. Configuration IDs retain their meaning. Build records identify the actual selected configuration and output filename. The firmware core, plugin blobs, runtime, manifests and frontend must be updated as one consistent release.
 
-## Credits
+See [the manual](manual.html), [changelog](CHANGELOG.md) and [op1r credits](OP1R-README.md). Additional work builds on kennel, op1r, Musica Obscura by ultralazr, Maiko Pruett's tools, OberVave by zvenson, cRSID by Hermit and the credited Mutable Instruments ports.
 
-Built on [pcppcp/op1r](https://github.com/pcppcp/op1r), pinned to [release 30](https://github.com/pcppcp/op1r/commit/6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01). See [upstream notes and credits](OP1R-README.md). Tape undo/redo, snapshot naming, scale mode and the storage display come from [Maiko Pruett’s #249 firmware](https://maikopruett.com/op-1). Mixtur, Arc, Palme, In a room, Oracle and Peal are [ultralazr’s Musica Obscura](https://github.com/ultralazr/op1-musica-obscura). Additional synths, effects and presets by Hundekraft.
+Independent project; not affiliated with Teenage Engineering. This targets the original OP-1, not the OP-1 field. No original/patched firmware, NAND images, OTP or device keys belong in a published source or web export. 
 
-Independent project; not affiliated with Teenage Engineering. This targets the original OP-1, not the OP-1 field.
+Manual links for3.0 use readable selection snapshots: `manual.html?version=3.0&without=oxbow,sid#father`. Excluded canonical plugin IDs are sorted and comma-separated; all-on selection needs only `version=3.0`. Plain `manual.html#father` opens the full manual. `view=all` carries the Show everything choice without removing the selection. Shared links are independent of saved browser choices; live Workshop changes still refresh an already-open manual. Old Base64 `build` links are not decoded; they open the full manual with a format notice. No encoded selection links are generated. Invalid/unsupported selection parameters show the full manual.
 
-## Publishing
+Gin is an optional native drum synthesiser by SquareWave Studio (libpo32 by Eric Lewis), with24-key A/B kits, four synthesis voices, full editor and eight factory drum kits. It requires the new drum-synth core services on first installation. Drum kits appear in the OP-1 browser separately from the152-synth-preset ZIP. Workshop configuration IDs use arbitrary-width BigInt arithmetic, preserving all existing bit meanings when newer choices are left out.
 
-The repository root is served directly by GitHub Pages from the `main` branch. `.nojekyll` disables Jekyll processing. Updates replace the generated release as a complete set; do not mix manifests and payloads from different releases.
+## Source and SDK
+
+Download the [3.0 corresponding source and plugin SDK](source/hundekraft-3.0-source.tar.gz) and [SHA-256](source/hundekraft-3.0-source.tar.gz.sha256). Firmware sources are GPL-3.0-or-later with the OP-1 firmware permission; see LICENSE, NOTICE and retained third-party notices in the source bundle. The archive includes a standalone plugin SDK and full firmware rebuild instructions. No original/patched firmware or device keys are included.
