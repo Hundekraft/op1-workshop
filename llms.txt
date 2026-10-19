@@ -1,0 +1,242 @@
+# Kennel plugin development
+
+> Instructions and reference for an AI coding assistant helping someone build an original OP-1 kennel plugin. The installation deliverable is one `.knl` file; ordinary plugin development does not require rebuilding the firmware.
+
+## Start here: scope and compatibility
+
+1. Ask what the plugin should do and which controls it needs if the request does not say. Identify synth, effect or feature before writing code.
+2. Download the [matching source and SDK](source/hundekraft-3.0.1-source.tar.gz) and [SHA-256](source/hundekraft-3.0.1-source.tar.gz.sha256) from the same workshop as the target firmware. Verify the checksum and unpack the archive. Work from `ext/kennel/` inside it; all repository paths below are relative to that directory. Read the bundle README for prerequisites.
+3. Read the selected template, its manifest, the relevant `op1_*.h` headers and `synth_sdk/kennel/kn_exports.c`. Only use declared, exported services. Do not invent APIs or copy firmware addresses from an unrelated version.
+4. Copy a template into a new plugin folder, choose a unique ID and edit only that plugin for ordinary plugin work. New synth/FX files use `order: 0` (or omit order), never another engine's legacy order. Use the standalone packer shown below.
+5. Deliver the `.knl`, controls, source, build command, licenses and required SDK/services. Keep the ID for future replacements. Report compilation, emulator and hardware checks separately; never call an unperformed hardware check passed.
+
+No original R246, full `.op1` build, OTP/device key or firmware extraction is required to compile a standalone plugin. The SDK archive includes full firmware sources too; that does not make a firmware rebuild part of the plugin workflow. If the plugin needs a missing core service, describe that requirement instead of silently patching firmware or pretending a header declaration is a supported import.
+
+The supplied bundle may contain newer optional extensions than a player's installed core. In particular, input engines, stereo FX and drum services must be checked against that core's exports and SDK. Keep unsupported additions out of an ordinary plugin-only delivery, or state the necessary firmware upgrade explicitly.
+
+## Get the matching SDK
+
+As the author, you need the matching SDK headers, plugin template and packer, Python 3 and a Blackfin cross compiler providing `bfin-elf-gcc`, `bfin-elf-ld` and libgcc. The 3.0 build uses GCC 13.3.0. Your computer’s ordinary C compiler cannot produce OP-1 plugins. The packer itself uses Python’s standard library. Building a plugin needs no original R246 file, device key or full firmware build.
+
+Download the [matching 3.0.1 source and SDK](source/hundekraft-3.0.1-source.tar.gz) ([SHA-256](source/hundekraft-3.0.1-source.tar.gz.sha256)). It includes the kennel headers, templates, packer, firmware sources, build instructions and licenses. Unpack it and open `ext/kennel`; all paths and commands below are relative to that folder. You use `synth_sdk/` for headers/templates and `tools/kennel/` for the plugin packer. Building a standalone plugin does not require building the complete firmware. Use the matching source bundle for your installed firmware; newer SDK services may be absent from older cores. See the bundle’s `README.md` for full firmware rebuild instructions.
+
+If the cross tools are on PATH, the packer finds them. Otherwise pass `--toolchain /path/to/toolchain`, whose directories are `bfin-gcc/bin` and `bfin/bin`, or set `KENNEL_TOOLCHAIN` to that directory. Toolchain setup is documented in `docs/op1r-src-README.md`. For plugin work, use the `pack.py` command below; the full-firmware build commands in that older document are not part of this workflow.
+
+| Start here | What it provides |
+|---|---|
+| `synth_sdk/template/synth` | Small two-saw synth with detune, cutoff, drive and level |
+| `synth_sdk/template/fx` | Small effect starting point |
+| `synth_sdk/op1_plugin.h` | Synth, FX, screen and fixed-point helpers |
+| `synth_sdk/op1_input.h` | Optional live-input synth descriptor, reset/process/service callbacks and T2 tuner |
+| `synth_sdk/op1_feature.h` | Feature lifecycle, notes, input, views and shared services |
+| `synth_sdk/op1_feature_*.h` | Service-specific interfaces, described below |
+| `tools/kennel/pack.py` | Compile and pack a folder into a `.knl` file |
+| `synth_sdk/kennel/kn_exports.c` | Exact symbols a loadable plugin can import from this core |
+| `docs/plugin-format.md`, `docs/preset-identity.md` | Binary format and saved-sound identity reference |
+| `docs/feature-hooks.md`, `docs/screen-art.md` | Hook implementation and native screen constraints |
+
+## Build your first synth
+
+Copy the synth template into a new folder named `mysynth`. Keep its source and exported symbol unchanged for this first build. Run these commands from kennel’s root:
+
+```sh
+mkdir -p synth_sdk/plugins/mysynth
+cp synth_sdk/template/synth/mysynth.c synth_sdk/plugins/mysynth/
+cp synth_sdk/template/synth/plugin.json synth_sdk/plugins/mysynth/
+python3 tools/kennel/pack.py synth_sdk/plugins/mysynth -o build/mysynth.knl
+```
+
+The template manifest should look like this. `order: 0` is deliberate: a new plugin uses name-based identity, with its runtime slot allocated by the loader. Do not copy another engine’s legacy order.
+
+```json
+{
+  "name": "mysynth",
+  "kind": "synth",
+  "order": 0,
+  "loadable": true,
+  "symbol": "ENGINE_mysynth",
+  "sources": ["mysynth.c"],
+  "defaults": [4000, 12000, 6000, 24000],
+  "claims": []
+}
+```
+
+**The output is `build/mysynth.knl`.** It contains your compiled code, defaults, metadata and any embedded SVG. This is the file you hand to a player; you do not need to supply a rebuilt firmware or separate C, JSON or SVG files for installation. Keep your source available with the required license notices.
+
+The `symbol` names the non-static C descriptor exported by the source. For a synth it is an `op1_engine_t`; for an effect it is an `op1_fx_t`. Source paths are relative to the plugin folder. Defaults are blue, green, white and orange, each 0–32767. `loadable` also tells the full firmware builder to ship a file instead of compiling this plugin into the core. `claims: []` explicitly declares no exclusive controls.
+
+The template has no custom SVG; it uses the stock engine presentation. In the workshop, add `build/mysynth.knl` under **Your plugins**, connect an OP-1 already running 3.0 and press **Update OP-1**. Read the review, send and press [T1] on the instrument. After startup, the workshop verifies it automatically; use **Refresh** to check again, then open [synth] → [Shift] + [T1] and choose mysynth. Turn the four knobs and play. See [Your own plugins](manual.html#own-plugins) for replacements, removals and core updates.
+
+To make it yours, choose a unique ID and rename the folder, manifest name, output filename and C descriptor together. Change `sources` and `symbol` to match your C filenames and exported descriptor. A plugin ID is 1–15 lowercase ASCII letters, digits, underscores or hyphens. The saved/display name normally replaces underscores with spaces: `my_synth` becomes `my synth`. `saved_name` is reserved for existing exceptions, not an arbitrary display-name field.
+
+Add `author` and `version` strings to identify your release. They help the review explain a replacement; CRC/content comparison decides whether it needs uploading. Same bytes are skipped even if resent. Keep the ID stable for updates. A different ID installs a different plugin and does not migrate saved sounds.
+
+## Start an effect instead
+
+Use the FX template rather than changing a synth descriptor into an effect:
+
+```sh
+mkdir -p synth_sdk/plugins/myfx
+cp synth_sdk/template/fx/myfx.c synth_sdk/plugins/myfx/
+cp synth_sdk/template/fx/plugin.json synth_sdk/plugins/myfx/
+python3 tools/kennel/pack.py synth_sdk/plugins/myfx -o build/myfx.knl
+```
+
+The supplied manifest uses `kind: "fx"`, `symbol: "FX_myfx"`, `order: 0`, `loadable: true`, four defaults and `claims: []`. Keep the template's descriptor layout and callback signatures. Use separate runtime state for synth, drum and master positions. Rename the folder, manifest ID, source, descriptor and output together when making it your own.
+
+## Architecture reference
+
+The chain is: workshop → plugin file on flash → boot loader → registered descriptor → core callback → your code. The core owns the R246 firmware patches, dispatchers and native object lifetimes. A plugin supplies code, state and descriptors; it uses SDK services rather than installing its own hooks into firmware instructions.
+
+A `.knl` contains a versioned KNPL header, code/read-only data/initialized data, zero-fill state size, relocations, imported symbol names, optional SVG and metadata. The packer compiles freestanding Blackfin C, links at address zero and records the relocations needed at load time. This is relocatable native code, not an interpreter or a sandbox. libgcc helpers are linked into the file. Do not invent your own linker layout or edit a packed file’s bytes: that invalidates its checksum.
+
+At startup the loader checks size, CRC, supported API and format, section/relocation bounds, names, required imports and descriptors/callbacks. It allocates SDRAM, copies the image, zeroes BSS, relocates references and flushes code caches before registration. Invalid files are skipped. Callback descriptors must live in initialized plugin data; callbacks must point into the plugin’s own executable code. To use a core function as a callback, write a local wrapper that calls it.
+
+Workshop plugins normally live under `content/`; imported plugins under `plugins/`. Both are internal YAFFS paths managed by the updater, not folders to create on the ordinary disk-mode volume. A same-ID user provider takes precedence over its workshop provider. Removing it lets the selected workshop version return. Disabled files remain installed but do not register. Installing, replacing or deleting code takes effect after the confirmed restart; it is not a hot reload.
+
+File kind 1 is a synth, kind 2 an effect and kind 3 a feature. Sequencers, LFOs and native drum synths are feature subtypes, not additional file kinds. The workshop also accepts legacy `.op1p` engines/effects; use `.knl` for new kennel work.
+
+## Synth and effect callbacks
+
+| Interface | Contract |
+|---|---|
+| Synth `note_on(self, params)` | Initialize your voice state on every note, including voice stealing |
+| Synth `render(self, out, params)` | Write all 128 signed 16-bit mono samples at 44.1 kHz; six voices maximum |
+| Synth `note_off(self)` | Optional release notification; the stock T2 envelope/gain is applied after rendering |
+| FX `init(pos)` | Initialize state for position 0 synth, 1 drum or 2 master |
+| FX `render(pos, buf, params)` | Process 64 signed 16-bit samples in place; keep each position’s state separate |
+| Stereo FX `render_stereo(pos, left, right, params)` | With `stereo: true` and `op1_fx_stereo_t`, process both master channels; supply the mono callbacks too |
+| Screen `init(scr)`, `update(scr, dt)` | Resolve SVG nodes after load, then animate on the GUI thread |
+
+A synth voice object is 0x24 bytes. Its first four bytes belong to the firmware; only the remaining 32 bytes are yours. Never overwrite its vtable. Use `OP1_PITCH_INC` for this voice’s per-sample pitch, and `op1_voice_vel_gain(self)` for velocity. Keep the stock T2 envelope as the amplitude envelope unless you deliberately document a different design. Multiplying a second envelope into the oscillator can make sustain and release appear ineffective.
+
+Render parameters 0–3 are normalized knob words; word 4 is the engine/FX selector and must remain intact. Words 5–7 can store secondary values. The engine’s `press[4]` can use `OP1_PRESS_PAGE`: blue maps to word 5, green to 6, white and orange both to 7, so do not assign two independent parameters to that shared word. FX second pages use blue/green/white for words 5–7. `OP1_PRESS_LATCH` is an FX runtime toggle, such as freeze, and is not saved. Add `page2_defaults` when supplying secondary defaults.
+
+Live-input synths declare `input_engine: true` and export an `op1_input_engine_t` from `op1_input.h`. Its silent legacy voice prefix preserves ordinary synth registration; `process` runs once per 64-sample selected-input block, before T3, even without notes. `reset` handles activation, source and slot changes; optional `service` runs bounded work on the main loop and `tuner` supplies a scoped T2 screen. These need the new input-routing core; older cores reject the extension flag. Raw input remains available to stock recording/sampler paths, while duplicate dry monitoring is suppressed. Master resampling is blocked to prevent feedback. Saved controls use normal words; voice-based T4 modulation does not apply. Study `plugins/amp/` and keep analysis and I/O out of `process`.
+
+For FX delay lines use `op1_fx_scratch(pos)`: 176460 bytes per position, shared with whichever effect is active there. Clear/reinitialize it on creation and never assume another FX preserved your contents. A stereo master callback does not make instrument FX stereo. Ordinary mono effects use the existing master mono-sum route. For sample-based synths set `uses_sample: true` and use the SDK’s slot sample accessors; validate buffer presence and bounds.
+
+Audio callbacks must finish within every block deadline. Use integer/fixed-point arithmetic, saturate output and leave mixing headroom. Avoid soft float, per-sample division, large stack arrays, file/SQL calls, waiting, allocation and UI work in render. Prepare expensive coefficients once per block or parameter change, smooth continuous controls and cache selectors. Global BSS saves file bytes but still consumes resident RAM. `op1_alloc` is zeroed, boot-lifetime SDRAM with no free; allocate once and handle failure, never repeatedly on slot changes.
+
+For this project target SVGs below 8 KiB; this is an artwork budget, not a KNPL format limit. Paths must also stay within the native renderer’s complexity limits. Use supported M/L/C/z commands and matrix transforms; split long compound paths into smaller independent paths. Check the screen on the native renderer, since a browser preview can accept unsupported syntax or excessive per-path geometry.
+
+## Features, notes and core services
+
+A feature exports a constant `op1_feature_t`, uses `kind: "feature"` and declares the resources it owns. Zero-initialize unused members with designated C initializers. This minimal feature passes notes through unchanged and claims no exclusive controls:
+
+```c
+#include "op1_feature.h"
+
+static void pass_on(const op1_note *n, int next)
+{
+    op1_note_on(next, n);
+}
+static void pass_off(const op1_note *n, int next)
+{
+    op1_note_off(next, n);
+}
+static const char *const claims[] = { 0 };
+const op1_feature_t FEATURE_passthru = {
+    .api = OP1_FEATURE_API,
+    .priority = 300,
+    .name = "passthru",
+    .note_on = pass_on,
+    .note_off = pass_off,
+    .claims = claims
+};
+```
+
+Put it in `synth_sdk/plugins/passthru/passthru.c`, with this manifest, then pack it using the same command as the synth, substituting passthru for mysynth:
+
+```json
+{
+  "name": "passthru",
+  "kind": "feature",
+  "loadable": true,
+  "symbol": "FEATURE_passthru",
+  "sources": ["passthru.c"],
+  "claims": []
+}
+```
+
+Enabled features receive `OP1_EV_REGISTER` after claims resolve and before screen construction; register service types at the required phase. `OP1_EV_SERVICE` is short main-loop work. Input and key sync run on the KeyHandler thread. `tick` runs every 64-sample audio block; `midi_raw` runs in timer context. Screens/overlays run on the graphics thread. Other events have their own caller context: read the header comments, do not assume all events are safe for storage. There is no general unload callback; files stay resident until restart.
+
+Note stages run in priority order: scale 100, chord 200, then later processors. Pass output to `op1_note_on/off(next, ...)`. If you transpose, expand or suppress notes, retain a ledger of the actual output notes for each input and release those exact notes later. Do not calculate note-off using the current octave, scale or chord settings: the user may have changed them while holding a key. Handle `OP1_EV_NOTES_RESET`, slot/mode changes, repeated notes and all-notes-off. `note_in` observes input without transforming it. Notes played with `op1_key_down/up` go through the observers and pipeline again, so guard against processing your own output recursively.
+
+| Need | SDK entry point and responsibility |
+|---|---|
+| Clock page, clock/COM/MIDI Tape view, input, overlay | `op1_feature.h`: `op1_page_t`, feature page/view fields and input callbacks; consume only events you own |
+| Sequencer | `op1_feature_seq.h`: register a sequencer type; follow c64arp/euclid for lifecycle, timing and note release |
+| LFO | `op1_feature_lfo.h`: type matching, apply/trigger, screen and saved-word validation |
+| MIDI | `op1_feature_midi.h`, `midi_raw`, `op1_midi_send`: bound work, validate lengths and queue nontrivial work out of timer/audio callbacks |
+| Musical key and scale | Music context and note services in `op1_feature.h`; follow chord/scale for shared routing |
+| Small persistent settings and text entry | `op1_setting_get/set`, string variants, `op1_text_entry`; keep settings under your plugin’s ID |
+| Snapshot naming, files, storage totals | Snapshot, bounded user-file and storage services in `op1_feature.h`; respect thread and path restrictions |
+| Tape edits, chunk writeback and switching | `op1_feature_tape.h`: before/after events, drained/flush state and tape-aware services; never write around the core’s cache |
+| Sound access and randomization | `op1_feature_sound.h`: validated synth/FX/LFO operations |
+| Sampler additions | `op1_feature_sampler.h`, `op1_feature_samplerplus.h`: native sampler lifecycle and editing |
+| Sampled-drum extensions | `op1_feature_drum.h`: drum+ style processing of an existing sampled kit |
+| Synthesized drum instrument | `op1_feature_drum_synth.h`: native routing/rendering, factory kits, UI, normalization and saves; Gin is the complete example |
+
+Header declarations alone do not guarantee a loadable import exists. Check `kennel/kn_exports.c`. Functions named `kn_*` are generally core implementation details; do not adopt them as a stable author API.
+
+### When a core change is needed
+
+Stay with the existing SDK services for ordinary plugin development: build and distribute your `.knl` independently. A new core hook or exported service is core development. Request or contribute that service separately; it needs review and a full firmware release before plugins can use it. Your plugin still ships as a `.knl`, with the required core version stated in its instructions.
+
+If a player's installed core needs upgrading, the workshop prepares that full update and asks for original R246 when needed. The plugin author does not need to build custom firmware for each recipient. Lander is a deliberate exception to file-based choices: its workshop checkbox selects a full-firmware core variant, with no plugin adapter.
+
+## Declare controls and coexist with other plugins
+
+List exclusive resources in both `plugin.json` metadata and the feature’s NUL-terminated `claims` array. An empty list says you claim none; omitting declarations can trigger an unknown-compatibility warning. Declare a resource only when you take exclusive ownership, not when you merely observe an event.
+
+Examples include `page:t1` through `page:t4`, `view`, `view:com`, `view:seqtape`, `seq:<name>`, `lfo:<name>`, `drum:<name>`, `tape.erase`, `tape.metro`, `tape.lookup` and `key:<mode>:<combo>`. Follow an existing plugin for exact combo spelling. Current clock pages already have owners; do not silently steal one. Mirror actual registration and consumed controls in the declarations.
+
+The workshop reviews conflicts and asks which whole plugin should stay on. Core resolution is deterministic: a built-in wins over a file, then lower priority, then name. The losing feature is disabled entirely, not just its conflicting knob. Claims cannot discover arbitrary undeclared firmware writes or prove two plugins compatible. Choose a distinct plugin ID: reusing an installed ID means replacement, even when your effect sounds unrelated.
+
+## Screens that fit the OP-1
+
+Add `screen: {"svg": "mysynth.svg", "symbol": "SCREEN_mysynth"}` to the manifest, and export an `op1_screen_t` from a listed source. The SVG is embedded before the KNPL header; loading the file supplies its screen asset too. Name moving groups with stable IDs, resolve nodes in `init`, check lookups, and update transforms/readouts in `update`. Use `op1_synth_knobs_live` or `op1_fx_knobs_live` to display modulation-aware normalized values; raw saved FX words have different ranges.
+
+The core keeps the screen table fixed during each graphics frame. When a screen is replaced, it releases that screen’s drawing caches on the graphics thread before the next draw; the parsed SVG and your cached node pointers remain valid. Keep screen objects and SVG documents alive until restart, and leave drawing-cache cleanup to the core. Input and audio callbacks must not free graphics buffers.
+
+For heavy static artwork, the optional GUI helper `op1_screen_draw_cached(scr, dt, first_live)` preserves native pixels in a bounded cache. It requires an immutable, always-visible prefix of the SVG's top-level children, drawn first onto the cleared raster. Resolve the first mutable child by ID and pass it as `first_live`; pass NULL only for an entirely static SVG. Keep changing labels, transforms, colours and animation after that boundary in their original order. The core shares two 96 KiB records from the plugin arena, allocated after plugin loading only when 64 KiB headroom remains, and falls back to ordinary drawing if the cache or panel is unsuitable. See `docs/screen-art.md` in the SDK for the exact contract and examples. This helper requires the current core; the workshop review handles that core update.
+
+The screen coordinate space is 320 × 160, with Q10 geometry in the C helpers. The SVG text and its terminating NUL precede the aligned KNPL header. The native loader scans that prefix within the bounded plugin file; it does not impose an 8 KB SVG window. Large SVGs still increase parsing, drawing and heap costs. Code, tables, imports and relocations also contribute to file size. The workshop’s whole-file limit is 512 KiB; resident use also includes BSS and allocations.
+
+R246 supports a small SVG subset: groups, lines, circles, polylines and M/L/C/z paths. Convert quadratic curves to cubics and rotations to supported matrix transforms before shipping; draw text with native stroke helpers. Avoid CSS, opacity, embedded fonts and browser-only SVG features. Never emit more than four decimal places. Use a separate simple contour for each newly generated filled path: disconnected filled subpaths can join into triangles in the native renderer.
+
+Do not compose artwork right against the lower edge. The established effect-screen correction lifts the full composition by 12 screen pixels; use the corrected Father/Plate/Warble/Crush and screen-art guide as placement references, rather than adding that offset twice. Artwork, procedural lines, text, pivots, moving masks and clipping must move together. Keep full-screen dimming veils full-screen. Inspect minimum/default/maximum values, longest labels and all secondary controls in native captures; browser SVG bounds do not prove OLED clearance. Make the active secondary control’s name and units visible.
+
+## Save safely and survive removal
+
+Synth/FX identity is the saved type name, not a newly assigned runtime index. Preserve that name, parameter meanings and state schema across releases, or provide an explicit migration. Legacy orders 1–31 are for established compatibility mappings; new files use order 0 and allocated slots 32–63. Capacity is finite and core slots are reserved. Do not edit another plugin’s order to find a free slot.
+
+Keep persistent writes out of audio callbacks. Stage changes and save through an appropriate main-loop service, handle failure, retry without losing the dirty state and verify the slot/engine identity still matches before committing. A slot may change while a write is waiting. Do not overwrite a damaged or absent provider’s payload with defaults just because it cannot currently decode it. Keep transient DSP state separate from saved sound settings.
+
+Native drum synths must declare their `drum_synth` descriptor, register only during `OP1_EV_REGISTER`, supply the current API/size and check registration failure. The registry allows four providers; this is separate from Gin’s four synthesis voices. Native callback stacks are guarded 4 KiB stacks, not permission to put large buffers on them. Use `op1_drum_synth_save_epoch(slot)` to reject saves during or after slot replacement; zero means a transition is in progress. Study Gin’s transactional save/readback/retry and normalization path before implementing custom kits. Explicitly changing engines discards the previous provider payload; temporarily removing its plugin preserves it.
+
+Missing synths/effects fall back to Iter/filter while retaining saved names so reinstalling restores them. Preserve this behavior; do not rewrite missing identities to stock names. Removal in the workshop deletes code, not a promise to erase every saved setting, sound or kit belonging to it. Check both a cold boot without the file and a later reinstall.
+
+## Verify, troubleshoot and share
+
+Packing proves the file can be constructed, not that it meets audio deadlines or saves safely. Keep a development backup. Before sharing, check these separately:
+
+1. Compile the documented template/manifest, inspect packer warnings/imports and load it on the matching core. Use `--keep build/mysynth-objects` to retain the compiler and linker output for inspection.
+2. Use `synth_sdk/harness` for host DSP/bounds checks and native emulator captures. Run relevant checks for your plugin type; include real FX/LFO/envelope rendering when comparing presets.
+3. Try minimum/default/maximum controls, repeated notes, rapid octave and slot changes, voice stealing, sustained chords and a heavy effect. Watch peak audio load on hardware, not only its average. Overload protection is recovery, not a performance budget.
+4. Save/reload sounds and restart. Test failed/retried writes, a slot change during save, missing/malformed state, plugin OFF, removal, absence and reinstall. Tape/file features also need interrupted-operation and full-storage checks.
+5. Review conflicts, same-ID replacements, missing imports and a core update from an older build. Confirm the manual and control names match what a player sees.
+
+| Symptom | Check first |
+|---|---|
+| Packer rejects order or name | Use order 0; match folder, manifest ID and output stem; avoid arbitrary saved-name overrides |
+| Unknown import / API mismatch / skipped file | Match SDK to installed core, inspect exports, then update the full core if needed |
+| Valid file is present but feature is absent | Installed inventory: disabled, replaced, conflict loser, slot capacity or skipped startup |
+| First restart skips all files | Let startup finish; an unfinished previous boot triggers one safe start without plugin files |
+| FX value looks wrong on screen | Use normalized live helpers; do not treat raw stock FX words as 0–32767 |
+| Audio crackles with chords | Peak deadline, repeated setup, stack use and combined effect cost; profile and reduce work |
+| Save restores the previous kit | Identity/epoch checks, save retries, transactions and cache invalidation; follow Gin |
+| SVG works in a browser but clips or fails on OP-1 | Native SVG subset, size/decimals, filled contours, animation bounds and lower-edge placement |
+
+Ship the `.knl`, source, build instructions, required core/SDK version, control map, resource claims, license/notices and a short changelog. Credit copied DSP, artwork and preset material and retain their license terms. Kennel’s license and OP-1 firmware permission are in `LICENSE` and `NOTICE`; third-party components may have separate notices. Do not include Teenage Engineering firmware or device keys in your plugin source bundle. Ask users to install through the workshop so replacements, conflicts, core requirements and removal remain reviewable.

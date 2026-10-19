@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 3.0 / Firmware workshop</title>
+<title>hundekraft 3.0.1 / Firmware workshop</title>
 <link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" href="favicon-32.png?v=3"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="stylesheet" href="style.css?v=3.0-update-review-20261019"><link rel="stylesheet" href="preview.css?v=hundekraft-3.0"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-2.7.1-m19-sdk">
-<script type="module" src="app.js?v=3.0-update-review-20261019"></script>
+<link rel="stylesheet" href="style.css?v=3.0.1-release-20261019"><link rel="stylesheet" href="preview.css?v=hundekraft-3.0"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-2.7.1-m19-sdk">
+<script type="module" src="app.js?v=3.0.1-release-20261019"></script>
+<link rel="alternate" type="text/plain" href="llms.txt" title="Kennel plugin development for coding assistants">
 </head>
 <body>
 <header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><nav class="tabs" aria-label="Pages"><a href="index.html" aria-current="page">Workshop</a><a href="manual.html">Manual</a></nav><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main>
-<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 3.0</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><details class="quickstart"><summary><span class="qs-cta">New here? Get started in 5 steps</span><a class="qs-coffee" href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Buy me a coffee ↗</a><span class="qs-hint">Build, install, add presets</span></summary>
+<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 3.0.1</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><details class="quickstart"><summary><span class="qs-cta">New here? Get started in 5 steps</span><a class="qs-coffee" href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Buy me a coffee ↗</a><span class="qs-hint">Build, install, add presets</span></summary>
 <ol class="qs-steps">
 <li><b>Get original R246</b><p>Get Teenage Engineering’s original OP-1 firmware file, <code>op1_246.op1</code>. The workshop checks that it is the unmodified original.</p></li>
 <li><b>Choose your plugins</b><p>Pick synths, drums, effects and tools below, or keep the defaults. Cards without a checkbox are always included. Add your own files under “Your plugins”. Your choices are saved in this browser.</p></li>
@@ -27,7 +28,7 @@
 <p class="catalog-intro">Tick what you want. Things without a box are always in. Each card links to its page in the manual.</p>
 <nav class="cat-tabs" id="cat-tabs" role="tablist" aria-label="Categories"></nav>
 <div id="cat-panels"></div>
-<section id="own" hidden aria-label="Your plugins"><div class="section-label"><span>YOUR PLUGINS</span><a href="manual.html#make-plugins">Make a plugin →</a></div><p>Add .knl or .op1p files here. Connected OP–1 uploads appear in this list too, including files added from another browser.</p><label id="own-drop" class="file-area own-drop"><strong>Add your plugin files</strong><input type="file" id="own-files" accept=".knl,.op1p" multiple></label><ul id="own-list"></ul><p id="own-empty">No uploaded plugins yet.</p><p id="own-status" role="status" aria-live="polite"></p><details><summary>Storage and plugin safety</summary><p>Choices and plugin files are saved in this browser and site address. Clearing site data removes them. Only add plugins from people you trust: they run as firmware code. If startup fails, restart once without plugin files, reconnect here and remove the plugin.</p></details></section>
+<section id="own" hidden aria-label="Your plugins"><div class="section-label"><span>YOUR PLUGINS</span><a href="llms.txt">Make a plugin →</a></div><p>Add .knl or .op1p files here. Connected OP–1 uploads appear in this list too, including files added from another browser.</p><label id="own-drop" class="file-area own-drop"><strong>Add your plugin files</strong><input type="file" id="own-files" accept=".knl,.op1p" multiple></label><ul id="own-list"></ul><p id="own-empty">No uploaded plugins yet.</p><p id="own-status" role="status" aria-live="polite"></p><details><summary>Storage and plugin safety</summary><p>Choices and plugin files are saved in this browser and site address. Clearing site data removes them. Only add plugins from people you trust: they run as firmware code. If startup fails, restart once without plugin files, reconnect here and remove the plugin.</p></details></section>
 <p class="catalog-foot">Also in every build: MIDI CC and sync, and OP-Z controller mode. <a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">op1r’s notes ↗</a> · <a href="https://maikopruett.com/op-1" target="_blank" rel="noopener noreferrer">Maiko’s notes ↗</a></p></section>
 
 
@@ -36,8 +37,9 @@
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 3.0</div><p id="build-upstreams" class="build-upstreams"></p>
-<dl><div><dt>Synths and drums</dt><dd id="synth-count">—</dd></div><div><dt>Effects</dt><dd id="effect-count">—</dd></div><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
+<div class="build-brand" data-release-label>hundekraft 3.0.1</div><p id="build-upstreams" class="build-upstreams"></p>
+<p class="selection-summary-hint">Selected / available, including always-in features.</p>
+<dl id="selection-summary" aria-label="Your selected features"><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <section id="device-card" class="device-card" hidden aria-label="Update your OP–1">
 <div class="panel-label">UPDATE YOUR OP–1</div>
 <p id="device-state" role="status">Connect your OP–1 by USB to see what’s installed.</p>
@@ -65,6 +67,8 @@
 </form>
 <section class="after"><span>03 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
 <section class="after changelog" id="changelog"><span>04 / CHANGELOG</span><div>
+<h3>3.0.1</h3>
+<ul><li>Amp: new optional live-input engine with Volume, Comp, Tone and Drive, plus a T2 tuner. (Hundekraft; workflow inspired by Teenage Engineering’s OP-1 Field)</li><li>EVA: restored the radio beep’s level while keeping the choir level unchanged. (Hundekraft)</li><li>Oxbow: reduced synthesis processing cost and improved arithmetic safety at high resonance; added active control names and values for Cutoff, Env and the pushed Wave, Filter and Drive controls. (Hundekraft, based on zvenson’s OberVave)</li><li>Workshop and manual: updated selection counts, credits, Amp setup instructions and screenshots; simplified the player manual and added a standalone plugin development guide. (Hundekraft; Father concept and visual reference by xylograph)</li></ul>
 <h3>3.0</h3>
 <p>New since 2.7.2.</p>
 <ul>
@@ -73,11 +77,11 @@
 <li>MBIRA: thumb-piano synthesis. (Hundekraft)</li>
 <li>Oxbow: OB-style polysynth with normal OP-1 presets. (Hundekraft, based on zvenson’s OberVave)</li>
 <li>SID: 8580-inspired chip synth. (Hundekraft, based on Hermit’s cRSID)</li>
-<li>Aether: control pitch and volume by tilting the OP-1. (pcppcp / op1r)</li>
+<li>Aether: control pitch and volume by tilting the OP-1. (pcppcp / op1r; artwork by DAN76/Rackes)</li>
 <li>Gin: drum synthesis with 24 sounds per kit, A/B morphing, four voices, a full editor and eight factory kits. (SquareWave Studio; libpo32 by Eric Lewis; kits adapted from CNTR RNDM)</li>
 <li>HAIL: granular clouds with secondary controls shown on screen. (Hundekraft, based on Émilie Gillet’s Mutable Instruments Beads)</li>
 <li>STUTTER: beat-synchronised stuttering. (Hundekraft)</li>
-<li>Father: stereo ambience reverb with an optional gate. (Hundekraft)</li>
+<li>Father: stereo ambience reverb with an optional gate. (Hundekraft DSP; Father concept and visual reference by Reddit creator xylograph)</li>
 <li>Crush, Warble and Plate: distortion, modulation and reverb rebuilt as native plugins. (Maiko Pruett’s designs; Hundekraft implementation)</li>
 <li>C64 arpeggiator: editable pitch tables, per-step dwell and gate. (Hundekraft)</li>
 <li>Randomiser: create sound variations and restore up to six earlier states. (Lewis-Clayton / pcppcp; native port by Hundekraft)</li>
@@ -142,6 +146,6 @@
 <li>A matching collection of up to 112 presets.</li>
 </ul></div></section>
 </main>
-<footer><span>An independent firmware workshop.</span><span><a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">op1r</a> + <a href="https://maikopruett.com/op-1" target="_blank" rel="noopener noreferrer">Maiko Pruett</a> + <a href="https://github.com/ultralazr/op1-musica-obscura" target="_blank" rel="noopener noreferrer">ultralazr</a> + hundekraft · Not affiliated with Teenage Engineering.</span></footer>
+<footer><span>An independent firmware workshop. <a href="manual.html#credits">Full credits</a></span><span><a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">op1r</a> + <a href="https://maikopruett.com/op-1" target="_blank" rel="noopener noreferrer">Maiko Pruett</a> + <a href="https://github.com/ultralazr/op1-musica-obscura" target="_blank" rel="noopener noreferrer">ultralazr</a> + hundekraft · Not affiliated with Teenage Engineering.</span></footer>
 </body>
 </html>

@@ -10,7 +10,7 @@
 // Order inside a category: hundekraft first, then op1r, then the rest.
 const HK = 'hundekraft', OP = 'op1r', MO = 'Musica Obscura · ultralazr', MI = 'Mutable Instruments';
 const img = name => `manual/img/${name}.png`;
-const card = name => `cards/${name}.png?v=3.0-manual-20261018`;   // clean screens for the cards (run/cards/capture.py); img() where none exists yet
+const card = name => `cards/${name}.png?v=3.0.1`;   // clean screens for the cards (run/cards/capture.py); img() where none exists yet
 export const CATEGORIES = [
   {id: 'synths', label: 'Synths and drums', items: [
     {name: 'Wavetable', line: 'morphing waves, ladder filter', by: HK, img: card('wavetable'), manual: 'wavetable', pick: 'synths:wavetable'},
@@ -21,27 +21,28 @@ export const CATEGORIES = [
     {name: 'MBIRA', line: 'thumb piano', by: HK, img: card('mbira'), manual: 'mbira', kennel: true, pick: 'plugin:mbira'},
     {name: 'Oxbow', line: 'OB-style polysynth, normal OP-1 presets', by: `${HK}, after OberVave by zvenson`, img: card('oxbow'), imageAlt: 'OP-1 emulator screen: Oxbow playing a chord: wide blue horns, red birds, green bell and voice stars, with room below the fur.', kennelImg: 'cards/oxbow-kennel.png?v=05bcb48868c8', kennelImageAlt: "OP-1 emulator: Oxbow playing a chord with current wide artwork and voice stars.", manual: 'oxbow', kennel: true, pick: 'plugin:oxbow'},
     {name: 'SID', line: '8580-inspired chip synth', by: `${HK}, after cRSID by Hermit`, img: 'cards/sid.png?v=3.0-manual-20261018', imageAlt: 'OP-1 emulator screen: SID screen showing saw mode, Voices 49, Cutoff 97 and Res 25.', manual: 'sid', kennel: true, requiresChoice: true, pick: 'plugin:sid'},
+    {name: 'Amp', line: 'live input, compressor, tone, drive and tuner', by: 'Hundekraft · workflow inspired by OP-1 Field', img: 'cards/amp.png?v=3.0.1', manual: 'amp', kennel: true, requiresChoice: true, isNew: true, pick: 'plugin:amp'},
     {name: 'Supersaw', line: 'detuned saw stack', by: OP, img: card('supersaw'), manual: 'supersaw', pick: 'plugin:supersaw'},
     {name: 'FM Bell', line: 'FM bells', by: OP, img: card('fmbell'), manual: 'fmbell', pick: 'plugin:fmbell'},
     {name: 'Granular', line: 'plays a sample as grains', by: OP, img: card('granular'), manual: 'granular', pick: 'plugin:granular'},
-    {name: 'Aether', line: 'play pitch and volume by tilting', by: OP, img: card('aether'), kennelImg: 'cards/aether-kennel.png?v=b394840cb0a1', kennelImageAlt: "OP-1 emulator: Aether satellite dish and radio signals responding to a held note and tilt.", manual: 'aether', kennel: true, requiresChoice: true, pick: 'plugin:aether'},
+    {name: 'Aether', line: 'play pitch and volume by tilting', by: `${OP} · artwork by DAN76/Rackes`, img: card('aether'), kennelImg: 'cards/aether-kennel.png?v=b394840cb0a1', kennelImageAlt: "OP-1 emulator: Aether satellite dish and radio signals responding to a held note and tilt.", manual: 'aether', kennel: true, requiresChoice: true, pick: 'plugin:aether'},
     {name: 'Iter lab', line: 'the stock Iter, opened up', by: OP, img: card('iterlab'), manual: 'iterlab'},
     {name: 'Mixtur', line: 'subharmonic organ', by: MO, img: card('mixtur'), manual: 'mixtur', pick: 'plugin:mixtur'},
     {name: 'Arc', line: 'singing arc lamp, 1899', by: MO, img: card('arc'), manual: 'arc', pick: 'plugin:arc'},
     {name: 'drum+', line: 'per-pad envelopes and drive', by: OP, img: card('drumplus'), manual: 'drumplus', pick: 'plugin:drumplus'},
-    {name: 'Gin', line: '24 drum sounds, A/B morph, four synth voices', by: 'SquareWave Studio · libpo32 by Eric Lewis', img: card('gin'), manual: 'gin', kennel: true, requiresChoice: true, pick: 'plugin:gin'}]},
+    {name: 'Gin', line: '24 drum sounds, A/B morph, four synth voices', by: 'SquareWave Studio · libpo32 by Eric Lewis · kits after CNTR RNDM', img: card('gin'), manual: 'gin', kennel: true, requiresChoice: true, pick: 'plugin:gin'}]},
   {id: 'effects', label: 'Effects', items: [
     {name: 'Washer', line: 'chorus, ensemble, flanger', by: HK, img: card('washer'), manual: 'washer', pick: 'effects:washer'},
     {name: 'Snowglobe', line: 'shimmer reverb with freeze', by: HK, img: card('snowglobe'), manual: 'snowglobe', pick: 'effects:snowglobe'},
     {name: 'STUTTER', line: 'stutter locked to the beat', by: HK, img: card('stutter'), manual: 'stutter', kennel: true, pick: 'plugin:stutter'},
-    {name: 'HAIL', line: 'clouds of grains', by: `${HK}, after ${MI} Beads`, img: card('hail'), manual: 'hail', kennel: true, pick: 'plugin:hail'},
+    {name: 'HAIL', line: 'clouds of grains', by: `${HK}, after ${MI} Beads by Émilie Gillet`, img: card('hail'), manual: 'hail', kennel: true, pick: 'plugin:hail'},
     {name: 'Crush', line: 'bit depth, sample rate and drive', by: 'Maiko · kennel port by hundekraft', img: 'cards/crush.png?v=3.0-manual-20261018', imageAlt: 'OP-1 emulator screen: Crush screen showing Bits 6, Rate 8.0, Drive 6 and Mix 99.', manual: 'crush', kennel: true, requiresChoice: true, pick: 'plugin:crush'},
     {name: 'Warble', line: 'chorus, vibrato and tape wobble', by: 'Maiko · kennel port by hundekraft', img: 'cards/warble.png?v=3.0-manual-20261018', imageAlt: 'OP-1 emulator screen: Warble screen showing Rate 52, Depth 57, Tone 79 and Mix 49.', manual: 'warble', kennel: true, requiresChoice: true, pick: 'plugin:warble'},
     {name: 'Plate', line: 'damped plate reverb', by: 'Maiko · kennel port by hundekraft', img: 'cards/plate.png?v=3.0-manual-20261018', imageAlt: 'OP-1 emulator screen: Plate screen showing Decay 49, Tone 59, Pre 32 and Mix 30.', manual: 'plate', kennel: true, requiresChoice: true, pick: 'plugin:plate'},
-    {name: 'Father', line: 'from a nearby room to distant ambience', by: HK, img: 'cards/father.png?v=3.0-manual-20261018', imageAlt: 'OP-1 emulator screen: Father room screen showing Distance 49, Gate, Color, a Mix bar and the small green person.', manual: 'father', kennel: true, requiresChoice: true, pick: 'plugin:father'},
+    {name: 'Father', line: 'from a nearby room to distant ambience', by: `${HK} DSP · Father concept/visual reference by xylograph`, img: 'cards/father.png?v=3.0-manual-20261018', imageAlt: 'OP-1 emulator screen: Father room screen showing Distance 49, Gate, Color, a Mix bar and the small green person.', manual: 'father', kennel: true, requiresChoice: true, pick: 'plugin:father'},
     {name: 'Tape', line: 'tape echo', by: OP, img: card('tape'), manual: 'tape-fx', pick: 'plugin:tape'},
-    {name: 'Clouds', line: 'granular textures', by: `${OP}, after ${MI} Clouds`, img: card('clouds'), manual: 'clouds', pick: 'plugin:clouds'},
-    {name: 'Reverb', line: 'plate and hall', by: `${OP}, after ${MI} Elements`, img: card('reverb'), kennelImg: 'cards/reverb-kennel.png?v=a876a3750de6', kennelImageAlt: "OP-1 emulator: Reverb skull and fire artwork with Time, Tone, Diffusion and Mix in knob order.", manual: 'reverb', pick: 'plugin:reverb'},
+    {name: 'Clouds', line: 'granular textures', by: `${OP}, after ${MI} Clouds by Émilie Gillet`, img: card('clouds'), manual: 'clouds', pick: 'plugin:clouds'},
+    {name: 'Reverb', line: 'plate and hall', by: `${OP}, after ${MI} Elements by Émilie Gillet · artwork by DAN76`, img: card('reverb'), kennelImg: 'cards/reverb-kennel.png?v=a876a3750de6', kennelImageAlt: "OP-1 emulator: Reverb skull and fire artwork with Time, Tone, Diffusion and Mix in knob order.", manual: 'reverb', pick: 'plugin:reverb'},
     {name: 'Palme', line: 'sympathetic strings', by: MO, img: card('palme'), manual: 'palme', pick: 'plugin:palme'},
     {name: 'In a room', line: 'a loop through a room', by: MO, img: card('in_a_room'), kennelImg: 'cards/in_a_room-kennel.png?v=edebca3f802f', kennelImageAlt: "OP-1 emulator: In a room before capture, showing Size, Shape, Erode and Mix.", manual: 'in-a-room', pick: 'plugin:in_a_room'}]},
   {id: 'play', label: 'Play and sequence', items: [

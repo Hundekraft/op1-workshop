@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "b96524528869c1b5",
+    "id": "d35d41c20c34a5c2",
     "product": {
       "name": "hundekraft",
-      "version": "3.0",
-      "label": "hundekraft 3.0",
-      "slug": "hundekraft-3.0"
+      "version": "3.0.1",
+      "label": "hundekraft 3.0.1",
+      "slug": "hundekraft-3.0.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -705,6 +705,16 @@
         ],
         "file": "gin.knl",
         "needs": []
+      },
+      {
+        "id": "amp",
+        "kind": "synth",
+        "name": "Amp",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "amp.knl",
+        "needs": []
       }
     ],
     "core_options": [
@@ -717,14 +727,14 @@
   },
   "devupd": true,
   "runtime_sha256": "818afd43377afb0fe0d0aa497e51c995986229a33dbdd0d0862b95d23907c3f4",
-  "base_sha256": "789499ae9c54d751891a242b89886e12eb11c2137ff3cb3452feb914035cbab5",
+  "base_sha256": "31caeed769dfee5c43181e64339b06991618d045d0684385e5fcf8ce51a162e0",
   "variants": {
     "7ff": {
-      "sha256": "4a981fed61f2571bce8834f4f58cf0ed91dfeceebf63381b411645027c7c0cbf",
+      "sha256": "087b62935e41721f503bd1f29c38636782d2a755ab4bcca1c902c173949f090a",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 29008,
-        "plugin_file_bytes": 1626592,
+        "plugin_file_bytes": 1660008,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -1359,16 +1369,16 @@
       },
       "core": {
         "start": 31457280,
-        "len": 152280,
-        "crc": 2651396540
+        "len": 155232,
+        "crc": 1915659251
       }
     },
     "100000000000007ff": {
-      "sha256": "a9bb83a1b4642a5303154deb694b851ec83f1132ba1c54700c893f8669f4be15",
+      "sha256": "44b05632a01005511ec9069a4ab60b2644c673bc0d2ab86fa5534f57436ba51d",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 29008,
-        "plugin_file_bytes": 1626592,
+        "plugin_file_bytes": 1660008,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -2003,8 +2013,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 152280,
-        "crc": 1658006608
+        "len": 155232,
+        "crc": 2398393887
       }
     }
   },
@@ -2021,6 +2031,16 @@
         "priority": null,
         "source": "knl",
         "path": "content/aether.knl"
+      },
+      {
+        "name": "amp",
+        "savedName": "amp",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/amp.knl"
       },
       {
         "name": "arc",
@@ -2611,7 +2631,7 @@
   },
   "core": {
     "start": 31457280,
-    "len": 152280,
-    "crc": 2651396540
+    "len": 155232,
+    "crc": 1915659251
   }
 }

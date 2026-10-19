@@ -4,7 +4,7 @@ import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertRes
 import {showPlan, claimText} from './plugin-plan.js?v=3.0-update-review-20261019';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=3.0-drums-synths-20261019';                  // the front page: what's in a build, by category
+import {CATEGORIES} from './categories.js?v=3.0.1-release-20261019';                  // the front page: what's in a build, by category
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
@@ -213,12 +213,7 @@ function update() {
   shareWithManual();
   countTabs();
   const selection = selectionReview();
-  // Ours plus the op1r synths/effects left in.
-  // Synth/drum engines and effects: every card on that tab that is ticked or always in
-  const inTab = id => $(`panel-${id}`) ? $(`panel-${id}`).querySelectorAll('.cat-card').length - $(`panel-${id}`).querySelectorAll('input:not(:checked)').length : 0;
-  $('synth-count').textContent = inTab('synths');
-  $('effect-count').textContent = inTab('effects');
-  $('cap-count').textContent = $('expanded').checked ? 300 : 100;
+  updateSummary();
   $('cap-warning').hidden = $('expanded').checked;               // R246 asserts at boot with more presets than the cap
   document.querySelector('.capacity-number').textContent = $('cap-count').textContent;
   $('build').disabled = busy || devicePending || storageBlocked || !release || !file || (selection.blocked || !!selection.conflicts.length);
@@ -770,6 +765,7 @@ function showOwn(inv) {
   for (const r of ownState.removals) rows.set(removalId(r), {...r, pending: true, label: 'Your plugin · Will be removed on update'});
   $('own-list').replaceChildren(...[...rows.values()].map(r => {
     const li = document.createElement('li'), name = document.createElement('span'), btn = document.createElement('button');
+    li.dataset.pendingRemoval = String(!!r.pending);
     name.textContent = `${r.name || r.path} · ${r.label}`;
     btn.type = 'button'; btn.textContent = pendingUpdate() ? 'Verify first' : r.pending ? 'Undo' : 'Remove'; btn.disabled = busy || devicePending;
     btn.onclick = async () => {
@@ -782,7 +778,7 @@ function showOwn(inv) {
   $('own-send').hidden = false;
   $('own-send').textContent = 'Update OP–1 →';
   $('own-empty').hidden = rows.size > 0;
-  if (release) { selectionReview(); countTabs(); }
+  if (release) { selectionReview(); countTabs(); updateSummary(); }
   if (storageError) ownStatus(storageError, true);
   else if (ownState.verification) ownStatus('Update awaiting verification. Connect or Refresh once the tape screen returns.');
 }
@@ -913,11 +909,39 @@ function renderCatalog() {
   });
   $('catalog-base').textContent = kennel() ? 'BUILT ON OP1R AND KENNEL' : `BUILT ON ${baseLabel().toUpperCase()}`;
 }
+function categoryCounts(panel) {
+  const cards = [...panel.querySelectorAll('.cat-card')];
+  return {total: cards.length, selected: cards.filter(card => card.querySelector('input[type=checkbox]')?.checked !== false).length};
+}
+function updateSummary() {
+  const rows = [];
+  const row = (label, value, id) => {
+    const wrap = document.createElement('div'), term = document.createElement('dt'), count = document.createElement('dd');
+    term.textContent = label; count.textContent = value;
+    if (id) count.id = id;
+    wrap.append(term, count); rows.push(wrap);
+  };
+  for (const cat of CATEGORIES) {
+    const panel = $(`panel-${cat.id}`);
+    if (!panel) continue;
+    const count = categoryCounts(panel);
+    row(cat.label, `${count.selected} / ${count.total}`);
+  }
+  const lander = document.querySelector('input[data-core=lander]');
+  if (lander) row('Lander', lander.checked ? 'On' : 'Off');
+  if ($('panel-your-plugins')) {
+    const pending = $('own-list').querySelectorAll('[data-pending-removal=true]').length;
+    const kept = $('own-list').children.length - pending;
+    row('Your plugins', `${kept} kept${pending ? ` · ${pending} to remove` : ''}`);
+  }
+  row('User preset limit', $('expanded').checked ? '300' : '100', 'cap-count');
+  $('selection-summary').replaceChildren(...rows);
+}
 function countTabs() {                                            // ticked / all on each tab
   for (const tab of document.querySelectorAll('#cat-tabs [role=tab]')) {
     if (tab.id === 'tab-your-plugins') { tab.querySelector('[data-count]').textContent = $('own-list').children.length; continue; }
-    const panel = $(tab.getAttribute('aria-controls')), cards = panel.querySelectorAll('.cat-card').length;
-    tab.querySelector('[data-count]').textContent = cards - panel.querySelectorAll('input:not(:checked)').length + '/' + cards;
+    const count = categoryCounts($(tab.getAttribute('aria-controls')));
+    tab.querySelector('[data-count]').textContent = `${count.selected}/${count.total}`;
   }
 }
 try {

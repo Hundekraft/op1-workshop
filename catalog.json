@@ -691,6 +691,16 @@
       ],
       "file": "gin.knl",
       "needs": []
+    },
+    {
+      "id": "amp",
+      "kind": "synth",
+      "name": "Amp",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "amp.knl",
+      "needs": []
     }
   ],
   "core_options": [

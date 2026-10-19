@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.1
+
+- Amp: new optional live-input engine with Volume, Comp, Tone and Drive, plus a T2 tuner. (Hundekraft; workflow inspired by Teenage Engineering’s OP-1 Field)
+- EVA: restored the radio beep’s level while keeping the choir level unchanged. (Hundekraft)
+- Oxbow: reduced synthesis processing cost and improved arithmetic safety at high resonance; added active control names and values for Cutoff, Env and the pushed Wave, Filter and Drive controls. (Hundekraft, based on zvenson’s OberVave)
+- Workshop and manual: updated selection counts, credits, Amp setup instructions and screenshots; simplified the player manual and added a standalone plugin development guide. (Hundekraft; Father concept and visual reference by xylograph)
+
 ## 3.0
 
 New since 2.7.2; earlier features remain included.
@@ -9,11 +16,11 @@ New since 2.7.2; earlier features remain included.
 - MBIRA: thumb-piano synthesis. (Hundekraft)
 - Oxbow: OB-style polysynth with normal OP-1 presets. (Hundekraft, based on zvenson’s OberVave)
 - SID: 8580-inspired chip synth. (Hundekraft, based on Hermit’s cRSID)
-- Aether: control pitch and volume by tilting the OP-1. (pcppcp / op1r)
+- Aether: control pitch and volume by tilting the OP-1. (pcppcp / op1r; artwork by DAN76/Rackes)
 - Gin: drum synthesis with 24 sounds per kit, A/B morphing, four voices, a full editor and eight factory kits. (SquareWave Studio; libpo32 by Eric Lewis; kits adapted from CNTR RNDM)
 - HAIL: granular clouds with secondary controls shown on screen. (Hundekraft, based on Émilie Gillet’s Mutable Instruments Beads)
 - STUTTER: beat-synchronised stuttering. (Hundekraft)
-- Father: stereo ambience reverb with an optional gate. (Hundekraft)
+- Father: stereo ambience reverb with an optional gate. (Hundekraft DSP; Father concept and visual reference by Reddit creator xylograph)
 - Crush, Warble and Plate: distortion, modulation and reverb rebuilt as native plugins. (Maiko Pruett’s designs; Hundekraft implementation)
 - C64 arpeggiator: editable pitch tables, per-step dwell and gate. (Hundekraft)
 - Randomiser: create sound variations and restore up to six earlier states. (Lewis-Clayton / pcppcp; native port by Hundekraft)
