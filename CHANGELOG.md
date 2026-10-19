@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.2
+
+- Clouds: reduced processing load for dense textures while preserving the sound, grain count and reverb quality. (Hundekraft optimization; pcppcp / op1r fixed-point port; Mutable Instruments DSP by Émilie Gillet)
+- C64 arpeggiator: reduced gate-timing processing overhead without changing note timing. (Hundekraft)
+
 ## 3.0.1
 
 - Amp: new optional live-input engine with Volume, Comp, Tone and Drive, plus a T2 tuner. (Hundekraft; workflow inspired by Teenage Engineering’s OP-1 Field)

@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 3.0.1 / Manual</title>
+<title>hundekraft 3.0.2 / Manual</title>
 <meta name="description" content="How to use everything hundekraft adds to the original OP-1: synths, effects, chord mode, op1r, Musica Obscura and the Maiko toolkit.">
 <link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" href="favicon-32.png?v=3"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="stylesheet" href="style.css?v=3.0-web-review-20261018"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-3.0.1-m19-sdk">
+<link rel="stylesheet" href="style.css?v=3.0-web-review-20261018"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-3.0.2-m19-sdk">
 </head>
 <body class="manual-page">
 <header><a href="index.html" class="wordmark">hundekraft <span>instruments / experiments</span></a><nav class="tabs" aria-label="Pages"><a href="index.html">Workshop</a><a href="manual.html" aria-current="page">Manual</a></nav><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main class="manual">
-<section class="intro manual-intro"><div class="eyebrow">hundekraft 3.0.1 / MANUAL</div><h1>How to play it.</h1><p>Every synth, effect and shortcut hundekraft adds to your OP-1, plus a guide to making your own plugins.</p><div class="manual-actions"><a href="#map">Where things live ↓</a><a href="#make-plugins">Make a plugin ↓</a></div></section>
+<section class="intro manual-intro"><div class="eyebrow">hundekraft 3.0.2 / MANUAL</div><h1>How to play it.</h1><p>Every synth, effect and shortcut hundekraft adds to your OP-1, plus a guide to making your own plugins.</p><div class="manual-actions"><a href="#map">Where things live ↓</a><a href="#make-plugins">Make a plugin ↓</a></div></section>
 <p id="manual-link-notice" role="status" hidden></p>
 <div class="buildbar" id="buildbar" hidden><p id="buildbar-text"></p><label class="switch"><input type="checkbox" id="show-all"> Show everything</label></div>
 <div class="manual-grid">
@@ -43,7 +43,7 @@
 <h3 id="build">Build your firmware</h3>
 <p>The workshop builds the firmware in your browser. Nothing is uploaded and you don&#x27;t need an account.</p>
 <ol><li>Open the workshop at <a href="https://hundekraft.github.io/op1-workshop/" target="_blank" rel="noopener noreferrer">hundekraft.github.io/op1-workshop</a>.</li><li>Choose what you want. The tabs sort everything by kind: synths, effects, play and sequence, tape and sampler, system and storage. Cards with a box are ticked by default; untick one to leave it out. Cards without a box are always in. Lander is a separate firmware option, off by default. Each card has a link to its page in this manual.</li><li>Your build has room for 300 user synth presets (the stock OP-1 has 100). With every sound selected, the preset pack has 152.</li><li>Drop <code>op1_246.op1</code> on the page, or choose it. The page checks the file and says so when it&#x27;s the right one.</li><li>Press &quot;Build my firmware&quot;. The first build downloads the Python runtime the builder uses, so it takes a little longer.</li><li>When the page says &quot;Verified. Your firmware is ready to download.&quot;, download the firmware (<code>.op1</code>) and the matching preset pack (<code>.presets.zip</code>).</li></ol>
-<p>Firmware downloads use <code>hundekraft-3.0.1.op1</code>, or <code>hundekraft-3.0.1-lander.op1</code> with Lander enabled. The matching build report (<code>.build.json</code>) records the full configuration ID, selected plugins and firmware hash; keep it if you need to identify a build.</p>
+<p>Firmware downloads use <code>hundekraft-3.0.2.op1</code>, or <code>hundekraft-3.0.2-lander.op1</code> with Lander enabled. The matching build report (<code>.build.json</code>) records the full configuration ID, selected plugins and firmware hash; keep it if you need to identify a build.</p>
 <aside class="note note-tip"><span>Tip</span><p>&quot;Save choices&quot; stores your selection as a small file. Load it next time to build the same firmware again, for example for a new release.</p></aside>
 </div>
 <div class="sub">
@@ -51,7 +51,7 @@
 <p>This is the OP-1&#x27;s normal firmware update. It keeps your tapes, album and sounds.</p>
 <ol><li>Switch the OP-1 off. Hold <span class="okey okey-text" title="COM">COM</span> and switch it on. The firmware update menu appears.</li><li>Press <img class="okey" src="manual/keys/T1.png?v=c" alt="T1" title="T1"> to choose &quot;Upload firmware&quot;.</li><li>Connect the OP-1 to the computer. It appears as a disk.</li><li>Copy the hundekraft <code>.op1</code> file to that disk.</li><li>Eject the disk on the computer, or press <span class="okey okey-text" title="COM">COM</span>. The OP-1 unpacks and writes the firmware. This takes a few minutes.</li><li>When the screen says &quot;Please restart your OP-1&quot;, switch it off and on again.</li></ol>
 <figure class="screen small"><img src="manual/img/teboot-upload.png?v=49a327609a3c" width="800" height="400" alt="Firmware upload screen asking to connect the OP-1 to a computer" loading="lazy"><figcaption><b>Fig. 1</b> The update menu after pressing T1. The OP-1 waits for a firmware file.</figcaption></figure>
-<p>The boot screen shows &quot;hundekraft 3.0.1&quot;. That&#x27;s how you know it worked.</p>
+<p>The boot screen shows &quot;hundekraft 3.0.2&quot;. That&#x27;s how you know it worked.</p>
 </div>
 <div class="sub">
 <h3 id="send-usb">Send it over USB</h3>
@@ -162,7 +162,7 @@
 <p>Push <span class="enc enc-b">blue</span>, <span class="enc enc-g">green</span> or <span class="enc enc-w">white</span> to reach its page-2 setting, push again to go back. The labels on screen change to RING, DOUBLE and WAH. Page-2 settings are saved with the sound.</p>
 <div class="recipes-wrap"><h4>Try this</h4><p class="rnote">Each bar is a share of that encoder’s range. The encoders turn endlessly, so use it as a guide while you watch the screen. Where a preset is named, it’s in the workshop’s preset pack.</p><div class="recipes"><div class="recipe"><div class="rname"><b>Kalimba</b></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-b.png" alt=""><span><em class="fill-b" style="width:43%"></em></span><small>43%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-g.png" alt=""><span><em class="fill-g" style="width:50%"></em></span><small>50%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-w.png" alt=""><span><em class="fill-w" style="width:37%"></em></span><small>37%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-o.png" alt=""><span><em class="fill-o" style="width:0%"></em></span><small>0%</small></div><p>The plain instrument.</p></div><div class="recipe"><div class="rname"><b>Thumb wah</b></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-b.png" alt=""><span><em class="fill-b" style="width:49%"></em></span><small>49%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-g.png" alt=""><span><em class="fill-g" style="width:50%"></em></span><small>50%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-w.png" alt=""><span><em class="fill-w" style="width:43%"></em></span><small>43%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-o.png" alt=""><span><em class="fill-o" style="width:18%"></em></span><small>18%</small></div><p>Wah and a second tine on page 2.</p></div><div class="recipe"><div class="rname"><b>Glass rain</b><span>octave +1</span></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-b.png" alt=""><span><em class="fill-b" style="width:79%"></em></span><small>79%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-g.png" alt=""><span><em class="fill-g" style="width:92%"></em></span><small>92%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-w.png" alt=""><span><em class="fill-w" style="width:18%"></em></span><small>18%</small></div><div class="rbar"><img class="knobmini" src="manual/keys/knob-o.png" alt=""><span><em class="fill-o" style="width:0%"></em></span><small>0%</small></div><p>Bright glass tines.</p></div></div></div>
 </div>
-<div class="sub">
+<div class="sub" data-feature="plugin:amp" data-kind="synth">
 <h3 id="amp">Amp</h3>
 <p class="tagline">Your input is the instrument.</p>
 <figure class="screen"><img src="manual/img/synth-amp-native.png?v=65e68b052999" width="800" height="400" alt="Amp live-input engine with kennel cabinet, four coloured knobs and input waveform" loading="lazy"><figcaption><b>Fig. 9</b> Amp’s kennel cabinet: four coloured dials and an input waveform.</figcaption></figure>

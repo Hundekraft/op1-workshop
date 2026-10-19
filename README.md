@@ -1,10 +1,10 @@
-# hundekraft 3.0.1 — OP-1 Firmware Workshop
+# hundekraft 3.0.2 — OP-1 Firmware Workshop
 
-Build your own Hundekraft 3.0.1 firmware for the original OP-1 at [the workshop](https://hundekraft.github.io/op1-workshop/).
+Build your own Hundekraft 3.0.2 firmware for the original OP-1 at [the workshop](https://hundekraft.github.io/op1-workshop/).
 
 A firmware configurator for the original Teenage Engineering OP-1. Supply the original R246 update, select synths, effects and tools, and build firmware locally in the browser. The kennel core loads individual plugin files; every build supports 300 user synth presets. The current collection contains 152 presets, filtered to each build's synths and active effects.
 
-Current 3.0.1 includes native kennel ports of op1r features through version 40: Randomiser, sampler+, Aether and the latest DSP, editor and monitor refinements. The manual and workshop cards use current kennel emulator captures for those additions; unchanged pages can retain older captures. 
+Current 3.0.2 includes native kennel ports of op1r features through version 40: Randomiser, sampler+, Aether and the latest DSP, editor and monitor refinements. The manual and workshop cards use current kennel emulator captures for those additions; unchanged pages can retain older captures. 
 
 A normal update does not require Format drive. Factory reset clears user data; imported plugin files can survive it and a normal install. Connect the OP-1 and open Your plugins to review and remove an unwanted import. Back up before destructive recovery.
 
@@ -24,4 +24,4 @@ Gin is an optional native drum synthesiser by SquareWave Studio (libpo32 by Eric
 
 ## Source and SDK
 
-Download the [3.0.1 corresponding source and plugin SDK](source/hundekraft-3.0.1-source.tar.gz) and [SHA-256](source/hundekraft-3.0.1-source.tar.gz.sha256). Firmware sources are GPL-3.0-or-later with the OP-1 firmware permission; see LICENSE, NOTICE and retained third-party notices in the source bundle. The archive includes a standalone plugin SDK and full firmware rebuild instructions. No original/patched firmware or device keys are included.
+Download the [3.0.2 corresponding source and plugin SDK](source/hundekraft-3.0.2-source.tar.gz) and [SHA-256](source/hundekraft-3.0.2-source.tar.gz.sha256). Firmware sources are GPL-3.0-or-later with the OP-1 firmware permission; see LICENSE, NOTICE and retained third-party notices in the source bundle. The archive includes a standalone plugin SDK and full firmware rebuild instructions. No original/patched firmware or device keys are included.

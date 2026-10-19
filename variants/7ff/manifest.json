@@ -21,12 +21,12 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "d35d41c20c34a5c2",
+    "id": "8b5664cc13aa6131",
     "product": {
       "name": "hundekraft",
-      "version": "3.0.1",
-      "label": "hundekraft 3.0.1",
-      "slug": "hundekraft-3.0.1"
+      "version": "3.0.2",
+      "label": "hundekraft 3.0.2",
+      "slug": "hundekraft-3.0.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -35,11 +35,11 @@
   "sizes": {
     "image_bytes": 0,
     "memory_bytes": 29008,
-    "plugin_file_bytes": 1660008,
+    "plugin_file_bytes": 1661100,
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-3.0.1-7ff.op1",
+  "filename": "hundekraft-3.0.2-7ff.op1",
   "presets": {
     "count": 152,
     "by_engine": {
@@ -673,7 +673,7 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "890f1b66e6c8e2b6436a730a37548b83d48f3c02487baf5d409634339d831dde",
-      "result_sha256": "51f215d0947dc6ae700e6fe805c888855b7444930350e4c6c8499cfbd09c2a8d",
+      "result_sha256": "72296f4193324b21f75c07f2155768f69357f397daef07e5aaf383044d7a08ac",
       "ops": [
         {
           "op": "replace",
@@ -781,7 +781,7 @@
           "op": "insert",
           "offset": 2330110,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "e44a18898197294658c879e35a2387dae37216ad917829a69456bf8a2d83dbb7",
+          "sha256": "673fdf07715c0248f4e62103206a49d0267bac8e0329a17198b08edfc2d85a25",
           "size": 96
         }
       ]
@@ -809,7 +809,7 @@
     {
       "path": "content/c64arp.knl",
       "blob": "content_c64arp.knl",
-      "sha256": "9f733536d10d6b1dcde2201c772549d6f9a1846caca75c49a0ef8f639f8d2a67",
+      "sha256": "0ff2c9b2c59b3147622c6318badffeb0eb2cc5590dbd46d4123e0c43fc6c72e2",
       "template": "content/display/iter.svg"
     },
     {
@@ -821,7 +821,7 @@
     {
       "path": "content/clouds.knl",
       "blob": "content_clouds.knl",
-      "sha256": "f31479ee7677c099fb5c92f3ea07502090e763c1cc71324da371a9e4324e0f13",
+      "sha256": "eae76c6f6f6782dad0d7ab65764c375bd9ef7c33dfded212d9d83876c5d208f9",
       "template": "content/display/iter.svg"
     },
     {
@@ -1124,6 +1124,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "c1cc5b63d365554fbf1b68c11c1ac9c2a9ac77fe88299f411ad85348b70745d7"
+    "tar_sha256": "c561b7b41bb660b3ed423a798612ab47866d552da5a35fa22698509fa343b296"
   }
 }
