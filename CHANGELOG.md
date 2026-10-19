@@ -5,7 +5,6 @@
 - Amp: new optional live-input engine with Volume, Comp, Tone and Drive, plus a T2 tuner. (Hundekraft; workflow inspired by Teenage Engineering’s OP-1 Field)
 - EVA: restored the radio beep’s level while keeping the choir level unchanged. (Hundekraft)
 - Oxbow: reduced synthesis processing cost and improved arithmetic safety at high resonance; added active control names and values for Cutoff, Env and the pushed Wave, Filter and Drive controls. (Hundekraft, based on zvenson’s OberVave)
-- Workshop and manual: updated selection counts, credits, Amp setup instructions and screenshots; simplified the player manual and added a standalone plugin development guide. (Hundekraft; Father concept and visual reference by xylograph)
 
 ## 3.0
 
