@@ -1,7 +1,7 @@
 import {sameCore, matchesUpdate, updateDifferences} from './update-state.js?v=3.0-update-review-20261019';
 import {saveSelection, loadSelection, loadPlugins, savePlugins, providerSignature, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
 import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, session, ABORT, OK} from './op1push.js?v=3.0-update-review-20261019';
-import {showPlan, claimText} from './plugin-plan.js?v=3.0-update-review-20261019';                       // kennel OP-1, same core: single plugin files
+import {showPlan, claimText} from './plugin-plan.js?v=3.0-update-review-20261020';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
 import {CATEGORIES} from './categories.js?v=3.0.1-release-20261019';                  // the front page: what's in a build, by category
@@ -544,7 +544,7 @@ async function settlePlan(inv, wanted, opts, full = false) {
     const needsReview = full || plan.changed || !plan.resolved || (plan.unknown.length && !unknownAccepted);
     if (needsReview && (!asked || !plan.resolved || (plan.unknown.length && !unknownAccepted))) {
       pushStatus(full ? 'Full firmware update required: review the core update and plugin changes. Nothing has been sent.' : 'Review installs, replacements, removals and whole-plugin on/off choices. Nothing has been sent.');
-      const r = await showPlan(box, plan, {ask: true, pending: manageOwn ? ownState.removals : [], saved, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander: ${choices().lander ? 'enabled' : 'disabled'}. Changing this option requires full firmware.` : ''});
+      const r = await showPlan(box, plan, {ask: true, pending: manageOwn ? ownState.removals : [], saved, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander ${choices().lander ? 'on' : 'off'}` : ''});
       if (r.remove) { const e = plan.entries.find(e => e.path === r.remove); await removeOwn(e.name, e.path); acceptedSignature = null; continue; }
       if (r.undo) { await undoRemoval(r.undo); acceptedSignature = null; continue; }
       if (r.toggle) {
@@ -564,7 +564,7 @@ async function settlePlan(inv, wanted, opts, full = false) {
       inv = current; acceptedSignature = null; continue;
     }
     assertResolvedPlan(plan);
-    await showPlan(box, plan, {ask: false, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander: ${choices().lander ? 'enabled' : 'disabled'}. Changing this option requires full firmware.` : ''});
+    await showPlan(box, plan, {ask: false, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander ${choices().lander ? 'on' : 'off'}` : ''});
     return {...plan, reviewedInventory: current, managesOwn: manageOwn};
   }
 }
