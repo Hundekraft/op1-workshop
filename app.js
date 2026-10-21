@@ -1,4 +1,4 @@
-import {sameCore, matchesUpdate, updateDifferences} from './update-state.js?v=3.0-update-review-20261019';
+import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
 import {saveSelection, loadSelection, loadPlugins, savePlugins, providerSignature, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
 import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, session, ABORT, OK} from './op1push.js?v=3.0-update-review-20261019';
 import {showPlan, claimText} from './plugin-plan.js?v=3.0-update-review-20261020';                       // kennel OP-1, same core: single plugin files
@@ -428,6 +428,12 @@ function deviceError(error, suffix = '', failed = true) {
 }
 function unresolvedUpdate(inv = null) {
   if (!pendingUpdate()) return;
+  if (Date.now() >= installingUntil && updateNotApplied(inv, ownState.verification)) {
+    recoveryActions('update', 'Send again');
+    $('device-cancel-pending').hidden = false;
+    pushStatus('The OP–1 did not apply the update. Its plugin files are exactly as they were before you sent it: if one step fails, the OP–1 undoes the whole update. Press Send again to retry. If it happens again, watch the OP–1 screen after pressing T1 and tell us what it says.');
+    return;
+  }
   recoveryActions('verify', 'Retry verification');
   $('device-cancel-pending').hidden = Date.now() < installingUntil;
   pushStatus(Date.now() < installingUntil
@@ -653,7 +659,11 @@ async function sendToOp1() {
       const reviewed = expectedPlan.reviewedInventory;
       const core = !pluginsOnly && targetCore() ? {...targetCore()} : reviewed?.core && {...reviewed.core};
       if (core && ldr) core.crc = ldrRangeCrc(ldr, core.start, core.len);
-      ownState.verification = {phase: 'sending', notBefore: 0, core: core?.crc != null ? core : null,
+      const was = new Map((reviewed?.records || []).filter(r => r.path).map(r => [r.path, r.crc]));
+      const sent = new Set(expectedPlan.send.map(([p]) => p));          // what the update changes, as it was before
+      const before = [...expectedPlan.entries.filter(e => sent.has(e.path) && was.get(e.path) !== e.crc).map(e => e.path),
+                      ...expectedPlan.deletes.filter(p => was.has(p))].map(p => ({path: p, crc: was.has(p) ? was.get(p) : null}));
+      ownState.verification = {phase: 'sending', notBefore: 0, core: core?.crc != null ? core : null, before,
         files: expectedPlan.entries.filter(e => e.path).map(e => ({path: e.path, crc: e.crc, on: e.on})),
         builtins: expectedPlan.entries.filter(e => e.source === 'builtin' && !e.path).map(e => ({name: e.name, on: e.on})),
         deletes: expectedPlan.deletes, off: expectedPlan.off, removals: expectedPlan.managesOwn ? ownState.removals.map(removalId) : []};
@@ -992,6 +1002,7 @@ try {
     if (v && (!Array.isArray(v.files) || !v.files.every(f => pluginPath(f.path) && Number.isInteger(f.crc) && typeof f.on === 'boolean') ||
       !Array.isArray(v.deletes) || !v.deletes.every(pluginPath) || !Array.isArray(v.removals) || !v.removals.every(n => typeof n === 'string') ||
       !Array.isArray(v.off) || !v.off.every(n => typeof n === 'string') ||
+      v.before && (!Array.isArray(v.before) || !v.before.every(b => pluginPath(b.path) && (b.crc === null || Number.isInteger(b.crc)))) ||
       v.builtins && (!Array.isArray(v.builtins) || !v.builtins.every(e => typeof e.name === 'string' && typeof e.on === 'boolean')))) throw Error('Invalid saved device confirmation; existing data was preserved');
     if (v && (v.phase != null && !['sending', 'installing'].includes(v.phase) || v.notBefore != null && (!Number.isFinite(v.notBefore) || v.notBefore < 0))) throw Error('Invalid pending update phase');
     installingUntil = v?.notBefore || 0;

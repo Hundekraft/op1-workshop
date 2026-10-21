@@ -19,3 +19,11 @@ export function updateDifferences(inv, expected) {
   return differences;
 }
 export const matchesUpdate = (inv, expected) => updateDifferences(inv, expected).length === 0;
+// The OP-1 applies a batch whole or not at all (a failed step rolls everything back) and does not report why.
+// expected.before = [{path, crc}] for every file the update changes (crc null: absent before). All still as before:
+// nothing was applied. Saved updates without `before` never match.
+export function updateNotApplied(inv, expected) {
+  if (!inv?.plugins || !Array.isArray(expected?.before) || !expected.before.length) return false;
+  const installed = new Map((inv.records || []).filter(r => r.path).map(r => [r.path, r]));
+  return expected.before.every(b => b.crc === null ? !installed.has(b.path) : installed.get(b.path)?.crc === b.crc);
+}
