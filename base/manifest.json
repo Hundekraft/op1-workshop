@@ -1153,7 +1153,7 @@
   {
    "path": "content/display/oxbow.svg",
    "blob": "files/content_display_oxbow.svg",
-   "sha256": "73237630f2467b0c7823a92890e032b64b8f853a9312563fecb3cc6e77ec0b5c",
+   "sha256": "9a1ce1b2e0f0428a2c0bec65ab3183f620e1e19d8b1e7362311647460b7d53fd",
    "template": "content/display/adsr.svg"
   },
   {
@@ -1258,8 +1258,8 @@
   "fx": []
  },
  "result": {
-  "tar_sha256": "6185ecc90290c0641f3dc30b7e188d93ad76b73b162a880891646b56517755d6",
-  "sha256": "479b37531fd89f83684f303ab6f72a933d6981a2da1fa4c1e0afc3adf60d8421",
-  "size": 12933603
+  "tar_sha256": "d63b504c2a6f78ffa97f477b8664e07527257849c6c5be4b93dbc13d92021216",
+  "sha256": "cec3734e41067d9a76c0c49c2a8d1977834623d2cab9e68f8bbe443abd112ca0",
+  "size": 12933318
  }
 }

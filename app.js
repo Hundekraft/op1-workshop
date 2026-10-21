@@ -4,7 +4,7 @@ import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertRes
 import {showPlan, claimText} from './plugin-plan.js?v=3.0-update-review-20261020';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=3.0.1-release-20261019';                  // the front page: what's in a build, by category
+import {CATEGORIES} from './categories.js?v=3.0.3-release-20261021';                  // the front page: what's in a build, by category
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
