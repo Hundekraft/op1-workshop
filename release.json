@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "26d02850ebb6a55e",
+    "id": "20474d1611a28bd7",
     "product": {
       "name": "hundekraft",
-      "version": "3.0.3",
-      "label": "hundekraft 3.0.3",
-      "slug": "hundekraft-3.0.3"
+      "version": "3.1",
+      "label": "hundekraft 3.1",
+      "slug": "hundekraft-3.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -660,6 +660,7 @@
         "id": "father",
         "kind": "fx",
         "name": "Father",
+        "default": false,
         "bases": [
           "kennel30-plugins"
         ],
@@ -715,31 +716,203 @@
         ],
         "file": "amp.knl",
         "needs": []
-      }
-    ],
-    "core_options": [
+      },
       {
-        "id": "lander",
-        "bit": 64,
-        "default": false
+        "id": "trail",
+        "kind": "seq",
+        "name": "Trail",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "trail.knl",
+        "needs": []
+      },
+      {
+        "id": "grids",
+        "kind": "seq",
+        "name": "Grids",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "grids.knl",
+        "needs": []
+      },
+      {
+        "id": "brassophone",
+        "kind": "synth",
+        "name": "Brassophone",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "brassophone.knl",
+        "needs": []
+      },
+      {
+        "id": "dddd",
+        "kind": "synth",
+        "name": "dddd",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "dddd.knl",
+        "needs": []
+      },
+      {
+        "id": "steve",
+        "kind": "fx",
+        "name": "Steve",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "steve.knl",
+        "needs": []
+      },
+      {
+        "id": "nostromo",
+        "kind": "fx",
+        "name": "Nostromo",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "nostromo.knl",
+        "needs": []
+      },
+      {
+        "id": "juni",
+        "kind": "synth",
+        "name": "JUNI",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "juni.knl",
+        "needs": []
+      },
+      {
+        "id": "lander_bit",
+        "kind": "feature",
+        "name": "(bit 64: the Lander core option)",
+        "reserved": true,
+        "bases": [
+          "kennel30-plugins"
+        ]
+      },
+      {
+        "id": "juni_chorus",
+        "kind": "fx",
+        "name": "JUNI chorus",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "juni_chorus.knl",
+        "needs": [],
+        "saved": "juni chorus"
+      },
+      {
+        "id": "monolit",
+        "kind": "synth",
+        "name": "MONOLIT",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "monolit.knl",
+        "needs": []
+      },
+      {
+        "id": "sister",
+        "kind": "fx",
+        "name": "SISTER",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "sister.knl",
+        "needs": []
+      },
+      {
+        "id": "outatime",
+        "kind": "synth",
+        "name": "outatime",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "outatime.knl",
+        "needs": []
+      },
+      {
+        "id": "hollowsaint",
+        "kind": "synth",
+        "name": "Hollow Saint",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "hollowsaint.knl",
+        "needs": []
+      },
+      {
+        "id": "bloodmoon",
+        "kind": "synth",
+        "name": "Bloodmoon",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "bloodmoon.knl",
+        "needs": []
+      },
+      {
+        "id": "blot",
+        "kind": "synth",
+        "name": "blot",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "blot.knl",
+        "needs": []
+      },
+      {
+        "id": "vapora",
+        "kind": "synth",
+        "name": "VAPORA",
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "vapora.knl",
+        "needs": []
       }
     ]
   },
   "devupd": true,
-  "runtime_sha256": "818afd43377afb0fe0d0aa497e51c995986229a33dbdd0d0862b95d23907c3f4",
-  "base_sha256": "531a7505fc892f29d1945905d6eea86863075bf74a51b2662be17bc94b618f89",
+  "runtime_sha256": "5321b804e355311d94b699e4e0a7975f2798f1b6ecd46da31ae346208ea8475c",
+  "base_sha256": "6b86bfedd90df173f549eb60d77fd195bf03cee3158d5447c2e7731d5147e017",
   "variants": {
     "7ff": {
-      "sha256": "ffbdaa1daa1eb898ebedc191f4cd798480bef9a5cc0df9953df61f6e83bd97af",
+      "sha256": "d707a256c66e62c1bc0477b630d63f0b77789d065ac489d260852414d838f394",
       "sizes": {
         "image_bytes": 0,
-        "memory_bytes": 29008,
-        "plugin_file_bytes": 1661828,
+        "memory_bytes": 30184,
+        "plugin_arena_bytes": 2248944,
+        "plugin_arena_estimate": 2480880,
+        "plugin_arena_room": 3670016,
+        "plugin_arena_percent": 67.6,
+        "plugin_arena_over_budget": false,
+        "plugin_decl_bytes": 0,
+        "plugin_decl_room": 1048576,
+        "plugin_fx_lease_bytes": 1048576,
+        "plugin_file_max": 1048576,
+        "plugin_file_bytes": 2777280,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
       "presets": {
-        "count": 152,
+        "count": 211,
         "by_engine": {
           "supersaw": 12,
           "fmbell": 12,
@@ -749,12 +922,18 @@
           "pew": 16,
           "elg": 16,
           "iter": 12,
+          "bloodmoon": 8,
           "eva": 8,
+          "hollowsaint": 8,
+          "juni": 12,
           "mbira": 8,
+          "monolit": 12,
+          "outatime": 4,
           "oxbow": 16,
-          "sid": 8
+          "sid": 8,
+          "vapora": 15
         },
-        "sha256": "896edff94a3cf62fe5a34861148f8d5265f2fc7abe7121cbc7d23ca163c99ba5",
+        "sha256": "dae4097a579b674aaf0fd64ce38d96fd9a33569437db0995614bc5aa9b7ee800",
         "exceeds_cap": false,
         "items": [
           [
@@ -799,7 +978,7 @@
           ],
           [
             "granular",
-            ""
+            "clouds"
           ],
           [
             "granular",
@@ -863,7 +1042,7 @@
           ],
           [
             "fmbell",
-            "grid"
+            "in a room"
           ],
           [
             "fmbell",
@@ -1043,7 +1222,7 @@
           ],
           [
             "pew",
-            "spring"
+            "nostromo"
           ],
           [
             "elg",
@@ -1139,7 +1318,7 @@
           ],
           [
             "iter",
-            "grid"
+            "hail"
           ],
           [
             "wavetable",
@@ -1206,11 +1385,35 @@
             "snowglobe"
           ],
           [
-            "eva",
-            "spring"
+            "bloodmoon",
+            "delay"
           ],
           [
-            "eva",
+            "bloodmoon",
+            "sister"
+          ],
+          [
+            "bloodmoon",
+            ""
+          ],
+          [
+            "bloodmoon",
+            "delay"
+          ],
+          [
+            "bloodmoon",
+            ""
+          ],
+          [
+            "bloodmoon",
+            ""
+          ],
+          [
+            "bloodmoon",
+            "delay"
+          ],
+          [
+            "bloodmoon",
             "delay"
           ],
           [
@@ -1223,6 +1426,14 @@
           ],
           [
             "eva",
+            "spring"
+          ],
+          [
+            "eva",
+            "delay"
+          ],
+          [
+            "eva",
             "delay"
           ],
           [
@@ -1236,6 +1447,86 @@
           [
             "eva",
             "spring"
+          ],
+          [
+            "hollowsaint",
+            "spring"
+          ],
+          [
+            "hollowsaint",
+            "delay"
+          ],
+          [
+            "hollowsaint",
+            ""
+          ],
+          [
+            "hollowsaint",
+            "delay"
+          ],
+          [
+            "hollowsaint",
+            "spring"
+          ],
+          [
+            "hollowsaint",
+            ""
+          ],
+          [
+            "hollowsaint",
+            "sister"
+          ],
+          [
+            "hollowsaint",
+            "spring"
+          ],
+          [
+            "juni",
+            "tape"
+          ],
+          [
+            "juni",
+            ""
+          ],
+          [
+            "juni",
+            "sister"
+          ],
+          [
+            "juni",
+            "juni chorus"
+          ],
+          [
+            "juni",
+            "nostromo"
+          ],
+          [
+            "juni",
+            "juni chorus"
+          ],
+          [
+            "juni",
+            "juni chorus"
+          ],
+          [
+            "juni",
+            "tape"
+          ],
+          [
+            "juni",
+            "juni chorus"
+          ],
+          [
+            "juni",
+            "juni chorus"
+          ],
+          [
+            "juni",
+            "spring"
+          ],
+          [
+            "juni",
+            ""
           ],
           [
             "mbira",
@@ -1251,7 +1542,7 @@
           ],
           [
             "mbira",
-            "spring"
+            "palme"
           ],
           [
             "mbira",
@@ -1259,7 +1550,7 @@
           ],
           [
             "mbira",
-            ""
+            "steve"
           ],
           [
             "mbira",
@@ -1268,6 +1559,70 @@
           [
             "mbira",
             "delay"
+          ],
+          [
+            "monolit",
+            "delay"
+          ],
+          [
+            "monolit",
+            "spring"
+          ],
+          [
+            "monolit",
+            "spring"
+          ],
+          [
+            "monolit",
+            "delay"
+          ],
+          [
+            "monolit",
+            "delay"
+          ],
+          [
+            "monolit",
+            ""
+          ],
+          [
+            "monolit",
+            ""
+          ],
+          [
+            "monolit",
+            "delay"
+          ],
+          [
+            "monolit",
+            ""
+          ],
+          [
+            "monolit",
+            ""
+          ],
+          [
+            "monolit",
+            "spring"
+          ],
+          [
+            "monolit",
+            "delay"
+          ],
+          [
+            "outatime",
+            "spring"
+          ],
+          [
+            "outatime",
+            "delay"
+          ],
+          [
+            "outatime",
+            "tape"
+          ],
+          [
+            "outatime",
+            ""
           ],
           [
             "oxbow",
@@ -1364,657 +1719,73 @@
           [
             "sid",
             "crush"
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            "juni chorus"
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            "reverb"
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
+          ],
+          [
+            "vapora",
+            ""
           ]
         ]
       },
       "core": {
         "start": 31457280,
-        "len": 155232,
-        "crc": 1915659251
-      }
-    },
-    "100000000000007ff": {
-      "sha256": "de9fb4df24483216b8a2f3546571955f2d53531adf728fff0cfb27697bebeebf",
-      "sizes": {
-        "image_bytes": 0,
-        "memory_bytes": 29008,
-        "plugin_file_bytes": 1661828,
-        "branding_bytes": 64,
-        "branding_address": "0x1ef0000"
-      },
-      "presets": {
-        "count": 152,
-        "by_engine": {
-          "supersaw": 12,
-          "fmbell": 12,
-          "granular": 12,
-          "wavetable": 16,
-          "taffy": 16,
-          "pew": 16,
-          "elg": 16,
-          "iter": 12,
-          "eva": 8,
-          "mbira": 8,
-          "oxbow": 16,
-          "sid": 8
-        },
-        "sha256": "9e119f5e5e12f49e97d79595aea545ab582583ae2971d19dcff50429c62a21f5",
-        "exceeds_cap": false,
-        "items": [
-          [
-            "supersaw",
-            "delay"
-          ],
-          [
-            "supersaw",
-            "warble"
-          ],
-          [
-            "supersaw",
-            "plate"
-          ],
-          [
-            "supersaw",
-            "nitro"
-          ],
-          [
-            "fmbell",
-            "plate"
-          ],
-          [
-            "fmbell",
-            "delay"
-          ],
-          [
-            "fmbell",
-            "phone"
-          ],
-          [
-            "fmbell",
-            "plate"
-          ],
-          [
-            "granular",
-            "spring"
-          ],
-          [
-            "granular",
-            "delay"
-          ],
-          [
-            "granular",
-            ""
-          ],
-          [
-            "granular",
-            "delay"
-          ],
-          [
-            "supersaw",
-            "nitro"
-          ],
-          [
-            "supersaw",
-            "father"
-          ],
-          [
-            "supersaw",
-            "punch"
-          ],
-          [
-            "supersaw",
-            "spring"
-          ],
-          [
-            "supersaw",
-            "delay"
-          ],
-          [
-            "supersaw",
-            "grid"
-          ],
-          [
-            "supersaw",
-            "delay"
-          ],
-          [
-            "supersaw",
-            "crush"
-          ],
-          [
-            "fmbell",
-            "warble"
-          ],
-          [
-            "fmbell",
-            "delay"
-          ],
-          [
-            "fmbell",
-            "cwo"
-          ],
-          [
-            "fmbell",
-            ""
-          ],
-          [
-            "fmbell",
-            "spring"
-          ],
-          [
-            "fmbell",
-            "snowglobe"
-          ],
-          [
-            "fmbell",
-            "grid"
-          ],
-          [
-            "fmbell",
-            "nitro"
-          ],
-          [
-            "granular",
-            "spring"
-          ],
-          [
-            "granular",
-            "delay"
-          ],
-          [
-            "granular",
-            "father"
-          ],
-          [
-            "granular",
-            "delay"
-          ],
-          [
-            "granular",
-            ""
-          ],
-          [
-            "granular",
-            "phone"
-          ],
-          [
-            "granular",
-            "cwo"
-          ],
-          [
-            "granular",
-            ""
-          ],
-          [
-            "wavetable",
-            "father"
-          ],
-          [
-            "wavetable",
-            "delay"
-          ],
-          [
-            "wavetable",
-            "delay"
-          ],
-          [
-            "wavetable",
-            "spring"
-          ],
-          [
-            "wavetable",
-            "nitro"
-          ],
-          [
-            "wavetable",
-            "delay"
-          ],
-          [
-            "wavetable",
-            "spring"
-          ],
-          [
-            "wavetable",
-            "delay"
-          ],
-          [
-            "wavetable",
-            "delay"
-          ],
-          [
-            "wavetable",
-            "cwo"
-          ],
-          [
-            "wavetable",
-            "plate"
-          ],
-          [
-            "wavetable",
-            "delay"
-          ],
-          [
-            "taffy",
-            "delay"
-          ],
-          [
-            "taffy",
-            "nitro"
-          ],
-          [
-            "taffy",
-            "delay"
-          ],
-          [
-            "taffy",
-            "warble"
-          ],
-          [
-            "taffy",
-            "delay"
-          ],
-          [
-            "taffy",
-            "punch"
-          ],
-          [
-            "taffy",
-            "delay"
-          ],
-          [
-            "taffy",
-            "spring"
-          ],
-          [
-            "taffy",
-            "cwo"
-          ],
-          [
-            "taffy",
-            "spring"
-          ],
-          [
-            "taffy",
-            ""
-          ],
-          [
-            "taffy",
-            "crush"
-          ],
-          [
-            "pew",
-            "spring"
-          ],
-          [
-            "pew",
-            ""
-          ],
-          [
-            "pew",
-            "warble"
-          ],
-          [
-            "pew",
-            "nitro"
-          ],
-          [
-            "pew",
-            "spring"
-          ],
-          [
-            "pew",
-            ""
-          ],
-          [
-            "pew",
-            "delay"
-          ],
-          [
-            "pew",
-            "spring"
-          ],
-          [
-            "pew",
-            "nitro"
-          ],
-          [
-            "pew",
-            "phone"
-          ],
-          [
-            "pew",
-            "delay"
-          ],
-          [
-            "pew",
-            "spring"
-          ],
-          [
-            "elg",
-            "spring"
-          ],
-          [
-            "elg",
-            "delay"
-          ],
-          [
-            "elg",
-            "nitro"
-          ],
-          [
-            "elg",
-            "spring"
-          ],
-          [
-            "elg",
-            "cwo"
-          ],
-          [
-            "elg",
-            "delay"
-          ],
-          [
-            "elg",
-            "punch"
-          ],
-          [
-            "elg",
-            "delay"
-          ],
-          [
-            "elg",
-            "warble"
-          ],
-          [
-            "elg",
-            "spring"
-          ],
-          [
-            "elg",
-            "delay"
-          ],
-          [
-            "elg",
-            "grid"
-          ],
-          [
-            "iter",
-            "spring"
-          ],
-          [
-            "iter",
-            ""
-          ],
-          [
-            "iter",
-            "delay"
-          ],
-          [
-            "iter",
-            "nitro"
-          ],
-          [
-            "iter",
-            "spring"
-          ],
-          [
-            "iter",
-            "spring"
-          ],
-          [
-            "iter",
-            "cwo"
-          ],
-          [
-            "iter",
-            "delay"
-          ],
-          [
-            "iter",
-            "punch"
-          ],
-          [
-            "iter",
-            "cwo"
-          ],
-          [
-            "iter",
-            "spring"
-          ],
-          [
-            "iter",
-            "grid"
-          ],
-          [
-            "wavetable",
-            "washer"
-          ],
-          [
-            "wavetable",
-            "washer"
-          ],
-          [
-            "wavetable",
-            "snowglobe"
-          ],
-          [
-            "wavetable",
-            "plate"
-          ],
-          [
-            "taffy",
-            "washer"
-          ],
-          [
-            "taffy",
-            "washer"
-          ],
-          [
-            "taffy",
-            "snowglobe"
-          ],
-          [
-            "taffy",
-            "snowglobe"
-          ],
-          [
-            "pew",
-            "washer"
-          ],
-          [
-            "pew",
-            "washer"
-          ],
-          [
-            "pew",
-            "father"
-          ],
-          [
-            "pew",
-            "snowglobe"
-          ],
-          [
-            "elg",
-            "washer"
-          ],
-          [
-            "elg",
-            "washer"
-          ],
-          [
-            "elg",
-            "snowglobe"
-          ],
-          [
-            "elg",
-            "snowglobe"
-          ],
-          [
-            "eva",
-            "spring"
-          ],
-          [
-            "eva",
-            "delay"
-          ],
-          [
-            "eva",
-            "spring"
-          ],
-          [
-            "eva",
-            "delay"
-          ],
-          [
-            "eva",
-            "delay"
-          ],
-          [
-            "eva",
-            "spring"
-          ],
-          [
-            "eva",
-            "spring"
-          ],
-          [
-            "eva",
-            "spring"
-          ],
-          [
-            "mbira",
-            "crush"
-          ],
-          [
-            "mbira",
-            "warble"
-          ],
-          [
-            "mbira",
-            "delay"
-          ],
-          [
-            "mbira",
-            "spring"
-          ],
-          [
-            "mbira",
-            "stutter"
-          ],
-          [
-            "mbira",
-            ""
-          ],
-          [
-            "mbira",
-            "plate"
-          ],
-          [
-            "mbira",
-            "delay"
-          ],
-          [
-            "oxbow",
-            "spring"
-          ],
-          [
-            "oxbow",
-            "crush"
-          ],
-          [
-            "oxbow",
-            "plate"
-          ],
-          [
-            "oxbow",
-            ""
-          ],
-          [
-            "oxbow",
-            ""
-          ],
-          [
-            "oxbow",
-            "delay"
-          ],
-          [
-            "oxbow",
-            "spring"
-          ],
-          [
-            "oxbow",
-            ""
-          ],
-          [
-            "oxbow",
-            ""
-          ],
-          [
-            "oxbow",
-            "warble"
-          ],
-          [
-            "oxbow",
-            "delay"
-          ],
-          [
-            "oxbow",
-            "spring"
-          ],
-          [
-            "oxbow",
-            "delay"
-          ],
-          [
-            "oxbow",
-            "spring"
-          ],
-          [
-            "oxbow",
-            ""
-          ],
-          [
-            "oxbow",
-            ""
-          ],
-          [
-            "sid",
-            ""
-          ],
-          [
-            "sid",
-            ""
-          ],
-          [
-            "sid",
-            "warble"
-          ],
-          [
-            "sid",
-            "spring"
-          ],
-          [
-            "sid",
-            ""
-          ],
-          [
-            "sid",
-            "plate"
-          ],
-          [
-            "sid",
-            "delay"
-          ],
-          [
-            "sid",
-            "crush"
-          ]
-        ]
-      },
-      "core": {
-        "start": 31457280,
-        "len": 155232,
-        "crc": 2398393887
+        "len": 186308,
+        "crc": 694709056
       }
     }
   },
@@ -2051,6 +1822,36 @@
         "priority": null,
         "source": "knl",
         "path": "content/arc.knl"
+      },
+      {
+        "name": "bloodmoon",
+        "savedName": "bloodmoon",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/bloodmoon.knl"
+      },
+      {
+        "name": "blot",
+        "savedName": "blot",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/blot.knl"
+      },
+      {
+        "name": "brassophone",
+        "savedName": "brassophone",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/brassophone.knl"
       },
       {
         "name": "c64arp",
@@ -2105,6 +1906,16 @@
         "priority": null,
         "source": "knl",
         "path": "content/crush.knl"
+      },
+      {
+        "name": "dddd",
+        "savedName": "dddd",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/dddd.knl"
       },
       {
         "name": "dots",
@@ -2223,6 +2034,16 @@
         "path": "content/granular.knl"
       },
       {
+        "name": "grids",
+        "savedName": "grids",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "path": "content/grids.knl"
+      },
+      {
         "name": "hail",
         "savedName": "hail",
         "kind": "fx",
@@ -2233,6 +2054,16 @@
         "path": "content/hail.knl"
       },
       {
+        "name": "hollowsaint",
+        "savedName": "hollowsaint",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/hollowsaint.knl"
+      },
+      {
         "name": "in_a_room",
         "savedName": "in a room",
         "kind": "fx",
@@ -2241,6 +2072,26 @@
         "priority": null,
         "source": "knl",
         "path": "content/in_a_room.knl"
+      },
+      {
+        "name": "juni",
+        "savedName": "juni",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/juni.knl"
+      },
+      {
+        "name": "juni_chorus",
+        "savedName": "juni chorus",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/juni_chorus.knl"
       },
       {
         "name": "markers",
@@ -2298,6 +2149,16 @@
         "path": "content/mixtur.knl"
       },
       {
+        "name": "monolit",
+        "savedName": "monolit",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/monolit.knl"
+      },
+      {
         "name": "naming",
         "savedName": "naming",
         "kind": "feature",
@@ -2308,6 +2169,16 @@
         "priority": 600,
         "source": "knl",
         "path": "content/naming.knl"
+      },
+      {
+        "name": "nostromo",
+        "savedName": "nostromo",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/nostromo.knl"
       },
       {
         "name": "oblique",
@@ -2330,6 +2201,16 @@
         "priority": 1000,
         "source": "knl",
         "path": "content/oracle.knl"
+      },
+      {
+        "name": "outatime",
+        "savedName": "outatime",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/outatime.knl"
       },
       {
         "name": "oxbow",
@@ -2480,6 +2361,16 @@
         "path": "content/sid.knl"
       },
       {
+        "name": "sister",
+        "savedName": "sister",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/sister.knl"
+      },
+      {
         "name": "snowglobe",
         "savedName": "snowglobe",
         "kind": "fx",
@@ -2488,6 +2379,16 @@
         "priority": null,
         "source": "knl",
         "path": "content/snowglobe.knl"
+      },
+      {
+        "name": "steve",
+        "savedName": "steve",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/steve.knl"
       },
       {
         "name": "stutter",
@@ -2557,6 +2458,16 @@
         "path": "content/tapes.knl"
       },
       {
+        "name": "trail",
+        "savedName": "trail",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "path": "content/trail.knl"
+      },
+      {
         "name": "undo",
         "savedName": "undo",
         "kind": "feature",
@@ -2584,6 +2495,16 @@
         "priority": 1000,
         "source": "knl",
         "path": "content/usbout.knl"
+      },
+      {
+        "name": "vapora",
+        "savedName": "vapora",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/vapora.knl"
       },
       {
         "name": "warble",
@@ -2631,7 +2552,8 @@
   },
   "core": {
     "start": 31457280,
-    "len": 155232,
-    "crc": 1915659251
-  }
+    "len": 186308,
+    "crc": 694709056
+  },
+  "plugin_max": 1048576
 }

@@ -43,7 +43,7 @@ export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], save
   const count = n => `${n} plugin${n === 1 ? '' : 's'}`;
   box.innerHTML = `<h3>${full ? 'Firmware upgrade' : changes.length ? 'Ready to update' : 'Your plugins are up to date'}</h3>
 <p class="plan-sub">${full ? `Firmware${changes.length ? ` + ${count(changes.length)}` : ''} · takes a minute or two · no format. Keep the OP–1 on until the tape screen returns.` : changes.length ? 'Only changed plugins are sent.' : 'Nothing to send.'}</p>
-${deferredOwn.length ? `<p role="status">Your saved uploads (${deferredOwn.map(esc).join(', ')}) are not included in this first firmware upgrade. Once 3.0 is verified, press Update OP–1 again to review and install them.</p>` : ''}
+${deferredOwn.length ? `<p role="status">Your saved uploads (${deferredOwn.map(esc).join(', ')}) are not included in this first firmware upgrade. Once 3.0 is verified, press Review changes again to install them.</p>` : ''}
 <ul class="plan-list">${key.map(row).join('')}
 ${updated.length ? `<li class="plan-group"><details><summary><span class="plan-sign" aria-hidden="true">↻</span><span class="plan-name">${updated.length} updated</span><span class="plan-meta">${total(updated)}</span></summary><ul class="plan-brief">${updated.map(brief).join('')}</ul></details></li>` : ''}
 ${unchanged.length ? `<li class="plan-group"><details class="unchanged-plugins"><summary><span class="plan-sign" aria-hidden="true">=</span><span class="plan-name">${unchanged.length} unchanged</span></summary><ul class="plan-brief">${unchanged.map(brief).join('')}</ul></details></li>` : ''}
@@ -56,7 +56,7 @@ ${unknown ? `<p role="alert">Compatibility is unknown for ${esc(plan.unknown.joi
 ${ask && unknown ? `<label><input type="checkbox" data-unknown${saved.unknownAccepted ? ' checked' : ''}> I understand these plugins may conflict.</label>` : ''}
 ${ask && downgrade ? '<label><input type="checkbox" data-downgrade> I want to install the older version shown above.</label>' : ''}
 ${plan.errors?.length ? `<p role="alert">${plan.errors.map(esc).join('<br>')}</p>` : ''}
-${ask ? `<p data-consequence role="status"></p>${plan.offChanged ? '<p>Plugin on/off choices are saved before T1. T2 cancels file installation but keeps those choices.</p>' : ''}<button type="button" class="download" data-send disabled>${full ? 'Send firmware + plugins →' : 'Send update →'}</button> <button type="button" data-cancel>Cancel</button>` : ''}`;
+${ask ? `<p data-consequence role="status"></p>${plan.offChanged ? '<p>Plugin on/off choices are saved before T1. T2 cancels file installation but keeps those choices.</p>' : ''}<button type="button" class="download" data-send disabled>${full ? 'Send firmware + plugins →' : 'Send to OP–1 →'}</button> <button type="button" data-cancel>Cancel</button>` : ''}`;
   box.hidden = false;
   if (!ask) return Promise.resolve({});
   return new Promise((resolve, reject) => {

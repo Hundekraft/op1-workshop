@@ -1,14 +1,14 @@
-# hundekraft 3.0.3 — OP-1 Firmware Workshop
+# hundekraft 3.0.1 — OP-1 Firmware Workshop
 
-Build your own Hundekraft 3.0.3 firmware for the original OP-1 at [the workshop](https://hundekraft.github.io/op1-workshop/).
+Build your own Hundekraft 3.0.1 firmware for the original OP-1 at [the workshop](https://hundekraft.github.io/op1-workshop/).
 
 A firmware configurator for the original Teenage Engineering OP-1. Supply the original R246 update, select synths, effects and tools, and build firmware locally in the browser. The kennel core loads individual plugin files; every build supports 300 user synth presets. The current collection contains 152 presets, filtered to each build's synths and active effects.
 
-Current 3.0.3 includes native kennel ports of op1r features through version 40: Randomiser, sampler+, Aether and the latest DSP, editor and monitor refinements. The manual and workshop cards use current kennel emulator captures for those additions; unchanged pages can retain older captures. 
+Current 3.0.1 includes native kennel ports of op1r features through version 40: Randomiser, sampler+, Aether and the latest DSP, editor and monitor refinements. The manual and workshop cards use current kennel emulator captures for those additions; unchanged pages can retain older captures. 
 
 A normal update does not require Format drive. Factory reset clears user data; imported plugin files can survive it and a normal install. Connect the OP-1 and open Your plugins to review and remove an unwanted import. Back up before destructive recovery.
 
-After installing 3.0 once through the boot menu, the workshop can send later updates over USB MIDI. Matching cores need only changed plugin files. Update OP–1 checks the release’s linked core fingerprint first. A mismatch automatically prepares and reviews a full USB MIDI firmware update from the selected original R246; matching cores retain build-free plugin management. The review identifies the scope before transfer. Own .knl/.op1p files up to 512 KB can be added, replaced or removed through a reviewed send plan. Catalog choices use localStorage; own file bytes and pending operations use IndexedDB, scoped to this browser, site address and base.
+After installing 3.0 once through the boot menu, the workshop can send later updates over USB MIDI. Matching cores need only changed plugin files. Review changes checks the release’s linked core fingerprint first. A mismatch automatically prepares and reviews a full USB MIDI firmware update from the selected original R246; matching cores retain build-free plugin management. The review identifies the scope before transfer. Own .knl/.op1p files up to the release core's limit (1 MB on kennel cores with kn_mem.h, 512 KB before) can be added, replaced or removed through a reviewed send plan. Catalog choices use localStorage; own file bytes and pending operations use IndexedDB, scoped to this browser, site address and base.
 
 Firmware is never uploaded. Versioned patch assets and Pyodide are downloaded on first use. Original firmware input is not saved between sessions. Export/Import choices backs up catalog choices only, not plugin bytes.
 
@@ -24,4 +24,4 @@ Gin is an optional native drum synthesiser by SquareWave Studio (libpo32 by Eric
 
 ## Source and SDK
 
-Download the [3.0.3 corresponding source and plugin SDK](source/hundekraft-3.0.3-source.tar.gz) and [SHA-256](source/hundekraft-3.0.3-source.tar.gz.sha256). Firmware sources are GPL-3.0-or-later with the OP-1 firmware permission; see LICENSE, NOTICE and retained third-party notices in the source bundle. The archive includes a standalone plugin SDK and full firmware rebuild instructions. No original/patched firmware or device keys are included.
+Download the [3.0.1 corresponding source and plugin SDK](source/hundekraft-3.0.1-source.tar.gz) and [SHA-256](source/hundekraft-3.0.1-source.tar.gz.sha256). Firmware sources are GPL-3.0-or-later with the OP-1 firmware permission; see LICENSE, NOTICE and retained third-party notices in the source bundle. The archive includes a standalone plugin SDK and full firmware rebuild instructions. No original/patched firmware or device keys are included.

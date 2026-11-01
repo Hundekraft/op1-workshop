@@ -1,5 +1,42 @@
 # Changelog
 
+## 3.1
+
+Install the full firmware once (boot menu or the workshop’s full update) and back up your tapes and sounds first. After that, updates go over USB.
+
+New synths and effects:
+
+- MONOLIT, a ladder-filter synth for bass and leads (Hundekraft)
+- JUNI and JUNI chorus, an early-80s polysynth and its chorus (Hundekraft)
+- SISTER, a cathedral reverb whose tail sings (Hundekraft)
+- outatime, a time-travel synth (LizardMan245)
+- Bloodmoon, a gothic organ with a haunted bell (Nola Drift / SammiBabe666)
+- Hollow Saint, a haunted hurdy-gurdy (SammiBabe666)
+- From op1r: Grids and dddd, Steve and blot (pcppcp), Brassophone (nvmsocool), Nostromo (Lewis-Clayton), VAPORA (AiAAAA)
+
+New features:
+
+- Master effect routing, Dots synth locks, Sampler+ play modes (pcppcp, Anthony Berg / op1r)
+- Chord mode page B and more scales and key maps (pcppcp / op1r, Hundekraft)
+- Amp, a live-input amp with a tuner, and new Resource monitor pages (Hundekraft)
+- Presets use the new effects and LFOs more, and the workshop offers a matching preset pack for any selection
+
+Faster and steadier:
+
+- Plugins run from faster memory, so big chords on heavy sounds stay clean
+- Many synths and effects need much less CPU and sound the same
+- Recording to tape no longer slows the OP-1 (after op1r)
+- Fewer save stalls when you turn knobs (pcppcp / op1r)
+
+Changed:
+
+- New screens for Wavetable, JUNI, JUNI chorus and Taffy
+- Pew is redesigned with 16 new presets; older Pew sounds play differently
+- Father is rebuilt and lighter, with a slightly darker tail
+- The Lander game is gone; its memory now speeds up the plugins
+
+Fixes: disk mode ends on eject again, tape recording stops cleanly when flash runs low, room for 63 sampler sounds (move extras past 33 off before going back to 3.0.3), no stuck notes in scale and chord mode, and fixes for Gin, Trail and the sampler tools.
+
 ## 3.0.3
 
 - Oxbow: larger two-line control names and values, with the artwork raised to make room. (Hundekraft, based on zvenson’s OberVave)

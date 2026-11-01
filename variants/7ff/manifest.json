@@ -21,12 +21,12 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "26d02850ebb6a55e",
+    "id": "20474d1611a28bd7",
     "product": {
       "name": "hundekraft",
-      "version": "3.0.3",
-      "label": "hundekraft 3.0.3",
-      "slug": "hundekraft-3.0.3"
+      "version": "3.1",
+      "label": "hundekraft 3.1",
+      "slug": "hundekraft-3.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -34,14 +34,23 @@
   },
   "sizes": {
     "image_bytes": 0,
-    "memory_bytes": 29008,
-    "plugin_file_bytes": 1661828,
+    "memory_bytes": 30184,
+    "plugin_arena_bytes": 2248944,
+    "plugin_arena_estimate": 2480880,
+    "plugin_arena_room": 3670016,
+    "plugin_arena_percent": 67.6,
+    "plugin_arena_over_budget": false,
+    "plugin_decl_bytes": 0,
+    "plugin_decl_room": 1048576,
+    "plugin_fx_lease_bytes": 1048576,
+    "plugin_file_max": 1048576,
+    "plugin_file_bytes": 2777280,
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-3.0.3-7ff.op1",
+  "filename": "hundekraft-3.1-7ff.op1",
   "presets": {
-    "count": 152,
+    "count": 211,
     "by_engine": {
       "supersaw": 12,
       "fmbell": 12,
@@ -51,12 +60,18 @@
       "pew": 16,
       "elg": 16,
       "iter": 12,
+      "bloodmoon": 8,
       "eva": 8,
+      "hollowsaint": 8,
+      "juni": 12,
       "mbira": 8,
+      "monolit": 12,
+      "outatime": 4,
       "oxbow": 16,
-      "sid": 8
+      "sid": 8,
+      "vapora": 15
     },
-    "sha256": "896edff94a3cf62fe5a34861148f8d5265f2fc7abe7121cbc7d23ca163c99ba5",
+    "sha256": "dae4097a579b674aaf0fd64ce38d96fd9a33569437db0995614bc5aa9b7ee800",
     "exceeds_cap": false,
     "items": [
       [
@@ -101,7 +116,7 @@
       ],
       [
         "granular",
-        ""
+        "clouds"
       ],
       [
         "granular",
@@ -165,7 +180,7 @@
       ],
       [
         "fmbell",
-        "grid"
+        "in a room"
       ],
       [
         "fmbell",
@@ -345,7 +360,7 @@
       ],
       [
         "pew",
-        "spring"
+        "nostromo"
       ],
       [
         "elg",
@@ -441,7 +456,7 @@
       ],
       [
         "iter",
-        "grid"
+        "hail"
       ],
       [
         "wavetable",
@@ -508,11 +523,35 @@
         "snowglobe"
       ],
       [
-        "eva",
-        "spring"
+        "bloodmoon",
+        "delay"
       ],
       [
-        "eva",
+        "bloodmoon",
+        "sister"
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
         "delay"
       ],
       [
@@ -525,6 +564,14 @@
       ],
       [
         "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
         "delay"
       ],
       [
@@ -538,6 +585,86 @@
       [
         "eva",
         "spring"
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        "delay"
+      ],
+      [
+        "hollowsaint",
+        ""
+      ],
+      [
+        "hollowsaint",
+        "delay"
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        ""
+      ],
+      [
+        "hollowsaint",
+        "sister"
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "juni",
+        "tape"
+      ],
+      [
+        "juni",
+        ""
+      ],
+      [
+        "juni",
+        "sister"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "nostromo"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "tape"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "spring"
+      ],
+      [
+        "juni",
+        ""
       ],
       [
         "mbira",
@@ -553,7 +680,7 @@
       ],
       [
         "mbira",
-        "spring"
+        "palme"
       ],
       [
         "mbira",
@@ -561,7 +688,7 @@
       ],
       [
         "mbira",
-        ""
+        "steve"
       ],
       [
         "mbira",
@@ -570,6 +697,70 @@
       [
         "mbira",
         "delay"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        "spring"
+      ],
+      [
+        "monolit",
+        "spring"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        "spring"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "outatime",
+        "spring"
+      ],
+      [
+        "outatime",
+        "delay"
+      ],
+      [
+        "outatime",
+        "tape"
+      ],
+      [
+        "outatime",
+        ""
       ],
       [
         "oxbow",
@@ -666,26 +857,86 @@
       [
         "sid",
         "crush"
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        "juni chorus"
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        "reverb"
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
       ]
     ]
   },
   "patched_files": [
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "890f1b66e6c8e2b6436a730a37548b83d48f3c02487baf5d409634339d831dde",
-      "result_sha256": "abc54ee7c1548a58ba30ed346b19673578a29ad5b3185daa38debdd0fed7460e",
+      "orig_sha256": "e4b084b89ff93d1720c77e6fd9a043954d98365e4a6e2e09de0d80342ecb2140",
+      "result_sha256": "6801e7b353f604f656222642228c62754c9f0737db0abf3ccd2de26f1f72fd6a",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "08",
-          "new": "68"
+          "old": "14",
+          "new": "74"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "00",
-          "new": "60"
+          "old": "9c",
+          "new": "fc"
         },
         {
           "op": "replace",
@@ -704,6 +955,12 @@
           "offset": 1393008,
           "old": "6400",
           "new": "2c01"
+        },
+        {
+          "op": "replace",
+          "offset": 1393026,
+          "old": "51",
+          "new": "f9"
         },
         {
           "op": "replace",
@@ -743,15 +1000,27 @@
         },
         {
           "op": "replace",
+          "offset": 1419864,
+          "old": "51",
+          "new": "f9"
+        },
+        {
+          "op": "replace",
           "offset": 1419878,
           "old": "3e01",
-          "new": "0602"
+          "new": "1b02"
+        },
+        {
+          "op": "replace",
+          "offset": 1420224,
+          "old": "51",
+          "new": "f9"
         },
         {
           "op": "replace",
           "offset": 1420238,
           "old": "3e01",
-          "new": "0602"
+          "new": "1b02"
         },
         {
           "op": "replace",
@@ -763,13 +1032,13 @@
           "op": "replace",
           "offset": 1421928,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1000040e1f0"
+          "new": "1b0200e1000040e1f0"
         },
         {
           "op": "replace",
           "offset": 1422100,
           "old": "3e0100e168db40e1dd",
-          "new": "060200e1000040e1f0"
+          "new": "1b0200e1000040e1f0"
         },
         {
           "op": "replace",
@@ -779,9 +1048,9 @@
         },
         {
           "op": "insert",
-          "offset": 2330110,
+          "offset": 2361241,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "fdeb8b02ed0e7ae9246c64c393368fca2d75009f45e8169cde17478074dd156e",
+          "sha256": "9ec6f2f197f448526363ad9649c80be775abadefecbec0529785a8094de2dd98",
           "size": 96
         }
       ]
@@ -791,19 +1060,37 @@
     {
       "path": "content/aether.knl",
       "blob": "content_aether.knl",
-      "sha256": "83cab579ef46d0cd8b192ff439dcb73928b25b61de5487b68552a825f7df2aec",
+      "sha256": "70796c1adaba8bef1183f1e36963b093fa6f39ed8487b4693f1661ed9adbd1e5",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/amp.knl",
       "blob": "content_amp.knl",
-      "sha256": "95cd039e1efb07fce5099c8b94be8bb7f1e1ce394acd0b8c643a7021b514af1f",
+      "sha256": "054e9a107fbc1cb0be86ddf74233b6eeb1c7989389ca02241830a4cc5160af77",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/arc.knl",
       "blob": "content_arc.knl",
-      "sha256": "86bd0dc39cf429c01499c7cf1c3b8716eaa4ffcb2325b15b61daa77e827fb4f5",
+      "sha256": "26459ae93fa4c0da8a302e8191104454fd68ed2378512097fc51f1f6b57a2cd7",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/bloodmoon.knl",
+      "blob": "content_bloodmoon.knl",
+      "sha256": "3ae3be043c066549e1e7ef66a1c70abfd05b281b0fea86232ee7e2f12d06297a",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/blot.knl",
+      "blob": "content_blot.knl",
+      "sha256": "9720ec1427ba7c85008011d5c121420988b188c0dd1eafcac649f12e48a5c172",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/brassophone.knl",
+      "blob": "content_brassophone.knl",
+      "sha256": "65d192a864a67078c47a0179c517ab66050b7889cb9bfe833e6da568418aa959",
       "template": "content/display/iter.svg"
     },
     {
@@ -815,13 +1102,13 @@
     {
       "path": "content/chord.knl",
       "blob": "content_chord.knl",
-      "sha256": "14b35197fd137d2d69aa84adcca2f32c71261ac92eed9d85aacbf36975fdc27c",
+      "sha256": "8d87005f6d4a226273c6f9786d14f9bf0992ec7a44ae54a4de4cdc176d7756dc",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/clouds.knl",
       "blob": "content_clouds.knl",
-      "sha256": "eae76c6f6f6782dad0d7ab65764c375bd9ef7c33dfded212d9d83876c5d208f9",
+      "sha256": "8447fbb2266a774be8c078cc94f0891f7aec750bfd355b52fb051c124218215f",
       "template": "content/display/iter.svg"
     },
     {
@@ -833,13 +1120,19 @@
     {
       "path": "content/crush.knl",
       "blob": "content_crush.knl",
-      "sha256": "7cfa0f86cef5d02c8c5f408acac58bfce70c8907774c67f84b1ff128b9be4783",
+      "sha256": "9f836052869bd15f54ac6e8a639d08c7fb18370ec0f04f9ae8f2960b4ac7482d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/dddd.knl",
+      "blob": "content_dddd.knl",
+      "sha256": "d0b3bfa7e798ec3ab44c1c6734c6971b04ad287d4cf6bff2a7947a619a47c4d4",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/dots.knl",
       "blob": "content_dots.knl",
-      "sha256": "700080b6b0509ff02004b078cadfba9801b8b81cf8a7f5c9ad034b176cb78451",
+      "sha256": "4f46f7bbf884d5c46a9a847f00ecc6bada3ab9d3b68801079af6d254d49dd804",
       "template": "content/display/iter.svg"
     },
     {
@@ -851,7 +1144,7 @@
     {
       "path": "content/elg.knl",
       "blob": "content_elg.knl",
-      "sha256": "997c184b64c8e01c395c23134840bd27b0e30c767befd26d78854758dc65d1c7",
+      "sha256": "0a2557e576862be5019c3c6843491bbed788f45b3e86c84ed964106ba02bdd07",
       "template": "content/display/iter.svg"
     },
     {
@@ -863,7 +1156,7 @@
     {
       "path": "content/eva.knl",
       "blob": "content_eva.knl",
-      "sha256": "66f7d34712250ac4a19b23299ac22c30441c64aeee26737bd41e615ec4ab0c6a",
+      "sha256": "35cb134c8e077ba5c952b0e5cb35d9686f45e4eeabad5ed6e66bb79d0704ff94",
       "template": "content/display/iter.svg"
     },
     {
@@ -875,7 +1168,7 @@
     {
       "path": "content/father.knl",
       "blob": "content_father.knl",
-      "sha256": "4da8376bc7185880424e220150239db1bb2d20a71a16fcf36ccfd5c7aab78c5a",
+      "sha256": "eeb9e7d1d4561d515a2e3520931ec3016121c3b6f813b53d1bf4460b9a40dc46",
       "template": "content/display/iter.svg"
     },
     {
@@ -887,31 +1180,55 @@
     {
       "path": "content/fmbell.knl",
       "blob": "content_fmbell.knl",
-      "sha256": "99114cf0666f183482f58b66f0b2a87e9f2e898003ad88084c85f855b43038f0",
+      "sha256": "c674ee45618adff780f17cd6d65bdd0414fc2fc130d1c84cdff68f661ca7b1c8",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/gin.knl",
       "blob": "content_gin.knl",
-      "sha256": "bcaf786f841beab6c67532b3aa205a0e4bc4db7e92c2d40f6f6dfc42768c752f",
+      "sha256": "c8b2d438cc035c2d76f5d1c93c2207eb21d967ffbdb58f6fd65d9030404d1e9d",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/granular.knl",
       "blob": "content_granular.knl",
-      "sha256": "5de96821f64c19c7c91d702b2594ae8ec3af723331146d7cca3f891f5b5ebf1c",
+      "sha256": "a22864a80ff844a4d8d4a47a3e0801b9b50eccde33c53a677d6a6e3f869bef20",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/grids.knl",
+      "blob": "content_grids.knl",
+      "sha256": "744d43ca41a9181ec07fd86807daa4cafb1ae212fbbbdc1efbfc36d5e324e115",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/hail.knl",
       "blob": "content_hail.knl",
-      "sha256": "53234eec3bb77534a7b472072acd151f343ba7045bca546e7abcbf96d43c8c6e",
+      "sha256": "1d2557b653379742cc849ae0947ba09e4175970a6122a545ab2ea421d5ed3171",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/hollowsaint.knl",
+      "blob": "content_hollowsaint.knl",
+      "sha256": "6b4d479e2ce4451d00c798af118264e7dd9b52cc21815c99302d9976931d126c",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/in_a_room.knl",
       "blob": "content_in_a_room.knl",
-      "sha256": "5080b011c04942dce198102efdef4226029d9f1a2dbfd1539c25e7a1626200ab",
+      "sha256": "3527724009535b3e02c99531329c49b8651f82eca0ed381ed4d33e40358bf62e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/juni.knl",
+      "blob": "content_juni.knl",
+      "sha256": "8f09a4220a2093797952eea08169c3fbb60d213041a72f8ee79ff33f51f62505",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/juni_chorus.knl",
+      "blob": "content_juni_chorus.knl",
+      "sha256": "2f9c6a44fa3f13cf7dc375cec5663c3f01e99c12e1aa4465c40d6072819cdbb0",
       "template": "content/display/iter.svg"
     },
     {
@@ -923,7 +1240,7 @@
     {
       "path": "content/mbira.knl",
       "blob": "content_mbira.knl",
-      "sha256": "c4b2aabb8646c14cf2c45037200c1091e941f9803accb192806417c0c9c5e169",
+      "sha256": "6980f556d2f267006df0e79a9d426c54b65c4fdcbb408fd9394f237ec5cdcd02",
       "template": "content/display/iter.svg"
     },
     {
@@ -941,13 +1258,25 @@
     {
       "path": "content/mixtur.knl",
       "blob": "content_mixtur.knl",
-      "sha256": "92133796b446870575b37178f6ae27c977634bd5610ee7947505f823a041399a",
+      "sha256": "14ef38e2e99ac1e93bda744cf041969d6268ea5284422a3dad19d2bb53aa12a6",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/monolit.knl",
+      "blob": "content_monolit.knl",
+      "sha256": "f40dfdb3fcf2628e25ae5669414a81f430d1e907cd736e7de2a012bd89a3f942",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/naming.knl",
       "blob": "content_naming.knl",
       "sha256": "cb5e9a508fdff654a888563989e213aa7f400224f2fce53e8c454e151731006e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/nostromo.knl",
+      "blob": "content_nostromo.knl",
+      "sha256": "444cf573bee8231362ad35273e06b94296d274e273ceb37f0553f552322ef584",
       "template": "content/display/iter.svg"
     },
     {
@@ -963,15 +1292,21 @@
       "template": "content/display/iter.svg"
     },
     {
+      "path": "content/outatime.knl",
+      "blob": "content_outatime.knl",
+      "sha256": "089578440ee51a7dbdd57284cb3b76221b8d5bb2cd652c023c1b4d021f0d31c4",
+      "template": "content/display/iter.svg"
+    },
+    {
       "path": "content/oxbow.knl",
       "blob": "content_oxbow.knl",
-      "sha256": "be55d084f29c50ed06c0c4e0d13b41f25710703dfc058870c7ffd8dd6c992cf3",
+      "sha256": "a6b7182cc1b3f5fde4436c9ce868de4e76baa2741ed9365befd9b6650dbaa103",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/palme.knl",
       "blob": "content_palme.knl",
-      "sha256": "7fc21627aecb90c165af4f939a93a4da24d5c112073c6c3d74bb4e9d8f0834b0",
+      "sha256": "618561717a92f6ae1a46bf71d8180b53a0cc50a8f88bccc3284fc6d6a3856de1",
       "template": "content/display/iter.svg"
     },
     {
@@ -983,13 +1318,13 @@
     {
       "path": "content/pew.knl",
       "blob": "content_pew.knl",
-      "sha256": "dd3f215f30bb18d30db6416d66e4473fc86425630eaaf1d24fd29c29153809d3",
+      "sha256": "99e351d6dfaa20696d974dbfb104d856ba1fc1aac36737d002c04b87a6a41b96",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/plate.knl",
       "blob": "content_plate.knl",
-      "sha256": "705b134efe4885c2de8a6f756c7cd79a369033426e4c36c878d884832f39dc70",
+      "sha256": "089f4407b935b5e068ad86c9be73c30a950db9fa83afd74ae7cbf298eddcc4a1",
       "template": "content/display/iter.svg"
     },
     {
@@ -1007,79 +1342,97 @@
     {
       "path": "content/randomiser.knl",
       "blob": "content_randomiser.knl",
-      "sha256": "16538b2787eaf3e97f0a93dbe35d5c27bc9ee38831d520c941cff23876c3331d",
+      "sha256": "9b0527428aa2a70da2a24063ee9f22b94418bd2ea6ea9d14e650ae1f91bab7f4",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/reverb.knl",
       "blob": "content_reverb.knl",
-      "sha256": "f1c8d25fe7e425894f990273edd33dbad4754b817adbbfc0583fc7446cb0dd4f",
+      "sha256": "483dbc41e628aa563dcb0ff95a2404b0b2eed281ffca1f3fc9a3c5b4a2c88fad",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/samplerplus.knl",
       "blob": "content_samplerplus.knl",
-      "sha256": "18de48fff3836c3ca1d86d9a1b3250442759d2bcc926b616617c02530f94a7e0",
+      "sha256": "d3a5f654fc3d7d138fdc71f2f319ee09d29f60c5ac9208c75ab455488fa9a722",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/sampletools.knl",
       "blob": "content_sampletools.knl",
-      "sha256": "b49c837a29a0b11b78ec7d9109d8223b2ef1b0378236393e886c8206e186769f",
+      "sha256": "094161697ecaa74d8bef9ebfb1b615a2123c6e2184101d6cce46a29c750286b3",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/scale.knl",
       "blob": "content_scale.knl",
-      "sha256": "7c0c453f3f39104e32425d19589efa29d93833b6b3e3fa52740163802779fa37",
+      "sha256": "632ee3d8ff37411c54cb68d0b2328549363fd26e27071150a8fab079bab060d8",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/sid.knl",
       "blob": "content_sid.knl",
-      "sha256": "ed51a2397646dd0ab852aa6029dae85ce5e6bbf2376558a04c7513771eb90ed3",
+      "sha256": "921fc80d7c7fd32b67438f1c97b12afbe2fcdf337bb892269a6423c74f0f548d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sister.knl",
+      "blob": "content_sister.knl",
+      "sha256": "07fc2c131222dacb062628bdd2fef5884d24e6c0dab887f887d336f18b693765",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/snowglobe.knl",
       "blob": "content_snowglobe.knl",
-      "sha256": "c959c34952e694e6b517d1877d71f923933a20699117752d60916789fb171c3f",
+      "sha256": "c0b612e4c1e59d6bcfb15c820dace5d485cee42a84974592931fa33e72db213b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/steve.knl",
+      "blob": "content_steve.knl",
+      "sha256": "59d2dcafc549c7b0e2eccd44dacce956442e1d10e020e3349c019a484f6ed574",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/stutter.knl",
       "blob": "content_stutter.knl",
-      "sha256": "11d3f125a3f78a7c6ffe3474f8dc364a174415ddf412e7febc5616dcc4929c27",
+      "sha256": "e96cb813b82a9b35e31ce5b20b1cb87df9d97c8dbbfc54f9616ec5abefbfb00e",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/supersaw.knl",
       "blob": "content_supersaw.knl",
-      "sha256": "151e315b150afb0ad6b0943dbf2dfcd5e48ec9d120ba25da083e4fc6f7536c8f",
+      "sha256": "3b63f651d53819abf1cbb877beddedb0085aa7b7005ce14dec08968588c9e1dc",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/sysmon.knl",
       "blob": "content_sysmon.knl",
-      "sha256": "d8f16f6e8e48f1369ebb837c0009adc2116e9a5144678bdbe7c41d0064f6331e",
+      "sha256": "105a6c64983edce013a99cdd69de0677e78f43677a0edbc8b26b9304c4176cb8",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/taffy.knl",
       "blob": "content_taffy.knl",
-      "sha256": "022acfe40687f23736c7a628d35ee3f0bfeba7cb50c51db10b5785c2ee6774f9",
+      "sha256": "6e0f503b620149e1195dd4ed4cfc05cec1f88846f49053537ba1f83685f1c45d",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/tape.knl",
       "blob": "content_tape.knl",
-      "sha256": "91518454a081a8d3d0ac49b2af3bf368e62907071cbbb0aeb1a3f58233d034c7",
+      "sha256": "720cc803b9ad4971ea04141f5b309fe48c5d76038847158d11174411c2195be5",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/tapes.knl",
       "blob": "content_tapes.knl",
-      "sha256": "209f75fe9bbe72f72a35bb0781131ceb9e06953eb16bee3f648111353bcb12b1",
+      "sha256": "bda92e441f159736b85ed52ed8b4678a49af3f64c9765631b5d23d941321a014",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/trail.knl",
+      "blob": "content_trail.knl",
+      "sha256": "d457eaccb597e291053b8bd3d42b586c1793042a2986ba95f5abc4d3d773e854",
       "template": "content/display/iter.svg"
     },
     {
@@ -1095,21 +1448,27 @@
       "template": "content/display/iter.svg"
     },
     {
+      "path": "content/vapora.knl",
+      "blob": "content_vapora.knl",
+      "sha256": "5892959651db804f942fea5cd42e992b416509e751da988b4378ff0af71067f8",
+      "template": "content/display/iter.svg"
+    },
+    {
       "path": "content/warble.knl",
       "blob": "content_warble.knl",
-      "sha256": "391ba06c2b1983889b7fb56bffb89a0b153ce0af6ebb7ececaffc180f574d7ac",
+      "sha256": "3d7d6e3a2bfc694be4a9ba89632e23adef8176ae92014e77b6403d1aefa93f92",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/washer.knl",
       "blob": "content_washer.knl",
-      "sha256": "ea83e43cff9ed8991df2ec8a82c4643307ed35dfcbdecdccd5305bfe611efa1d",
+      "sha256": "25ff7a09de50f257668b8dd9e1e21eb8f66e50a1035ffaa8559d3b6b203e6c15",
       "template": "content/display/iter.svg"
     },
     {
       "path": "content/wavetable.knl",
       "blob": "content_wavetable.knl",
-      "sha256": "263fe50f7758481cca50aa1165a462e4b88d67e59a21d1468a663f073b17147f",
+      "sha256": "4c0b6dfdc5222b0a61c12208b2585d2777d387c8dba74581087c0e7fa996da59",
       "template": "content/display/iter.svg"
     }
   ],
@@ -1124,6 +1483,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "df48681b53b3f1cd777de6c723f787676de9eba92c93aa014b6698d00db5da38"
+    "tar_sha256": "2025a8d819e7b5bb72f26d1807e5f50573eeac4d5983efe30346ed595be25fb5"
   }
 }

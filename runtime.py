@@ -32,9 +32,10 @@ def normalize(config, catalog):
         raise ValueError('Unsupported configuration schema or base bundle')
     out = {'schema': 1, 'base': catalog['base']}
     if 'lander' in config:
-        if type(config['lander']) is not bool or not any(f['id'] == 'lander' for f in catalog.get('core_options', [])):
+        if type(config['lander']) is not bool:
             raise ValueError('Unsupported Lander option')
-        if config['lander']:
+        # a base without the option (kennel 3.1: the L1 pool uses the Lander's memory) builds saved Lander choices without it
+        if config['lander'] and any(f['id'] == 'lander' for f in catalog.get('core_options', [])):
             out['lander'] = True
 
     for group in ('synths', 'effects', 'utilities'):

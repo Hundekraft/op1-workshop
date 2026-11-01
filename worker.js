@@ -22,8 +22,28 @@ async function assets(py, manifest, prefix, destination) {
     py.FS.writeFile(path, await get(`${prefix}/${blob}`));
   }
 }
-onmessage = async ({data:{bytes,config,release,push}}) => {
+// The preset pack alone, filtered to the selection (no R246 needed): the same runtime.filter_preset_zip as a build
+async function presetsOnly(config, release) {
+  log('Loading the local patcher (first use needs an internet connection)…');
+  const {loadPyodide} = await import(PYODIDE + 'pyodide.mjs');
+  const py = await loadPyodide({indexURL:PYODIDE});
+  py.FS.writeFile('/runtime.py', await get('runtime.py', release.runtime_sha256));
+  py.globals.set('config_json', JSON.stringify(config)); py.globals.set('catalog_json', JSON.stringify(release.catalog));
+  const ids = py.runPython("import sys; sys.path.insert(0, '/'); import json, runtime as R; catalog = json.loads(catalog_json); config = R.normalize(json.loads(config_json), catalog); [R.config_id(config, catalog), R.config_id(R.variant_config(config, catalog), catalog)]");
+  let id, variantId;
+  try { [id, variantId] = ids.toJs(); } finally { ids.destroy(); }
+  if (!release.variants[variantId]) throw Error('This configuration is not available in this release.');
+  const variant = JSON.parse(new TextDecoder().decode(await get(`variants/${variantId}/manifest.json`, release.variants[variantId].sha256)));
+  if (variant.release.id !== release.release.id) throw Error('Mixed patch release. Reload the page.');
+  log('Putting your preset pack together…');
+  py.FS.writeFile('/presets.zip', await get(`variants/${variantId}/presets.zip`, variant.presets.sha256));
+  py.runPython("open('/presets-out.zip','wb').write(R.filter_preset_zip(open('/presets.zip','rb').read(), config, catalog))");
+  const presets = py.FS.readFile('/presets-out.zip');
+  postMessage({type:'presets', presets, id}, [presets.buffer]);
+}
+onmessage = async ({data:{bytes,config,release,push,presetsJob}}) => {
   try {
+    if (presetsJob) return await presetsOnly(config, release);
     log('Checking original R246…');
     const baseBytes = await get('base/manifest.json', release.base_sha256);
     const base = JSON.parse(new TextDecoder().decode(baseBytes));

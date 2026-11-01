@@ -1,10 +1,10 @@
 /* Knob colours sampled from the OP-1 (see tools/manual/build.py KNOBS). */
 :root{--knob-b:#8fc6f5;--knob-g:#70d28a;--knob-w:#fefafb;--knob-o:#fe813b}
 /* Manual page, the Workshop/Manual tabs and the front-page quick start (index.html loads this file too). */
-.tabs{display:flex;gap:4px;font:11px/1.5 "SFMono-Regular",Consolas,monospace;letter-spacing:.06em;text-transform:uppercase}
-.tabs a{text-decoration:none;padding:6px 12px;border:1px solid transparent;border-radius:100px;color:var(--muted)}
-.tabs a:hover{color:var(--ink);border-color:var(--line)}
-.tabs a[aria-current=page]{color:var(--paper);background:var(--ink)}
+.tabs{display:flex;padding:4px;border:1.5px solid var(--ink);border-radius:100px;background:#f4f3ec;font:600 15px/1 "Helvetica Neue",Helvetica,sans-serif}
+.tabs a{padding:11px 26px;border-radius:100px;text-decoration:none;color:var(--ink);text-align:center}
+.tabs a:hover{background:#e2e1d8}
+.tabs a[aria-current=page]{color:#fff;background:var(--ink)}
 .manual-intro{padding:56px 0 36px}
 .manual-intro h1{font-size:clamp(44px,5vw,76px)}
 .manual-actions{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:26px;font-size:14px}
@@ -133,6 +133,7 @@ h3.engine{font-size:46px;font-weight:600;letter-spacing:-2px;line-height:1;margi
 }
 @media(max-width:640px){
   .tabs{order:3;width:100%}
+  .tabs a{flex:1;padding:12px 10px}
   header{flex-wrap:wrap}
   .manual-body{font-size:15px}
   .chapter>h2{font-size:28px}

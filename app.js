@@ -1,15 +1,17 @@
 import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
 import {saveSelection, loadSelection, loadPlugins, savePlugins, providerSignature, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
-import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, session, ABORT, OK} from './op1push.js?v=3.0-update-review-20261019';
-import {showPlan, claimText} from './plugin-plan.js?v=3.0-update-review-20261020';                       // kennel OP-1, same core: single plugin files
+import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK} from './op1push.js?v=3.1-two-paths-20261027';
+import {connectionProblem, connectedText, recentlySent, MIDI_ASK, NEW_CORE} from './connect-result.js?v=3.1-two-paths-20261027';   // one message per connection result
+import {showPlan, claimText} from './plugin-plan.js?v=3.1-two-paths-20261027';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=3.0.3-release-20261021';                  // the front page: what's in a build, by category
+import {CATEGORIES} from './categories.js?v=new-on-top-20261028';                  // the front page: what's in a build, by category
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
 let ownFiles = [];                                              // your own plugin files: [[plugins/ path, bytes, file name]]
 let stopConnectionWatch = null, deviceInventory = null, firmwareWait = null, stopVerification = false, verificationController = null, retryAction = 'connect';
+let reviewBlocked = false;                                    // no MIDI / no OP-1 / not hundekraft 3: Review changes hidden
 let devicePending = false;                                    // includes the asynchronous Web Lock acquisition
 const pendingUpdate = () => !!ownState.verification;
 const editingLocked = () => busy || devicePending || storageBlocked || pendingUpdate();
@@ -46,7 +48,7 @@ async function removeOwn(name, path) {
   delete ownState.toggles[name];
   ownState.reviews = {}; ownState.verification = null;
   await rememberOwn(); showOwn();
-  ownStatus(storageError || (unsent ? 'Unsent plugin removed from your selection.' : 'Removal saved. Press Update OP–1 to review it; Undo cancels.'), !!storageError);
+  ownStatus(storageError || (unsent ? 'Unsent plugin removed from your selection.' : 'Removal saved. Press Review changes to check it before anything is sent. Undo cancels it.'), !!storageError);
 }
 async function undoRemoval(name) {
   if (pendingUpdate()) throw Error('Verify the previous update or cancel its pending files before Undo.');
@@ -105,7 +107,7 @@ const pushEnabled = () => !!release?.devupd || new URLSearchParams(location.sear
 // Exact original R246 bytes; the worker and Python runtime independently check again.
 const ORIGINAL_R246_SHA256 = 'c5315218f825f143b415ca554516541898abee843d3a236df0b54c04e1fb13a9';
 const status = (text, error = false) => { $('status').textContent = text; $('status').classList.toggle('error', error); };
-const hiddenPlugins = () => (release.catalog.op1r_plugins || []).map(f => f.id).filter(id => document.querySelector(`input[data-plugin="${id}"]`)?.checked === false);
+const hiddenPlugins = () => (release.catalog.op1r_plugins || []).filter(f => pluginLeftOut(f, document.querySelector(`input[data-plugin="${f.id}"]`))).map(f => f.id);
 const targetMetadata = () => Object.fromEntries((release?.plugin_metadata?.plugins || []).map(p => [p.name, p]));
 const targetBuiltins = () => release?.plugin_metadata?.builtins || [];
 const targetCore = () => {
@@ -135,11 +137,16 @@ function variantChoices(c) {
     v[group] = release.catalog[group].filter(f => f.file || f.files?.length || c[group].includes(f.id)).map(f => f.id);
   return v;
 }
+// An op1r_plugins entry is left out when its box is unticked. Opt-in entries (catalog "default": false) start
+// unticked, and without a card (no box) they stay out; other entries without a box stay in.
+function pluginLeftOut(f, input) { return input ? !input.checked : f.default === false; }
 function validateChoices(c) {
   const keys = ['base', 'effects', 'preset_cap', 'schema', 'synths'];
   if (!c || typeof c !== 'object' || Array.isArray(c) || Object.keys(c).filter(k => !['utilities', 'hidden', 'lander'].includes(k)).sort().join() !== keys.join() ||
       c.schema !== 1 || c.base !== release.catalog.base || !release.catalog.preset_caps.includes(c.preset_cap)) throw Error('These choices do not match this firmware base or preset capacity.');
-  if (Object.hasOwn(c, 'lander') && (typeof c.lander !== 'boolean' || !release.catalog.core_options?.some(f => f.id === 'lander'))) throw Error('Unsupported Lander option.');
+  if (Object.hasOwn(c, 'lander') && typeof c.lander !== 'boolean') throw Error('Unsupported Lander option.');
+  // A base without the Lander option (3.1) builds saved Lander choices without it; bit 64 stays reserved.
+  if (c.lander && !release.catalog.core_options?.some(f => f.id === 'lander')) { c = {...c}; delete c.lander; }
   const out = {...c, utilities: Object.hasOwn(c, 'utilities') ? c.utilities : [], hidden: Object.hasOwn(c, 'hidden') ? c.hidden : []};
   for (const group of ['synths', 'effects', 'utilities', 'hidden']) {
     const entries = group === 'hidden' ? release.catalog.op1r_plugins || [] : release.catalog[group];
@@ -245,15 +252,14 @@ function update() {
       }
       // Drum/tools choices do not change synth presets. Offer the static pack whenever every preset survives.
       $('preset-pack-download').hidden = !exact;
-      $('preset-pack-later').hidden = exact;
+      $('preset-pack-later').hidden = true; $('preset-pack-make').hidden = exact;
       $('preset-pack-download').href = `variants/${id}/presets.zip`;
       $('preset-pack-download').dataset.sha256 = presets.sha256;
-      $('preset-pack-later').textContent = 'Your matching pack comes with your build: the selection differs from the complete pack.';
       $('preset-pack-download').download = `${release.release.product?.slug || "op1-hundekraft"}-${id}.presets.zip`;
       $('preset-warning').hidden = count <= ($('expanded').checked ? 300 : 100);
       $('preset-warning').textContent = `This pack has ${count} presets; your selected limit is 100. Enable 300 presets below, or install a subset. Existing user presets also count toward the limit.`;
     } else {
-      $('preset-pack-download').hidden = true; $('preset-pack-download').removeAttribute('href');
+      $('preset-pack-download').hidden = true; $('preset-pack-download').removeAttribute('href'); $('preset-pack-make').hidden = true;
       $('preset-pack-later').hidden = false; $('preset-pack-later').textContent = 'This selection is unavailable in this release. Reload the workshop or choose another selection.'; $('preset-breakdown').replaceChildren();
       $('preset-total').textContent = '—'; $('preset-intro-total').textContent = '—';
       $('preset-warning').hidden = true; $('build').disabled = true;
@@ -317,7 +323,7 @@ $('firmware').addEventListener('change', e => chooseFile(e.target.files[0]));
 for (const event of ['dragenter', 'dragover']) $('drop-zone').addEventListener(event, e => { e.preventDefault(); if (!busy || firmwareWait) $('drop-zone').classList.add('dragover'); });
 $('drop-zone').addEventListener('dragleave', () => $('drop-zone').classList.remove('dragover'));
 $('drop-zone').addEventListener('drop', e => { e.preventDefault(); $('drop-zone').classList.remove('dragover'); chooseFile(e.dataTransfer.files[0]); });
-$('workshop').addEventListener('change', e => { if (e.target.matches('#expanded, #catalog input[type=checkbox][data-group], #catalog input[type=checkbox][data-plugin], #catalog input[type=checkbox][data-core]')) { clearDownloads(); updateStage(null); $('push-progress').hidden = true; pushStatus('Selections changed. Press Update OP–1 to review.'); update(); status(file ? 'Choices updated. Ready to build.' : 'Choose your original R246 firmware to continue.'); } });
+$('workshop').addEventListener('change', e => { if (e.target.matches('#expanded, #catalog input[type=checkbox][data-group], #catalog input[type=checkbox][data-plugin], #catalog input[type=checkbox][data-core]')) { clearDownloads(); updateStage(null); $('push-progress').hidden = true; pushStatus('Selections changed. Press Review changes to see what will be sent.'); update(); status(file ? 'Choices updated. Ready to build.' : 'Choose your original R246 firmware to continue.'); } });
 $('cancel').addEventListener('click', () => {
   if (!worker) return;
   worker.cancelBuild?.(); worker.terminate(); worker = null; clearDownloads();
@@ -332,7 +338,7 @@ async function buildFirmware(forSend = false) {
   clearDownloads();
   if (!forSend) $('log').textContent = '';
   status('Starting the local patcher…');
-  const active = new Worker('worker.js?v=3.0-hostile-ui-20261018', {type: 'module'});
+  const active = new Worker('worker.js?v=3.1-presets-20261101b', {type: 'module'});
   worker = active;
   $('cancel').hidden = false;
   try {
@@ -387,7 +393,8 @@ function deviceContext() {
   $('push-hint').hidden = true; $('push-hint').textContent = '';
   $('push-recovery').hidden = true;
   $('push-progress').hidden = true;
-  $('device-actions').hidden = true; $('device-cancel-pending').hidden = true;
+  $('device-actions').hidden = true; $('device-cancel-pending').hidden = true; $('device-firmware').hidden = true;
+  blockReview(false);
   if ($('push-plan')) $('push-plan').hidden = true;
 }
 function updateStage(stage) {
@@ -404,27 +411,63 @@ function observeConnection(port) {
   stopConnectionWatch = port.watchConnection?.(connected => {
     if (!connected && !installingUntil) {
       deviceInventory = null; observedOwn = []; showOwn();
-      $('device-state').textContent = 'OP–1 disconnected · reconnect USB to continue';
-      $('own-check').textContent = 'Connect OP–1';
+      deviceState('OP–1 disconnected · reconnect USB to continue', 'warn');
+      $('own-check').textContent = 'Connect my OP–1';
     }
   });
 }
-function connectionState(inv, name = 'OP–1') {
+// What the connected OP-1 runs (connect-result.js): the release's label only when its core is this release's.
+function connected(inv) {
+  let coreMatches = false;
+  try { coreMatches = !!inv?.core && sameCore(targetCore(), inv.core); } catch { /* core information missing: not a match */ }
+  return connectedText(inv, {label: release?.release.product?.label || 'hundekraft 3', coreMatches, haveFile: !!file});
+}
+// The device line: text plus a tone for its look (ok / warn / wait / error; none = not connected yet)
+function deviceState(text, tone) {
+  $('device-state').textContent = text;
+  if (tone) $('device-state').dataset.tone = tone; else delete $('device-state').dataset.tone;
+}
+function connectionState(inv) {
   deviceInventory = inv;
-  $('device-state').textContent = `${name} connected · ${inv?.plugins ? 'installed plugins checked' : 'firmware update available'}`;
-  $('own-check').textContent = 'Refresh';
+  const c = connected(inv);
+  deviceState(c.state, c.newCore ? 'warn' : 'ok');
+  $('own-check').textContent = 'Check again';
+}
+// Buttons under a device message. retry: Try again's label; file: the label of the button that opens the firmware
+// file panel; firmware: Choose op1_246.op1 (a new core needs the original R246).
+// primary: retry/file are the main actions (dark), with Review changes hidden (blockReview)
+function deviceButtons({retry = null, file = null, firmware = false, primary = false} = {}) {
+  $('device-actions').hidden = false;
+  for (const id of ['device-retry', 'device-download']) $(id).classList.toggle('primary', primary);
+  $('device-retry').hidden = !retry; if (retry) $('device-retry').textContent = retry;
+  $('device-download').hidden = !file; if (file) $('device-download').textContent = file;
+  $('device-firmware').hidden = !firmware;
+}
+// Review changes and its scope line, hidden while the card says to use a file instead (kept across showOwn)
+function blockReview(on) {
+  reviewBlocked = on;
+  $('own-send').hidden = on; document.querySelector('.device-scope').hidden = on;
 }
 function recoveryActions(action, label) {
   retryAction = action;
-  $('device-actions').hidden = false;
-  $('device-retry').textContent = label;
+  deviceButtons({retry: label, file: 'Use a firmware file instead'});
 }
 function deviceError(error, suffix = '', failed = true) {
+  // No MIDI, no OP-1, or an OP-1 that doesn't answer the update: one message each (connect-result.js)
+  // restarting only within the install window after a send, not for as long as the update stays unverified
+  const problem = failed && connectionProblem(error, {pending: recentlySent(installingUntil)});
+  if (problem) {
+    pushStatus(problem.text, true);
+    deviceState(problem.state, problem.kind === 'restarting' ? 'wait' : 'error'); $('own-check').textContent = 'Connect my OP–1';
+    $('push-hint').textContent = problem.hint; $('push-hint').hidden = !problem.hint;
+    deviceButtons({retry: problem.retry ? 'Try again' : null, file: problem.file, primary: !problem.review});
+    blockReview(!problem.review);
+    return;
+  }
   pushStatus(String(error.message || error) + suffix, failed);
-  if (failed && /No OP|MIDI access|talk to MIDI|no answer/i.test(error.message || '')) { $('device-state').textContent = 'Connection not confirmed'; $('own-check').textContent = 'Connect OP–1'; }
   $('push-hint').textContent = error.hint || '';
   $('push-hint').hidden = !error.hint;
-  if (failed) recoveryActions(retryAction, retryAction === 'verify' ? 'Retry verification' : retryAction === 'update' ? 'Resume update' : 'Retry connection');
+  if (failed) recoveryActions(retryAction, retryAction === 'verify' ? 'Retry verification' : retryAction === 'update' ? 'Resume update' : 'Try again');
 }
 function unresolvedUpdate(inv = null) {
   if (!pendingUpdate()) return;
@@ -437,7 +480,7 @@ function unresolvedUpdate(inv = null) {
   recoveryActions('verify', 'Retry verification');
   $('device-cancel-pending').hidden = Date.now() < installingUntil;
   pushStatus(Date.now() < installingUntil
-    ? 'Installation is still awaiting verification. Wait for the tape screen, then Refresh. Plugin edits and Undo wait until the result is known.'
+    ? 'Installation is still awaiting verification. Wait for the tape screen, then press Check again. Plugin edits and Undo wait until the result is known.'
     : 'The previous update is not verified. Retry verification, resume the update, or cancel its pending files before using Remove / Undo.');
   if (inv) pushStatus($('push-status').textContent + ' ' + updateDifferences(inv, ownState.verification).slice(0, 3).join('; ') + '.');
 }
@@ -445,22 +488,25 @@ async function openDevice() {
   const controller = new AbortController(), button = document.createElement('button');
   button.type = 'button'; button.className = 'connection-cancel'; button.textContent = 'Cancel connection';
   button.onclick = () => controller.abort(); $('device-feedback').append(button);
-  pushStatus('Allow MIDI access if asked. Looking for your OP–1…');
+  let ask = true;                                              // say why the browser asks, unless MIDI is already allowed
+  try { ask = (await navigator.permissions?.query({name: 'midi', sysex: true}))?.state !== 'granted'; } catch { /* unknown: say it */ }
+  pushStatus(ask ? MIDI_ASK : 'Looking for your OP–1…');
   try { return await openWebMidi(navigator, new URLSearchParams(location.search).has('debug'), {signal: controller.signal}); }
   finally { button.remove(); }
 }
 function requestFirmware() {
   if (file) return Promise.resolve();
   $('download-option').open = true;
-  $('firmware-reason').textContent = 'This update also needs a firmware upgrade. Choose original R246 here; preparation continues automatically. Nothing has been sent.';
-  pushStatus('Firmware upgrade needed. Choose original R246 below to continue.');
+  $('firmware-reason').textContent = NEW_CORE + ' Preparation continues as soon as you choose it.';
+  pushStatus(NEW_CORE);
+  deviceButtons({firmware: true});
   $('firmware').disabled = false;
   $('firmware').focus();
   const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'Cancel update';
   $('device-feedback').append(cancel);
   return new Promise((resolve, reject) => {
-    firmwareWait = {resolve: () => { cancel.remove(); $('firmware').disabled = true; resolve(); }};
-    cancel.onclick = () => { fileCheck++; firmwareWait = null; cancel.remove(); $('firmware').disabled = true; reject(Error('Cancelled before transfer. Your selections are saved.')); };
+    firmwareWait = {resolve: () => { cancel.remove(); $('device-firmware').hidden = true; $('device-actions').hidden = true; $('firmware').disabled = true; resolve(); }};
+    cancel.onclick = () => { fileCheck++; firmwareWait = null; cancel.remove(); $('device-firmware').hidden = true; $('firmware').disabled = true; reject(Error('Cancelled before transfer. Your selections are saved.')); };
   });
 }
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -486,9 +532,9 @@ async function verifyRestart(full) {
       if (controller.signal.aborted) break;
       if (inv) lastInventory = inv;
       if (inv && confirmInventory(inv)) {
-        observeConnection(port); connectionState(inv, port.name); await rememberOwn(); showOwn(inv);
+        observeConnection(port); connectionState(inv); await rememberOwn(); showOwn(inv);
         updateStage('verified'); $('push-label').textContent = 'UPDATE VERIFIED'; $('push-eta').textContent = 'installed';
-        pushStatus('Update installed and verified. Your OP–1 is ready.' + (ownFiles.some(([path]) => !inv.records.some(r => r.path === path)) ? ' Your saved uploads still need installing: press Update OP–1 again to review them.' : ''));
+        pushStatus('Update installed and verified. Your OP–1 is ready.' + (ownFiles.some(([path]) => !inv.records.some(r => r.path === path)) ? ' Your saved uploads still need installing: press Review changes again to check them.' : ''));
         $('device-actions').hidden = true;
         const box = $('push-plan');
         if (box && !box.hidden) {
@@ -600,7 +646,7 @@ async function sendToOp1() {
     const inv = await readInventory(port, {log});
     if (inv && confirmInventory(inv)) await rememberOwn();
     if (inv) showOwn(inv);
-    observeConnection(port); connectionState(inv, port.name);
+    observeConnection(port); connectionState(inv);
     const recheck = () => readInventory(port, {log});
     showInventory(inv);
     if (ownOnly) {
@@ -630,7 +676,7 @@ async function sendToOp1() {
         if (ownState.verification) confirmInventory(reviewed);
         await rememberOwn(); showOwn(reviewed);
         if (!ownState.verification) updateStage('verified');
-        pushStatus(ownState.verification ? 'Files match, but previous changes still await device confirmation. Refresh after restart to verify.' : 'Your OP–1 is up to date. No changes to send.'); return;
+        pushStatus(ownState.verification ? 'Files match, but previous changes still await device confirmation. Press Check again after the restart to verify.' : 'Your OP–1 is up to date. No changes to send.'); return;
       }
       expectedPlan = plan;
       log(`selected plugin changes: ${plan.send.length} files to send, ${plan.deletes.length} to remove`);
@@ -702,7 +748,7 @@ async function sendToOp1() {
       updateStage(null); $('device-actions').hidden = true;
       if (/Cancelled on the OP/.test(msg)) { ownState.verification = null; installingUntil = 0; await rememberOwn(); }
     }
-    deviceError(error, !cancelled && extra.off !== undefined ? ' On/off choices may already be saved on the OP–1 even if file installation failed or was cancelled. Refresh after restart to verify.' : '', !cancelled);
+    deviceError(error, !cancelled && extra.off !== undefined ? ' On/off choices may already be saved on the OP–1 even if file installation failed or was cancelled. Press Check again after the restart to verify.' : '', !cancelled);
   }
   finally { port?.close(); lock(false); showOwn(); $('push-send').disabled = false; $('own-send').disabled = false; }
 }
@@ -730,13 +776,16 @@ $('own-check').addEventListener('click', () => withDevice(async () => {
     port = await openDevice();
     pushStatus('Checking what’s on your OP–1…');
     const inv = await readInventory(port, {log: text => { $('log').textContent += text + '\n'; }});
-    observeConnection(port); connectionState(inv, port.name);
-    if (!inv?.plugins) { pushStatus('Connected. Update OP–1 will review the firmware upgrade needed for plugin management.'); return; }
+    observeConnection(port); connectionState(inv);
+    const found = connected(inv);
+    // An earlier core (or none with plugin files): Review changes sends the whole firmware, built from R246
+    if (!inv?.plugins) { pushStatus(found.text); if (found.newCore && !file) deviceButtons({firmware: true}); return; }
     const confirmed = confirmInventory(inv);
     await rememberOwn(); showOwn(inv);
     if (confirmed) updateStage('verified');
     if (pendingUpdate()) { unresolvedUpdate(inv); return; }
-    pushStatus(confirmed ? 'Update installed and verified. Your OP–1 is ready.' : ownState.verification ? 'Changes are not yet confirmed. If you cancelled on the OP–1, review and send again.' : 'Connected. Choose plugins or remove your uploads, then press Update OP–1.');
+    pushStatus(confirmed ? 'Update installed and verified. Your OP–1 is ready.' : ownState.verification ? 'Changes are not yet confirmed. If you cancelled on the OP–1, review and send again.' : found.text);
+    if (!confirmed && !ownState.verification && found.newCore && !file) deviceButtons({firmware: true});
   } catch (e) { deviceError(e, '', !/^Cancelled/.test(e.message || '')); }
   finally { port?.close(); lock(false); showOwn(); }
 }, true));
@@ -746,12 +795,12 @@ $('device-cancel-pending').onclick = () => withDevice(async () => {
     port = await openDevice();
     const inv = await readInventory(port);
     if (!inv?.plugins) throw Error('Reconnect an OP–1 running 3.0 to check the pending update.');
-    connectionState(inv, port.name);
+    connectionState(inv);
     if (confirmInventory(inv)) { await rememberOwn(); showOwn(inv); updateStage('verified'); pushStatus('Update installed and verified. Your OP–1 is ready.'); return; }
     if (Date.now() < installingUntil) { unresolvedUpdate(); return; }
     await rememberOwn();
     const reply = await session(port).ask(ABORT);
-    if (reply[2] !== OK) throw Error('The OP–1 did not cancel its pending files. Refresh before trying again.');
+    if (reply[2] !== OK) throw Error('The OP–1 did not cancel its pending files. Press Check again before trying again.');
     ownState.verification = null; installingUntil = 0; pushResume = {};
     await rememberOwn(); showOwn(inv); updateStage(null); $('push-plan')?.setAttribute('hidden', '');
     $('device-actions').hidden = true;
@@ -761,7 +810,20 @@ $('device-cancel-pending').onclick = () => withDevice(async () => {
 }, true);
 $('device-retry').onclick = () => retryAction === 'update' ? $('own-send').click() : $('own-check').click();
 document.querySelectorAll('a[href="#drop-zone"]').forEach(a => a.addEventListener('click', () => { $('download-option').open = true; }));
-$('device-download').onclick = () => { $('download-option').open = true; $('download-option').scrollIntoView({block: 'center'}); };
+// Path B: the firmware file panel (also Build firmware file / Use a firmware file instead under device messages)
+function openFilePath() {
+  $('download-option').open = true;
+  $('drop-zone').scrollIntoView({block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+}
+$('device-download').onclick = openFilePath;
+$('path-build').onclick = openFilePath;
+$('device-firmware').onclick = () => { openFilePath(); if (!$('firmware').disabled) $('firmware').click(); };
+// Path A: the same connect as the device card's own button, which it scrolls to
+$('path-connect').onclick = () => {
+  $('device-card').scrollIntoView({block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  $('own-check').focus({preventScroll: true});
+  $('own-check').click();
+};
 const stopButton = document.createElement('button'); stopButton.id = 'verification-stop'; stopButton.type = 'button'; stopButton.textContent = 'Check later'; stopButton.hidden = true;
 stopButton.onclick = () => { stopVerification = true; verificationController?.abort(); stopButton.disabled = true; };
 $('device-feedback').append(stopButton);
@@ -785,13 +847,14 @@ function showOwn(inv) {
     };
     li.append(name, btn); return li;
   }));
-  $('own-send').hidden = false;
-  $('own-send').textContent = 'Update OP–1 →';
+  $('own-send').hidden = reviewBlocked;
+  $('own-send').textContent = 'Review changes →';
   $('own-empty').hidden = rows.size > 0;
   if (release) { selectionReview(); countTabs(); updateSummary(); }
   if (storageError) ownStatus(storageError, true);
-  else if (ownState.verification) ownStatus('Update awaiting verification. Connect or Refresh once the tape screen returns.');
+  else if (ownState.verification) ownStatus('Update awaiting verification. Once the tape screen is back, press Connect my OP–1 or Check again.');
 }
+const pluginMax = () => release?.plugin_max || PLUGIN_MAX;        // this release's core (release.py), else 512 KB
 async function addOwn(list) {
   if (editingLocked() || !release) return;
   lock(true);
@@ -799,8 +862,8 @@ async function addOwn(list) {
   const errors = [];
   for (const f of list) {
     try {
-      if (f.size > 0x80000) throw Error(`${f.name}: too big to load (512 KB at most)`);
-      const d = new Uint8Array(await f.arrayBuffer()), {path, info} = checkPlugin(f.name, d);
+      if (f.size > pluginMax()) throw Error(`${f.name}: too big to load (${sizeText(pluginMax())} at most)`);
+      const d = new Uint8Array(await f.arrayBuffer()), {path, info} = checkPlugin(f.name, d, pluginMax());
       const same = ownFiles.findIndex(([p, bytes]) => pluginInfo(p, bytes).name === info.name);
       if (same >= 0) ownFiles.splice(same, 1);              // the same plugin again: the newer file wins
       ownFiles.push([path, d, f.name]);
@@ -810,7 +873,7 @@ async function addOwn(list) {
     } catch (e) { errors.push(e.message); }
   }
   await rememberOwn(); showOwn();
-  ownStatus(storageError || (errors.length ? errors.join('\n') : ownFiles.length ? 'Saved. Press Update OP–1 to review and install your changes.' : ''), !!storageError || errors.length > 0);
+  ownStatus(storageError || (errors.length ? errors.join('\n') : ownFiles.length ? 'Saved. Press Review changes to check and install them.' : ''), !!storageError || errors.length > 0);
   } catch (e) { ownStatus(e.message, true); }
   finally { lock(false); showOwn(); }
 }
@@ -818,6 +881,30 @@ $('own-files').addEventListener('change', e => { if (!editingLocked()) addOwn([.
 for (const event of ['dragenter', 'dragover']) $('own-drop').addEventListener(event, e => { e.preventDefault(); if (!editingLocked()) $('own-drop').classList.add('dragover'); });
 $('own-drop').addEventListener('dragleave', () => $('own-drop').classList.remove('dragover'));
 $('own-drop').addEventListener('drop', e => { e.preventDefault(); $('own-drop').classList.remove('dragover'); if (!editingLocked()) addOwn([...e.dataTransfer.files]); });
+// Any selection: the pack filtered in the browser (worker.js presetsOnly), no firmware file needed
+$('preset-pack-make').addEventListener('click', async () => {
+  if (busy || !release) return;
+  const config = validateChoices(choices()), snapshot = release;
+  const active = new Worker('worker.js?v=3.1-presets-20261101b', {type: 'module'});
+  lock(true); status('Starting the local patcher…');
+  try {
+    const data = await new Promise((resolve, reject) => {
+      active.onerror = e => reject(Error(e.message || 'The patcher could not start. Try again.'));
+      active.onmessage = ({data}) => {
+        if (data.type === 'log') status(data.text);
+        if (data.type === 'error') reject(Error(data.text));
+        if (data.type === 'presets') resolve(data);
+      };
+      active.postMessage({config, release: snapshot, presetsJob: true});
+    });
+    if (data.id !== configId(config)) throw Error('The preset pack does not match your selection. Try again.');
+    const url = URL.createObjectURL(new Blob([data.presets], {type: 'application/zip'})), a = document.createElement('a');
+    a.href = url; a.download = `${snapshot.release.product?.slug || 'op1-hundekraft'}-${data.id}.presets.zip`; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    status('Preset pack ready. Install it separately through disk mode.');
+  } catch (error) { status(error.message, true); }
+  finally { active.terminate(); lock(false); }
+});
 $('preset-pack-download').addEventListener('click', async e => {
   e.preventDefault();
   const target = e.currentTarget;
@@ -875,7 +962,7 @@ function renderCatalog() {
       const head = document.createElement('span'); head.className = 'cat-head';
       if (it.pick) {
         const [group, id] = it.pick.split(':'), input = document.createElement('input');
-        input.type = 'checkbox'; input.checked = it.defaultOn !== false; input.setAttribute('aria-label', `Include ${it.name}`);
+        input.type = 'checkbox'; input.checked = it.defaultOn !== false && !(group === 'plugin' && (release.catalog.op1r_plugins || []).some(f => f.id === id && f.default === false)); input.setAttribute('aria-label', `Include ${it.name}`);
         if (group === 'core') input.dataset.core = id; else if (group === 'plugin') input.dataset.plugin = id; else { input.dataset.group = group; input.value = id; }
         head.append(input);
       }
@@ -964,6 +1051,8 @@ try {
   document.querySelectorAll('#catalog input[type=checkbox], #own-files, #own-send, #own-check').forEach(el => el.disabled = true);
   $('device-card').hidden = !pushEnabled() || !release.catalog.base.startsWith('kennel');
   $('own').hidden = $('device-card').hidden;   // the plugin loader is kennel's
+  // Path A and the USB hints only where this release can update over USB; path B is always there
+  for (const id of ['path-usb', 'paths-unsure', 'usb-next']) $(id).hidden = $('device-card').hidden;
   // kennel bases always have room for 300 presets (100 would stop an OP-1 holding more at startup): no choice
   if (kennel()) {
     $('expanded').checked = true; document.querySelector('fieldset.capacity').hidden = true;
@@ -1007,7 +1096,7 @@ try {
     if (v && (v.phase != null && !['sending', 'installing'].includes(v.phase) || v.notBefore != null && (!Number.isFinite(v.notBefore) || v.notBefore < 0))) throw Error('Invalid pending update phase');
     installingUntil = v?.notBefore || 0;
     const restoreFile = ([p, raw, name]) => {
-      const bytes = new Uint8Array(raw), checked = checkPlugin(name, bytes);
+      const bytes = new Uint8Array(raw), checked = checkPlugin(name, bytes, pluginMax());
       if (checked.path !== p) throw Error('Saved plugin identity changed: ' + name);
       return [p, bytes, name];
     };
@@ -1021,5 +1110,6 @@ try {
   selectionsReady = true; busy = false; showOwn();
   update(); setControls();
   if (storageError) ownStatus(storageError, true);
-  status((restored ? 'Saved selections restored. ' : '') + 'Choose your original R246 firmware to build, or press Update OP–1.');
+  $('path-connect').disabled = $('device-card').hidden;
+  status((restored ? 'Saved selections restored. ' : '') + ($('device-card').hidden ? 'Choose your original R246 firmware to build.' : 'Choose your original R246 firmware to build, or connect your OP–1 to update over USB.'));
 } catch (error) { release = null; $('download-option').open = true; status(error.message, true); }

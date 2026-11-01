@@ -646,6 +646,7 @@
       "id": "father",
       "kind": "fx",
       "name": "Father",
+      "default": false,
       "bases": [
         "kennel30-plugins"
       ],
@@ -701,13 +702,176 @@
       ],
       "file": "amp.knl",
       "needs": []
-    }
-  ],
-  "core_options": [
+    },
     {
-      "id": "lander",
-      "bit": 64,
-      "default": false
+      "id": "trail",
+      "kind": "seq",
+      "name": "Trail",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "trail.knl",
+      "needs": []
+    },
+    {
+      "id": "grids",
+      "kind": "seq",
+      "name": "Grids",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "grids.knl",
+      "needs": []
+    },
+    {
+      "id": "brassophone",
+      "kind": "synth",
+      "name": "Brassophone",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "brassophone.knl",
+      "needs": []
+    },
+    {
+      "id": "dddd",
+      "kind": "synth",
+      "name": "dddd",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "dddd.knl",
+      "needs": []
+    },
+    {
+      "id": "steve",
+      "kind": "fx",
+      "name": "Steve",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "steve.knl",
+      "needs": []
+    },
+    {
+      "id": "nostromo",
+      "kind": "fx",
+      "name": "Nostromo",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "nostromo.knl",
+      "needs": []
+    },
+    {
+      "id": "juni",
+      "kind": "synth",
+      "name": "JUNI",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "juni.knl",
+      "needs": []
+    },
+    {
+      "id": "lander_bit",
+      "kind": "feature",
+      "name": "(bit 64: the Lander core option)",
+      "reserved": true,
+      "bases": [
+        "kennel30-plugins"
+      ]
+    },
+    {
+      "id": "juni_chorus",
+      "kind": "fx",
+      "name": "JUNI chorus",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "juni_chorus.knl",
+      "needs": [],
+      "saved": "juni chorus"
+    },
+    {
+      "id": "monolit",
+      "kind": "synth",
+      "name": "MONOLIT",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "monolit.knl",
+      "needs": []
+    },
+    {
+      "id": "sister",
+      "kind": "fx",
+      "name": "SISTER",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "sister.knl",
+      "needs": []
+    },
+    {
+      "id": "outatime",
+      "kind": "synth",
+      "name": "outatime",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "outatime.knl",
+      "needs": []
+    },
+    {
+      "id": "hollowsaint",
+      "kind": "synth",
+      "name": "Hollow Saint",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "hollowsaint.knl",
+      "needs": []
+    },
+    {
+      "id": "bloodmoon",
+      "kind": "synth",
+      "name": "Bloodmoon",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "bloodmoon.knl",
+      "needs": []
+    },
+    {
+      "id": "blot",
+      "kind": "synth",
+      "name": "blot",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "blot.knl",
+      "needs": []
+    },
+    {
+      "id": "vapora",
+      "kind": "synth",
+      "name": "VAPORA",
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "vapora.knl",
+      "needs": []
     }
   ]
 }

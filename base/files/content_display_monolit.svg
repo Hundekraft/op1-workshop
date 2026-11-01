@@ -1,0 +1,10 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="320px" height="160px" viewBox="0 0 320 160">
+<circle cx="40" cy="36" r="11" fill="#DED7FF"/>
+<circle cx="286" cy="64" r="4" fill="#383572"/>
+<polyline points="14,104 14,99 26,95 38,98 52,92 66,97 84,99 104,101 130,102 146,104" fill="#1D2040" stroke="#383572" stroke-width="1.5" stroke-linejoin="round"/>
+<polyline points="174,104 190,102 214,100 232,96 246,99 262,93 278,97 294,95 306,99 306,104" fill="#1D2040" stroke="#383572" stroke-width="1.5" stroke-linejoin="round"/>
+<polyline points="14,104 306,104" fill="none" stroke="#656579" stroke-width="1"/>
+<polyline points="160,32 155,42 150,116 160,116 160,32" fill="#1D2040" stroke="#DED7FF" stroke-width="1.5" stroke-linejoin="round"/>
+<polyline points="160,32 165,42 170,116 160,116 160,32" fill="#383572" stroke="#DED7FF" stroke-width="1.5" stroke-linejoin="round"/>
+<polyline points="155,42 165,42" fill="none" stroke="#DED7FF" stroke-width="1"/>
+</svg>

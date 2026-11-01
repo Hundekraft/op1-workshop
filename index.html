@@ -2,25 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hundekraft 3.0.3 / Firmware workshop</title>
+<title>hundekraft 3.1 / Firmware workshop</title>
 <link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" href="favicon-32.png?v=3"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="stylesheet" href="style.css?v=3.0.3-release-20261020"><link rel="stylesheet" href="preview.css?v=hundekraft-3.0"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-2.7.1-m19-sdk">
-<script type="module" src="app.js?v=3.0.3-not-applied-20261021"></script>
+<link rel="stylesheet" href="style.css?v=3.1-presets-20261101"><link rel="stylesheet" href="preview.css?v=hundekraft-3.0"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-3.1-nav-20261101">
+<script type="module" src="app.js?v=3.1-presets-20261101b"></script>
 <link rel="alternate" type="text/plain" href="llms.txt" title="Kennel plugin development for coding assistants">
 </head>
 <body>
 <header><a href="#" class="wordmark">hundekraft <span>instruments / experiments</span></a><nav class="tabs" aria-label="Pages"><a href="index.html" aria-current="page">Workshop</a><a href="manual.html">Manual</a></nav><span class="edition">ORIGINAL OP–1 · R246</span></header>
 <main>
-<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 3.0.3</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want and build your firmware.</p><details class="quickstart"><summary><span class="qs-cta">New here? Get started in 5 steps</span><a class="qs-coffee" href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Buy me a coffee ↗</a><span class="qs-hint">Build, install, add presets</span></summary>
-<ol class="qs-steps">
-<li><b>Get original R246</b><p>Get Teenage Engineering’s original OP-1 firmware file, <code>op1_246.op1</code>. The workshop checks that it is the unmodified original.</p></li>
-<li><b>Choose your plugins</b><p>Pick synths, drums, effects and tools below, or keep the defaults. Cards without a checkbox are always included. Add your own files under “Your plugins”. Your choices are saved in this browser.</p></li>
-<li><b>Build your firmware</b><p>Choose your R246 file below and press “Build my firmware”. Download the finished firmware and matching preset pack.</p><a href="#drop-zone">Go to the build</a></li>
-<li><b>Install the firmware</b><p>Switch the OP-1 off. Hold COM while switching it on, then press T1. Connect USB and copy the downloaded <code>.op1</code> file to the OP-1 disk. Eject and restart when asked.</p></li>
-<li><b>Add the presets</b><p>Unzip the preset pack. On the OP-1, press Shift + COM, then T3 for disk mode. Copy the folders inside the pack’s <code>synth</code> folder into <code>synth</code> on the OP-1, then eject.</p></li>
-</ol>
-<p class="qs-foot"><a href="manual.html#quick-start">Full walkthrough in the manual</a><span>Already on 3.0? Choose your plugins and press “Update OP–1”. Review the changes before sending.</span></p>
-</details><a class="preset-intro" href="#preset-pack"><strong id="preset-intro-total">—</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
+<section class="intro"><div class="eyebrow"><span data-release-label>hundekraft 3.1</span> / ORIGINAL OP–1</div><h1>Your OP–1. A little more yours.</h1><p>New sounds, useful additions and handcrafted presets. Choose what you want, then send it to your OP–1 over USB or build a firmware file.</p>
+<div class="paths">
+<section class="path-card path-usb" id="path-usb" aria-labelledby="path-usb-title"><span class="path-tag">USB</span><h2 id="path-usb-title">Update over USB</h2><p>Already on hundekraft 3.0 or newer? Plug in the USB cable with the OP–1 switched on as normal. Nothing to copy and no boot menu. Only what changed is sent.</p><button type="button" id="path-connect" class="path-go" disabled>Connect my OP–1 <span>→</span></button>
+<details class="path-steps"><summary>Show the steps</summary><ol class="qs-steps">
+<li><b>Connect my OP–1</b><p>Switch the OP–1 on, plug in USB and press “Connect my OP–1”. Click Allow when the browser asks about MIDI.</p></li>
+<li><b>Pick plugins</b><p>Tick what you want below. Your choices are saved in this browser.</p></li>
+<li><b>Review changes</b><p>See what will be added, updated or removed. Nothing is sent yet.</p></li>
+<li><b>Send to OP–1</b><p>Press T1 on the OP–1 when it asks. T2 cancels.</p></li>
+<li><b>Done</b><p>The OP–1 restarts and the page confirms what was installed.</p></li>
+</ol></details></section>
+<section class="path-card path-file" id="path-file" aria-labelledby="path-file-title"><span class="path-tag">FILE</span><h2 id="path-file-title">Install with a file</h2><p>First time, or coming from stock, op1r or another firmware? You need Teenage Engineering’s original <code>op1_246.op1</code>. Build the file here, then install it from the boot menu.</p><button type="button" id="path-build" class="path-go">Build firmware file <span>↓</span></button><p class="path-note"><strong>Coming from another firmware? Start clean.</strong> Leftover files can trip up a new one. Back up your tapes and sounds, then format before you install. <a href="manual.html#start-clean">How to back up and format →</a></p>
+<details class="path-steps"><summary>Show the steps</summary><ol class="qs-steps">
+<li><b>Get original R246</b><p>Get Teenage Engineering’s original OP–1 firmware file, <code>op1_246.op1</code>. The workshop checks that it is the unmodified original.</p></li>
+<li><b>Pick plugins</b><p>Pick synths, drums, effects and tools below, or keep the defaults. Cards without a checkbox are always included. Your choices are saved in this browser.</p></li>
+<li><b>Build firmware file</b><p>Choose your R246 file and press “Build firmware file”. Download the firmware and the matching preset pack.</p><a href="#drop-zone">Go to the build</a></li>
+<li><b>Install it</b><p>Switch the OP–1 off. Hold COM while switching it on, then press T1. Connect USB, copy the <code>.op1</code> file to the OP–1 disk and eject. Restart when asked.</p></li>
+<li><b>Add the presets</b><p>Unzip the preset pack. On the OP–1, press Shift + COM, then T3 for disk mode. Copy the folders inside the pack’s <code>synth</code> folder into <code>synth</code> on the OP–1, then eject.</p></li>
+<li><b>Next time, use USB</b><p>Once hundekraft is on your OP–1, plug in USB here and press “Connect my OP–1”.</p></li>
+</ol></details></section>
+<section class="path-card path-coffee" aria-labelledby="path-coffee-title"><span class="path-tag">SUPPORT</span><h2 id="path-coffee-title">Keep it going</h2><p>Every engine, screen and fix here is made in spare evenings and shared for free. If it made your OP–1 more fun, chip in and help the next one happen.</p><a class="path-go path-go-coffee" href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Support the workshop <span>↗</span></a></section>
+</div>
+<p class="paths-foot"><span id="paths-unsure">Not sure? Connect it anyway. We’ll check what’s on your OP–1 and show you the right way.</span><a href="manual.html#quick-start">Full walkthrough in the manual</a></p><a class="preset-intro" href="#preset-pack"><strong id="preset-intro-total">—</strong> handcrafted presets, matched to your build <span>↓</span></a></section>
 <form id="workshop">
 <div class="workspace">
 <div class="options">
@@ -32,32 +44,32 @@
 <p class="catalog-foot">Also in every build: MIDI CC and sync, and OP-Z controller mode. <a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">op1r’s notes ↗</a> · <a href="https://maikopruett.com/op-1" target="_blank" rel="noopener noreferrer">Maiko’s notes ↗</a></p></section>
 
 
-<section class="preset-pack" id="preset-pack"><div class="section-label"><span>THE HUNDEKRAFT SOUND COLLECTION</span><span>MADE FOR THESE ENGINES</span></div><div class="preset-heading"><strong id="preset-total">—</strong><h2>Sounds to<br>start something. Wanna be startin’ somethin’.</h2></div><p>From bell keys and drawbar organs to soft pads, frozen textures and slow-moving drones. We’ve made a collection for op1r and our own engines—your pack includes only the sounds your build can play.</p><div id="preset-breakdown" class="preset-breakdown"></div><p class="preset-examples">Lab Flute · Warm Ensemble · Frozen Toffee · Midnight Mass · Aurora</p><a id="preset-pack-download" class="preset-link" download hidden>Download matching preset pack ↓</a><p id="preset-pack-later" class="preset-later" hidden>Your matching pack comes with your build: some sounds you left out have presets.</p><small>Separate download. Install through disk mode after updating the firmware. The preset limit includes sounds already on your instrument. Granular presets need a sample loaded or recorded into the slot.</small><p id="preset-warning" role="status" hidden></p></section>
+<section class="preset-pack" id="preset-pack"><div class="section-label"><span>THE HUNDEKRAFT SOUND COLLECTION</span><span>MADE FOR THESE ENGINES</span></div><div class="preset-heading"><strong id="preset-total">—</strong><h2>Sounds to<br>start something. Wanna be startin’ somethin’.</h2></div><p>From bell keys and drawbar organs to soft pads, frozen textures and slow-moving drones. We’ve made a collection for op1r and our own engines—your pack includes only the sounds your build can play.</p><div id="preset-breakdown" class="preset-breakdown"></div><p class="preset-examples">Lab Flute · Warm Ensemble · Frozen Toffee · Midnight Mass · Aurora</p><a id="preset-pack-download" class="preset-link" download hidden>Download matching preset pack ↓</a><button id="preset-pack-make" class="preset-link" type="button" hidden>Download matching preset pack ↓</button><p id="preset-pack-later" class="preset-later" hidden>Your matching pack comes with your build: some sounds you left out have presets.</p><small>Separate download. Install through disk mode after updating the firmware. The preset limit includes sounds already on your instrument. Granular presets need a sample loaded or recorded into the slot.</small><p id="preset-warning" role="status" hidden></p></section>
 <fieldset class="capacity"><legend>02 / ROOM TO EXPLORE</legend><label><input type="checkbox" id="expanded" checked disabled><span><strong>300 user synth presets</strong><small>More space for your sounds. Every 3.0 build uses this limit, including sounds already on your OP–1.</small></span><span class="capacity-number" aria-hidden="true">300</span></label><p id="cap-warning" class="cap-warning" role="status" hidden>Only choose 100 if your OP–1 has 100 user synth presets or fewer. With more on it, the OP–1 stops at startup. If that happens, hold COM while you switch it on and install a build with 300.</p></fieldset>
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 3.0.3</div><p id="build-upstreams" class="build-upstreams"></p>
+<div class="build-brand" data-release-label>hundekraft 3.1</div><p id="build-upstreams" class="build-upstreams"></p>
 <p class="selection-summary-hint">Selected / available, including always-in features.</p>
 <dl id="selection-summary" aria-label="Your selected features"><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <section id="device-card" class="device-card" hidden aria-label="Update your OP–1">
 <div class="panel-label">UPDATE YOUR OP–1</div>
 <p id="device-state" role="status">Connect your OP–1 by USB to see what’s installed.</p>
-<button type="button" id="own-check">Connect OP–1</button>
-<button type="button" id="own-send" class="download">Update OP–1 →</button>
+<button type="button" id="own-check">Connect my OP–1</button>
+<button type="button" id="own-send" class="download">Review changes →</button>
 <p class="device-scope">Applies your workshop selections and your own plugins together. You’ll review every change before sending.</p>
 <ol id="update-steps" class="update-steps" aria-label="Update progress" hidden><li data-step="prepare">Prepare</li><li data-step="send">Send</li><li data-step="confirm">Confirm</li><li data-step="restart">Restart</li><li data-step="verified">Verified</li></ol>
 <div id="device-feedback" hidden><div id="push-progress" hidden><p id="push-label" class="push-label"></p><div class="push-track"><div id="push-fill" class="push-fill"></div></div><div class="push-row"><span id="push-amount"></span><span id="push-eta"></span></div></div><p id="push-status" role="status" aria-live="polite"></p><p id="push-hint" class="device-hint" hidden></p><p id="push-recovery" hidden class="push-recovery">If it doesn’t start afterwards, hold COM while you switch it on, choose 1. Upload firmware and install the downloaded file as usual.</p></div>
-<div id="device-actions" hidden><button type="button" id="device-cancel-pending" hidden>Cancel pending files</button><button type="button" id="device-retry">Retry connection</button><button type="button" id="device-download">Download firmware instead</button></div>
+<div id="device-actions" hidden><button type="button" id="device-cancel-pending" hidden>Cancel pending files</button><button type="button" id="device-retry">Try again</button><button type="button" id="device-firmware" hidden>Choose op1_246.op1</button><button type="button" id="device-download">Use a firmware file instead</button></div>
 <p class="device-note">Chrome, Edge or Firefox on a computer. Allow MIDI access when asked. First installation uses the boot menu.</p>
 </section>
-<div id="push" hidden><button type="button" id="push-send" hidden>Update OP–1</button></div>
-<details id="download-option" class="download-option"><summary>Download firmware instead</summary><p id="firmware-reason">For first installation or installing through the boot menu.</p><div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
+<div id="push" hidden><button type="button" id="push-send" hidden>Review changes</button></div>
+<details id="download-option" class="download-option"><summary>Use a firmware file instead</summary><p id="firmware-reason">For first installation or installing through the boot menu.</p><div class="file-area" id="drop-zone"><label for="firmware"><strong>Bring your original R246</strong><span>Original, unmodified op1_246.op1 only — drop here or choose a file</span></label><input id="firmware" type="file" accept=".op1"><p id="file-name">No firmware selected</p></div>
 <p class="privacy">The firmware stays in this browser. No account, no upload, no device key.</p>
-<button id="build" type="submit" disabled>Build my firmware <span>↗</span></button>
+<button id="build" type="submit" disabled>Build firmware file <span>↗</span></button>
 <button id="cancel" type="button" hidden>Cancel build</button>
 <p id="status" role="status" aria-live="polite">Loading the feature catalog…</p>
-<div id="downloads" hidden><a id="download-firmware" class="download">Download firmware ↓</a><a id="download-presets">Download matching preset pack</a><a id="download-report">Download build record</a></div>
+<div id="downloads" hidden><a id="download-firmware" class="download">Download firmware file ↓</a><a id="download-presets">Download matching preset pack</a><a id="download-report">Download build record</a><p id="usb-next" class="usb-next" hidden>Next time is easier. Once hundekraft is on your OP–1, plug in USB here and press “Connect my OP–1”. Updates and new plugins go straight over, with no file and no boot menu.</p></div>
 </details>
 <section class="support"><div><span class="bundle-kicker">KEEP THE EXPERIMENTS GOING</span><p>Enjoying the workshop? Help support more sounds and firmware experiments.</p></div><a href="https://buymeacoffee.com/hundekraft" target="_blank" rel="noopener noreferrer">Buy me a coffee ↗</a></section>
 <div class="config-actions"><button type="button" id="export" disabled>Save choices</button><label for="import">Load choices<input type="file" id="import" accept=".json" hidden disabled></label></div>
@@ -67,6 +79,17 @@
 </form>
 <section class="after"><span>03 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
 <section class="after changelog" id="changelog"><span>04 / CHANGELOG</span><div>
+<h3>3.1</h3>
+<p>Install the full firmware once (boot menu or the workshop’s full update) and back up your tapes and sounds first. After that, updates go over USB.</p>
+<p>New synths and effects:</p>
+<ul><li>MONOLIT, a ladder-filter synth for bass and leads (Hundekraft)</li><li>JUNI and JUNI chorus, an early-80s polysynth and its chorus (Hundekraft)</li><li>SISTER, a cathedral reverb whose tail sings (Hundekraft)</li><li>outatime, a time-travel synth (LizardMan245)</li><li>Bloodmoon, a gothic organ with a haunted bell (Nola Drift / SammiBabe666)</li><li>Hollow Saint, a haunted hurdy-gurdy (SammiBabe666)</li><li>From op1r: Grids and dddd, Steve and blot (pcppcp), Brassophone (nvmsocool), Nostromo (Lewis-Clayton), VAPORA (AiAAAA)</li></ul>
+<p>New features:</p>
+<ul><li>Master effect routing, Dots synth locks, Sampler+ play modes (pcppcp, Anthony Berg / op1r)</li><li>Chord mode page B and more scales and key maps (pcppcp / op1r, Hundekraft)</li><li>Amp, a live-input amp with a tuner, and new Resource monitor pages (Hundekraft)</li><li>Presets use the new effects and LFOs more, and the workshop offers a matching preset pack for any selection</li></ul>
+<p>Faster and steadier:</p>
+<ul><li>Plugins run from faster memory, so big chords on heavy sounds stay clean</li><li>Many synths and effects need much less CPU and sound the same</li><li>Recording to tape no longer slows the OP-1 (after op1r)</li><li>Fewer save stalls when you turn knobs (pcppcp / op1r)</li></ul>
+<p>Changed:</p>
+<ul><li>New screens for Wavetable, JUNI, JUNI chorus and Taffy</li><li>Pew is redesigned with 16 new presets; older Pew sounds play differently</li><li>Father is rebuilt and lighter, with a slightly darker tail</li><li>The Lander game is gone; its memory now speeds up the plugins</li></ul>
+<p>Fixes: disk mode ends on eject again, tape recording stops cleanly when flash runs low, room for 63 sampler sounds (move extras past 33 off before going back to 3.0.3), no stuck notes in scale and chord mode, and fixes for Gin, Trail and the sampler tools.</p>
 <h3>3.0.3</h3>
 <ul><li>Oxbow: larger two-line control names and values, with the artwork raised to make room. (Hundekraft, based on zvenson’s OberVave)</li><li>C64 arpeggiator: turn orange right to hold notes, like the stock arpeggio; Gate moves to Shift + orange. Turn blue left past Major for TABLE OFF, which plays only the keys you hold. (Hundekraft)</li></ul>
 <h3>3.0.2</h3>

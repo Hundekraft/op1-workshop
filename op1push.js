@@ -64,6 +64,9 @@ export function pathOk(p) {
 // runs hundekraft 2.7 or older, op1r or TE's firmware (or it's busy restarting), and needs one install through the update menu.
 export const NO_UPDATE_TEXT = "Your OP–1 is connected but doesn't answer the USB update. It probably runs hundekraft 2.7 or older, op1r or TE's own firmware, and those can't be updated over USB. Install 3.0 once through the update menu: download the firmware, switch the OP–1 off, hold COM while you switch it on, press T1 and copy the file to the OP–1 disk. After that, Send to OP–1 works. If you just confirmed an update, wait for the tape screen and try again.";
 // a plugin file the OP-1 may delete (du_plugin_path): content/ or plugins/ <file>.knl|.op1p
+// error.code on the connection failures below, so the page can tell them apart without reading the text:
+// 'no-midi' (no Web MIDI), 'midi-denied', 'no-port' (no OP-1 port), 'no-reply' (error.cmd got no answer)
+const coded = (error, code, cmd) => Object.assign(error, {code}, cmd === undefined ? {} : {cmd});
 export const pluginPath = p => pathOk(p) && /^(content|plugins)\/[^/.][^/]*\.(knl|op1p)$/.test(p);
 const u32 = v => [v & 0xFF, v >>> 8 & 0xFF, v >>> 16 & 0xFF, v >>> 24 & 0xFF];
 const rd32 = b => (b[0] | b[1] << 8 | b[2] << 16 | b[3] << 24) >>> 0;
@@ -138,9 +141,9 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
     }
     return null;
   }
-  const silent = () => Error(NO_UPDATE_TEXT);
+  const silent = cmd => coded(Error(NO_UPDATE_TEXT), 'no-reply', cmd);
   const hello = await ask(HELLO);
-  if (!hello) throw silent();
+  if (!hello) throw silent(HELLO);
   log(`OP–1 update protocol ${rd32(hello[1])}`);
   if ((deletes.length || off !== undefined) && !(hello[1][4] & CAP_PLUGINS))
     throw Error('This OP–1 cannot apply plugin choices over USB. Install the downloaded firmware through the update menu.');
@@ -156,7 +159,7 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
     }
   }
   if (!first && !acked) {                                           // start over: staging on the OP-1 cleared
-    if (!await ask(ABORT)) throw silent();
+    if (!await ask(ABORT)) throw silent(ABORT);
     Object.assign(resume, {key, index: 0, open: false, acked: 0});
   }
   let done = files.slice(0, first).reduce((n, [, d]) => n + d.length, 0);
@@ -164,7 +167,7 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
     const [path, data] = files[i];
     if (!(i === first && acked)) {
       const r = await ask(BEGIN, Uint8Array.from([...u32(data.length), ...u32(crc32(data)), ...new TextEncoder().encode(path), 0]));
-      if (!r) throw silent();
+      if (!r) throw silent(BEGIN);
       // BEGIN is not idempotent: "state" after a resend means the first BEGIN opened the file (ABORT came first)
       if (r[0] !== OK && !(r[0] === E_STATE && r[2])) throw Error(`${path}: refused (${statusText(r[0])})`);
       acked = 0;
@@ -218,7 +221,7 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
   let asked = false;
   for (;;) {
     const r = await final(cmd);
-    if (!r) throw silent();
+    if (!r) throw silent(cmd);
     if (r[0] === OK) { resume.key = null; return; }
     if (r[0] === E_STATE && asked) { resume.key = null; throw Error(off !== undefined ? 'Cancelled on the OP–1. File installation was cancelled; plugin on/off choices are already saved for the next restart.' : 'Cancelled on the OP–1. No file changes were installed.'); }
     if (r[0] !== WAIT_KEY) { resume.key = null; throw Error(`The OP–1 refused the update (${statusText(r[0])})`); }
@@ -238,14 +241,14 @@ export async function openWebMidi(nav = globalThis.navigator, debug = false, {si
     Promise.resolve(promise).then(value => { signal.removeEventListener('abort', abort); if (signal.aborted) reject(cancelled()); else resolve(value); },
       error => { signal.removeEventListener('abort', abort); reject(error); });
   });
-  if (!nav?.requestMIDIAccess) throw Error("This browser can't talk to MIDI devices. Use Chrome, Edge or Firefox on a computer, or install the downloaded firmware as usual.");
+  if (!nav?.requestMIDIAccess) throw coded(Error("This browser can't talk to MIDI devices. Use Chrome, Edge or Firefox on a computer, or install the downloaded firmware as usual."), 'no-midi');
   let access;
   try { access = await wait(nav.requestMIDIAccess({sysex: true})); }
-  catch { if (signal?.aborted) throw cancelled(); throw Error('MIDI access was blocked. Allow it in the site settings, or install the downloaded firmware as usual.'); }
+  catch { if (signal?.aborted) throw cancelled(); throw coded(Error('MIDI access was blocked. Allow it in the site settings, or install the downloaded firmware as usual.'), 'midi-denied'); }
   const find = ports => [...ports.values()].find(p => p.state !== 'disconnected' && /op-?1/i.test(p.name || ''));
   const output = find(access.outputs), input = find(access.inputs);
   if (!output || !input) {
-    const error = Error('No OP–1 found. Connect it by USB and try again.');
+    const error = coded(Error('No OP–1 found. Connect it by USB and try again.'), 'no-port');
     error.hint = 'If you just confirmed an update, wait for the tape screen. If it is already connected, unplug the USB cable and plug it back in.';
     throw error;
   }
@@ -307,7 +310,7 @@ export function session(port, {timeoutMs = 3000, tries = 5, log = () => {}, sign
         if (r[0] === cmd && r[1] === want) return r;
       }
     }
-    throw Error(NO_UPDATE_TEXT);
+    throw coded(Error(NO_UPDATE_TEXT), 'no-reply', cmd);
   }
   const s = {
     ask,
@@ -417,15 +420,18 @@ export function pluginInfo(path, d) {
 // ---- Your own plugin files (BYOP): the loader's checks (kennel kn_load.c kn_parse, plugload/op1p_load.c op1p_parse)
 // on the page, so a file the OP-1 would skip at boot is refused before it is sent ----
 export const PLUGIN_API = 1;                                       // OP1_PLUGIN_API, synth_sdk/op1_plugin.h (= OP1P_API)
-export const PLUGIN_MAX = 0x80000;                                // kn_boot.c KN_FILE_MAX: loader limit, not transport limit
+export const PLUGIN_MAX = 0x80000;                                // kn_boot.c KN_FILE_MAX before kn_mem.h: loader limit, not transport limit
+// the release's own core says its limit (release.json plugin_max, kn_mem.h KN_FILE_MAX: 1 MiB from 2026-10-21); own files
+// only reach an OP-1 running that core (a core mismatch sends the whole update first), so older cores keep 512 KB
+export const sizeText = n => n >= 0x100000 && n % 0x100000 === 0 ? `${n / 0x100000} MB` : `${Math.round(n / 1024)} KB`;
 const crcSkipping = (d, at) => { const c = d.slice(); c.fill(0, at, at + 4); return crc32(c); };
 // fileName, bytes -> {path: plugins/<type name>.knl|.op1p, info (pluginInfo)}; throws an Error that says what's wrong
-export function checkPlugin(fileName, d) {
+export function checkPlugin(fileName, d, max = PLUGIN_MAX) {
   const ext = /\.op1p$/i.test(fileName) ? 'op1p' : /\.knl$/i.test(fileName) ? 'knl' : null;
   const bad = why => Error(`${fileName}: ${why}`);
   if (!ext) throw bad('not a plugin file (.knl or .op1p)');
   if (d.length < 16 || (ext === 'knl' && d.length % 4)) throw bad('the file is cut short or damaged');   // .knl is padded, op1r's .op1p isn't
-  if (d.length > PLUGIN_MAX) throw bad('too big to load (512 KB at most)');
+  if (d.length > max) throw bad(`too big to load (${sizeText(max)} at most)`);
   const dv = new DataView(d.buffer, d.byteOffset, d.byteLength);
   let name, svgEnd = 0;
   try {
