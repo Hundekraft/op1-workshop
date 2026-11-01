@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "20474d1611a28bd7",
+    "id": "4bb2b18ad16abfa7",
     "product": {
       "name": "hundekraft",
-      "version": "3.1",
-      "label": "hundekraft 3.1",
-      "slug": "hundekraft-3.1"
+      "version": "3.1.1",
+      "label": "hundekraft 3.1.1",
+      "slug": "hundekraft-3.1.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -41,6 +41,7 @@
             "description": "Add resonance and drive"
           }
         ],
+        "screen_bytes": 143048,
         "file": "wavetable.knl",
         "needs": []
       },
@@ -69,6 +70,7 @@
             "description": "Blend in a resonant wave"
           }
         ],
+        "screen_bytes": 24336,
         "file": "taffy.knl",
         "needs": []
       },
@@ -97,6 +99,7 @@
             "description": "Slow chorale to fast rotation"
           }
         ],
+        "screen_bytes": 132824,
         "file": "pew.knl",
         "needs": []
       },
@@ -125,6 +128,7 @@
             "description": "Sweep and swell with slow modulation"
           }
         ],
+        "screen_bytes": 42480,
         "file": "elg.knl",
         "needs": []
       }
@@ -155,6 +159,7 @@
             "description": "Blend the wet signal with the dry"
           }
         ],
+        "screen_bytes": 21112,
         "file": "washer.knl",
         "needs": []
       },
@@ -183,6 +188,7 @@
             "description": "Add reverb; turn fully up to freeze"
           }
         ],
+        "screen_bytes": 46496,
         "file": "snowglobe.knl",
         "needs": []
       }
@@ -241,6 +247,7 @@
         "name": "Supersaw",
         "type": "supersaw synth",
         "description": "Detuned saw stack.",
+        "screen_bytes": 8936,
         "file": "supersaw.knl",
         "needs": []
       },
@@ -250,6 +257,7 @@
         "name": "FM Bell",
         "type": "FM bell synth",
         "description": "FM bells.",
+        "screen_bytes": 7616,
         "file": "fmbell.knl",
         "needs": []
       },
@@ -259,6 +267,7 @@
         "name": "Granular",
         "type": "granular sampler",
         "description": "Plays the slot's sample as grains.",
+        "screen_bytes": 1632,
         "file": "granular.knl",
         "needs": []
       },
@@ -268,6 +277,7 @@
         "name": "Tape",
         "type": "tape echo",
         "description": "Vintage tape echo.",
+        "screen_bytes": 14760,
         "file": "tape.knl",
         "needs": []
       },
@@ -277,6 +287,7 @@
         "name": "Clouds",
         "type": "granular effect",
         "description": "Granular textures, after Mutable Instruments Clouds.",
+        "screen_bytes": 5976,
         "file": "clouds.knl",
         "needs": []
       },
@@ -286,6 +297,7 @@
         "name": "Reverb",
         "type": "plate / hall reverb",
         "description": "Plate and hall reverb, after Mutable Instruments Elements.",
+        "screen_bytes": 68184,
         "file": "reverb.knl",
         "needs": []
       },
@@ -299,6 +311,7 @@
         "bases": [
           "op1r30mo-chord-plugins"
         ],
+        "screen_bytes": 9448,
         "file": "mixtur.knl",
         "needs": []
       },
@@ -312,6 +325,7 @@
         "bases": [
           "op1r30mo-chord-plugins"
         ],
+        "screen_bytes": 7176,
         "file": "arc.knl",
         "needs": []
       },
@@ -325,6 +339,7 @@
         "bases": [
           "op1r30mo-chord-plugins"
         ],
+        "screen_bytes": 14024,
         "file": "palme.knl",
         "needs": []
       },
@@ -338,6 +353,7 @@
         "bases": [
           "op1r30mo-chord-plugins"
         ],
+        "screen_bytes": 1632,
         "file": "in_a_room.knl",
         "needs": [],
         "saved": "in a room"
@@ -349,6 +365,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 144384,
         "file": "eva.knl",
         "needs": []
       },
@@ -359,6 +376,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 110720,
         "file": "mbira.knl",
         "needs": []
       },
@@ -369,6 +387,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 170824,
         "file": "stutter.knl",
         "needs": []
       },
@@ -379,6 +398,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 134416,
         "file": "hail.knl",
         "needs": []
       },
@@ -472,6 +492,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 2616,
         "file": "euclid.knl",
         "needs": []
       },
@@ -483,6 +504,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 128,
         "file": "dots.knl",
         "needs": []
       },
@@ -494,6 +516,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 4704,
         "file": "oracle.knl",
         "needs": []
       },
@@ -505,6 +528,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 400,
         "file": "peal.knl",
         "needs": []
       },
@@ -516,6 +540,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 3488,
         "file": "quad.knl",
         "needs": []
       },
@@ -582,6 +607,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 7160,
         "file": "sysmon.knl",
         "needs": []
       },
@@ -603,6 +629,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 182664,
         "file": "oxbow.knl",
         "needs": []
       },
@@ -613,6 +640,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 48888,
         "file": "crush.knl",
         "needs": []
       },
@@ -623,6 +651,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 171664,
         "file": "warble.knl",
         "needs": []
       },
@@ -633,6 +662,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 128,
         "file": "plate.knl",
         "needs": []
       },
@@ -643,6 +673,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 64672,
         "file": "sid.knl",
         "needs": []
       },
@@ -653,6 +684,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 300280,
         "file": "c64arp.knl",
         "needs": []
       },
@@ -664,6 +696,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 39352,
         "file": "father.knl",
         "needs": []
       },
@@ -684,6 +717,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 24496,
         "file": "aether.knl",
         "needs": []
       },
@@ -704,6 +738,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 25904,
         "file": "gin.knl",
         "needs": []
       },
@@ -714,6 +749,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 67672,
         "file": "amp.knl",
         "needs": []
       },
@@ -724,6 +760,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 240,
         "file": "trail.knl",
         "needs": []
       },
@@ -735,6 +772,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 128,
         "file": "grids.knl",
         "needs": []
       },
@@ -746,6 +784,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 21008,
         "file": "brassophone.knl",
         "needs": []
       },
@@ -757,6 +796,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 128,
         "file": "dddd.knl",
         "needs": []
       },
@@ -768,6 +808,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 136,
         "file": "steve.knl",
         "needs": []
       },
@@ -779,6 +820,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 136728,
         "file": "nostromo.knl",
         "needs": []
       },
@@ -790,6 +832,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 38000,
         "file": "juni.knl",
         "needs": []
       },
@@ -810,6 +853,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 20744,
         "file": "juni_chorus.knl",
         "needs": [],
         "saved": "juni chorus"
@@ -821,6 +865,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 3032,
         "file": "monolit.knl",
         "needs": []
       },
@@ -831,6 +876,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 19328,
         "file": "sister.knl",
         "needs": []
       },
@@ -841,6 +887,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 82728,
         "file": "outatime.knl",
         "needs": []
       },
@@ -852,6 +899,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 70728,
         "file": "hollowsaint.knl",
         "needs": []
       },
@@ -862,6 +910,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 32232,
         "file": "bloodmoon.knl",
         "needs": []
       },
@@ -873,6 +922,7 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 128,
         "file": "blot.knl",
         "needs": []
       },
@@ -884,17 +934,28 @@
         "bases": [
           "kennel30-plugins"
         ],
+        "screen_bytes": 1152,
         "file": "vapora.knl",
         "needs": []
       }
-    ]
+    ],
+    "screen_budget": {
+      "limit": 8000000,
+      "margin": 65536,
+      "base": 4409868,
+      "worst_screen": 250000,
+      "per_preset": 2785,
+      "own_min": 16384,
+      "own_svg_factor": 5.1,
+      "own_size_factor": 2.25
+    }
   },
   "devupd": true,
-  "runtime_sha256": "5321b804e355311d94b699e4e0a7975f2798f1b6ecd46da31ae346208ea8475c",
-  "base_sha256": "6b86bfedd90df173f549eb60d77fd195bf03cee3158d5447c2e7731d5147e017",
+  "runtime_sha256": "675c22b6412825b40f22db064e2c4701e3c27eb25eb9dcf5ad66d690973e8129",
+  "base_sha256": "aa7e96a5f9d049bbf0bc1ed9c137dde32940904d912c3c370b5db3bb1bfe29f7",
   "variants": {
     "7ff": {
-      "sha256": "d707a256c66e62c1bc0477b630d63f0b77789d065ac489d260852414d838f394",
+      "sha256": "58effbbccf602ae83f7a3b08f4c9b05fa5a81ff958ceef283e42ab9041e33b7d",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
@@ -1784,8 +1845,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 186308,
-        "crc": 694709056
+        "len": 186584,
+        "crc": 3555095889
       }
     }
   },
@@ -2552,8 +2613,8 @@
   },
   "core": {
     "start": 31457280,
-    "len": 186308,
-    "crc": 694709056
+    "len": 186584,
+    "crc": 3555095889
   },
   "plugin_max": 1048576
 }

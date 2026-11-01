@@ -9,6 +9,7 @@ import {CATEGORIES} from './categories.js?v=new-on-top-20261028';               
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
+let observedOwn = [];                                            // your own plugins the connected OP-1 reports (inventory records)
 let ownFiles = [];                                              // your own plugin files: [[plugins/ path, bytes, file name]]
 let stopConnectionWatch = null, deviceInventory = null, firmwareWait = null, stopVerification = false, verificationController = null, retryAction = 'connect';
 let reviewBlocked = false;                                    // no MIDI / no OP-1 / not hundekraft 3: Review changes hidden
@@ -196,6 +197,11 @@ function selectionReview() {
     return `<label><input type="radio" name="selection-claim${i}" value="${escapeText(n)}" ${possible && !editingLocked() ? '' : 'disabled'}> ${escapeText(n)}${possible ? '' : ' (would remove a plugin that is always included)'}</label>`;
   }).join('')}</fieldset>`).join('') + (plan.conflicts.length ? '<p>The other whole plugin is left out of your firmware and preset pack.</p><button type="button" data-apply disabled>Apply choices</button>' : '')
     + (own.length ? `<p>Your own files are added when you send; they are not part of the firmware download.${sending.conflicts.length ? ` Before sending, choose which whole plugin stays on: ${sending.conflicts.map(x => `${x.names.join(' / ')} (${claimText(x.claim)})`).map(escapeText).join('; ')}.` : ''}${sending.unknown.length ? ` Compatibility could not be checked for ${sending.unknown.map(escapeText).join(', ')}.` : ''} The OP–1’s installed plugins are checked again before sending.</p>` : '');
+  // R246's drawing heap (runtime.screen_memory): the chosen files' screens, the preset cap and the user's own files
+  const screens = screenMemory(c, ownScreens());
+  const overText = screens.over ? 'That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit.' : '';
+  if (overText) box.insertAdjacentHTML('beforeend', `<p class="screen-over" role="alert">${escapeText(overText)}</p>`);
+  if ($('screen-note')) { $('screen-note').textContent = overText; $('screen-note').hidden = !overText; }   // also next to Build and Review changes
   const apply = box.querySelector('[data-apply]');
   if (apply) {
     const chosen = () => Object.fromEntries(plan.conflicts.flatMap((x, i) => { const input = box.querySelector(`input[name=selection-claim${i}]:checked`); return input ? [[x.claim, input.value]] : []; }));
@@ -209,7 +215,27 @@ function selectionReview() {
       clearDownloads(); update(); status('Choices applied to your firmware, manual and preset pack.');
     };
   }
-  return plan;
+  return screens.over ? {...plan, blocked: true} : plan;
+}
+// Same sum as runtime.screen_memory: base + chosen files' screen_bytes + preset_cap x per_preset + own files + worst screen
+function screenMemory(c, ownBytes = 0) {
+  const b = release.catalog.screen_budget;
+  if (!b) return {over: 0, heaviest: []};
+  const chosen = ['synths', 'effects', 'utilities', 'op1r_plugins'].flatMap(g => (release.catalog[g] || []).filter(f => f.screen_bytes &&
+    (f.always || (g === 'op1r_plugins' ? !c.hidden?.includes(f.id) : c[g].includes(f.id)))));
+  const need = b.base + chosen.reduce((n, f) => n + f.screen_bytes, 0) + (c.preset_cap || 300) * b.per_preset + ownBytes + b.worst_screen;
+  return {over: Math.max(0, need - (b.limit - b.margin)), heaviest: chosen.sort((x, y) => y.screen_bytes - x.screen_bytes).slice(0, 5).map(f => f.name || f.id)};
+}
+// Your own plugins' screens: files listed here (from the SVG each .knl starts with, as runtime.own_screen_bytes) and
+// plugins the connected OP-1 reports that aren't listed (only their size is known: own_size_factor x file size)
+function ownScreens() {
+  const b = release?.catalog?.screen_budget;
+  if (!b) return 0;
+  const listed = new Map(ownFiles.map(([p, d]) => [pluginInfo(p, d).name, d]));
+  let n = 0;
+  for (const d of listed.values()) { const svg = d[0] === 0x3C ? d.indexOf(0) : 0; n += Math.max(b.own_min, Math.ceil(Math.max(svg, 0) * b.own_svg_factor)); }
+  for (const r of observedOwn) if (!listed.has(r.name) && !/off|removed/.test(r.state || '')) n += Math.max(b.own_min, Math.ceil((r.size || 0) * b.own_size_factor));
+  return n;
 }
 function catalogInput(name) {
   return [...document.querySelectorAll('#catalog input[type=checkbox]')].find(i => i.value === name || i.dataset.plugin === name);
@@ -629,6 +655,8 @@ async function sendToOp1() {
     unresolvedUpdate();
     return;
   }
+  const screens = screenMemory(choices(), ownScreens());
+  if (screens.over) { ownStatus('That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit. Nothing has been sent.', true); return; }
   const own = ownFiles.map(([p, d]) => [p, d]);
   let expectedPlan = null;
   let files = ownOnly ? own : pushFiles, total = files.reduce((n, [, d]) => n + d.length, 0), port, sent = 0, extra = {}, pluginsOnly = false;
@@ -829,7 +857,6 @@ stopButton.onclick = () => { stopVerification = true; verificationController?.ab
 $('device-feedback').append(stopButton);
 // Your own plugin files: checked as the OP-1's loader would, kept across rebuilds, one per name
 const ownStatus = (text, error = false) => { $('own-status').textContent = text; $('own-status').classList.toggle('error', error); };
-let observedOwn = [];
 function showOwn(inv) {
   if (inv) { deviceInventory = inv; observedOwn = inv.records.filter(r => r.path?.startsWith('plugins/')); }
   const rows = new Map(observedOwn.map(r => [r.name || r.path, {name: r.name, path: r.path, label: `Your plugin · Installed${r.state === 'loaded' ? '' : ' · ' + r.state}`}]));

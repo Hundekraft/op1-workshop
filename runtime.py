@@ -136,6 +136,33 @@ def files(config, catalog):
     return out
 
 
+def screen_memory(config, catalog, own_bytes=0):
+    """R246's drawing heap (TE heap) for a normalized configuration, from the catalog's measured screen_bytes and
+    screen_budget (kennel bases; {} without them): the boot use (base, the chosen files' screens, preset_cap user
+    presets) plus the worst steady screen must stay under R246's drawing-cache reset point less a margin, or every
+    frame rebuilds every cache. own_bytes: the user's own plugin files' estimated screens (own_screen_bytes)."""
+    b = (catalog or {}).get('screen_budget')
+    if not b:
+        return {}
+    chosen = []
+    for group in ('synths', 'effects', 'utilities', 'op1r_plugins'):
+        for f in catalog.get(group, []):
+            on = f.get('always') or (f['id'] not in config.get('hidden', []) if group == 'op1r_plugins' else f['id'] in config.get(group, []))
+            if on and f.get('screen_bytes'):
+                chosen.append((f['screen_bytes'], f['id']))
+    need = b['base'] + sum(n for n, _ in chosen) + config.get('preset_cap', 300) * b['per_preset'] + own_bytes + b['worst_screen']
+    room = b['limit'] - b['margin']
+    return {'need': need, 'room': room, 'over': max(0, need - room), 'heaviest': [i for _, i in sorted(chosen, reverse=True)[:5]]}
+
+
+def own_screen_bytes(data, catalog):
+    """A user's own .knl: its screen's estimated drawing-heap use from the SVG it carries (a .knl starts with the SVG
+    and a NUL), at the worst measured ratio of our plugins (screen_budget own_svg_factor), at least own_min."""
+    b = (catalog or {}).get('screen_budget') or {}
+    svg = data.index(b'\0') if data[:1] == b'<' and b'\0' in data else 0
+    return max(b.get('own_min', 0), int(svg * b.get('own_svg_factor', 0) + 0.999))
+
+
 def variant_config(config, catalog):
     """The prebuilt variant a normalized configuration is patched from: without hidden op1r plugins, and with every
     choice that is a plugin file on (patch() leaves out the files not chosen). config_id of the configuration itself
