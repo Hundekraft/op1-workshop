@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.2
+
+- Oxbow shows its controls again: each encoder's name and value along the bottom, with its page-2 control beneath, and the art raised above them.
+- Sampler+: cutoff and resonance (T2 + Shift) now work straight away; turning them switches the filter on as low-pass.
+- Fixed knobs that stopped responding after using the sample editor or a second knob page, then switching sounds.
+- Lighter screens for C64arp, Warble and Pew, so every plugin fits again.
+
 ## 3.1.1
 
 - Fixed a crash (“out of memory”) when switching screens with a sequencer running, most often with many plugins and presets installed. The OP–1 now has more room for drawing its screens.

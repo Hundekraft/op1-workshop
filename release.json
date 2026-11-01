@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "4bb2b18ad16abfa7",
+    "id": "0b75be5371f74138",
     "product": {
       "name": "hundekraft",
-      "version": "3.1.1",
-      "label": "hundekraft 3.1.1",
-      "slug": "hundekraft-3.1.1"
+      "version": "3.1.2",
+      "label": "hundekraft 3.1.2",
+      "slug": "hundekraft-3.1.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -99,7 +99,7 @@
             "description": "Slow chorale to fast rotation"
           }
         ],
-        "screen_bytes": 132824,
+        "screen_bytes": 130288,
         "file": "pew.knl",
         "needs": []
       },
@@ -651,7 +651,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 171664,
+        "screen_bytes": 125632,
         "file": "warble.knl",
         "needs": []
       },
@@ -684,7 +684,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 300280,
+        "screen_bytes": 245496,
         "file": "c64arp.knl",
         "needs": []
       },
@@ -952,15 +952,15 @@
   },
   "devupd": true,
   "runtime_sha256": "675c22b6412825b40f22db064e2c4701e3c27eb25eb9dcf5ad66d690973e8129",
-  "base_sha256": "aa7e96a5f9d049bbf0bc1ed9c137dde32940904d912c3c370b5db3bb1bfe29f7",
+  "base_sha256": "140aaf049421b3799f1069a9ad970a934383a879753cf2d3294185e6244ef0fc",
   "variants": {
     "7ff": {
-      "sha256": "58effbbccf602ae83f7a3b08f4c9b05fa5a81ff958ceef283e42ab9041e33b7d",
+      "sha256": "070dfc249009185080df50aab7de8e7945f7d34fbb8cc4d07b25282938bbb706",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
-        "plugin_arena_bytes": 2248944,
-        "plugin_arena_estimate": 2480880,
+        "plugin_arena_bytes": 2250032,
+        "plugin_arena_estimate": 2481968,
         "plugin_arena_room": 3670016,
         "plugin_arena_percent": 67.6,
         "plugin_arena_over_budget": false,
@@ -968,7 +968,7 @@
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 2777280,
+        "plugin_file_bytes": 2758980,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -1845,8 +1845,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 186584,
-        "crc": 3555095889
+        "len": 186820,
+        "crc": 2285539951
       }
     }
   },
@@ -2613,8 +2613,8 @@
   },
   "core": {
     "start": 31457280,
-    "len": 186584,
-    "crc": 3555095889
+    "len": 186820,
+    "crc": 2285539951
   },
   "plugin_max": 1048576
 }

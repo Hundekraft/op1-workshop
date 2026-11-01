@@ -85,7 +85,7 @@
           "description": "Slow chorale to fast rotation"
         }
       ],
-      "screen_bytes": 132824,
+      "screen_bytes": 130288,
       "file": "pew.knl",
       "needs": []
     },
@@ -637,7 +637,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 171664,
+      "screen_bytes": 125632,
       "file": "warble.knl",
       "needs": []
     },
@@ -670,7 +670,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 300280,
+      "screen_bytes": 245496,
       "file": "c64arp.knl",
       "needs": []
     },

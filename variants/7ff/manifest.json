@@ -21,12 +21,12 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "4bb2b18ad16abfa7",
+    "id": "0b75be5371f74138",
     "product": {
       "name": "hundekraft",
-      "version": "3.1.1",
-      "label": "hundekraft 3.1.1",
-      "slug": "hundekraft-3.1.1"
+      "version": "3.1.2",
+      "label": "hundekraft 3.1.2",
+      "slug": "hundekraft-3.1.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -35,8 +35,8 @@
   "sizes": {
     "image_bytes": 0,
     "memory_bytes": 30184,
-    "plugin_arena_bytes": 2248944,
-    "plugin_arena_estimate": 2480880,
+    "plugin_arena_bytes": 2250032,
+    "plugin_arena_estimate": 2481968,
     "plugin_arena_room": 3670016,
     "plugin_arena_percent": 67.6,
     "plugin_arena_over_budget": false,
@@ -44,11 +44,11 @@
     "plugin_decl_room": 1048576,
     "plugin_fx_lease_bytes": 1048576,
     "plugin_file_max": 1048576,
-    "plugin_file_bytes": 2777280,
+    "plugin_file_bytes": 2758980,
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-3.1.1-7ff.op1",
+  "filename": "hundekraft-3.1.2-7ff.op1",
   "presets": {
     "count": 211,
     "by_engine": {
@@ -923,20 +923,20 @@
   "patched_files": [
     {
       "path": "OP1_vdk.ldr",
-      "orig_sha256": "86dab79bc86db8fc9ebda7641097a5bb6b6065996fdaaa5287c4834538e782a6",
-      "result_sha256": "8c0fa6974136f44263a1f155f9831abc804203ce0b8c4631a9b0798a178c3f08",
+      "orig_sha256": "d9e134325e6a779ed777250afdccce1cca4ebb9ecf2772b24d478f9c373afc9c",
+      "result_sha256": "21fe9ad786122ff9de0bddb868b9d52a6e9ef848cd4075f87e3b4ced9e8914b9",
       "ops": [
         {
           "op": "replace",
           "offset": 2,
-          "old": "39",
-          "new": "9a"
+          "old": "2a",
+          "new": "8b"
         },
         {
           "op": "replace",
           "offset": 12,
-          "old": "b009",
-          "new": "100a"
+          "old": "a00a",
+          "new": "000b"
         },
         {
           "op": "replace",
@@ -1048,9 +1048,9 @@
         },
         {
           "op": "insert",
-          "offset": 2361518,
+          "offset": 2361758,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "ee6e65ba40c61675336ef9308391f544e73cbdc9c4aadac6a198aa7d01c07d2d",
+          "sha256": "a4e9ae2f5723d7e8b4c1d6ca904c35e4ca7021fdac88d48a10dd0c49b0956476",
           "size": 96
         }
       ]
@@ -1096,7 +1096,7 @@
     {
       "path": "content/c64arp.knl",
       "blob": "content_c64arp.knl",
-      "sha256": "7a6745b2e7fa2da96f84e434e0e1272009428d0026ef5d66a71809b78b02ffd2",
+      "sha256": "2cc6cc7bdf0af2b1b9317e27203ce7945b4013cc189fca69e91f299fc9b86086",
       "template": "content/display/iter.svg"
     },
     {
@@ -1300,7 +1300,7 @@
     {
       "path": "content/oxbow.knl",
       "blob": "content_oxbow.knl",
-      "sha256": "a6b7182cc1b3f5fde4436c9ce868de4e76baa2741ed9365befd9b6650dbaa103",
+      "sha256": "e16ef0cd5dd9268049fe5d2b952a4dc28471d4df340a5eff8986207ea6a6b998",
       "template": "content/display/iter.svg"
     },
     {
@@ -1318,7 +1318,7 @@
     {
       "path": "content/pew.knl",
       "blob": "content_pew.knl",
-      "sha256": "99e351d6dfaa20696d974dbfb104d856ba1fc1aac36737d002c04b87a6a41b96",
+      "sha256": "910d0da2d2e8c2adca3e05f77267c70360d22aa1e4c28be2d58705bc132e224f",
       "template": "content/display/iter.svg"
     },
     {
@@ -1354,7 +1354,7 @@
     {
       "path": "content/samplerplus.knl",
       "blob": "content_samplerplus.knl",
-      "sha256": "d3a5f654fc3d7d138fdc71f2f319ee09d29f60c5ac9208c75ab455488fa9a722",
+      "sha256": "65d0753cb40821f6854f64d051ac7a0bea04bae03473870d40383bf25e3bb3a7",
       "template": "content/display/iter.svg"
     },
     {
@@ -1456,7 +1456,7 @@
     {
       "path": "content/warble.knl",
       "blob": "content_warble.knl",
-      "sha256": "3d7d6e3a2bfc694be4a9ba89632e23adef8176ae92014e77b6403d1aefa93f92",
+      "sha256": "89e3d3fdafbe589dd08f571e8aa4d7e4de05c849d6cb06b1c4aa9cfb89cb5e1f",
       "template": "content/display/iter.svg"
     },
     {
@@ -1483,6 +1483,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "9b8f1108380e934998d80863e4f2118bae834b77caf8eb0037a6885a636ded34"
+    "tar_sha256": "d0b467596963b2cea7fd3f31be32675b5d7ecebf9f298321ebe622f9671ef456"
   }
 }
