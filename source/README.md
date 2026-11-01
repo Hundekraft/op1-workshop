@@ -14,14 +14,14 @@ Only your plugin is compiled. No original R246 or full firmware build is require
 
 ## Build the firmware
 
-Requirements: Python 3.9+, Blackfin GCC 13.3.0 and matching binutils, Node.js, Playwright with Chrome for Gin font geometry, and your own unmodified R246. Set `NODE_PATH` to Playwright’s `node_modules` directory when needed.
+Requirements: Python 3.9+, Blackfin GCC 13.3.0 and matching binutils, and your own unmodified R246.
 
 ```sh
 python3 build.py --verify
 python3 build.py --firmware /path/to/op1_246.op1 --toolchain /path/to/gcc/bin --binutils /path/to/binutils/bin
 ```
 
-Output is in `build/`. Lander is off by default; add `--lander` to enable it. Move `build/generated` aside before a fresh rebuild. Stock artwork/font inputs are derived locally from your R246; no firmware is downloaded or uploaded.
+Output is in `build/`, with every plugin file in the firmware; the workshop leaves out the ones you don't pick. Move `build/generated` aside before a fresh rebuild. Stock artwork/font inputs are derived locally from your R246; no firmware is downloaded or uploaded.
 
 `PROVENANCE.json` records source hashes and the source snapshot identifier. `expected.json` records firmware configurations and expected output hashes. Editorial cleanup changes documentation and comments, not executable source. Toolchain or functional source changes can change build output.
 
