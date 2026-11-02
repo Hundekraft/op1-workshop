@@ -2,9 +2,7 @@
 
 ## 3.1.4
 
-- Once your OP–1 runs 3.1.4, most firmware updates over USB won’t need op1_246.op1 any more. Getting to 3.1.4 still needs it.
-- The workshop shows which version your OP–1 has. When an update needs op1_246.op1, it says why and where to get it.
-- Fixed: the settings page (T3) could be switched off in the plugin list, which took away count-in and the feature switches.
+- Easier updates. From now on, most updates over USB no longer need the op1_246.op1 file, only your OP–1 and a cable. You’ll need the file once more to install 3.1.4 itself.
 
 ## 3.1.3
 
