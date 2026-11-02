@@ -2,7 +2,7 @@
 
 ## 3.1.4
 
-- Easier updates. From now on, most updates over USB no longer need the op1_246.op1 file, only your OP–1 and a cable. You’ll need the file once more to install 3.1.4 itself.
+- Easier updates. From now on, updates over USB no longer need the op1_246.op1 file, only your OP–1 and a cable. You’ll need the file once more to install 3.1.4 itself.
 
 ## 3.1.3
 
