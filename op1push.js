@@ -54,11 +54,12 @@ export function parseReply(m) {
   const pl = unpack7(m.subarray(8, m.length - 1));
   return [m[5] & 0x3F, m[6] | m[7] << 7, pl[0], pl.subarray(1)];
 }
-// the device's allow-list (du_path_ok): OP1_vdk.ldr, content/..., plugins/<file>.knl|.op1p (kennel), never te-boot
+// the device's allow-list (du_path_ok): OP1_vdk.ldr(.knp, a core patch), content/..., plugins/<file>.knl|.op1p (kennel),
+// never te-boot
 export function pathOk(p) {
   if (!p || p.length >= 96 || !/^[A-Za-z0-9_.\/-]+$/.test(p) || p.startsWith('/') || p.endsWith('/')) return false;
   if (/te-boot|te_boot|teboot/i.test(p) || p.includes('..') || p.includes('//')) return false;
-  return p === 'OP1_vdk.ldr' || p.startsWith('content/') || /^plugins\/[^/.][^/]*\.(knl|op1p)$/.test(p);
+  return p === 'OP1_vdk.ldr' || p === CORE_PATCH || p.startsWith('content/') || /^plugins\/[^/.][^/]*\.(knl|op1p)$/.test(p);
 }
 // The OP-1's MIDI port is there but nothing answers HELLO: no USB update on it. Released units get it with 3.0, so the unit
 // runs hundekraft 2.7 or older, op1r or TE's firmware (or it's busy restarting), and needs one install through the update menu.
@@ -278,6 +279,9 @@ export async function openWebMidi(nav = globalThis.navigator, debug = false, {si
 // ("kennel.off", applied at the next boot). HELLO's byte 4 says whether the firmware has them: stock 2.x devupd
 // builds answer with 4 bytes, and then list() / getOff() return null and setOff() returns false.
 export const LIST = 7, OFF_GET = 8, OFF_SET = 9, DELETE = 10, RESTART = 11, CAP_INVENTORY = 1, CAP_PLUGINS = 2, OFF_MAX = 1023;
+// core patches (kennel docs: devupd du.h): STAT reads the CRC of the OP-1's own OP1_vdk.ldr; CORE_PATCH is staged
+// and applied to it at the restart, so a new core needs no R246 (docs/sysex-update.md "Core patches")
+export const STAT = 12, CAP_PATCH = 4, CORE_PATCH = 'OP1_vdk.ldr.knp', STAT_MAX = 0x40000;
 const OFF_CHUNK = 64;
 const E_OFFSET = 5;
 // the LIST text -> {core: {start, len, crc} or null, records: [...]}; the header's core field: CRC of the running
@@ -317,10 +321,23 @@ export function session(port, {timeoutMs = 3000, tries = 5, log = () => {}, sign
     async hello() {                                                // {version, inventory, plugins}
       if (!hello) {
         const r = await ask(HELLO), caps = r[3].length > 4 ? r[3][4] : 0;
-        hello = {version: rd32(r[3]), inventory: !!(caps & CAP_INVENTORY), plugins: !!(caps & CAP_PLUGINS)};
+        hello = {version: rd32(r[3]), inventory: !!(caps & CAP_INVENTORY), plugins: !!(caps & CAP_PLUGINS), patch: !!(caps & CAP_PATCH)};
         log(`OP–1 update protocol ${hello.version}${hello.inventory ? ', inventory' : ''}`);
       }
       return hello;
+    },
+    async coreFile() {                                             // {size, crc} of the OP-1's OP1_vdk.ldr, or null
+      if (!(await s.hello()).patch) return null;
+      const path = new TextEncoder().encode('OP1_vdk.ldr');
+      let off = 0, crc = 0, size = 0;
+      for (;;) {
+        const r = await ask(STAT, Uint8Array.from([...u32(off), ...u32(STAT_MAX), ...u32(crc), ...path, 0]));
+        if (r[2] !== OK) throw Error(`The OP–1 couldn't read its firmware file (${statusText(r[2])})`);
+        size = rd32(r[3]); crc = rd32(r[3].subarray(4)); const n = rd32(r[3].subarray(8));
+        if (!n) break;
+        off += n;
+      }
+      return off === size ? {size, crc} : null;
     },
     async list() {                                                 // [{kind, name, source, path, ..., claims}] or null
       return (await s.inventory())?.records ?? null;
@@ -381,9 +398,10 @@ export async function readInventory(port, opts) {
   const s = session(port, opts);
   const inv = await s.inventory();
   if (!inv) return null;
-  return {...inv, plugins: (await s.hello()).plugins, off: await s.getOff(), offBoot: await s.getOff({atBoot: true})};
+  return {...inv, plugins: (await s.hello()).plugins, patch: (await s.hello()).patch, off: await s.getOff(), offBoot: await s.getOff({atBoot: true})};
 }
 export const list = (port, opts) => session(port, opts).list();
+export const readCoreFile = (port, opts) => session(port, opts).coreFile();
 export const getOff = (port, opts) => session(port, opts).getOff(opts);
 export const setOff = (port, names, opts) => session(port, opts).setOff(names);
 
@@ -551,7 +569,8 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
     entries.push({...r, claimsKnown: r.source === 'builtin' || !!r.claims?.length, claims: (r.claims || []).map(c => typeof c === 'string' ? c : c.name), action: 'keep', was: r, removable: r.path.startsWith('plugins/')});
   const names = new Set(entries.map(e => e.name));
   for (const r of builtins ?? inv.records.filter(r => r.source === 'builtin'))
-    if (!names.has(r.name)) entries.push({...r, claimsKnown: Array.isArray(r.claims), claims: (r.claims || []).map(c => typeof c === 'string' ? c : c.name), action: 'built-in', was: r});
+    if (!names.has(r.name)) entries.push({...r, claimsKnown: Array.isArray(r.claims), claims: (r.claims || []).map(c => typeof c === 'string' ? c : c.name), action: 'built-in', was: r,
+                                          locked: ALWAYS_ON.includes(r.name)});
   const holder = new Map();                                        // who holds a claim on the OP-1 now
   for (const r of inv.records) for (const c of r.claims || []) if (c.state === 'won') holder.set(c.name, r.name);
   const off = new Set(inv.off);
@@ -559,6 +578,7 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
   for (const [p] of wanted) off.delete(info.get(p).name);          // chosen in this build: on
   for (const name of forceOn) off.delete(name);
   for (const name of forceOff) off.add(name);
+  for (const e of entries) if (e.locked) off.delete(e.name);       // never switched off (an older page allowed it)
   // Do not retain stale off names for plugins being deleted.
   for (const name of [...off]) if (!entries.some(e => e.name === name)) off.delete(name);
   const resolution = resolveConflicts(entries, {winners, off: [...off], holder: Object.fromEntries(holder)});
@@ -569,6 +589,9 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
           changed: !!(send.length || removed.length || offChanged || restartNeeded)};
 }
 
+// Built-ins that are never switched off: settings is the T3 page, the only place on the OP-1 for count-in and the
+// features' on / off switches (kennel kn_features.c ignores an off list naming it)
+export const ALWAYS_ON = ['settings'];
 // A new core supplies its own built-ins. Installed file plugins survive unless the build replaces/removes them.
 export function planFullUpdate(inv, wanted, opts = {}) {
   return planPlugins(inv || {records: [], off: []}, wanted.filter(([p]) => pluginPath(p)),

@@ -41,9 +41,45 @@ async function presetsOnly(config, release) {
   const presets = py.FS.readFile('/presets-out.zip');
   postMessage({type:'presets', presets, id}, [presets.buffer]);
 }
-onmessage = async ({data:{bytes,config,release,push,presetsJob}}) => {
+// A new core as a patch of the OP-1's own firmware file (runtime.core_update; no R246): the patch plus the base
+// files the OP-1's release doesn't have, or the reason it needs the original R246 after all
+async function corePatch({variantId, disk, running}, release) {
+  log('Loading the local patcher (first use needs an internet connection)…');
+  const {loadPyodide} = await import(PYODIDE + 'pyodide.mjs');
+  const py = await loadPyodide({indexURL:PYODIDE});
+  py.FS.writeFile('/runtime.py', await get('runtime.py', release.runtime_sha256));
+  const coresBytes = await get('cores.json', release.cores_sha256);
+  const cores = JSON.parse(new TextDecoder().decode(coresBytes));
+  const same = (a, b) => a && b && a.start === b.start && a.len === b.len && a.crc >>> 0 === b.crc >>> 0;
+  const target = cores.releases.find(r => r.version === cores.current), now = cores.releases.find(r => r.cores.some(c => same(c.core, running)));
+  const core = target?.cores.find(c => c.variant === variantId);
+  const need = [...(core?.ldr.ops || []).filter(o => o[0] === 'i').map(o => o[3]),
+                ...Object.entries(target?.files || {}).filter(([p, [sha, blob]]) => blob && now?.files[p]?.[0] !== sha).map(([, [, blob]]) => 'base/' + blob)];
+  log('Preparing the firmware update…');
+  for (const path of need) {
+    if (path.startsWith('/') || path.split('/').includes('..')) throw Error('Invalid patch asset path');
+    py.FS.mkdirTree('/site/' + path.substring(0, path.lastIndexOf('/')));
+    py.FS.writeFile('/site/' + path, await get(path));                 // runtime checks every hash
+  }
+  py.FS.writeFile('/cores.json', coresBytes);
+  py.globals.set('job_json', JSON.stringify({variantId, disk, running}));
+  py.runPython(`
+import sys, json, os; sys.path.insert(0, '/'); import runtime as R
+job = json.loads(job_json)
+files, why = R.core_update(json.load(open('/cores.json')), job['variantId'], job['disk'], job['running'],
+                           lambda p: open('/site/' + p, 'rb').read())
+os.makedirs('/core', exist_ok=True)
+for i, (name, data) in enumerate(files or []): open(f'/core/{i}', 'wb').write(data)
+open('/core.json', 'w').write(json.dumps({'names': [n for n, _ in files or []], 'reason': why}))
+`);
+  const out = JSON.parse(py.FS.readFile('/core.json', {encoding:'utf8'}));
+  const files = out.names.map((name, i) => [name, py.FS.readFile(`/core/${i}`)]);
+  postMessage({type:'core', files, reason: out.reason}, files.map(([, d]) => d.buffer));
+}
+onmessage = async ({data:{bytes,config,release,push,presetsJob,coreJob}}) => {
   try {
     if (presetsJob) return await presetsOnly(config, release);
+    if (coreJob) return await corePatch(coreJob, release);
     log('Checking original R246…');
     const baseBytes = await get('base/manifest.json', release.base_sha256);
     const base = JSON.parse(new TextDecoder().decode(baseBytes));

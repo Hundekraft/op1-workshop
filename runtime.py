@@ -512,3 +512,189 @@ def preset_info(data, cap):
         counts[kind] = counts.get(kind, 0) + 1
     return {'count': len(items), 'by_engine': counts, 'sha256': sha256(data), 'exceeds_cap': len(items) > cap,
             'items': items}
+
+
+# ---- core patches: a new OP1_vdk.ldr from the one on the OP-1, without R246 (docs/sysex-update.md) ----
+# Both cores are R246's OP1_vdk.ldr plus published ops (cores.json). The script copies what the OP-1's file already
+# has and carries the rest: our code, and R246 bytes only where the old core changed them (their `old` values, which
+# the manifests published). The OP-1 (devupd PATCH) checks the base's size and CRC before and the result's after.
+PATCH_MAGIC = b'KNP1'
+
+
+def _layout(size, ops, read=None):
+    """R246 (size bytes) after ops: segments ['o', a, b] (R246 bytes a..b) or ['l', bytes|None, n] (ours; None:
+    not loaded). Also {R246 offset: byte} for every R246 byte an op's `old` names."""
+    segs, known = [['o', 0, size]], {}
+
+    def cut(at):                                                   # segment boundary at output offset `at`
+        pos = 0
+        for i, s in enumerate(segs):
+            n = s[2] - s[1] if s[0] == 'o' else s[2]
+            if pos < at < pos + n:
+                k = at - pos
+                if s[0] == 'o':
+                    segs[i:i + 1] = [['o', s[1], s[1] + k], ['o', s[1] + k, s[2]]]
+                else:
+                    segs[i:i + 1] = [['l', s[1] and s[1][:k], k], ['l', s[1] and s[1][k:], n - k]]
+                return
+            pos += n
+
+    def span(a, b):                                                # indexes of the segments covering a..b
+        cut(a); cut(b)
+        pos, out = 0, []
+        for i, s in enumerate(segs):
+            n = s[2] - s[1] if s[0] == 'o' else s[2]
+            if a <= pos and pos + n <= b and n:
+                out.append(i)
+            pos += n
+        return out
+
+    for op in ops:
+        if op[0] == 'r':
+            off, old, new = op[1], bytes.fromhex(op[2]), bytes.fromhex(op[3])
+            at = 0
+            for i in span(off, off + len(old)):
+                s = segs[i]
+                n = s[2] - s[1] if s[0] == 'o' else s[2]
+                if s[0] == 'o':
+                    for k in range(n):
+                        known[s[1] + k] = old[at + k]
+                elif s[1] is not None and s[1] != old[at:at + n]:
+                    raise ValueError('Core patch: unexpected bytes at patch site')
+                at += n
+            i = span(off, off + len(old))
+            segs[i[0]:i[-1] + 1] = [['l', new, len(new)]]
+        elif op[0] == 'i':
+            off, n = op[1], op[2]
+            cut(off)
+            pos, i = 0, 0
+            while i < len(segs) and pos < off:
+                pos += segs[i][2] - segs[i][1] if segs[i][0] == 'o' else segs[i][2]
+                i += 1
+            blob = checked(read(op[3]), op[4], op[3]) if read else None
+            if blob is not None and len(blob) != n:
+                raise ValueError('Core patch: blob size mismatch')
+            segs.insert(i, ['l', blob, n])
+        elif op[0] == 't':
+            i = span(op[1], 1 << 31)
+            del segs[i[0]:]
+        else:
+            raise ValueError('Unknown patch operation')
+    return segs, known
+
+
+def core_patch(stock_size, base, target, read):
+    """Script turning the OP-1's OP1_vdk.ldr (cores.json ldr entry `base`) into `target` (read: site path -> bytes)."""
+    bsegs, known = _layout(stock_size, base['ops'])
+    tsegs, tknown = _layout(stock_size, target['ops'], read)
+    known.update(tknown)
+    where, pos = [], 0                                             # base file: R246 range -> file offset
+    for s in bsegs:
+        if s[0] == 'o':
+            where.append((s[1], s[2], pos)); pos += s[2] - s[1]
+        else:
+            pos += s[2]
+    if pos != base['size']:
+        raise ValueError('Core patch: base size mismatch')
+    recs = []
+
+    def lit(b):
+        if recs and recs[-1][0] == 'L':
+            recs[-1][1] += b
+        else:
+            recs.append(['L', bytearray(b)])
+
+    def copy_(src, n):
+        if recs and recs[-1][0] == 'C' and recs[-1][1] + recs[-1][2] == src:
+            recs[-1][2] += n
+        else:
+            recs.append(['C', src, n])
+
+    for s in tsegs:
+        if s[0] == 'l':
+            lit(s[1])
+            continue
+        a = s[1]
+        while a < s[2]:
+            hit = next(((lo, hi, at) for lo, hi, at in where if lo <= a < hi), None)
+            if hit:
+                n = min(hit[1], s[2]) - a
+                copy_(hit[2] + a - hit[0], n)
+                a += n
+            else:
+                b = a
+                while b < s[2] and not any(lo <= b < hi for lo, hi, _ in where):
+                    if b not in known:
+                        raise ValueError('Core patch: R246 bytes needed that no release published')
+                    b += 1
+                lit(bytes(known[k] for k in range(a, b)))
+                a = b
+    out = bytearray(PATCH_MAGIC + struct.pack('<5I', base['size'], base['crc'], target['size'], target['crc'], len(recs)))
+    for r in recs:
+        if r[0] == 'C':
+            out += b'C' + struct.pack('<II', r[1], r[2])
+        else:
+            out += b'L' + struct.pack('<I', len(r[1])) + r[1]
+    return bytes(out)
+
+
+def apply_core_patch(base, script):
+    """Reference for the OP-1's PATCH apply (synth_sdk/devupd/du.c du_patch_apply): every check it makes."""
+    if script[:4] != PATCH_MAGIC or len(script) < 24:
+        raise ValueError('Core patch: bad header')
+    bsize, bcrc, osize, ocrc, n = struct.unpack_from('<5I', script, 4)
+    if len(base) != bsize or binascii.crc32(base) != bcrc:
+        raise ValueError('Core patch: the OP-1 has another core file')
+    out, at = bytearray(), 24
+    for _ in range(n):
+        kind = script[at:at + 1]
+        if at + (9 if kind == b'C' else 5) > len(script):
+            raise ValueError('Core patch: truncated')
+        if kind == b'C':
+            src, k = struct.unpack_from('<II', script, at + 1); at += 9
+            if src + k > bsize:
+                raise ValueError('Core patch: copy out of range')
+            out += base[src:src + k]
+        elif kind == b'L':
+            k = struct.unpack_from('<I', script, at + 1)[0]; at += 5
+            if at + k > len(script):
+                raise ValueError('Core patch: truncated')
+            out += script[at:at + k]; at += k
+        else:
+            raise ValueError('Core patch: bad record')
+    if at != len(script) or len(out) != osize or binascii.crc32(out) != ocrc:
+        raise ValueError('Core patch: result mismatch')
+    return bytes(out)
+
+
+def core_update(cores, variant_id, disk, running, read):
+    """A core update without R246: (files, None), or (None, reason) when the OP-1 needs the original R246 instead.
+    cores: cores.json; variant_id: the selection's variant; disk: {'size', 'crc'} of the OP-1's /yaffs2/OP1_vdk.ldr
+    (devupd STAT); running: the running core's identity (inventory). files: the patch (DU_PATCH_PATH) and the base's
+    added files the OP-1's release doesn't have as they are; plugin files are planned by the page as for any update.
+    The factory DB isn't sent, so the running release's must be the target's."""
+    rel = cores['releases']
+    target = next((r for r in rel if r['version'] == cores['current']), None)
+    tcore = target and next((c for c in target['cores'] if c['variant'] == variant_id), None)
+    if not tcore:
+        return None, 'target'
+    base = next((c['ldr'] for r in rel for c in r['cores'] if c['ldr']['size'] == disk['size'] and
+                 c['ldr']['crc'] == disk['crc']), None)
+    if not base:
+        return None, 'disk'                                       # an rc, op1r, or a damaged file: not one we published
+    now = next((r for r in rel if any(c['core'] and c['core']['start'] == running.get('start') and
+                                      c['core']['len'] == running.get('len') and c['core']['crc'] == running.get('crc')
+                                      for c in r['cores'])), None) if running else None
+    if not now:
+        return None, 'running'
+    if now['factory'] != target['factory']:
+        return None, 'factory'
+    script = core_patch(rel[0]['cores'][0]['ldr']['size'], base, tcore['ldr'], read)
+    files = [('OP1_vdk.ldr.knp', script)]
+    for path, (digest, blob) in sorted(target['files'].items()):
+        if (now['files'].get(path) or [None])[0] == digest:
+            continue
+        if not blob:
+            return None, 'files'                                  # a changed copy of an R246 file
+        files.append((path, checked(read('base/' + blob), digest, path)))
+    return files, None

@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.4
+
+- Once your OP–1 runs 3.1.4, most firmware updates over USB won’t need op1_246.op1 any more. Getting to 3.1.4 still needs it.
+- The workshop shows which version your OP–1 has. When an update needs op1_246.op1, it says why and where to get it.
+- Fixed: the settings page (T3) could be switched off in the plugin list, which took away count-in and the feature switches.
+
 ## 3.1.3
 
 - Fixed clicks and short dropouts in tape recordings, most often in the first 20 seconds of a take or in audio copied to the start of the tape. It mostly happened on units with fragmented or nearly full flash, where saving to flash is slow. The cause was a bug in the original 246 firmware, which can drop recorded audio that hasn't been saved yet, made worse by our tape undo's own flash writes.

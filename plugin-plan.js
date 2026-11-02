@@ -36,7 +36,7 @@ export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], save
   const sign = e => e.action === 'remove' ? '−' : e.action === 'install' ? '+' : e.downgrade || e.restoration || failed(e) ? '!' : e.action === 'update' ? '↻' : '·';
   const tag = e => e.action === 'remove' ? 'removed' : e.action === 'install' ? 'new' : e.restoration ? 'workshop version' : e.downgrade ? 'older version' : stateChanged(e) ? (e.on ? 'turned on' : 'turned off') : e.action === 'update' ? 'updated' : '';
   const warn = e => e.downgrade || e.restoration || failed(e);
-  const toggle = e => ask && e.name && e.action !== 'remove' ? `<button type="button" class="plan-switch" role="switch" aria-checked="${!!e.on}" aria-label="${esc(e.name)}" data-toggle="${esc(e.name)}" data-enable="${!e.on}"><span data-state>${e.on ? 'On' : 'Off'}</span></button>` : e.action === 'remove' ? '' : `<span class="plan-state" data-state>${e.on ? 'On' : 'Off'}</span>`;
+  const toggle = e => e.locked ? `<span class="plan-state" data-state>Always on</span>` : ask && e.name && e.action !== 'remove' ? `<button type="button" class="plan-switch" role="switch" aria-checked="${!!e.on}" aria-label="${esc(e.name)}" data-toggle="${esc(e.name)}" data-enable="${!e.on}"><span data-state>${e.on ? 'On' : 'Off'}</span></button>` : e.action === 'remove' ? '' : `<span class="plan-state" data-state>${e.on ? 'On' : 'Off'}</span>`;
   const row = e => `<li class="plan-row${warn(e) ? ' plan-warn' : ''}"${e.action === 'remove' ? '' : ` data-plugin-name="${esc(e.name)}"`}><span class="plan-sign" aria-hidden="true">${sign(e)}</span><span class="plan-name">${esc(e.name || e.path)}${e.source === 'own' ? ' <small>your file</small>' : ''}${e.replaces ? `<small>replaces ${esc(e.replaces)}</small>` : ''}${failed(e) ? `<small>last boot ${esc(e.was.state)}${e.was.reason ? ': ' + esc(e.was.reason) : ''}</small>` : ''}</span><span class="plan-meta">${esc([tag(e), ver(e), kb(e.size)].filter(Boolean).join(' · '))}</span>${toggle(e)}${controls(e)}</li>`;
   const brief = e => `<li data-plugin-name="${esc(e.name)}">${esc(e.name || e.path)}${ver(e) ? ` <span>${esc(ver(e))}</span>` : ''}${e.source === 'own' ? ' <span>your file</span>' : ''}${controls(e)}</li>`;
   const total = list => kb(list.reduce((n, e) => n + (e.size || 0), 0));
@@ -69,7 +69,7 @@ ${ask ? `<p data-consequence role="status"></p>${plan.offChanged ? '<p>Plugin on
       send.disabled = !live.resolved || (unknown && !box.querySelector('[data-unknown]').checked) || (downgrade && !box.querySelector('[data-downgrade]').checked);
       for (const e of live.entries) for (const row of box.querySelectorAll('.plan-row[data-plugin-name]')) {
         if (row.dataset.pluginName !== e.name) continue;
-        const state = row.querySelector('[data-state]'); if (state) state.textContent = e.on ? 'On' : 'Off';
+        const state = row.querySelector('[data-state]'); if (state) state.textContent = e.locked ? 'Always on' : e.on ? 'On' : 'Off';
         const toggle = row.querySelector('[data-toggle]');
         if (toggle) { toggle.dataset.enable = String(!e.on); toggle.setAttribute('aria-checked', String(!!e.on)); }
       }

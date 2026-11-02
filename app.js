@@ -1,7 +1,8 @@
 import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
 import {saveSelection, loadSelection, loadPlugins, savePlugins, providerSignature, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
-import {push, openWebMidi, readInventory, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK} from './op1push.js?v=3.1-two-paths-20261027';
-import {connectionProblem, connectedText, recentlySent, MIDI_ASK, NEW_CORE} from './connect-result.js?v=3.1-two-paths-20261027';   // one message per connection result
+import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK} from './op1push.js?v=3.1-core-patch-20261102';
+import {connectionProblem, connectedText, newCoreText, recentlySent, MIDI_ASK} from './connect-result.js?v=3.1-core-patch-20261102';   // one message per connection result
+import {coreRoute, runningRelease} from './core-route.js?v=3.1-core-patch-20261102';      // which release the OP-1 runs; core patches
 import {showPlan, claimText} from './plugin-plan.js?v=3.1-two-paths-20261027';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
@@ -9,6 +10,8 @@ import {CATEGORIES} from './categories.js?v=new-on-top-20261028';               
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
+let coreState = null;                                            // {installed, route, disk} of the connected OP-1 (coreCheck)
+let autoReview = false;                                          // Choose op1_246.op1 from the device card: review once it's verified
 let observedOwn = [];                                            // your own plugins the connected OP-1 reports (inventory records)
 let ownFiles = [];                                              // your own plugin files: [[plugins/ path, bytes, file name]]
 let stopConnectionWatch = null, deviceInventory = null, firmwareWait = null, stopVerification = false, verificationController = null, retryAction = 'connect';
@@ -335,7 +338,11 @@ async function chooseFile(candidate) {
     status(error.message || 'Could not verify the firmware. Please choose the original R246 again.', true);
   }
   update();
+  if ((firmwareWait || autoReview) && !$('device-card').hidden)  // chosen from the device card: say it there too
+    pushStatus(file ? 'Original R246 verified. Preparing the update…' : $('status').textContent, !file);
   if (firmwareWait && file) { const ready = firmwareWait; firmwareWait = null; ready.resolve(); }
+  else if (autoReview && file && !$('device-card').hidden) { autoReview = false; $('device-card').scrollIntoView({block: 'center'}); $('own-send').click(); }
+  else if (!file) autoReview = false;
 }
 function link(id, blob, filename) {
   const url = URL.createObjectURL(blob); urls.push(url);
@@ -364,7 +371,7 @@ async function buildFirmware(forSend = false) {
   clearDownloads();
   if (!forSend) $('log').textContent = '';
   status('Starting the local patcher…');
-  const active = new Worker('worker.js?v=3.1-presets-20261101b', {type: 'module'});
+  const active = new Worker('worker.js?v=3.1-core-patch-20261102', {type: 'module'});
   worker = active;
   $('cancel').hidden = false;
   try {
@@ -442,11 +449,52 @@ function observeConnection(port) {
     }
   });
 }
+// The published cores (cores.json, tools/firmware/cores.py): what a connected OP-1 runs, and whether a new core can go
+// as a patch of its own firmware file (core-route.js). Null for a release without it.
+let coresData;
+async function loadCores() {
+  if (coresData === undefined) coresData = release?.cores_sha256 ? JSON.parse(new TextDecoder().decode(await checkedAsset('cores.json', release.cores_sha256))) : null;
+  return coresData;
+}
+const variantKey = () => configId(variantChoices(validateChoices(choices())), false);
+async function coreCheck(port, inv) {
+  coreState = null;
+  if (!inv?.plugins) return;
+  let cores = null;
+  try { cores = await loadCores(); } catch { /* without it: the version stays unnamed, a new core needs R246 */ }
+  const installed = runningRelease(cores, inv.core)?.label || null;
+  let matches = false;
+  try { matches = sameCore(targetCore(), inv.core); } catch { /* not a match */ }
+  if (matches) { coreState = {installed, route: null, disk: null}; return; }
+  pushStatus('Checking the firmware on your OP–1…');
+  const disk = inv.patch ? await readCoreFile(port, {log: text => { $('log').textContent += text + '\n'; }}) : null;
+  let route = coreRoute(cores, inv, disk, null);
+  try { route = coreRoute(cores, inv, disk, variantKey()); } catch { /* selection not valid yet: decided at review */ }
+  coreState = {installed, route, disk};
+}
+// A core update without R246 (worker.js corePatch): the patch and changed base files, or null (reason in the log)
+async function corePatchFiles(inv) {
+  const active = new Worker('worker.js?v=3.1-core-patch-20261102', {type: 'module'});
+  try {
+    const data = await new Promise((resolve, reject) => {
+      active.onerror = e => reject(Error(e.message || 'The patcher could not start. Try again.'));
+      active.onmessage = ({data}) => {
+        if (data.type === 'log') { $('log').textContent += data.text + '\n'; pushStatus('Preparing the firmware update: ' + data.text); }
+        if (data.type === 'error') reject(Error(data.text));
+        if (data.type === 'core') resolve(data);
+      };
+      active.postMessage({release, coreJob: {variantId: variantKey(), disk: coreState.disk, running: inv.core}});
+    });
+    if (!data.files.length) { $('log').textContent += `core patch not possible (${data.reason}): needs op1_246.op1\n`; return null; }
+    return data.files;
+  } finally { active.terminate(); }
+}
 // What the connected OP-1 runs (connect-result.js): the release's label only when its core is this release's.
 function connected(inv) {
   let coreMatches = false;
   try { coreMatches = !!inv?.core && sameCore(targetCore(), inv.core); } catch { /* core information missing: not a match */ }
-  return connectedText(inv, {label: release?.release.product?.label || 'hundekraft 3', coreMatches, haveFile: !!file});
+  return connectedText(inv, {label: release?.release.product?.label || 'hundekraft 3', coreMatches, haveFile: !!file,
+                             installed: coreState?.installed || null, patch: coreState?.route?.route === 'patch'});
 }
 // The device line: text plus a tone for its look (ok / warn / wait / error; none = not connected yet)
 function deviceState(text, tone) {
@@ -467,8 +515,11 @@ function deviceButtons({retry = null, file = null, firmware = false, primary = f
   for (const id of ['device-retry', 'device-download']) $(id).classList.toggle('primary', primary);
   $('device-retry').hidden = !retry; if (retry) $('device-retry').textContent = retry;
   $('device-download').hidden = !file; if (file) $('device-download').textContent = file;
-  $('device-firmware').hidden = !firmware;
+  $('device-firmware').hidden = !firmware; $('device-firmware').classList.toggle('primary', firmware);
+  originalHint(firmware);
 }
+// where to get op1_246.op1, under Choose op1_246.op1
+function originalHint(on) { $('device-r246').hidden = !on; }
 // Review changes and its scope line, hidden while the card says to use a file instead (kept across showOwn)
 function blockReview(on) {
   reviewBlocked = on;
@@ -522,12 +573,11 @@ async function openDevice() {
 }
 function requestFirmware() {
   if (file) return Promise.resolve();
-  $('download-option').open = true;
-  $('firmware-reason').textContent = NEW_CORE + ' Preparation continues as soon as you choose it.';
-  pushStatus(NEW_CORE);
-  deviceButtons({firmware: true});
-  $('firmware').disabled = false;
-  $('firmware').focus();
+  const text = newCoreText(coreState?.installed, release?.release.product?.label || 'hundekraft 3');
+  $('firmware-reason').textContent = text + ' Preparation continues as soon as you choose it.';
+  pushStatus(text);
+  deviceButtons({firmware: true}); originalHint(true);
+  $('firmware').disabled = false;                                 // (the file panel stays closed: this is the USB path)
   const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'Cancel update';
   $('device-feedback').append(cancel);
   return new Promise((resolve, reject) => {
@@ -621,7 +671,7 @@ async function settlePlan(inv, wanted, opts, full = false) {
     plan = planner(inv, desired, {...opts, own, drop, forceOn, forceOff, winners});
     const needsReview = full || plan.changed || !plan.resolved || (plan.unknown.length && !unknownAccepted);
     if (needsReview && (!asked || !plan.resolved || (plan.unknown.length && !unknownAccepted))) {
-      pushStatus(full ? 'Full firmware update required: review the core update and plugin changes. Nothing has been sent.' : 'Review installs, replacements, removals and whole-plugin on/off choices. Nothing has been sent.');
+      pushStatus(full ? 'This update includes new OP–1 firmware. Review it and the plugin changes. Nothing has been sent.' : 'Review installs, replacements, removals and whole-plugin on/off choices. Nothing has been sent.');
       const r = await showPlan(box, plan, {ask: true, pending: manageOwn ? ownState.removals : [], saved, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander ${choices().lander ? 'on' : 'off'}` : ''});
       if (r.remove) { const e = plan.entries.find(e => e.path === r.remove); await removeOwn(e.name, e.path); acceptedSignature = null; continue; }
       if (r.undo) { await undoRemoval(r.undo); acceptedSignature = null; continue; }
@@ -681,10 +731,23 @@ async function sendToOp1() {
       const target = targetCore();
       const coreMatches = sameCore(target, inv?.core);
       if (!coreMatches) {
-        pushStatus('A full firmware update is needed. Preparing it locally before review…');
-        await requestFirmware();
-        await buildFirmware(true);
-        files = pushFiles;
+        let patched = null;
+        if (!file) {
+          await coreCheck(port, inv);
+          if (coreState?.route?.route === 'patch') {
+            pushStatus('Preparing the firmware update locally before review…');
+            patched = await corePatchFiles(inv);
+          }
+        }
+        if (patched) {
+          files = [...patched, ...await workshopFiles()];
+          pushCap = validateChoices(choices()).preset_cap; pushResume = {};
+        } else {
+          pushStatus('A full firmware update is needed. Preparing it locally before review…');
+          await requestFirmware();
+          await buildFirmware(true);
+          files = pushFiles;
+        }
         ownOnly = false;
       } else {
         pushStatus('Preparing your selected plugin updates…');
@@ -804,16 +867,17 @@ $('own-check').addEventListener('click', () => withDevice(async () => {
     port = await openDevice();
     pushStatus('Checking what’s on your OP–1…');
     const inv = await readInventory(port, {log: text => { $('log').textContent += text + '\n'; }});
+    await coreCheck(port, inv);
     observeConnection(port); connectionState(inv);
     const found = connected(inv);
     // An earlier core (or none with plugin files): Review changes sends the whole firmware, built from R246
-    if (!inv?.plugins) { pushStatus(found.text); if (found.newCore && !file) deviceButtons({firmware: true}); return; }
+    if (!inv?.plugins) { pushStatus(found.text); if (found.needOriginal) deviceButtons({firmware: true}); return; }
     const confirmed = confirmInventory(inv);
     await rememberOwn(); showOwn(inv);
     if (confirmed) updateStage('verified');
     if (pendingUpdate()) { unresolvedUpdate(inv); return; }
     pushStatus(confirmed ? 'Update installed and verified. Your OP–1 is ready.' : ownState.verification ? 'Changes are not yet confirmed. If you cancelled on the OP–1, review and send again.' : found.text);
-    if (!confirmed && !ownState.verification && found.newCore && !file) deviceButtons({firmware: true});
+    if (!confirmed && !ownState.verification && found.needOriginal) deviceButtons({firmware: true});
   } catch (e) { deviceError(e, '', !/^Cancelled/.test(e.message || '')); }
   finally { port?.close(); lock(false); showOwn(); }
 }, true));
@@ -845,7 +909,10 @@ function openFilePath() {
 }
 $('device-download').onclick = openFilePath;
 $('path-build').onclick = openFilePath;
-$('device-firmware').onclick = () => { openFilePath(); if (!$('firmware').disabled) $('firmware').click(); };
+$('device-firmware').onclick = () => {
+  if (!firmwareWait) autoReview = true;                          // from Connect: go on to the review once it's verified
+  if (!$('firmware').disabled) $('firmware').click();            // the picker only: the file panel is the other path
+};
 // Path A: the same connect as the device card's own button, which it scrolls to
 $('path-connect').onclick = () => {
   $('device-card').scrollIntoView({block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
@@ -912,7 +979,7 @@ $('own-drop').addEventListener('drop', e => { e.preventDefault(); $('own-drop').
 $('preset-pack-make').addEventListener('click', async () => {
   if (busy || !release) return;
   const config = validateChoices(choices()), snapshot = release;
-  const active = new Worker('worker.js?v=3.1-presets-20261101b', {type: 'module'});
+  const active = new Worker('worker.js?v=3.1-core-patch-20261102', {type: 'module'});
   lock(true); status('Starting the local patcher…');
   try {
     const data = await new Promise((resolve, reject) => {

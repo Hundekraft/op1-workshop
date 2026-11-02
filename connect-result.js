@@ -8,7 +8,15 @@ export const NO_MIDI = "This browser can't talk to the OP–1. Open the page in 
 export const NO_ANSWER = "No OP–1 found. Check that it's switched on and not in disk mode or the boot menu. Use a cable that carries data, since some only charge. If the browser asked about MIDI, click Allow.";
 export const NOT_HUNDEKRAFT = "Your OP–1 is connected but isn't running hundekraft 3 yet. Install it once with a file. After that, updates go over USB.";
 export const RESTARTING = 'Your OP–1 may still be restarting. Wait for the tape screen, then press Try again.';
-export const NEW_CORE = 'This update includes a new core. Choose your original op1_246.op1 once and the rest still goes over USB. Nothing has been sent yet.';
+const WHY = "We can't share Teenage Engineering's firmware ourselves. Choose the file and everything still goes over USB. Nothing has been sent yet.";
+export const NEW_CORE = "This update replaces the OP–1's firmware too, and the workshop needs your copy of op1_246.op1 to build it. " + WHY;
+const version = label => label.replace(/^hundekraft /, '');
+// the same with the versions named (installed: what the OP-1 runs, or null when it isn't a published release)
+export const newCoreText = (installed, target) => installed
+  ? `Your OP–1 has ${installed}. Updating to ${version(target)} replaces its firmware too, and the workshop needs your copy of op1_246.op1 to build it. ` + WHY
+  : NEW_CORE;
+// a new core the OP-1 takes as a patch of its own firmware file (core-route.js): no R246
+export const patchText = (installed, target) => `Your OP–1 has ${installed}. Updating to ${version(target)} replaces its firmware too, and all of it goes over USB. Review the changes, then send.`;
 export const READY = 'Pick your plugins, then send the update.';
 // How long after an update was sent a silent or missing OP-1 still counts as restarting: the install wait (1.5 min for
 // plugin files, 4 min with a core) ends at notBefore; up to 6 min more, about 10 min after T1 in all.
@@ -35,10 +43,14 @@ export function connectionProblem(error, {pending = false} = {}) {
 // What a connected OP-1 runs, from its inventory (op1push.js readInventory; null: it answers the update but has no
 // inventory). The inventory has no version string: the release label is named only when the running core is this
 // release's (coreMatches). Count: plugin files on the OP-1 (records with a path), not the built-ins.
-// newCore: Review changes will send the whole firmware, which needs the original R246 (haveFile: already chosen).
-export function connectedText(inv, {label = 'hundekraft 3', coreMatches = false, haveFile = false} = {}) {
-  if (!inv?.plugins) return {state: 'OP–1 found: an earlier hundekraft.', text: haveFile ? READY : NEW_CORE, newCore: true};
+// newCore: Review changes will send a new core. installed: the release label of the running core (core-route.js
+// runningRelease), or null. patch: the new core goes as a patch (core-route.js coreRoute), so no R246 is needed;
+// otherwise needOriginal: the page asks for op1_246.op1 (haveFile: already chosen).
+export function connectedText(inv, {label = 'hundekraft 3', installed = null, coreMatches = false, haveFile = false, patch = false} = {}) {
+  if (!inv?.plugins) return {state: 'OP–1 found: an earlier hundekraft.', text: haveFile ? READY : NEW_CORE, newCore: true, needOriginal: !haveFile};
   const n = (inv.records || []).filter(r => r.path).length;
-  const state = `OP–1 found: ${coreMatches ? label : 'hundekraft 3'}, ${n} plugin${n === 1 ? '' : 's'}.`;
-  return {state, text: coreMatches || haveFile ? READY : NEW_CORE, newCore: !coreMatches};
+  const state = `OP–1 found: ${coreMatches ? label : installed || 'hundekraft 3'}, ${n} plugin${n === 1 ? '' : 's'}.`;
+  if (coreMatches) return {state, text: READY, newCore: false, needOriginal: false};
+  if (patch && installed) return {state, text: patchText(installed, label), newCore: true, needOriginal: false};
+  return {state, text: haveFile ? READY : newCoreText(installed, label), newCore: true, needOriginal: !haveFile && !patch};
 }
