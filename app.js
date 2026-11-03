@@ -1,5 +1,5 @@
 import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
-import {saveSelection, loadSelection, loadPlugins, savePlugins, providerSignature, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
+import {saveSelection, loadSelection, loadPlugins, savePlugins, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
 import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK} from './op1push.js?v=3.1-core-patch-20261102';
 import {connectionProblem, connectedText, newCoreText, recentlySent, MIDI_ASK} from './connect-result.js?v=3.1-core-patch-20261102';   // one message per connection result
 import {coreRoute, runningRelease} from './core-route.js?v=3.1-core-patch-20261102';      // which release the OP-1 runs; core patches
@@ -239,6 +239,16 @@ function ownScreens() {
   for (const d of listed.values()) { const svg = d[0] === 0x3C ? d.indexOf(0) : 0; n += Math.max(b.own_min, Math.ceil(Math.max(svg, 0) * b.own_svg_factor)); }
   for (const r of observedOwn) if (!listed.has(r.name) && !/off|removed/.test(r.state || '')) n += Math.max(b.own_min, Math.ceil((r.size || 0) * b.own_size_factor));
   return n;
+}
+// The main-page tick for a workshop plugin file (content/<file>), or null: the review's On / Off follows it
+function catalogTick(path) {
+  if (!path?.startsWith('content/') || !release) return null;
+  const name = path.slice(8);
+  for (const group of ['synths', 'effects', 'utilities', 'op1r_plugins']) for (const f of release.catalog[group] || []) {
+    if (f.always || ![f.file, ...(f.files || [])].includes(name)) continue;
+    return document.querySelector(group === 'op1r_plugins' ? `input[data-plugin="${f.id}"]` : `#catalog input[data-group="${group}"][value="${f.id}"]`);
+  }
+  return null;
 }
 function catalogInput(name) {
   return [...document.querySelectorAll('#catalog input[type=checkbox]')].find(i => i.value === name || i.dataset.plugin === name);
@@ -660,9 +670,9 @@ async function settlePlan(inv, wanted, opts, full = false) {
     const desired = wanted;
     const preliminary = planner(inv, desired, {...opts, own, drop});
     const forceOn = [], forceOff = [];
-    for (const e of preliminary.entries) {
-      const t = ownState.toggles[e.name];
-      if (t?.signature === providerSignature(e)) (t.on ? forceOn : forceOff).push(e.name);
+    for (const e of preliminary.entries) {                        // workshop plugins: the main page decides
+      const tick = catalogTick(e.path);
+      if (tick) (tick.checked ? forceOn : forceOff).push(e.name);
     }
     let plan = planner(inv, desired, {...opts, own, drop, forceOn, forceOff});
     const signature = reviewSignature(inv, plan.entries);
@@ -671,15 +681,10 @@ async function settlePlan(inv, wanted, opts, full = false) {
     plan = planner(inv, desired, {...opts, own, drop, forceOn, forceOff, winners});
     const needsReview = full || plan.changed || !plan.resolved || (plan.unknown.length && !unknownAccepted);
     if (needsReview && (!asked || !plan.resolved || (plan.unknown.length && !unknownAccepted))) {
-      pushStatus(full ? 'This update includes new OP–1 firmware. Review it and the plugin changes. Nothing has been sent.' : 'Review installs, replacements, removals and whole-plugin on/off choices. Nothing has been sent.');
+      pushStatus(full ? 'This update includes new OP–1 firmware. Review it and the plugin changes. Nothing has been sent.' : 'Review installs, replacements and removals. Nothing has been sent.');
       const r = await showPlan(box, plan, {ask: true, pending: manageOwn ? ownState.removals : [], saved, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander ${choices().lander ? 'on' : 'off'}` : ''});
       if (r.remove) { const e = plan.entries.find(e => e.path === r.remove); await removeOwn(e.name, e.path); acceptedSignature = null; continue; }
       if (r.undo) { await undoRemoval(r.undo); acceptedSignature = null; continue; }
-      if (r.toggle) {
-        const e = plan.entries.find(e => e.name === r.toggle);
-        ownState.toggles = {...ownState.toggles, [e.name]: {signature: providerSignature(e), on: r.on}};
-        ownState.reviews = {}; await rememberOwn(); acceptedSignature = null; continue;
-      }
       winners = r.winners; unknownAccepted = r.unknownAccepted; asked = true; acceptedSignature = signature;
       ownState.reviews[signature] = {winners, unknownAccepted};
       if (Object.keys(ownState.reviews).length > 30) delete ownState.reviews[Object.keys(ownState.reviews)[0]];

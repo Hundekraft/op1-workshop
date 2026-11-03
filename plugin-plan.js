@@ -20,7 +20,8 @@ export const needsChoice = plan => plan.changed || plan.conflicts.length > 0 || 
 export const cancelledPlan = () => new Error('Cancelled before transfer. No device changes were sent; pending selections are saved.');
 export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], saved = {}, full = false, coreNote = '', deferredOwn = []} = {}) {
   box.onchange = null;
-  const rows = [...plan.entries, ...plan.removed.map(r => ({...r, action: 'remove', on: false}))];
+  // Built-ins (settings, stock engines and effects) can't be chosen anywhere: left out. Conflicts still name them.
+  const rows = [...plan.entries.filter(e => e.action !== 'built-in'), ...plan.removed.map(r => ({...r, action: 'remove', on: false}))];
   const unknown = !!plan.unknown?.length, downgrade = rows.some(e => e.downgrade);
   const involved = new Set(plan.conflicts.flatMap(c => c.names));
   const changed = e => !['keep', 'built-in'].includes(e.action) || e.was && (e.on !== (e.was.state === 'loaded') || ['failed', 'skipped'].includes(e.was.state)) || involved.has(e.name);
@@ -36,7 +37,8 @@ export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], save
   const sign = e => e.action === 'remove' ? '−' : e.action === 'install' ? '+' : e.downgrade || e.restoration || failed(e) ? '!' : e.action === 'update' ? '↻' : '·';
   const tag = e => e.action === 'remove' ? 'removed' : e.action === 'install' ? 'new' : e.restoration ? 'workshop version' : e.downgrade ? 'older version' : stateChanged(e) ? (e.on ? 'turned on' : 'turned off') : e.action === 'update' ? 'updated' : '';
   const warn = e => e.downgrade || e.restoration || failed(e);
-  const toggle = e => e.locked ? `<span class="plan-state" data-state>Always on</span>` : ask && e.name && e.action !== 'remove' ? `<button type="button" class="plan-switch" role="switch" aria-checked="${!!e.on}" aria-label="${esc(e.name)}" data-toggle="${esc(e.name)}" data-enable="${!e.on}"><span data-state>${e.on ? 'On' : 'Off'}</span></button>` : e.action === 'remove' ? '' : `<span class="plan-state" data-state>${e.on ? 'On' : 'Off'}</span>`;
+  // Workshop plugins are chosen on the main page, your own files with Remove: the review shows the state, no switch
+  const toggle = e => e.action === 'remove' ? '' : `<span class="plan-state" data-state>${e.on ? 'On' : 'Off'}</span>`;
   const row = e => `<li class="plan-row${warn(e) ? ' plan-warn' : ''}"${e.action === 'remove' ? '' : ` data-plugin-name="${esc(e.name)}"`}><span class="plan-sign" aria-hidden="true">${sign(e)}</span><span class="plan-name">${esc(e.name || e.path)}${e.source === 'own' ? ' <small>your file</small>' : ''}${e.replaces ? `<small>replaces ${esc(e.replaces)}</small>` : ''}${failed(e) ? `<small>last boot ${esc(e.was.state)}${e.was.reason ? ': ' + esc(e.was.reason) : ''}</small>` : ''}</span><span class="plan-meta">${esc([tag(e), ver(e), kb(e.size)].filter(Boolean).join(' · '))}</span>${toggle(e)}${controls(e)}</li>`;
   const brief = e => `<li data-plugin-name="${esc(e.name)}">${esc(e.name || e.path)}${ver(e) ? ` <span>${esc(ver(e))}</span>` : ''}${e.source === 'own' ? ' <span>your file</span>' : ''}${controls(e)}</li>`;
   const total = list => kb(list.reduce((n, e) => n + (e.size || 0), 0));
@@ -69,9 +71,7 @@ ${ask ? `<p data-consequence role="status"></p>${plan.offChanged ? '<p>Plugin on
       send.disabled = !live.resolved || (unknown && !box.querySelector('[data-unknown]').checked) || (downgrade && !box.querySelector('[data-downgrade]').checked);
       for (const e of live.entries) for (const row of box.querySelectorAll('.plan-row[data-plugin-name]')) {
         if (row.dataset.pluginName !== e.name) continue;
-        const state = row.querySelector('[data-state]'); if (state) state.textContent = e.locked ? 'Always on' : e.on ? 'On' : 'Off';
-        const toggle = row.querySelector('[data-toggle]');
-        if (toggle) { toggle.dataset.enable = String(!e.on); toggle.setAttribute('aria-checked', String(!!e.on)); }
+        const state = row.querySelector('[data-state]'); if (state) state.textContent = e.on ? 'On' : 'Off';
       }
       plan.conflicts.forEach((c, i) => { box.querySelector(`[data-implied="${i}"]`).hidden = !live.conflicts.find(x => x.claim === c.claim)?.implied; });
       box.querySelector('[data-consequence]').textContent = live.errors.length ? live.errors.join('. ') : live.off.length ? `Whole plugins planned off: ${live.off.join(', ')}.` : '';
@@ -81,7 +81,6 @@ ${ask ? `<p data-consequence role="status"></p>${plan.offChanged ? '<p>Plugin on
     const finish = value => { if (settled) return; settled = true; box.onchange = null; box.querySelectorAll('button, input').forEach(e => e.disabled = true); resolve(value); };
     box.querySelectorAll('[data-remove]').forEach(b => b.onclick = () => finish({remove: b.dataset.remove}));
     box.querySelectorAll('[data-undo]').forEach(b => b.onclick = () => finish({undo: b.dataset.undo}));
-    box.querySelectorAll('[data-toggle]').forEach(b => b.onclick = () => finish({toggle: b.dataset.toggle, on: b.dataset.enable === 'true'}));
     box.querySelector('[data-cancel]').onclick = () => { box.onchange = null; box.hidden = true; reject(cancelledPlan()); };
     send.onclick = () => { if (!send.disabled) finish({winners: chosen(), unknownAccepted: !!box.querySelector('[data-unknown]')?.checked}); };
   });
