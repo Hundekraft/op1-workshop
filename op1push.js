@@ -589,6 +589,21 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
           changed: !!(send.length || removed.length || offChanged || restartNeeded)};
 }
 
+// Leftovers an install without a format can leave (docs/clean-install-helper-2026-11-04.md, check A). workshop: Map
+// file id -> display name of every catalog plugin; own: names of the uploads this browser holds. old: plugins/ files
+// named like a workshop plugin that aren't this browser's uploads (op1r's .op1p, an earlier build's copy): the loader
+// reads plugins/ first and refuses the shipped content/ file of the same name, and planPlugins keeps such a file as the
+// user's own. blocks: that refusal is in the inventory. noNumber: files refused for want of a plugin number (the
+// op1.db number map keeps every name it has seen). skippedAll: the crash marker made the last boot skip every file.
+export function leftovers(inv, {workshop = new Map(), own = []} = {}) {
+  const records = inv?.records || [], files = records.filter(r => r.path);
+  const sameName = r => r.state === 'failed' && /same name/.test(r.reason) && r.path.startsWith('content/');
+  const old = files.filter(r => r.path.startsWith('plugins/') && workshop.has(r.name) && !own.includes(r.name))
+    .map(r => ({name: r.name, path: r.path, label: workshop.get(r.name), source: r.source, version: r.version || '',
+                blocks: files.some(c => c.name === r.name && sameName(c))}));
+  return {old, noNumber: files.filter(r => r.state === 'failed' && /no free plugin number/.test(r.reason)).map(r => r.name),
+          skippedAll: files.length > 0 && files.every(r => r.state === 'skipped')};
+}
 // Built-ins that are never switched off: settings is the T3 page, the only place on the OP-1 for count-in and the
 // features' on / off switches (kennel kn_features.c ignores an off list naming it)
 export const ALWAYS_ON = ['settings'];

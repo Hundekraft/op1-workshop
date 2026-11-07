@@ -1,12 +1,13 @@
 import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
 import {saveSelection, loadSelection, loadPlugins, savePlugins, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
-import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK} from './op1push.js?v=3.1-core-patch-20261102';
-import {connectionProblem, connectedText, newCoreText, recentlySent, MIDI_ASK} from './connect-result.js?v=3.1-core-patch-20261102';   // one message per connection result
+import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK, leftovers} from './op1push.js?v=3.2-leftovers-20261104';
+import {connectionProblem, connectedText, newCoreText, recentlySent, MIDI_ASK, START_CLEAN, leftoverText} from './connect-result.js?v=3.2-leftovers-20261104';   // one message per connection result
 import {coreRoute, runningRelease} from './core-route.js?v=3.1-core-patch-20261102';      // which release the OP-1 runs; core patches
+import {initStartClean} from './backup.js?v=3.2-clean-20261104';                         // Start clean: steps and the disk-mode backup
 import {showPlan, claimText} from './plugin-plan.js?v=3.1-two-paths-20261027';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=new-on-top-20261028';                  // the front page: what's in a build, by category
+import {CATEGORIES} from './categories.js?v=3.2-order-20261107';                  // the front page: what's in a build, by category
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
@@ -226,7 +227,16 @@ function screenMemory(c, ownBytes = 0) {
   if (!b) return {over: 0, heaviest: []};
   const chosen = ['synths', 'effects', 'utilities', 'op1r_plugins'].flatMap(g => (release.catalog[g] || []).filter(f => f.screen_bytes &&
     (f.always || (g === 'op1r_plugins' ? !c.hidden?.includes(f.id) : c[g].includes(f.id)))));
-  const need = b.base + chosen.reduce((n, f) => n + f.screen_bytes, 0) + (c.preset_cap || 300) * b.per_preset + ownBytes + b.worst_screen;
+  // lazy_cap (svg-lazy cores): engine, FX and sequencer pages are parsed when in the screen table; resident at most
+  // max(cap, S) + S, S the heaviest page of each kind together (runtime.screen_memory says why)
+  const kindOf = f => (release.catalog.synths || []).includes(f) ? 'synth' : (release.catalog.effects || []).includes(f) ? 'fx' : f.kind;
+  const kinds = ['synth', 'fx', 'seq'];
+  const lazy = b.lazy_cap ? chosen.filter(f => kinds.includes(kindOf(f))) : [];
+  const heaviest = k => Math.max(0, ...lazy.filter(f => kindOf(f) === k).map(f => f.screen_bytes));
+  const lazySum = lazy.reduce((n, f) => n + f.screen_bytes, 0);
+  const table = kinds.reduce((n, k) => n + heaviest(k), 0);
+  const screens = chosen.reduce((n, f) => n + f.screen_bytes, 0) - lazySum + Math.min(lazySum, Math.max(b.lazy_cap || 0, table) + table);
+  const need = b.base + screens + (c.preset_cap || 300) * b.per_preset + ownBytes + b.worst_screen;
   return {over: Math.max(0, need - (b.limit - b.margin)), heaviest: chosen.sort((x, y) => y.screen_bytes - x.screen_bytes).slice(0, 5).map(f => f.name || f.id)};
 }
 // Your own plugins' screens: files listed here (from the SVG each .knl starts with, as runtime.own_screen_bytes) and
@@ -266,7 +276,6 @@ function update() {
   for (const id of ['export', 'import', 'expanded']) $(id).disabled = editingLocked() || !release;
   if (release) {
     const c = choices();
-    if ($('build-upstreams')) $('build-upstreams').textContent = `Original R246 · ${kennel() ? 'op1r + kennel' : baseLabel()}${c.utilities?.length ? (kennel() ? ` · ${c.utilities.length} of Maiko’s tools` : ' · Maiko #249') : ''}`;
     // the prebuilt variant: on kennel bases every file choice on (the build leaves files out); on 2.x Maiko's tools all or none
     const all = g => release.catalog[g].map(f => f.id);
     const v = variantChoices(c), id = configId(v, false);
@@ -311,7 +320,7 @@ function setControls() {
   document.querySelectorAll('#catalog input[type=checkbox], #export, #import, #own-files').forEach(el => el.disabled = editingLocked());
   if (editingLocked()) document.querySelectorAll('#selection-plan input, #selection-plan button').forEach(el => el.disabled = true);
   $('firmware').disabled = busy || devicePending;
-  document.querySelectorAll('#own-list button, #own-check, #own-send, #push-send').forEach(el => el.disabled = busy || devicePending || storageBlocked);
+  document.querySelectorAll('#own-list button, #leftovers button, #own-check, #own-send, #push-send').forEach(el => el.disabled = busy || devicePending || storageBlocked);
   if (firmwareWait) $('firmware').disabled = false;
 }
 function lock(value) {
@@ -495,7 +504,11 @@ async function corePatchFiles(inv) {
       };
       active.postMessage({release, coreJob: {variantId: variantKey(), disk: coreState.disk, running: inv.core}});
     });
-    if (!data.files.length) { $('log').textContent += `core patch not possible (${data.reason}): needs op1_246.op1\n`; return null; }
+    if (!data.files.length) {
+      $('log').textContent += `core patch not possible (${data.reason}): needs op1_246.op1\n`;
+      coreState = {...coreState, route: {route: 'original', reason: data.reason}};   // the page says why (requestFirmware)
+      return null;
+    }
     return data.files;
   } finally { active.terminate(); }
 }
@@ -504,7 +517,8 @@ function connected(inv) {
   let coreMatches = false;
   try { coreMatches = !!inv?.core && sameCore(targetCore(), inv.core); } catch { /* core information missing: not a match */ }
   return connectedText(inv, {label: release?.release.product?.label || 'hundekraft 3', coreMatches, haveFile: !!file,
-                             installed: coreState?.installed || null, patch: coreState?.route?.route === 'patch'});
+                             installed: coreState?.installed || null, patch: coreState?.route?.route === 'patch',
+                           reason: coreState?.route?.reason || null});
 }
 // The device line: text plus a tone for its look (ok / warn / wait / error; none = not connected yet)
 function deviceState(text, tone) {
@@ -515,8 +529,11 @@ function connectionState(inv) {
   deviceInventory = inv;
   const c = connected(inv);
   deviceState(c.state, c.newCore ? 'warn' : 'ok');
+  startClean(!!c.startClean);
   $('own-check').textContent = 'Check again';
 }
+// The manual's Start clean under the device line: an OP-1 on another firmware or a hundekraft before 3.0
+function startClean(on) { $('device-clean-text').textContent = START_CLEAN; $('device-clean').hidden = !on; }
 // Buttons under a device message. retry: Try again's label; file: the label of the button that opens the firmware
 // file panel; firmware: Choose op1_246.op1 (a new core needs the original R246).
 // primary: retry/file are the main actions (dark), with Review changes hidden (blockReview)
@@ -546,6 +563,7 @@ function deviceError(error, suffix = '', failed = true) {
   if (problem) {
     pushStatus(problem.text, true);
     deviceState(problem.state, problem.kind === 'restarting' ? 'wait' : 'error'); $('own-check').textContent = 'Connect my OP–1';
+    startClean(problem.kind === 'not-hundekraft');
     $('push-hint').textContent = problem.hint; $('push-hint').hidden = !problem.hint;
     deviceButtons({retry: problem.retry ? 'Try again' : null, file: problem.file, primary: !problem.review});
     blockReview(!problem.review);
@@ -583,7 +601,7 @@ async function openDevice() {
 }
 function requestFirmware() {
   if (file) return Promise.resolve();
-  const text = newCoreText(coreState?.installed, release?.release.product?.label || 'hundekraft 3');
+  const text = newCoreText(coreState?.installed, release?.release.product?.label || 'hundekraft 3', coreState?.route?.reason);
   $('firmware-reason').textContent = text + ' Preparation continues as soon as you choose it.';
   pushStatus(text);
   deviceButtons({firmware: true}); originalHint(true);
@@ -924,6 +942,7 @@ $('path-connect').onclick = () => {
   $('own-check').focus({preventScroll: true});
   $('own-check').click();
 };
+initStartClean();
 const stopButton = document.createElement('button'); stopButton.id = 'verification-stop'; stopButton.type = 'button'; stopButton.textContent = 'Check later'; stopButton.hidden = true;
 stopButton.onclick = () => { stopVerification = true; verificationController?.abort(); stopButton.disabled = true; };
 $('device-feedback').append(stopButton);
@@ -934,6 +953,8 @@ function showOwn(inv) {
   const rows = new Map(observedOwn.map(r => [r.name || r.path, {name: r.name, path: r.path, label: `Your plugin · Installed${r.state === 'loaded' ? '' : ' · ' + r.state}`}]));
   for (const [p, d, fileName] of ownFiles) { const i = pluginInfo(p, d); rows.set(i.name, {name: i.name, path: p, label: `Your plugin · ${observedOwn.some(r => r.path === p && r.crc === i.crc) ? 'Installed' : 'Ready to add / update'} · ${fileName} · ${Math.max(1, Math.round(d.length / 1024))} KB`}); }
   for (const r of ownState.removals) rows.set(removalId(r), {...r, pending: true, label: 'Your plugin · Will be removed on update'});
+  const found = showLeftovers();
+  for (const o of found.old) { const row = rows.get(o.name); if (row) row.label = row.pending ? 'Old copy · Will be removed on update' : 'Old copy from op1r or an earlier build · Installed'; }
   $('own-list').replaceChildren(...[...rows.values()].map(r => {
     const li = document.createElement('li'), name = document.createElement('span'), btn = document.createElement('button');
     li.dataset.pendingRemoval = String(!!r.pending);
@@ -952,6 +973,47 @@ function showOwn(inv) {
   if (release) { selectionReview(); countTabs(); updateSummary(); }
   if (storageError) ownStatus(storageError, true);
   else if (ownState.verification) ownStatus('Update awaiting verification. Once the tape screen is back, press Connect my OP–1 or Check again.');
+}
+// Every workshop plugin by file id (catalog file names without .knl), for the leftover check
+function workshopNames() {
+  const names = new Map();
+  for (const group of ['synths', 'effects', 'utilities', 'op1r_plugins']) for (const f of release?.catalog[group] || [])
+    for (const file of [f.file, ...(f.files || [])].filter(Boolean)) names.set(file.replace(/\.(knl|op1p)$/, ''), f.name || f.id);
+  return names;
+}
+// Leftovers an install without a format can leave (op1push.js leftovers): old copies of workshop plugins in plugins/,
+// plugins refused for want of a number, a boot that skipped every file. Removal is the own list's: staged, with Undo.
+function showLeftovers() {
+  const found = leftovers(deviceInventory, {workshop: workshopNames(), own: ownFiles.map(([p, d]) => pluginInfo(p, d).name)});
+  let current = false;
+  try { current = !!deviceInventory?.core && sameCore(targetCore(), deviceInventory.core); } catch { /* no core information */ }
+  const t = leftoverText(found, {current});
+  $('leftovers').hidden = !t;
+  if (!t) return found;
+  $('leftovers-text').textContent = t.text;
+  $('leftovers-hint').textContent = t.hint; $('leftovers-hint').hidden = !t.hint;
+  if (t.clean) startClean(true);
+  const pending = o => ownState.removals.some(r => removalMatches(r, o));
+  $('leftovers-list').replaceChildren(...found.old.map(o => {
+    const li = document.createElement('li'), label = document.createElement('span'), btn = document.createElement('button');
+    label.textContent = `${o.label} · ${o.path}${o.version ? ' · ' + o.version : ''}${pending(o) ? ' · will be removed on update' : ''}`;
+    btn.type = 'button'; btn.textContent = pendingUpdate() ? 'Verify first' : pending(o) ? 'Undo' : 'Remove'; btn.disabled = busy || devicePending;
+    btn.onclick = async () => {
+      if (pendingUpdate()) { $('own-check').click(); return; }
+      try { if (pending(o)) await undoRemoval(o.name); else await removeOwn(o.name, o.path); }
+      catch (e) { ownStatus(e.message, true); }
+    };
+    li.append(label, btn); return li;
+  }));
+  const left = found.old.filter(o => !pending(o));
+  $('leftovers-remove').hidden = left.length < 2 || pendingUpdate();
+  $('leftovers-remove').textContent = `Remove all ${left.length} old copies`;
+  $('leftovers-remove').disabled = busy || devicePending;
+  $('leftovers-remove').onclick = async () => {
+    try { for (const o of left) await removeOwn(o.name, o.path); }
+    catch (e) { ownStatus(e.message, true); }
+  };
+  return found;
 }
 const pluginMax = () => release?.plugin_max || PLUGIN_MAX;        // this release's core (release.py), else 512 KB
 async function addOwn(list) {

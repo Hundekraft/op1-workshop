@@ -140,17 +140,29 @@ def screen_memory(config, catalog, own_bytes=0):
     """R246's drawing heap (TE heap) for a normalized configuration, from the catalog's measured screen_bytes and
     screen_budget (kennel bases; {} without them): the boot use (base, the chosen files' screens, preset_cap user
     presets) plus the worst steady screen must stay under R246's drawing-cache reset point less a margin, or every
-    frame rebuilds every cache. own_bytes: the user's own plugin files' estimated screens (own_screen_bytes)."""
+    frame rebuilds every cache. own_bytes: the user's own plugin files' estimated screens (own_screen_bytes).
+    With lazy_cap (kennel svg-lazy cores) engine, FX and sequencer type pages are parsed only when in the screen table
+    and freed least recently drawn first over that cap, never while in the table or the frame after. The table holds
+    the current engine, FX and sequencer page at once (S: the heaviest of each kind together), and a switch can bring
+    a new set before the old one may go, so they count min(their sum, max(lazy_cap, S) + S). The rest (feature
+    pages, drum pages, own files) stay parsed from boot and count in full."""
     b = (catalog or {}).get('screen_budget')
     if not b:
         return {}
-    chosen = []
+    chosen, lazy = [], {'synth': [], 'fx': [], 'seq': []}
     for group in ('synths', 'effects', 'utilities', 'op1r_plugins'):
         for f in catalog.get(group, []):
             on = f.get('always') or (f['id'] not in config.get('hidden', []) if group == 'op1r_plugins' else f['id'] in config.get(group, []))
             if on and f.get('screen_bytes'):
                 chosen.append((f['screen_bytes'], f['id']))
-    need = b['base'] + sum(n for n, _ in chosen) + config.get('preset_cap', 300) * b['per_preset'] + own_bytes + b['worst_screen']
+                kind = {'synths': 'synth', 'effects': 'fx'}.get(group, f.get('kind'))
+                if b.get('lazy_cap') and kind in lazy:
+                    lazy[kind].append(f['screen_bytes'])
+    pages = [n for k in lazy for n in lazy[k]]
+    table = sum(max(lazy[k], default=0) for k in lazy)
+    bound = max(b.get('lazy_cap', 0), table) + table
+    screens = sum(n for n, _ in chosen) - sum(pages) + min(sum(pages), bound)
+    need = b['base'] + screens + config.get('preset_cap', 300) * b['per_preset'] + own_bytes + b['worst_screen']
     room = b['limit'] - b['margin']
     return {'need': need, 'room': room, 'over': max(0, need - room), 'heaviest': [i for _, i in sorted(chosen, reverse=True)[:5]]}
 
@@ -342,9 +354,55 @@ def hide_plugins(db, catalog, hidden, optional=()):
         os.remove(path)
 
 
+TYPE_TABLES = ('synth_types', 'fx_types', 'seq_types', 'drum_types')
+ROW_KEYS = {t: 'type' for t in TYPE_TABLES + ('lfo_types',)} | {'drum_presets': 'folder'}
+
+
+def boot_owned_types(catalog):
+    """{(table, type)} of the picker rows any kennel core writes itself at boot: every plugin that ships as a file
+    (kn_boot.c row_ensure, kn_seq_row_ensure), so a core patch needs no factory DB for them."""
+    names = {saved_name(f) for g in ('synths', 'effects', 'op1r_plugins') for f in (catalog or {}).get(g, [])
+             if entry_files(f)}
+    return {(t, n) for t in TYPE_TABLES for n in names}
+
+
+def core_rows(data):
+    """kennel synth_sdk/core_rows.json -> ({(table, key)}, {table}): the rows a core with kn_core_rows.h keeps right at
+    boot (added when missing, removed when their plugin isn't there) and kennel's own tables."""
+    return {(r['table'], r.get('type', r.get('folder'))) for r in data['rows']}, set(data.get('tables', []))
+
+
+def factory_digest(db, owned, tables=('kennel_seq_owned',)):
+    """SHA-256 of a factory DB's rows without the rows the target core maintains (owned: {(table, key)}, the key
+    column per ROW_KEYS) and without kennel's own tables: two releases with the same digest need no factory DB in a
+    core patch. Rows, not bytes, so SQLite's page layout and the ids of boot-written rows don't count
+    (docs/factory-db-route-2026-11-04.md)."""
+    import os, sqlite3, tempfile
+    fd, path = tempfile.mkstemp(suffix='.db')
+    try:
+        os.write(fd, db)
+        os.close(fd)
+        con = sqlite3.connect(path)
+        out = []
+        for (table, sql) in sorted(con.execute("SELECT name, sql FROM sqlite_master WHERE type='table'")):
+            if table in tables:
+                continue
+            cols = [r[1] for r in con.execute(f'PRAGMA table_info("{table}")')]
+            rows = con.execute(f'SELECT * FROM "{table}"').fetchall()
+            if ROW_KEYS.get(table) in cols:
+                i = cols.index(ROW_KEYS[table])
+                rows = [r for r in rows if (table, r[i]) not in owned]
+            out.append([table, sql, sorted(json.dumps(r) for r in rows)])
+        con.close()
+        return sha256(json.dumps(out).encode())
+    finally:
+        os.remove(path)
+
+
 def left_out_rows(config, catalog):
     """synth / FX / sequencer plugin files a configuration leaves out: their picker rows go too where the base has them
-    (kennel keeps rows for numbered plugins), so the OP-1 never lists a type whose file isn't there."""
+    (cores before kn_core_rows.h kept the rows of plugins that never loaded; since 3.2 the core removes them at boot
+    too), so the OP-1 never lists a type whose file isn't there."""
     shipped = files(config, catalog)
     kinds = {f['id']: f['kind'] for f in catalog.get('op1r_plugins', [])}
     kinds.update({f['id']: 'synth' for f in catalog.get('synths', [])})

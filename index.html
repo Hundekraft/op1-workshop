@@ -4,8 +4,8 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hundekraft 3.1 / Firmware workshop</title>
 <link rel="icon" href="favicon.ico?v=3" sizes="any"><link rel="icon" type="image/png" href="favicon-32.png?v=3"><link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="stylesheet" href="style.css?v=3.1-core-patch-20261102"><link rel="stylesheet" href="preview.css?v=hundekraft-3.0"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-3.1-nav-20261101">
-<script type="module" src="app.js?v=3.1-core-patch-20261102"></script>
+<link rel="stylesheet" href="style.css?v=3.2-clean-20261104"><link rel="stylesheet" href="preview.css?v=hundekraft-3.0"><link rel="stylesheet" href="manual/manual.css?v=hundekraft-3.1-nav-20261101">
+<script type="module" src="app.js?v=3.2-order-20261107"></script>
 <link rel="alternate" type="text/plain" href="llms.txt" title="Kennel plugin development for coding assistants">
 </head>
 <body>
@@ -21,7 +21,7 @@
 <li><b>Send to OP–1</b><p>Press T1 on the OP–1 when it asks. T2 cancels.</p></li>
 <li><b>Done</b><p>The OP–1 restarts and the page confirms what was installed.</p></li>
 </ol></details></section>
-<section class="path-card path-file" id="path-file" aria-labelledby="path-file-title"><span class="path-tag">FILE</span><h2 id="path-file-title">Install with a file</h2><p>First time, or coming from stock, op1r or another firmware? You need Teenage Engineering’s original <code>op1_246.op1</code>. Build the file here, then install it from the boot menu.</p><button type="button" id="path-build" class="path-go">Build firmware file <span>↓</span></button><p class="path-note"><strong>Coming from another firmware? Start clean.</strong> Leftover files can trip up a new one. Back up your tapes and sounds, then format before you install. <a href="manual.html#start-clean">How to back up and format →</a></p>
+<section class="path-card path-file" id="path-file" aria-labelledby="path-file-title"><span class="path-tag">FILE</span><h2 id="path-file-title">Install with a file</h2><p>First time, or coming from stock, op1r or another firmware? You need Teenage Engineering’s original <code>op1_246.op1</code>. Build the file here, then install it from the boot menu.</p><button type="button" id="path-build" class="path-go">Build firmware file <span>↓</span></button><p class="path-note"><strong>Coming from another firmware? Start clean.</strong> Leftover files can trip up a new one. Back up your tapes and sounds, then format before you install. <a href="#start-clean">How to back up and format →</a></p>
 <details class="path-steps"><summary>Show the steps</summary><ol class="qs-steps">
 <li><b>Get original R246</b><p>Get Teenage Engineering’s original OP–1 firmware file, <code>op1_246.op1</code>. The workshop checks that it is the unmodified original.</p></li>
 <li><b>Pick plugins</b><p>Pick synths, drums, effects and tools below, or keep the defaults. Cards without a checkbox are always included. Your choices are saved in this browser.</p></li>
@@ -49,13 +49,15 @@
 </div>
 <aside class="build-panel">
 <div class="panel-label"><span>YOUR BUILD</span><span class="status-dot" aria-hidden="true"></span></div>
-<div class="build-brand" data-release-label>hundekraft 3.1</div><p id="build-upstreams" class="build-upstreams"></p>
+<div class="build-brand" data-release-label>hundekraft 3.1</div>
 <p class="selection-summary-hint">Selected / available, including always-in features.</p>
 <dl id="selection-summary" aria-label="Your selected features"><div><dt>User preset limit</dt><dd id="cap-count">300</dd></div></dl>
 <section id="device-card" class="device-card" hidden aria-label="Update your OP–1">
 <div class="panel-label">UPDATE YOUR OP–1</div>
 <p id="screen-note" class="screen-over" role="alert" hidden></p>
 <p id="device-state" role="status">Connect your OP–1 by USB to see what’s installed.</p>
+<div id="leftovers" class="leftovers" hidden><p id="leftovers-text"></p><ul id="leftovers-list"></ul><button type="button" id="leftovers-remove" hidden>Remove old copies</button><p id="leftovers-hint" class="device-hint" hidden></p></div>
+<p id="device-clean" class="device-hint" hidden><span id="device-clean-text"></span> <a href="#start-clean">How to back up and format →</a></p>
 <button type="button" id="own-check">Connect my OP–1</button>
 <button type="button" id="own-send" class="download">Review changes →</button>
 <p class="device-scope">Applies your workshop selections and your own plugins together. You’ll review every change before sending.</p>
@@ -81,6 +83,19 @@
 </form>
 <section class="after"><span>03 / BACK TO MAKING MUSIC</span><p>Download your firmware, then install it using the OP–1’s usual firmware-update mode. This workshop is for the original OP–1, not the OP–1 field. Preset files are installed separately through disk mode.</p></section>
 <section class="after changelog" id="changelog"><span>04 / CHANGELOG</span><div>
+<h3>3.2</h3>
+<p>New synths:</p>
+<ul><li>VOX: your voice, played on the keys. Sing or talk into the OP–1, hold a chord, and VOX puts your words on those notes. Formant makes your voice bigger or smaller without touching the pitch. (Hundekraft)</li><li>SNAP: pitch correction, from polite to obvious. Turn it down and a shaky note slides into tune; turn it up and every note snaps hard to the key. Hold keys and each one adds another copy of your voice, so one chord makes a small choir. (Hundekraft)</li><li>STRUM: a real acoustic guitar that plays along. A Martin HD28, recorded note by note, strums the right chord for your key in time with the tempo. 28 patterns, from campfire strumming and funk to Travis picking, bossa nova and flamenco. (Hundekraft; guitar samples by Jeff Learman)</li><li>REACTOR: a power plant you play like a synth. Four rods hum in a loop that feeds itself; turn up the heat and it grows, bends and howls, and if the heat wins, the core goes critical. (Hundekraft)</li><li>MOAI: a Minimoog-style synth with 121 sounds. Three oscillators into a ladder filter, for fat basses, singing leads and brassy stabs. (fungiboletus)</li></ul>
+<p>New effects:</p>
+<ul><li>RACKVERB: the late-80s studio rack in one effect. Big halls, gated drum rooms, reverse reverbs, flangers and slapback echoes, plus QUAD, a multi-effect that chains EQ, chorus, a rotating speaker, delay and reverb. 316 programs, and an AUTH mode with the grainy sound of the original units. (Hundekraft)</li><li>ENTE: the pump, without the patch cables. It ducks your synth every time the kick hits, from a tape track, the input or a steady beat. A rubber duck on screen gets squashed with every hit. (op1r)</li></ul>
+<p>New sequencers and tools:</p>
+<ul><li>COMPOSER: hold a key, get a whole song. Verse, chorus and bridge with proper chord changes, in 32 styles from deep house and drum & bass to bossa nova and film noir. Load it on the drum page too and it plays the drums for the same song, with a groove of its own for every style. Hold Shift for swing, note length, a section lock and jumps between sections. (Hundekraft)</li><li>HOLD: hold keys, get a loop. Every key you hold is written into the loop as it passes: a chord, a line, or a drone that never retriggers. Let go and it keeps playing. (Hundekraft)</li><li>TRAIL: a melody that slowly wanders off. Hold a note and it plays a short phrase in your scale built around one small idea, then develops it while you play over it: moved up a step, turned upside down, played backwards. Character takes it from calm to restless, and Answer turns it into a call-and-response partner that replies to what you play. (Hundekraft)</li><li>Latch keeps notes sounding after you let go. (Hundekraft)</li><li>Line clock follows a pulse on the line-in jack, so the OP–1 can play in time with a modular or a drum machine. (Hundekraft, after Pulse Sync by Volker Junginger / ESC_CODE)<br>Careful with modular gear: Eurorack clock and gate outputs are often 5 to 10 V, far hotter than the line input is made for, and can damage it. Use an attenuator or a line-level clock output, and start with the level turned down.</li><li>Master LFO gives you four LFOs that move the master effect’s knobs. (Hundekraft, op1r)</li></ul>
+<p>Better sound:</p>
+<ul><li>Synth voices run at the speed they were designed for. Parts of 28 synths and effects ran too fast or an octave high; they’re right now. Sounds saved with them can change.</li><li>MONOLIT has a new ladder filter, a wider Contour, and Heat that makes the filter sing on its own. Saved MONOLIT sounds can change.</li><li>Every effect starts with only a little effect, so you can scroll through them while you play.</li><li>Input gain for VOX, SNAP and AMP: turn blue on T2 to lift a quiet mic or tame a hot line, from −12 to +24 dB. It’s saved for each input.</li></ul>
+<p>Playing:</p>
+<ul><li>Chord strums can be much slower, up to half a beat between notes, with Human and Shape on page B.</li><li>The scale view looks like the chord page and shows what each key plays.</li><li>Sampler: Shift + green tunes a sample to its own pitch, and the drum auto-cut is easier to set.</li><li>TAPE has a second page: more play heads (2, 3, dotted or swing), a dry/wet mix, and echoes locked to the tempo from 1/16 to 1/2. Older tape sounds play as before. (op1r)</li><li>The quad LFO gets two chaotic waves, Lorenz x and Lorenz z, and a new LFO type, POND: four species compete in a pond, and their ups and downs move four targets. (op1r)</li><li>Chord mode now has 69 progressions in seven groups (pop, rock, jazz, classic, bass lines, film and world), from La Folia and Pachelbel’s canon with its walking bass to Giant Steps and Just the Two of Us. Chords can have their own bass note, as slash chords like G/B, and the bass line walks as written. Shift + white jumps from group to group. (Hundekraft)</li><li>BLOT gets a truer 303 squelch: the filter now follows the TB-303's own, the bass holds steady under the resonance, and accents fade with the decay knob. (op1r)</li><li>A metronome that doesn’t clash with your tape: pick TICK, a short tick with no pitch, or WOOD, a woodblock knock, in place of the OP-1’s beep. It’s on the settings page (Shift + help, then T3), on the orange encoder. (Hundekraft)</li><li>C64ARP has eight more tables: OCTAVE, SUS2, DOM7, DIM7, AUG, ADD9, MIN9 and ALBERTI, a broken chord like a piano’s left hand. It can also play the keys you hold in random order: turn blue right past the last table to RANDOM.</li><li>MIDI: separate channels for the keys and for knob changes, knob positions sent back to your controller, and the mixer reachable over MIDI. (op1r)</li><li>FX2 routing works with every master effect, the stock ones too, and a track with its send at 0 stays dry. (op1r, Hundekraft)</li></ul>
+<p>Fixes:</p>
+<ul><li>TOMBOLA’s balls no longer escape the hexagon and go quiet when you switch between screens, for example with FATHER on the master.</li><li>STUTTER’s slices have the right length again.</li><li>SID’s interval in sync and ring mode steps in semitones, +0 to +24, so it’s easy to set and always in tune. Saved sounds keep their interval.</li><li>Sequencers play drum pads at the pad’s own pitch. Euclid, Grids, Dots, COMPOSER and HOLD played each pad sharp, more the further right it sat: the eighth key from the left came out a fifth up.</li><li>Notes from a MIDI keyboard are recorded at the pitch you play, also with the OP-1’s octave shifted. Dots, Euclid, Oracle, Peal, Grids, HOLD, TRAIL and C64ARP put them an octave off.</li></ul>
 <h3>3.1.4</h3>
 <ul><li>Easier updates. From now on, updates over USB no longer need the op1_246.op1 file, only your OP–1 and a cable. You’ll need the file once more to install 3.1.4 itself.</li></ul>
 <h3>3.1.3</h3>
@@ -183,6 +198,22 @@
 <li>A matching collection of up to 112 presets.</li>
 </ul></div></section>
 </main>
+<dialog id="start-clean" class="start-clean" aria-labelledby="start-clean-title">
+<div class="panel-label">START CLEAN</div>
+<h2 id="start-clean-title">Back up, format, install</h2>
+<p>A format erases everything on the OP–1: tapes, album, sounds and the firmware. The workshop can't undo it, so back up first.</p>
+<ol class="start-clean-steps">
+<li><strong>Disk mode.</strong> On the OP–1, hold Shift and press COM, then T3. It shows up as a disk on your computer.</li>
+<li><strong>Back up.</strong> Copy the TAPE, ALBUM, DRUM and SYNTH folders to your computer, then eject the disk.
+<div id="start-clean-assist"><button type="button" id="start-clean-copy">Copy them for me</button><span class="device-hint">The browser asks for the OP–1 disk, then for a folder to copy into. It only reads those four folders.</span><p id="start-clean-status" role="status" aria-live="polite" hidden></p></div></li>
+<li><strong>Get your firmware file ready.</strong> The format erases the firmware too, so this one install needs op1_246.op1. <button type="button" id="start-clean-build">Build firmware file</button></li>
+<li><strong>Format and install.</strong> Switch the OP–1 off. Hold COM and switch it on. Choose 8, Format drive, then 1, Upload firmware, and copy your file to the disk.</li>
+<li><strong>Copy back.</strong> When the tape screen is back, go to disk mode again and copy your folders back.</li>
+<li><strong>Check.</strong> Plug in USB here and press Connect my OP–1. The workshop tells you if anything old is left.</li>
+</ol>
+<p class="device-hint">Most updates don't need this. It's for coming from another firmware, or a fresh start. <a href="manual.html#start-clean">The same steps in the manual →</a></p>
+<button type="button" id="start-clean-close" class="download">Close</button>
+</dialog>
 <footer><span>An independent firmware workshop. <a href="manual.html#credits">Full credits</a></span><span><a href="https://github.com/pcppcp/op1r" target="_blank" rel="noopener noreferrer">op1r</a> + <a href="https://maikopruett.com/op-1" target="_blank" rel="noopener noreferrer">Maiko Pruett</a> + <a href="https://github.com/ultralazr/op1-musica-obscura" target="_blank" rel="noopener noreferrer">ultralazr</a> + hundekraft · Not affiliated with Teenage Engineering.</span></footer>
 </body>
 </html>

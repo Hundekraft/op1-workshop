@@ -5,7 +5,7 @@
 ## Start here: scope and compatibility
 
 1. Ask what the plugin should do and which controls it needs if the request does not say. Identify synth, effect or feature before writing code.
-2. Download the [matching source and SDK](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.1.4-source.tar.gz) and [SHA-256](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.1.4-source.tar.gz.sha256) from the same workshop as the target firmware. Verify the checksum and unpack the archive. Work from `ext/kennel/` inside it; all repository paths below are relative to that directory. Read the bundle README for prerequisites.
+2. Download the [matching source and SDK](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.2-source.tar.gz) and [SHA-256](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.2-source.tar.gz.sha256) from the same workshop as the target firmware. Verify the checksum and unpack the archive. Work from `ext/kennel/` inside it; all repository paths below are relative to that directory. Read the bundle README for prerequisites.
 3. Read the selected template, its manifest, the relevant `op1_*.h` headers and `synth_sdk/kennel/kn_exports.c`. Only use declared, exported services. Do not invent APIs or copy firmware addresses from an unrelated version.
 4. Copy a template into a new plugin folder, choose a unique ID and edit only that plugin for ordinary plugin work. New synth/FX files use `order: 0` (or omit order), never another engine's legacy order. Use the standalone packer shown below.
 5. Deliver the `.knl`, controls, source, build command, licenses and required SDK/services. Keep the ID for future replacements. Report compilation, emulator and hardware checks separately; never call an unperformed hardware check passed.
@@ -18,7 +18,7 @@ The supplied bundle may contain newer optional extensions than a player's instal
 
 As the author, you need the matching SDK headers, plugin template and packer, Python 3 and a Blackfin cross compiler providing `bfin-elf-gcc`, `bfin-elf-ld` and libgcc. The 3.0 build uses GCC 13.3.0. Your computer’s ordinary C compiler cannot produce OP-1 plugins. The packer itself uses Python’s standard library. Building a plugin needs no original R246 file, device key or full firmware build.
 
-Download the [matching 3.1.4 source and SDK](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.1.4-source.tar.gz) ([SHA-256](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.1.4-source.tar.gz.sha256)). It includes the kennel headers, templates, packer, firmware sources, build instructions and licenses. Unpack it and open `ext/kennel`; all paths and commands below are relative to that folder. You use `synth_sdk/` for headers/templates and `tools/kennel/` for the plugin packer. Building a standalone plugin does not require building the complete firmware. Use the matching source bundle for your installed firmware; newer SDK services may be absent from older cores. See the bundle’s `README.md` for full firmware rebuild instructions.
+Download the [matching 3.2 source and SDK](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.2-source.tar.gz) ([SHA-256](https://hundekraft.github.io/op1-workshop/source/hundekraft-3.2-source.tar.gz.sha256)). It includes the kennel headers, templates, packer, firmware sources, build instructions and licenses. Unpack it and open `ext/kennel`; all paths and commands below are relative to that folder. You use `synth_sdk/` for headers/templates and `tools/kennel/` for the plugin packer. Building a standalone plugin does not require building the complete firmware. Use the matching source bundle for your installed firmware; newer SDK services may be absent from older cores. See the bundle’s `README.md` for full firmware rebuild instructions.
 
 If the cross tools are on PATH, the packer finds them. Otherwise pass `--toolchain /path/to/toolchain`, whose directories are `bfin-gcc/bin` and `bfin/bin`, or set `KENNEL_TOOLCHAIN` to that directory. Toolchain setup is documented in `docs/op1r-src-README.md`. For plugin work, use the `pack.py` command below; the full-firmware build commands in that older document are not part of this workflow.
 
@@ -179,6 +179,25 @@ Note stages run in priority order: scale 100, chord 200, then later processors. 
 | Synthesized drum instrument | `op1_feature_drum_synth.h`: native routing/rendering, factory kits, UI, normalization and saves; Gin is the complete example |
 
 Header declarations alone do not guarantee a loadable import exists. Check `kennel/kn_exports.c`. Functions named `kn_*` are generally core implementation details; do not adopt them as a stable author API.
+
+### SDK additions in 3.2
+
+These services and helpers are in the 3.2 source and SDK. A plugin that uses any of them needs a hundekraft 3.2 core. An older core handles them in one of two ways, shown in the last column: it refuses a file that imports a service it does not export ("unknown import"), or it ignores a press kind it does not know. State the minimum core in your plugin's instructions, and keep a plugin on the older services if it has to run on every core. All the imports are exported in `synth_sdk/kennel/kn_exports.c`.
+
+| Entry point (header) | What it does | On an older core |
+|---|---|---|
+| `op1_sin(k)`, `op1_sin_tab()`, `op1_sin_q(tab, k)` (`op1_plugin.h`) | `op1_sin(k)` is `OP1_SINE_TABLE[k & 8191]` = sin(2 pi k / 8192) x 32767 for any k, bit for bit, but it folds a quarter-wave table that the core keeps in L1 when it has one. In a loop, fetch the table once per block with `op1_sin_tab()` and read with `op1_sin_q(tab, k)`; `op1_sin` asks the core for the pointer every time | file refused (it imports `op1_l1_sine_quarter`) |
+| `op1_preset_trim(params)`, `OP1_TRIM_ONE` (`op1_plugin.h`) | An engine without a page 2 reads preset word 7 as a hidden Q13 gain (8192 = 1x, unset = 1x, 32767 = 4x). Fold it into a gain once per block | nothing to import: your code applies it |
+| `OP1_PRESS_PAGE_STEPS(n)` in `press[k]` of an engine or an FX (`op1_plugin.h`) | Page 2 whose word turns in n steps (n = 2..63), one per detent. A step is `(word * n) >> 15`; `op1_press_steps(p)` tells the kinds apart | press kind ignored: engines get no page 2, FX turn page 2 in fine steps or not at all |
+| `OP1_PRESS_PAGE_SEMI` in an FX's `press[k]` (`op1_plugin.h`) | Page 2 as a pitch of -24..+24 semitones: one detent is one semitone, Shift + turn is one cent. Convert with `op1_semi_word` / `op1_semi_cents` | press kind ignored |
+| `OP1_FX_STEPS(n)` in an FX's `press[k]` | The page-1 word turns in n steps (n = 2..127), one per detent, for a program selector. Read the step as `(op1_fx_param_q15(params, k) * n) >> 15` | press kind ignored: fine steps |
+| `op1_fx_wrap[pos][k]` (`op1_plugin.h`) | Set to m (2..n) to make an `OP1_FX_STEPS(n)` knob wrap round within steps 0..m-1. The core resets it to 0 when it picks a new FX for the position | file refused |
+| `op1_engine_knob_steps(&ENGINE_x, k, n)` (`op1_plugin.h`) | Makes page 1 of a synth engine's knob turn in n steps (n = 2..127). Call it from the screen's init; n = 0 restores the fine turn | file refused |
+| `op1_fx_fast(pos, &size)` (`op1_plugin.h`, `OP1_FAST_API 1`) | A 224 KiB lease per FX position in R246's heap 0, for state the FX reads every block. Read `size`, and fall back to `op1_fx_big` when it is 0 or too small. Taken at boot only when a loaded file imports it | file refused |
+| `op1_sc_source(src, out)` (`op1_plugin.h`) | Writes this block's 64 samples of another signal (`OP1_SC_T1`..`OP1_SC_T4`, `OP1_SC_TAPE`, `OP1_SC_IN`, `OP1_SC_INST`) for sidechain-style FX. Returns 0 with zeros when the source has no data yet. Call it from render, once per block per source | file refused |
+| `op1_l1_claim`, `op1_l1_claim_state`, `op1_l1_sine_quarter` (`op1_l1.h`, `OP1_L1_API 2`) | The L1 pool: on-chip data SRAM for a plugin's hottest per-sample data, one partition per position (synth 8,192 B, FX 8,320 B, master FX 4,160 B, drum 512 B), claimed every block. `op1_l1_claim_state` also keeps persistent state; the core copies it in and out. The plugin gets 0 when there is no pool and then uses its SDRAM copy, so the output is the same either way. Read the header's rules before using it | file refused |
+
+Use `op1_sin`, `op1_sin_tab` and `op1_sin_q` from render and from an FX's init only. Do not call them from `note_on`, which can run on the key thread, or from a screen: the core fills the L1 quarter at its first use, and a caller that the audio callback preempts there could read it half filled. Use `OP1_SINE_TABLE` directly in those places.
 
 ### When a core change is needed
 

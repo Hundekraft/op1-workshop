@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "edccb912716e2659",
+    "id": "a6813dcf3fdbf86e",
     "product": {
       "name": "hundekraft",
-      "version": "3.1.4",
-      "label": "hundekraft 3.1.4",
-      "slug": "hundekraft-3.1.4"
+      "version": "3.2",
+      "label": "hundekraft 3.2",
+      "slug": "hundekraft-3.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -128,7 +128,7 @@
             "description": "Sweep and swell with slow modulation"
           }
         ],
-        "screen_bytes": 42480,
+        "screen_bytes": 77944,
         "file": "elg.knl",
         "needs": []
       }
@@ -607,7 +607,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 7160,
+        "screen_bytes": 7184,
         "file": "sysmon.knl",
         "needs": []
       },
@@ -629,7 +629,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 182664,
+        "screen_bytes": 182640,
         "file": "oxbow.knl",
         "needs": []
       },
@@ -684,7 +684,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 245496,
+        "screen_bytes": 245488,
         "file": "c64arp.knl",
         "needs": []
       },
@@ -937,6 +937,126 @@
         "screen_bytes": 1152,
         "file": "vapora.knl",
         "needs": []
+      },
+      {
+        "id": "composer",
+        "kind": "seq",
+        "name": "Composer",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 240,
+        "file": "composer.knl",
+        "needs": []
+      },
+      {
+        "id": "strum",
+        "kind": "synth",
+        "name": "Strum",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 248,
+        "file": "strum.knl",
+        "needs": []
+      },
+      {
+        "id": "reactor",
+        "kind": "synth",
+        "name": "REACTOR",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 35792,
+        "file": "reactor.knl",
+        "needs": []
+      },
+      {
+        "id": "lineclock",
+        "kind": "feature",
+        "name": "Line clock",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 328,
+        "file": "lineclock.knl",
+        "needs": []
+      },
+      {
+        "id": "hold",
+        "kind": "seq",
+        "name": "HOLD",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 240,
+        "file": "hold.knl",
+        "needs": []
+      },
+      {
+        "id": "latch",
+        "kind": "feature",
+        "name": "Latch",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "latch.knl",
+        "needs": []
+      },
+      {
+        "id": "moai",
+        "kind": "synth",
+        "name": "Moai",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 128,
+        "file": "moai.knl",
+        "needs": []
+      },
+      {
+        "id": "vox",
+        "kind": "synth",
+        "name": "VOX",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 736,
+        "file": "vox.knl",
+        "needs": []
+      },
+      {
+        "id": "snap",
+        "kind": "synth",
+        "name": "SNAP",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 248,
+        "file": "snap.knl",
+        "needs": []
+      },
+      {
+        "id": "rackverb",
+        "kind": "fx",
+        "name": "rackverb",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 31096,
+        "file": "rackverb.knl",
+        "needs": []
+      },
+      {
+        "id": "ente",
+        "kind": "fx",
+        "name": "ENTE",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 400,
+        "file": "ente.knl",
+        "needs": []
       }
     ],
     "screen_budget": {
@@ -944,6 +1064,7 @@
       "margin": 65536,
       "base": 4409868,
       "worst_screen": 250000,
+      "lazy_cap": 409600,
       "per_preset": 2785,
       "own_min": 16384,
       "own_svg_factor": 5.1,
@@ -951,29 +1072,29 @@
     }
   },
   "devupd": true,
-  "runtime_sha256": "2e955ed10c59f8fb98e13cc7346e674ba20e389c5e0c7788f0993ed7af0b0a11",
-  "base_sha256": "d05b121d9a327b95e2b53ff351b772f4e1807f601f8574780da61041d1946afa",
+  "runtime_sha256": "bcb7546f9a5dab29f27466bfcdbc04e2a65fa69132e75ac9d41d672afec44260",
+  "base_sha256": "e468bf24536443ca37a3116ec9633ae1a58c5170933a2a7f15239e812a35f417",
   "variants": {
     "7ff": {
-      "sha256": "c8de3ff942679f56521b3e66dff3be98c1c59d252a07d32350b49dd2d3cdc866",
+      "sha256": "8b9ef7b2eb83db0f54f51841a4bd1ca21055f38b0dd69aac6f3c3a02c1a6df3c",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
-        "plugin_arena_bytes": 2251132,
-        "plugin_arena_estimate": 2483068,
-        "plugin_arena_room": 3670016,
-        "plugin_arena_percent": 67.7,
+        "plugin_arena_bytes": 2915380,
+        "plugin_arena_estimate": 3152948,
+        "plugin_arena_room": 4194304,
+        "plugin_arena_percent": 75.2,
         "plugin_arena_over_budget": false,
         "plugin_decl_bytes": 0,
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 2760196,
+        "plugin_file_bytes": 3466776,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
       "presets": {
-        "count": 211,
+        "count": 248,
         "by_engine": {
           "supersaw": 12,
           "fmbell": 12,
@@ -991,10 +1112,14 @@
           "monolit": 12,
           "outatime": 4,
           "oxbow": 16,
+          "reactor": 11,
           "sid": 8,
-          "vapora": 15
+          "snap": 8,
+          "strum": 9,
+          "vapora": 15,
+          "vox": 9
         },
-        "sha256": "dae4097a579b674aaf0fd64ce38d96fd9a33569437db0995614bc5aa9b7ee800",
+        "sha256": "9f2c1081415dafd19d7b26f9090a769221409059a0f73d173dd0d626c14b548f",
         "exceeds_cap": false,
         "items": [
           [
@@ -1750,6 +1875,50 @@
             ""
           ],
           [
+            "reactor",
+            "spring"
+          ],
+          [
+            "reactor",
+            ""
+          ],
+          [
+            "reactor",
+            "spring"
+          ],
+          [
+            "reactor",
+            ""
+          ],
+          [
+            "reactor",
+            ""
+          ],
+          [
+            "reactor",
+            "delay"
+          ],
+          [
+            "reactor",
+            "spring"
+          ],
+          [
+            "reactor",
+            "delay"
+          ],
+          [
+            "reactor",
+            ""
+          ],
+          [
+            "reactor",
+            "delay"
+          ],
+          [
+            "reactor",
+            "delay"
+          ],
+          [
             "sid",
             ""
           ],
@@ -1780,6 +1949,74 @@
           [
             "sid",
             "crush"
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "snap",
+            "spring"
+          ],
+          [
+            "snap",
+            "delay"
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "strum",
+            "delay"
+          ],
+          [
+            "strum",
+            "spring"
+          ],
+          [
+            "strum",
+            ""
+          ],
+          [
+            "strum",
+            "delay"
+          ],
+          [
+            "strum",
+            "spring"
+          ],
+          [
+            "strum",
+            ""
+          ],
+          [
+            "strum",
+            ""
+          ],
+          [
+            "strum",
+            "delay"
+          ],
+          [
+            "strum",
+            "spring"
           ],
           [
             "vapora",
@@ -1840,13 +2077,49 @@
           [
             "vapora",
             ""
+          ],
+          [
+            "vox",
+            ""
+          ],
+          [
+            "vox",
+            "delay"
+          ],
+          [
+            "vox",
+            "phone"
+          ],
+          [
+            "vox",
+            "delay"
+          ],
+          [
+            "vox",
+            "phone"
+          ],
+          [
+            "vox",
+            "delay"
+          ],
+          [
+            "vox",
+            "spring"
+          ],
+          [
+            "vox",
+            ""
+          ],
+          [
+            "vox",
+            "spring"
           ]
         ]
       },
       "core": {
         "start": 31457280,
-        "len": 189412,
-        "crc": 2351902780
+        "len": 223712,
+        "crc": 1331940966
       }
     }
   },
@@ -1947,6 +2220,16 @@
         "path": "content/clouds.knl"
       },
       {
+        "name": "composer",
+        "savedName": "composer",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "path": "content/composer.knl"
+      },
+      {
         "name": "countin",
         "savedName": "countin",
         "kind": "feature",
@@ -2007,6 +2290,16 @@
         "priority": null,
         "source": "knl",
         "path": "content/elg.knl"
+      },
+      {
+        "name": "ente",
+        "savedName": "ente",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/ente.knl"
       },
       {
         "name": "euclid",
@@ -2115,6 +2408,16 @@
         "path": "content/hail.knl"
       },
       {
+        "name": "hold",
+        "savedName": "hold",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "path": "content/hold.knl"
+      },
+      {
         "name": "hollowsaint",
         "savedName": "hollowsaint",
         "kind": "synth",
@@ -2153,6 +2456,34 @@
         "priority": null,
         "source": "knl",
         "path": "content/juni_chorus.knl"
+      },
+      {
+        "name": "latch",
+        "savedName": "latch",
+        "kind": "feature",
+        "claims": [
+          "key:synth:t2+orange"
+        ],
+        "claimsKnown": true,
+        "priority": 950,
+        "source": "knl",
+        "path": "content/latch.knl"
+      },
+      {
+        "name": "lineclock",
+        "savedName": "lineclock",
+        "kind": "feature",
+        "claims": [
+          "key:tempo:shift+blue-push",
+          "key:tempo:shift+green-push",
+          "key:tempo:shift+white",
+          "key:tempo:shift+red",
+          "input:observer"
+        ],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "path": "content/lineclock.knl"
       },
       {
         "name": "markers",
@@ -2208,6 +2539,16 @@
         "priority": null,
         "source": "knl",
         "path": "content/mixtur.knl"
+      },
+      {
+        "name": "moai",
+        "savedName": "moai",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/moai.knl"
       },
       {
         "name": "monolit",
@@ -2338,12 +2679,23 @@
         "savedName": "quad",
         "kind": "feature",
         "claims": [
-          "lfo:quad"
+          "lfo:quad",
+          "lfo:pond"
         ],
         "claimsKnown": true,
         "priority": 500,
         "source": "knl",
         "path": "content/quad.knl"
+      },
+      {
+        "name": "rackverb",
+        "savedName": "rackverb",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/rackverb.knl"
       },
       {
         "name": "randomiser",
@@ -2357,6 +2709,16 @@
         "priority": 600,
         "source": "knl",
         "path": "content/randomiser.knl"
+      },
+      {
+        "name": "reactor",
+        "savedName": "reactor",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/reactor.knl"
       },
       {
         "name": "reverb",
@@ -2432,6 +2794,16 @@
         "path": "content/sister.knl"
       },
       {
+        "name": "snap",
+        "savedName": "snap",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/snap.knl"
+      },
+      {
         "name": "snowglobe",
         "savedName": "snowglobe",
         "kind": "fx",
@@ -2450,6 +2822,16 @@
         "priority": null,
         "source": "knl",
         "path": "content/steve.knl"
+      },
+      {
+        "name": "strum",
+        "savedName": "strum",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/strum.knl"
       },
       {
         "name": "stutter",
@@ -2568,6 +2950,16 @@
         "path": "content/vapora.knl"
       },
       {
+        "name": "vox",
+        "savedName": "vox",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "path": "content/vox.knl"
+      },
+      {
         "name": "warble",
         "savedName": "warble",
         "kind": "fx",
@@ -2613,9 +3005,9 @@
   },
   "core": {
     "start": 31457280,
-    "len": 189412,
-    "crc": 2351902780
+    "len": 223712,
+    "crc": 1331940966
   },
   "plugin_max": 1048576,
-  "cores_sha256": "984d5edf4bd89c562c0f6ef2ae1058a2ca7ff7eff9eba42cceba41b092355e1a"
+  "cores_sha256": "ff999de0ea380b9e43d3e7642a74b1720c6664a1b17e26f58df1f884dd71c082"
 }

@@ -114,7 +114,7 @@
           "description": "Sweep and swell with slow modulation"
         }
       ],
-      "screen_bytes": 42480,
+      "screen_bytes": 77944,
       "file": "elg.knl",
       "needs": []
     }
@@ -593,7 +593,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 7160,
+      "screen_bytes": 7184,
       "file": "sysmon.knl",
       "needs": []
     },
@@ -615,7 +615,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 182664,
+      "screen_bytes": 182640,
       "file": "oxbow.knl",
       "needs": []
     },
@@ -670,7 +670,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 245496,
+      "screen_bytes": 245488,
       "file": "c64arp.knl",
       "needs": []
     },
@@ -923,6 +923,126 @@
       "screen_bytes": 1152,
       "file": "vapora.knl",
       "needs": []
+    },
+    {
+      "id": "composer",
+      "kind": "seq",
+      "name": "Composer",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 240,
+      "file": "composer.knl",
+      "needs": []
+    },
+    {
+      "id": "strum",
+      "kind": "synth",
+      "name": "Strum",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 248,
+      "file": "strum.knl",
+      "needs": []
+    },
+    {
+      "id": "reactor",
+      "kind": "synth",
+      "name": "REACTOR",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 35792,
+      "file": "reactor.knl",
+      "needs": []
+    },
+    {
+      "id": "lineclock",
+      "kind": "feature",
+      "name": "Line clock",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 328,
+      "file": "lineclock.knl",
+      "needs": []
+    },
+    {
+      "id": "hold",
+      "kind": "seq",
+      "name": "HOLD",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 240,
+      "file": "hold.knl",
+      "needs": []
+    },
+    {
+      "id": "latch",
+      "kind": "feature",
+      "name": "Latch",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "latch.knl",
+      "needs": []
+    },
+    {
+      "id": "moai",
+      "kind": "synth",
+      "name": "Moai",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 128,
+      "file": "moai.knl",
+      "needs": []
+    },
+    {
+      "id": "vox",
+      "kind": "synth",
+      "name": "VOX",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 736,
+      "file": "vox.knl",
+      "needs": []
+    },
+    {
+      "id": "snap",
+      "kind": "synth",
+      "name": "SNAP",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 248,
+      "file": "snap.knl",
+      "needs": []
+    },
+    {
+      "id": "rackverb",
+      "kind": "fx",
+      "name": "rackverb",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 31096,
+      "file": "rackverb.knl",
+      "needs": []
+    },
+    {
+      "id": "ente",
+      "kind": "fx",
+      "name": "ENTE",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 400,
+      "file": "ente.knl",
+      "needs": []
     }
   ],
   "screen_budget": {
@@ -930,6 +1050,7 @@
     "margin": 65536,
     "base": 4409868,
     "worst_screen": 250000,
+    "lazy_cap": 409600,
     "per_preset": 2785,
     "own_min": 16384,
     "own_svg_factor": 5.1,
