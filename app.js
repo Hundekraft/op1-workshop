@@ -7,7 +7,7 @@ import {initStartClean} from './backup.js?v=3.2-clean-20261104';                
 import {showPlan, claimText} from './plugin-plan.js?v=3.1-two-paths-20261027';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
 import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=3.2-order-20261107';                  // the front page: what's in a build, by category
+import {CATEGORIES} from './categories.js?v=3.2.2-cards-20261108';                  // the front page: what's in a build, by category
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';

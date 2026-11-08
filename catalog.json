@@ -953,7 +953,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 35792,
+      "screen_bytes": 36784,
       "file": "reactor.knl",
       "needs": []
     },

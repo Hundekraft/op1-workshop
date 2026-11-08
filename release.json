@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "dc64a3c834578666",
+    "id": "b320dabba16f5e7f",
     "product": {
       "name": "hundekraft",
-      "version": "3.2.1",
-      "label": "hundekraft 3.2.1",
-      "slug": "hundekraft-3.2.1"
+      "version": "3.2.2",
+      "label": "hundekraft 3.2.2",
+      "slug": "hundekraft-3.2.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -967,7 +967,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 35792,
+        "screen_bytes": 36784,
         "file": "reactor.knl",
         "needs": []
       },
@@ -1073,23 +1073,23 @@
   },
   "devupd": true,
   "runtime_sha256": "bcb7546f9a5dab29f27466bfcdbc04e2a65fa69132e75ac9d41d672afec44260",
-  "base_sha256": "e468bf24536443ca37a3116ec9633ae1a58c5170933a2a7f15239e812a35f417",
+  "base_sha256": "22c90671581002b329438dfc50bc35d0c53276dc63d83b0f568d0b71b515b3f7",
   "variants": {
     "7ff": {
-      "sha256": "17f8cec63ee23258cb67dc0960fdb2587c8a6a86e73678e5973752d79ef18775",
+      "sha256": "f2726efc8fd429b0097b44f3d255908fc94c69279d92629441d6216d247223b6",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
-        "plugin_arena_bytes": 2915444,
-        "plugin_arena_estimate": 3153012,
+        "plugin_arena_bytes": 2924116,
+        "plugin_arena_estimate": 3161684,
         "plugin_arena_room": 4194304,
-        "plugin_arena_percent": 75.2,
+        "plugin_arena_percent": 75.4,
         "plugin_arena_over_budget": false,
         "plugin_decl_bytes": 0,
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 3466896,
+        "plugin_file_bytes": 3478488,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -2118,8 +2118,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 223712,
-        "crc": 1331940966
+        "len": 223944,
+        "crc": 3463632562
       }
     }
   },
@@ -3005,9 +3005,9 @@
   },
   "core": {
     "start": 31457280,
-    "len": 223712,
-    "crc": 1331940966
+    "len": 223944,
+    "crc": 3463632562
   },
   "plugin_max": 1048576,
-  "cores_sha256": "cf3a867f3e61bcd160f381790839f98d70559a68872a934524f9eeda17303e0b"
+  "cores_sha256": "6a419c64a583f39b587c56c51b61ce778dac06dbd03c3d05ba5debf66c0fd157"
 }

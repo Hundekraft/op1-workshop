@@ -1,8 +1,18 @@
 # Changelog
 
+## 3.2.2
+
+- Composer names the section it's playing (VERSE, CHORUS or DROP, BRIDGE or BREAK) with a letter for which pass it is, and a row at the bottom shows the song form with the current section underlined.
+- REACTOR's plant shakes as the core runs hot: a buzz near critical, then a hard judder when it goes critical, settling once the sound dies away.
+- Father has a CLASSIC switch on page 2 (push white). It brings back the brighter, shorter Father from 3.1.4 and earlier.
+- Sharper text on Composer, Trail, SNAP, VOX and the other screens that draw their own letters. Letters now sit on whole pixels with strokes at least a pixel wide, and the smallest text is a little bigger and brighter.
+- Composer and Trail dim a push or Shift option when it does nothing right now, like undo with nothing to undo, or most of Trail while Answer is on. Undo now covers every setting on the page, and in Trail several turns of one knob undo as one change.
+- Trail's Shift page says GATE instead of LENGTH, since that's what it always set, and the Answer push shows ANSWER ON or ANSWER OFF.
+- Composer's PUSH STOCK no longer wipes your own pad map when the kit is already STOCK.
+
 ## 3.2.1
 
-- ENTE's attack works. It used to duck at once whatever the attack was set to, which clicked on every kick. Now the attack sets how fast the ducking comes in, from 0.1 to 50 ms. Sounds with a slow attack may duck a little deeper than before.
+- Fixed a click in ENTE. With a loud trigger, it ducked almost instantly whatever the attack was set to, so every kick clicked. Now the attack sets how fast the ducking comes in, from 0.1 to 50 ms, and a slower attack ducks smoothly. Sounds with a slow attack may duck a little deeper than before.
 
 ## 3.2
 
