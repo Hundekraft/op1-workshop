@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.1
+
+- ENTE's attack works. It used to duck at once whatever the attack was set to, which clicked on every kick. Now the attack sets how fast the ducking comes in, from 0.1 to 50 ms. Sounds with a slow attack may duck a little deeper than before.
+
 ## 3.2
 
 New synths:

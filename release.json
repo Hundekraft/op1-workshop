@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "a6813dcf3fdbf86e",
+    "id": "dc64a3c834578666",
     "product": {
       "name": "hundekraft",
-      "version": "3.2",
-      "label": "hundekraft 3.2",
-      "slug": "hundekraft-3.2"
+      "version": "3.2.1",
+      "label": "hundekraft 3.2.1",
+      "slug": "hundekraft-3.2.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -1076,12 +1076,12 @@
   "base_sha256": "e468bf24536443ca37a3116ec9633ae1a58c5170933a2a7f15239e812a35f417",
   "variants": {
     "7ff": {
-      "sha256": "8b9ef7b2eb83db0f54f51841a4bd1ca21055f38b0dd69aac6f3c3a02c1a6df3c",
+      "sha256": "17f8cec63ee23258cb67dc0960fdb2587c8a6a86e73678e5973752d79ef18775",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
-        "plugin_arena_bytes": 2915380,
-        "plugin_arena_estimate": 3152948,
+        "plugin_arena_bytes": 2915444,
+        "plugin_arena_estimate": 3153012,
         "plugin_arena_room": 4194304,
         "plugin_arena_percent": 75.2,
         "plugin_arena_over_budget": false,
@@ -1089,7 +1089,7 @@
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 3466776,
+        "plugin_file_bytes": 3466896,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -3009,5 +3009,5 @@
     "crc": 1331940966
   },
   "plugin_max": 1048576,
-  "cores_sha256": "ff999de0ea380b9e43d3e7642a74b1720c6664a1b17e26f58df1f884dd71c082"
+  "cores_sha256": "cf3a867f3e61bcd160f381790839f98d70559a68872a934524f9eeda17303e0b"
 }

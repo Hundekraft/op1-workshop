@@ -21,12 +21,12 @@
     "preset_cap": 300
   },
   "release": {
-    "id": "a6813dcf3fdbf86e",
+    "id": "dc64a3c834578666",
     "product": {
       "name": "hundekraft",
-      "version": "3.2",
-      "label": "hundekraft 3.2",
-      "slug": "hundekraft-3.2"
+      "version": "3.2.1",
+      "label": "hundekraft 3.2.1",
+      "slug": "hundekraft-3.2.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -35,8 +35,8 @@
   "sizes": {
     "image_bytes": 0,
     "memory_bytes": 30184,
-    "plugin_arena_bytes": 2915380,
-    "plugin_arena_estimate": 3152948,
+    "plugin_arena_bytes": 2915444,
+    "plugin_arena_estimate": 3153012,
     "plugin_arena_room": 4194304,
     "plugin_arena_percent": 75.2,
     "plugin_arena_over_budget": false,
@@ -44,11 +44,11 @@
     "plugin_decl_room": 1048576,
     "plugin_fx_lease_bytes": 1048576,
     "plugin_file_max": 1048576,
-    "plugin_file_bytes": 3466776,
+    "plugin_file_bytes": 3466896,
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
-  "filename": "hundekraft-3.2-7ff.op1",
+  "filename": "hundekraft-3.2.1-7ff.op1",
   "presets": {
     "count": 248,
     "by_engine": {
@@ -1076,7 +1076,7 @@
     {
       "path": "OP1_vdk.ldr",
       "orig_sha256": "34977176351363edd6562e66fadf40f9885518c72e4d8d6552c0468482b07cde",
-      "result_sha256": "c12acca908bc0450083a00ed36d281d21db0f36232133c54e735a641eb4458fc",
+      "result_sha256": "2fbf0911e0a622884c713c7c9b8a99abc5e00d62e1b72d900e3510e033d22191",
       "ops": [
         {
           "op": "replace",
@@ -1200,9 +1200,9 @@
         },
         {
           "op": "insert",
-          "offset": 2399021,
+          "offset": 2399022,
           "blob": "OP1_vdk.ldr.insert.bin",
-          "sha256": "57f49ee6b5ab4fefa2f89ad24e640481ac41c76f99e9a25d673bfdfd83a48e5d",
+          "sha256": "c9661bb3329ab7736e0f66bb77515870130bfaed01b110ea4e6d797a8c80ac88",
           "size": 96
         }
       ]
@@ -1308,7 +1308,7 @@
     {
       "path": "content/ente.knl",
       "blob": "content_ente.knl",
-      "sha256": "2b74e9c778d0c3d2375a8bdd321d0636a144648c65fc954a5a2ea9ad52cc3900",
+      "sha256": "399ee9828c04f6962906ea258793637cf73e543ba8062df06977ac80eaafd01e",
       "template": "content/display/iter.svg"
     },
     {
@@ -1701,6 +1701,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "28e79260e36abdff4829315442b7296078bf7a1ed6a416753372624820328129"
+    "tar_sha256": "9f70c49d3b457e704a5732cfe1187475142ba8ef4e00d7594736e847d0546bb9"
   }
 }
