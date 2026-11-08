@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.2.3
+
+- Father's CLASSIC is now a single push of white: push to switch it on, push again to switch it off. No more page to turn.
+- VOX and SNAP: pushing blue or green puts both on page 2, so you can set Bands and Hold (Target and Range on SNAP) without pushing twice. Push either one again to go back.
+- VOX and SNAP: push white or orange to put that knob back where a new sound starts. That's Response and Air on VOX, Formant and Voices on SNAP.
+- Master LFO: hold Shift and turn white to pick the polarity. +- swings the knob both ways, as before; + only goes above where you set it, - only below. (Shift + white used to set the waveform a second time.)
+- Master LFO: Shift + T3 on its page turns the whole master LFO off and back on. It stays that way after a restart.
+- Fixed MOAI: Shift + blue on the main page could jump to another preset now and then, which put DET back and moved AMT.
+- The manual has a new section on starting a sequencer in time with the tape: which ones start from a key, and which need REC + Shift + C#.
+
 ## 3.2.2
 
 - Composer names the section it's playing (VERSE, CHORUS or DROP, BRIDGE or BREAK) with a letter for which pass it is, and a row at the bottom shows the song form with the current section underlined.

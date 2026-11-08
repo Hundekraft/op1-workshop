@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "b320dabba16f5e7f",
+    "id": "a909f630a6e723fc",
     "product": {
       "name": "hundekraft",
-      "version": "3.2.2",
-      "label": "hundekraft 3.2.2",
-      "slug": "hundekraft-3.2.2"
+      "version": "3.2.3",
+      "label": "hundekraft 3.2.3",
+      "slug": "hundekraft-3.2.3"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -1073,15 +1073,15 @@
   },
   "devupd": true,
   "runtime_sha256": "bcb7546f9a5dab29f27466bfcdbc04e2a65fa69132e75ac9d41d672afec44260",
-  "base_sha256": "22c90671581002b329438dfc50bc35d0c53276dc63d83b0f568d0b71b515b3f7",
+  "base_sha256": "aa3e053d09835d9d9deb66944858d99de8d8e98a223ac3ccd891b1dd11c21982",
   "variants": {
     "7ff": {
-      "sha256": "f2726efc8fd429b0097b44f3d255908fc94c69279d92629441d6216d247223b6",
+      "sha256": "3fdacd2db91bf7f6efecf9c4769fd718c05b9e2e635ed08dfe3665286a56a58f",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
-        "plugin_arena_bytes": 2924116,
-        "plugin_arena_estimate": 3161684,
+        "plugin_arena_bytes": 2924764,
+        "plugin_arena_estimate": 3162332,
         "plugin_arena_room": 4194304,
         "plugin_arena_percent": 75.4,
         "plugin_arena_over_budget": false,
@@ -1089,7 +1089,7 @@
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 3478488,
+        "plugin_file_bytes": 3479552,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -2118,8 +2118,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 223944,
-        "crc": 3463632562
+        "len": 224236,
+        "crc": 621602286
       }
     }
   },
@@ -3005,9 +3005,9 @@
   },
   "core": {
     "start": 31457280,
-    "len": 223944,
-    "crc": 3463632562
+    "len": 224236,
+    "crc": 621602286
   },
   "plugin_max": 1048576,
-  "cores_sha256": "6a419c64a583f39b587c56c51b61ce778dac06dbd03c3d05ba5debf66c0fd157"
+  "cores_sha256": "a4af6ea546ebe429c4dcd973e746ad38e0d8cafa296d2d7734b04ec5c0a3315f"
 }
