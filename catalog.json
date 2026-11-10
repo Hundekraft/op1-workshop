@@ -373,7 +373,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 170824,
+      "screen_bytes": 170784,
       "file": "stutter.knl",
       "needs": []
     },
@@ -964,7 +964,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 328,
+      "screen_bytes": 14064,
       "file": "lineclock.knl",
       "needs": []
     },

@@ -380,7 +380,6 @@
 <polyline points="60.8,130 60.3,128.8 58.3,127.1 57.4,125.5 57.2,126 56.1,125.5 50.8,121.5 49.9,121.3 48.6,121.8 36.7,128.6 36.1,129 35.9,129.8 35.9,130 36.5,130.2 60,130.2 60.8,130 62.3,130.2 71.9,130.2 72.7,130 74.2,130.2 97.7,130.2" fill="none" stroke="#383572" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="245.8,130 244.9,128.6 236.4,122.5 235.3,122.8 229.1,127.4 228.1,127.7 227,129.2 226.8,130" fill="none" stroke="#383572" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="317.4,130.2 291.8,130.2 290.5,130 289.7,130.2 278.2,130.2 278,130 276.5,130.2 247.9,130.2 245.8,130 244.9,130.2 227,130.2 226.8,130 225.8,130.2 213.6,130.2 213.4,130 212.1,130.2 192.3,130.2" fill="none" stroke="#383572" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="reel"><line x1="93.2" y1="31.3" x2="93.6" y2="33.5" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="113,34.1 108.3,42.2 106.2,44.6" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="117.7,39.9 118.9,42.4 119.6,45.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="98.5" y1="43.5" x2="97.5" y2="43.7" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="116.6,43.9 117.1,44.6 117.9,47.7 118.5,54.8 118.1,56.5 118.4,57.5" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="76.8,44.6 75.1,50.1 74.5,54.6 74.5,58.8 75.1,63.3 76.8,68.8" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="119.8" y1="48" x2="119.8" y2="49.5" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><line x1="120.1" y1="49.9" x2="119.4" y2="59.9" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="106.6,53.1 105.4,54 104.3,54.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="87.2,55.2 87,55 80,54.8 78.2,54 77.5,54 77.1,54.4 76.8,56.3 76.8,57.5 77.1,58.6 77.7,58.7 80.2,57.5 88.9,56.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="126.9,57.8 126.5,61.6 125.4,66.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="103.2,60.7 103.7,62.4 104.9,62.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="113,63.5 114.9,64.2 119.8,66.5 122.2,68.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="83.2" y1="64.4" x2="84.3" y2="68.8" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="95.6,68.6 95.3,68.8 95.1,71.2" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="116.9,68.6 115.1,72.5 112.9,75.5 110.6,77.8 107.1,79.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="97.7,69.5 96.7,71.6 93.6,82.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="93.8,74.8 91.8,80.6 91.3,81.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="90.4,76.9 89.7,79.6 88.9,80.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="100.2,55 101.1,55.1 101.7,55.8 101.7,57.5 101.1,58.2 100.2,58.2 99.4,57.3 99.5,56.1 100.2,55" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="86.4,41.8 86.6,41.5 86.6,41.8 86.2,41.8 86.2,42" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="83.8,69.3 84,68.8 84.5,68.8 84.7,69.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="116.6,36.9 109.5,48.2 109.2,50.7 109.6,53.3 109.6,55 110.2,56.9 111.1,57.9 120.7,60.1 122.2,60 123.2,59.4 124.4,57.5 125,53.7 125,48.8 123.9,44.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="110.9,33 106.4,41.1 105.2,42.5 104.5,42.9 103.2,43.1 99.9,42.5 99.4,42.1 98.7,40.8 96.1,32.6 96.1,31.2 98.3,30.5 103,30.5 105.7,31 106.2,31.6 106.4,31.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="91.1,52.6 91.5,53.3 91.5,54.6 91.1,59.5 88.9,59.3 80.6,60.2 79.5,60.8 78.4,62.4 78.1,64.8 79.3,69.7 80.9,73.7 83,76.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="94.5,35 94.9,36.7 95.1,37.2 95.1,36.7 94.9,36.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="103.6,52.4 104.3,54.1 104.5,56.9 103.9,60.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="96.2,40.5 97.5,43.9 96,44.8 95.1,45" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="85.3,43.3 85.5,43.3 85.6,43.7 85.3,44.3 84.3,44.8 82.8,49.2" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="102.4,69.5 100.7,69.7 99.4,70.8 98.7,72.4 95.8,82.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="107.9,47.3 107.9,46.3 114.1,36.7 114.5,36.5 114.7,35.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="119.6,47.3 119.4,45.4 120.4,45.9 122,50.7 122.6,53.5 122.6,55.6" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="106,60.7 105.5,62.5 104.9,62.9 104.5,64.2 103,65.6 101.5,66.3 100,66.5 99.6,66.3 100.5,64.4 100.3,63.1 99.6,62 98.2,60.7 96.8,58 96.8,55.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="111.1,60.5 120.1,63.2 123.3,63.3 123.7,63.9 123.5,65.2 122.8,67.6 122.2,68.4 122.2,69.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="91.3,32.2 94.8,42.6 95.1,45 94.8,45.5 93.4,45.8" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="105.6,44.3 106.2,44.6 107.1,45.9 107.9,46.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="101.1,46.5 101.1,47.1 101.6,47.7 101.9,48.8 101.3,51.2 102.9,52.2 103.9,52.4 104.7,51.3 106.2,50.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="116.4,78 118.9,75.1 119.6,74 119.8,71.4 119.2,69.6 118.1,68.9 116.9,68.6 116.4,68 110.1,64.7 109,64.4 107.3,65.1 105.2,67.5 103.5,68.7 102.4,69.3 102.2,72.5 103.9,82.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="86,43.1 85.5,42.8 85.1,43.5 85.3,44.6" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="87.9,74.2 87.7,74.6 87.5,74.4 87.5,74 87.9,74.2 88.1,74.6 87.2,74.4 86.4,73.4 85.4,71.2 85.1,70.1 85.3,69.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="93.8,74.2 93.6,74.6 93.6,74.8 94.1,74.8 93.8,74.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88.5,75.5 88.3,75.5 88.3,75 88.5,75 88.7,75.2 88.5,75.7 90.6,76.9 93.2,70 93.6,67.8 93.5,65.8 92.7,64.2 90.9,59.5" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="93.6,67.8 94.9,67.8 95.6,68.6 96.4,68.7 97.7,69.5 98.5,69.7 99.4,70.8" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="83.4,36.2 80.8,40 79.3,43.9 78.3,47.7 78.4,49.7 79,50.9 79.9,51.9 81.9,52.2 89.4,52.8 91.1,52.6 92.1,51.2 93.1,48.8 93.4,47.5 93.4,45.8 90.5,37.5 89.7,35.7 89.2,33.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="94.1,55.4 95.6,55 96.8,55.4 97.3,55.2 97.8,53.8 98.6,52.5 100.5,51.2 99.6,49.5 100.1,48 101.1,47.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="98.7,66.1 98.4,63.9 99.8,62 99.8,62.2 99.6,62.2 99.8,62 101.5,61.7 103.2,60.7 103.6,60.1 104.7,60.1 106,60.7 106.2,60.7 106.5,60.2 107.1,58 107.1,53.9 106.6,53.1 105.5,49 104,47.4 102.6,46.6 99.8,46.5 98.4,47 97.3,47.8 96.3,49 94.9,51.5 94.2,53.7 93.8,57.1 94.1,58" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="96.8,58 96.6,58.2 95.3,58.2 94.1,58 93.8,58.2 93.8,58.8 94.2,60.5 95.6,63.8 97.4,65.7 99.6,66.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
 <polyline points="31.2,43.2 30,41.7 29,40.1 28.4,38.3 28,36.4 28,34.4 28.4,32.5 29,30.7 30,29 31.2,27.6 32.7,26.3 34.4,25.3 36.2,24.7 38.1,24.3 40,24.3 41.9,24.7 43.8,25.3 45.4,26.3 46.9,27.6 48.2,29 49.1,30.7 49.8,32.5 50.1,34.4 50.1,36.4 49.8,38.3 49.1,40.1 48.2,41.7 46.9,43.2" fill="none" stroke="#17304D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="27,58.1 27,50.5 29.7,50.5 30.3,50.5 30.8,50.7 31.2,51.1 31.6,51.5 31.8,52 31.9,52.5 31.8,53.1 31.6,53.5 31.2,54 30.8,54.3 30.3,54.5 29.7,54.6 27,54.6" fill="none" stroke="#698EFF" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
 <line x1="29.6" y1="54.6" x2="31.9" y2="58.1" stroke="#698EFF" stroke-width="1.1" stroke-linecap="round"/>
@@ -417,148 +416,50 @@
 <polyline points="292.1,105.1 291.7,104.5 291.1,104 290.5,103.8 289.9,103.8 289.3,104 288.7,104.4 288.2,105 287.9,105.8 287.6,106.6 287.6,107.5 287.6,108.5 287.9,109.3 288.2,110.1 288.7,110.7 289.3,111.1 289.9,111.3 290.5,111.3 291.1,111.1 291.7,110.6 292.1,110" fill="none" stroke="#FF3A5D" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="298.7,103.7 294.2,103.7 294.2,111.3 298.7,111.3" fill="none" stroke="#FF3A5D" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
 <line x1="294.2" y1="107.5" x2="298" y2="107.5" stroke="#FF3A5D" stroke-width="1.1" stroke-linecap="round"/>
+<g id="reel"><line x1="93.2" y1="31.3" x2="93.6" y2="33.5" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="113,34.1 108.3,42.2 106.2,44.6" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="117.7,39.9 118.9,42.4 119.6,45.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="98.5" y1="43.5" x2="97.5" y2="43.7" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="116.6,43.9 117.1,44.6 117.9,47.7 118.5,54.8 118.1,56.5 118.4,57.5" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="76.8,44.6 75.1,50.1 74.5,54.6 74.5,58.8 75.1,63.3 76.8,68.8" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="119.8" y1="48" x2="119.8" y2="49.5" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><line x1="120.1" y1="49.9" x2="119.4" y2="59.9" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="106.6,53.1 105.4,54 104.3,54.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="87.2,55.2 87,55 80,54.8 78.2,54 77.5,54 77.1,54.4 76.8,56.3 76.8,57.5 77.1,58.6 77.7,58.7 80.2,57.5 88.9,56.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="126.9,57.8 126.5,61.6 125.4,66.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="103.2,60.7 103.7,62.4 104.9,62.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="113,63.5 114.9,64.2 119.8,66.5 122.2,68.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="83.2" y1="64.4" x2="84.3" y2="68.8" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round"/><polyline points="95.6,68.6 95.3,68.8 95.1,71.2" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="116.9,68.6 115.1,72.5 112.9,75.5 110.6,77.8 107.1,79.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="97.7,69.5 96.7,71.6 93.6,82.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="93.8,74.8 91.8,80.6 91.3,81.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="90.4,76.9 89.7,79.6 88.9,80.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="100.2,55 101.1,55.1 101.7,55.8 101.7,57.5 101.1,58.2 100.2,58.2 99.4,57.3 99.5,56.1 100.2,55" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="86.4,41.8 86.6,41.5 86.6,41.8 86.2,41.8 86.2,42" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="83.8,69.3 84,68.8 84.5,68.8 84.7,69.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="116.6,36.9 109.5,48.2 109.2,50.7 109.6,53.3 109.6,55 110.2,56.9 111.1,57.9 120.7,60.1 122.2,60 123.2,59.4 124.4,57.5 125,53.7 125,48.8 123.9,44.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="110.9,33 106.4,41.1 105.2,42.5 104.5,42.9 103.2,43.1 99.9,42.5 99.4,42.1 98.7,40.8 96.1,32.6 96.1,31.2 98.3,30.5 103,30.5 105.7,31 106.2,31.6 106.4,31.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="91.1,52.6 91.5,53.3 91.5,54.6 91.1,59.5 88.9,59.3 80.6,60.2 79.5,60.8 78.4,62.4 78.1,64.8 79.3,69.7 80.9,73.7 83,76.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="94.5,35 94.9,36.7 95.1,37.2 95.1,36.7 94.9,36.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="103.6,52.4 104.3,54.1 104.5,56.9 103.9,60.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="96.2,40.5 97.5,43.9 96,44.8 95.1,45" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="85.3,43.3 85.5,43.3 85.6,43.7 85.3,44.3 84.3,44.8 82.8,49.2" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="102.4,69.5 100.7,69.7 99.4,70.8 98.7,72.4 95.8,82.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="107.9,47.3 107.9,46.3 114.1,36.7 114.5,36.5 114.7,35.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="119.6,47.3 119.4,45.4 120.4,45.9 122,50.7 122.6,53.5 122.6,55.6" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="106,60.7 105.5,62.5 104.9,62.9 104.5,64.2 103,65.6 101.5,66.3 100,66.5 99.6,66.3 100.5,64.4 100.3,63.1 99.6,62 98.2,60.7 96.8,58 96.8,55.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="111.1,60.5 120.1,63.2 123.3,63.3 123.7,63.9 123.5,65.2 122.8,67.6 122.2,68.4 122.2,69.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="91.3,32.2 94.8,42.6 95.1,45 94.8,45.5 93.4,45.8" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="105.6,44.3 106.2,44.6 107.1,45.9 107.9,46.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="101.1,46.5 101.1,47.1 101.6,47.7 101.9,48.8 101.3,51.2 102.9,52.2 103.9,52.4 104.7,51.3 106.2,50.9" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="116.4,78 118.9,75.1 119.6,74 119.8,71.4 119.2,69.6 118.1,68.9 116.9,68.6 116.4,68 110.1,64.7 109,64.4 107.3,65.1 105.2,67.5 103.5,68.7 102.4,69.3 102.2,72.5 103.9,82.3" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="86,43.1 85.5,42.8 85.1,43.5 85.3,44.6" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="87.9,74.2 87.7,74.6 87.5,74.4 87.5,74 87.9,74.2 88.1,74.6 87.2,74.4 86.4,73.4 85.4,71.2 85.1,70.1 85.3,69.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="93.8,74.2 93.6,74.6 93.6,74.8 94.1,74.8 93.8,74.4" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88.5,75.5 88.3,75.5 88.3,75 88.5,75 88.7,75.2 88.5,75.7 90.6,76.9 93.2,70 93.6,67.8 93.5,65.8 92.7,64.2 90.9,59.5" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="93.6,67.8 94.9,67.8 95.6,68.6 96.4,68.7 97.7,69.5 98.5,69.7 99.4,70.8" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="83.4,36.2 80.8,40 79.3,43.9 78.3,47.7 78.4,49.7 79,50.9 79.9,51.9 81.9,52.2 89.4,52.8 91.1,52.6 92.1,51.2 93.1,48.8 93.4,47.5 93.4,45.8 90.5,37.5 89.7,35.7 89.2,33.7" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="94.1,55.4 95.6,55 96.8,55.4 97.3,55.2 97.8,53.8 98.6,52.5 100.5,51.2 99.6,49.5 100.1,48 101.1,47.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="98.7,66.1 98.4,63.9 99.8,62 99.8,62.2 99.6,62.2 99.8,62 101.5,61.7 103.2,60.7 103.6,60.1 104.7,60.1 106,60.7 106.2,60.7 106.5,60.2 107.1,58 107.1,53.9 106.6,53.1 105.5,49 104,47.4 102.6,46.6 99.8,46.5 98.4,47 97.3,47.8 96.3,49 94.9,51.5 94.2,53.7 93.8,57.1 94.1,58" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="96.8,58 96.6,58.2 95.3,58.2 94.1,58 93.8,58.2 93.8,58.8 94.2,60.5 95.6,63.8 97.4,65.7 99.6,66.1" fill="none" stroke="#698EFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
 </svg>
- KNPL  0O ˆE…  stutter             C 	@e 5      à  à  <                    è  ô1 L :   ÈN    ÔN :       d1 ÿÿÿÿO  Já€ÿ
+ KNPL  ˆG „JÇ8  stutter             C 	@e 5      (  (  <   d      d    d     H  0  ô1 XD 9   G    G S       d1 ÿÿÿÿhG  Já€ÿ
 áÔ9`‘TAá€ÿáD OP Já€ÿ
-áØ9`‘TAá€ÿáÄò/@á€ÿ áÄ   Åg¦o` ãÚ2Há  á0Má  á  ‰\J0‚Æ€R2ùc `^Q°HD	`±E[`‘æ  ‘æ" ªå ‘æ= Aá7’æ< á¹yQ0Ñ@BáE%á‘ôQP)áH JZæ !áL “	2“°Ğ°Ğ±³ŠZ“@á« á ‹2ZA‘A	Já   `
-á €²à ’fl'… ãOğ®1¯2!2*2Èd\L\Dä= 4ñoä  – ‘‰0	E ¡Sá €8á  	l@”‚B4ä NÚB2İ\—ùgæ R¡Ñ “®ä! ‘¡W®[4>N‰0lä"  G0	~K0Ñ@!2V   “¯CC0¸2ûo‘¢Á@!2Š0“¿'DG0È@xMd
-d@æÿÿºP“°R±ùoA¶w£ Ğ0¡dR±±õ/ÚB2İ\—·³/Ğ¢	; 2ü[O0	[BRC0Á@€á €RŠ0È@xMÒ/"X1    
-0Ğ¡PÀB2O0	İ\X•4(ƒ0Ğ@ 22;DC0	)‚0L0Á@‚Æ‰±/0à£P£P³Mß/"G0	C0Ğ@Š0È@xMœ/0ùgQRĞ/2Lá  á €;DC0	Ùƒ0WRÁ@D0ÄB0Š0È@xM„/‚0‚/ `€/±	`O0Q³³`¯/ áHáÁ@`€OP!áÌL	!áÍL0ï/0í/  gænq±q£ñ±±£1²1ä 1±ñ£²±ñ°V0N0Já¢âd¡d
-áLJb &m'   p0090 á q¡P#áÿT2Iá	áèåYT‘\P•Ğ@²­xM0P“2Q\H•Ğ@ò­xM8P“0   ã è  00ä 200úM°²ò² `90ğ°"á °¢ñ¢ ãJ(00ˆO}N~2^2hW§m á ƒmğ°EQw½3½"áS,00f2n2ÿãµÿäm*á ÅmB0(	&ò¼"áS,00t½5½2¾ÿã¤ÿ±¯ó£2ä  á ²±p±3±ñ¼0r£1£s²ñ½ÿãyÿñ­ á 2®s¢1¿2s³ŠZÙ/ `3½ğ°w½"á>!00ÿãÿ+á ó¼"á>!00t½5½ÿãtÿ±¯÷¯2å  á p±ñ¼²½7½r£1£0ñ½ÿãJÿñ­*á "w¿1¿)á ËZSŞt½5½õ°00"á³ÿãQÿ1å  á p±ğ£0±°£ğ°±½000ÿã(ÿæm&lw'£ gAá  Já£¦oáà
+áØ9`‘TAá€ÿáÄò/@á€ÿ áÄ   g¦o` ã«2Há  áx
+`fl‰\J0‚Æ€R2ùc `^Há  á  Q°^`‘æ> ±‘æ  ‘æ" ‚å ‘æ= Aá7’æ< á¹yQ0)áH JZÑ@“BáE%)áL á‘ôJZ“°Ğ°Ğ±³“QP`æ æ? ' ãOğ®1¯2!2*2Èd\L\Dä= 4ñoä  – ‘‰0	E ¡Sá €8á  	l@”‚B4ä NÚB2İ\—ùgæ R¡Ñ T®ä! “­\4—®>CN‰0jä"  D0	ŒO0Ñ@2V   “¯CC0¸2ûo‘¢Á@!2Š0“¿'DG0È@xMd
+d@æÿÿºP“°R±ùoA¶w£ Ğ0¡dR±±õ/ÚB2İ\—·³/Ğ¢	> 4c‹0	gBRG0Á@€á €RŠ0È@xMÒ/ l    Ó­1K0
+PÀB2İ\X•4‹0	6G0Ğ@2ƒ0GR	7‚0K0È@xM³/Eä¯P£K0PM2³K0Ğ¡PŞ/C+D0	(G0Ğ@Š0È@xM™/0øgK0RP‘ä? 2C
+2á  É/ƒ0GRKá  	á €ËO0RÈ@K0Ä@Š0È@xMx/‚0v/ `t/ÀB2İ\X•€B4¬/ Ká á  C0S¿h»/K0 áHáÈ@Ká á  K0P!áÌL	2ï+áÍLC0ë/gænq±q£ñ±±£1²1ä 1±ñ£²±ñ°V0N0Já¢âd¡d
+áLJb &m'   p0090 á q¡P#áÿT2Iá	áèåYT‘\P•Ğ@²­xM0P“2Q\H•Ğ@ò­xM8P“0   ã è  00ä *00úM0²r² `10ğ°"á 0¢q¢ ã‰OxNV!á ÈQF0`ep±àg0±ñ°"áS,00f2^2ÿã¸ÿ-á ¤mƒmE08	t½3½ õ¼"áS,00ÿã¨ÿ1¯w¯2å  á p±ñ¼²½07½ò¢±¢ñ½ÿã~ÿ á 2ñ­÷¾±¾U[İ/÷°00"á³ÿã‰ÿ2å  á p±p£0±0£ğ°²½000ÿã`ÿÆmw'£   ã è 0æ F0 ep±àg90200± `ğ°"á>!00^2f2ÿã^ÿ-á Cm$m$á õ¼"á>!00s½4½ÿãOÿ·®2å u¢0ä t±²½7½õ°2¢ñ¡ÿã'ÿ á 2õ±7¾U[*á "Uàfmw'£ xgJá£†o
+á´b 80@á   áDğ°‚á0áQœÿã«ÿ@á   á<‚áS±ğ°
+O0áQœÿãÿ@á   á@áñ‹ğ°‚á0Oÿã‘ÿ@á   á8‚áS±áñ‹ğ°
+O0Oÿãƒÿ†l'8   gAá  Já£¦oá(
 á€µb Já  
-á “fl'   p20g(M†nƒC‚ÎÂ³±  ‡áÏ‘)M‡J ÌÄñ°  ƒáÊâ0±r±ñ±2²000ø@Ù@Ş@ú@P²RPMÃRRM á —Rğ²N0B0Jár²³²ad
+áh“fl'   p20g(M†nƒC‚ÎÂ³±  ‡áÏ‘)M‡J ÌÄñ°  ƒáÊâ0±r±ñ±2²000ø@Ù@Ş@ú@P²RPMÃRRM á —Rğ²N0B0Jár²³²ad
 áX­b †m'0 ãJáß è 
 á<N‘Jáß
-á8N(2‚ÎÂ‘  ÿãOı2`TCá€ÿAá€ÿQ¬ áDáÄAOá€ÿ Rá€ÿE4”¬háØ<`áÔ1áÿ h	.L
+á8N(2‚ÎÂ‘  ÿãıü2`TCá€ÿAá€ÿQ¬ áDáÄAOá€ÿ Rá€ÿE4”¬háØ<`áÔ1áÿ h	.L
 ,‘ ‚ÆH…±0²P‚9F`–Rş`2	şcFá 0T¸JP@ l!løo@ãflw'£  ` l!løo@×flw'£ 
 ’2‘ T OP2«ZP•é/  8‘ T÷/@á€ÿ áÄô/ áÿİ/ã è Jáß1æ 
-á<N0æ ‘ `F0Àeÿãnÿ)á@ V2ZÂm`!h²àP”Ä €B ’0ÿã½ü2P©€0ÿã¶ü2P©2 hh0ä L0Ä 1`È@xN82(`Iá  6ä T0o¸ áT à@ 2	áÄyZMá  
-™OIá  á0	á…Z~N‘ä 
-0`.3²ñ½r² ã€r¢80
-0 á   ãUø@3¢R!á "áÿPTRñ­MP!á HPQT“	2HááèåTGá  H\I•2á 20\@•0‘ÿãºş21ä 0ä ‘ÿãHüIá£	á´a 2Iá  	á  80Q^H™@C C0L0ÄKN1`0 ã10xOR G0xOW0R)` ãAá  áü1±ğ°‚ááQœ0Lá  ÿãÇıáô0ä ‚áS±
-Oğ°áQœ04½ÿã¹ı@á   áø0±‚Æ}€`(R ãÚáñ‹ğ°‚áO0ÿã¥ı@á   áğ0±‚áS±0ä áñ‹ğ°
-O0Oÿã”ı áT à@ 2…Zä=  <F0`ep±àg0± `ğ°áS±€áñ‹"á)	OOÿãXı+á ¡i‚iqZ²ZáS±€áñ‹q½2½ó¼"á)	OOÿãEıw¯5£ á p±´½07½õ°ò¢±¢ÿãı á  2)á $µ²÷¾ÃZKÙ áT Ä@E0 Q!áL LP`)2z`(‘ªR0 á¼Q@è@z`Lá  Há  áôáøDá àá…sH Q á p± á£ O"áã´½0±ô°"OW Ká áe/á K0"á 
-P0±S0´½w½ô°00ÿãÎü(á Iá ÃZ	áezKë< !á q±!á£!O#á×n1±Aá áRpOØP"áeP´½ğ°‚J0  `"á TĞ@"áe‚Jq±!á£P!O´½1±ô°0  á£ O"áe´½q±0±ô°‚J00ÿã‰üd€`|æm¦lw'£   ã*02JáŞ è	 
-áR](2R•P¨‚‚ÎÌÉ¨  3QR‚Æy†ËRR00 ãË0 áÿÄB `Ä!2JáŞ
-áL]Q•P¨2—¨ÏS‚Æ„ºRR00 ã¯80 áÿÄ8N2 `Ä8 `$á@ I©Ä €B1`HN ã¿2Já  
-áÄ4`ŠZP™2å Iá  	á  AC‘^22å JáŞ
-áF]82€áÀÿÌ H±±  P¨Q•ì°«°k±«±N¨S‚Î~Š3±  µSR00 ãf‚Î Ì3¡   áÿÄ0LÄ3O0OHC~N ®æ! ­å  "©ä= `¨æ  ¥¨æ= (‘±¡è±0 ãC	`‚Î Ä±±  ù`
-	(±(æ h0 a(±a`D`.  `Aá ¨æ= áf(ä È@Aán<á_óP(æ L0ˆNˆ 82 2¨æ  (‘è±±¡0 ã‚Î Ä(±  D0@C°±ù`
-	Ò0‚Æò	ûM‚Î‚r±  yR‚Î1€3±  RxM!áX PÄ@0 2€á € ãî‚Î È3¡   áffÇ@ áÍMÇQ‚ÎÂ÷±  ùM1²r¡ó°ğ¡1¢ ã00iCˆOzNVO0H!L0o0 `è² Ì À©³  (³`€Oh³(ä ±¡OV(æ C0l¾¬²­æ" ¨æQ &mw'£ K`à/`*¡°±h˜/ `Ä  2Ü.  ã è
- 1æ `*2 ã·00O2Já«
-á ‹°±‘ZT‘D÷  JáŞ
-á@]R•Q¨Šh•R‚Æx†QRR ãv!áÿÄ@`Ä 2‚ÆŠµPOá  á0‰\B0OxN2Já  ‚Æ€
-áRŠZQ™2LC—^‘æP Jáª
-áØÚS‘Jáª
-áÜÚ‘Jáª
-áĞÚ2²P™Já€ÿ
+á<N0æ ‘ `F0Àeÿãnÿ)á@ V2ZÂm`!h²àP”Ä €B ’0ÿãkü2P©€0ÿãdü2P©2 hh0ä L0Ä 1`È@xN82(`Iá  6ä T0o¸ áT à@ 2	á\ÄyZMá  
+™OIá  áx	ád…Z~N‘ä 
+0`.3²ñ½r² ãşr¢80
+0 á   ãÓø@3¢R!á "áÿPTRñ­MP!á HPQT“	2HááèåTGá  H\I•2áh20\@•0‘ÿãºş@á   áÌÿãøû21ä 0ä ‘ÿãğûIá£	á´a 2Iá  	á  80Q^H™@C C0L0ÄKN1`0 ã©0xOR G0xOW0R)` ãzAá  áD1±ğ°‚ááQœ0Lá  ÿãuıá<0ä ‚áS±
+Oğ°áQœ04½ÿãgı@á   á@0±‚Æ}€`(R ãRáñ‹ğ°‚áO0ÿãSı@á   á80±‚áS±0ä áñ‹ğ°
+O0OÿãBı áT à@ 2…Zä=  <F0`ep±àg0± `ğ°áS±€áñ‹"á)	OOÿãı+á ¡i‚iqZ²ZáS±€áñ‹q½2½ó¼"á)	OOÿãóüw¯5£ á p±´½07½õ°ò¢±¢ÿãÌü á  2)á $µ²÷¾ÃZKÙ áT Ä@E0 Q!áL LP`)2z`(‘ªR0 á¼Q@è@z`Lá  Há  á<á@Dá àá…sH Q á p± á£ O"áã´½0±ô°"OW Ká áe/á K0"á 
+P0±S0´½w½ô°00ÿã|ü(á Iá ÃZ	áezKë< !á q±!á£!O#á×n1±Aá áRpOØP"áeP´½ğ°‚J0  `"á TĞ@"áe‚Jq±!á£P!O´½1±ô°0  á£ O"áe´½q±0±ô°‚J00ÿã7üd€`|æm¦lw'£   ã*02JáŞ è	 
+áR](2R•P¨‚‚ÎÌÉ¨  3QR‚Æy†ËRR00 ãC0 áÿÄB `Ä!2JáŞ
+áL]Q•P¨2—¨ÏS‚Æ„ºRR00 ã'80 áÿÄ8N2 `Ä8 `$á@ I©Ä €B1`HN ã72Já  
+áTÄ4`ŠZP™2å Iá  	á  AC‘^22å JáŞ
+áF]82€áÀÿÌ H±±  P¨Q•ì°«°k±«±N¨S‚Î~Š3±  µSR00 ãŞ‚Î Ì3¡   áÿÄ0LÄ3O0OHC~N ®æ! ­å  "©ä= `¨æ  ¥¨æ= (‘±¡è±0 ã»	`‚Î Ä±±  ù`
+	(±(æ h0 a(±a`D`.  `Aá ¨æ= áf(ä È@Aán<á_óP(æ L0ˆNˆ 82 2¨æ  (‘è±±¡0 ãŠ‚Î Ä(±  D0@C°±ù`
+	Ò0‚Æò	ûM‚Î‚r±  yR‚Î1€3±  RxM!áX PÄ@0 2€á € ãf‚Î È3¡   áffÇ@ áÍMÇQ‚ÎÂ÷±  ùM1²r¡ó°ğ¡1¢ ã00iCˆOzNVO0H!L0o0 `è² Ì À©³  (³`€Oh³(ä ±¡OV(æ C0l¾¬²­æ" ¨æQ &mw'£ K`à/`*¡°±h˜/ `Ä  2Ü.  ã è	 1æ `2æ  ã.2Já«
+á ‹80OD—ZS‘C  JáŞ
+á@]R•Q¨2å ŠP•R‚Æx†QRR ãì!áÿÄ@`Ä 2‚ÆŒ¾PLá  áx‰\B0OxN2Já  ‚Æ€
+á\RŠZQ™2LC”^‘æP Jáª
+áØÚ‘Jáª
+áÜÚ‘Jáª
+áĞÚP™Já€ÿ
 áp)‘@CJá€ÿ
-át) ‘¬Já? 
-áÿÿS	ĞKáˆá €uP‚Æ€R2—^P €S0ÄDøc OP€2²ÄK0PP°`§OS0rMuP‚Æ€R200O^ñ½ ã	p²0C0 ã00øg¬‚ÎÆ2¢  Ã@2ÚR²à£ »	Ÿ RuQ‚Æ‚iR2—^æ ` OĞ ¼ È0ùM‚Æ3`1OHVò°‚Æ3€0 ã;2 Ì À3½  ğ°T01ä ğ¡ÿãgùU0q¢ğ¡ö°ÿãßı á@ 0±ó¼T01ä ğ¡ÿãWù`1å *á@ ²à H”Ä €ÀBÄ@á€ÿ&O átP2R•’B‚Æ:€RHO€Mˆ0±­—Já  
-á$ŠZ‘d“Fmw'£ Iá? 	áÿÿK	V`§O2¢‚U
-2ËR2¢zR‚Æ—C0APõP‚Æ€R2—^Q°X!á@ 
-T
-0C0 ãe 0BMO/©N‚Æq1`°O	-Õ/P°?/øgËPuP‚Æ€R2—^Ğ  C á@ 0± `ğ°1ä ğ¡uQT0ÿãİø‚Æ€(R2—^Ñ 0dMP‘ xö°U0q¢ğ¡ÿãFıq/ sM2Q/øc OK0P`P°3¾§O/ö°U0q¢ğ¡s±ÿã0ıs¡1/ö°U0q¢ğ¡s±ÿã'ıs¡ã/ö°U0q¢ğ¡ÿãı¸/gG‚C€ŠC
-×Y ã	 C7'    i£à	 `‚ÆÀ‚ÆÆ‹R‹	‚ÆÀÀC   g@AÿãÙÿ21Â@R'   €ÈDó   ÈL4“  Ä?€!1ƒÀ ƒÀ€À1ƒÆ€QÀNÀX1ƒÆ€QÄ?€	1Æ "Ì‚4‘     €ÀƒÆ€QÀFÀXƒÆ€QÄ?€‹À 8   ã è 2 290202æ 0ä `€€CíC¶CR .2d0?2h>
-˜ƒáÿÿ
-ùcAáÿ 
-À``0A@2Iá  	áQZ	™PaR
-L0—@A@–@yVd0.292”@E0€NM02ÉB!20G0 ãß00K0G0ÿãbÿL0Á@80‚Æ„…‚Æ†€V
-
-]0P0
-úg
-¾:0ˆS0K0 ãÂ82K00äBÿãDÿT0Â@0G0€O V
-
-e0P0
-ûg
-›0‚Æ‡€V` 8
-` `¶C€C–S0Ælw'£ áÿÿ
-¡ûcCáÿ 
-Â``0Q@2Iá  	áQZ	™QPaÊR
-;2á¸	]d0&
- `Ó/EvJá  
-áÿÿU
-uJáÿ 
-áÿÿU
-À``M0A@2Iá  	áQZ	™PaRmE0M0ÇSÉB€N 22`L00 ãJ82L00ÿãÍşK0Á@80G0€O‚Æ„…V
-
-]0P0
-úg
-&:0ˆR‚ÎÀò°  L0 ã*82ò L00äBÿã«şK0Á@0G0€O V
-
-e0P0
-ûg
-0‚Æ‡€Vm/J0	R0¿C’C"2ÏSıcë. áÿ 
-  KOş.``ÿãş(2*áÿ U
-  KO/"áÿ 
-KOa/]0“@+2'0D@t0<2—@F@ƒN¾W}0d0ÿB#220G0”@ ãÕ80L0G0ÿãXşK0Á@0‚Æ†‡‚Æ‡€V
-}08P0
-ûg­
-«òg8PR82L0ò°öB ãµ80L0G0ÿã8şK0Á@‡O÷W9
-ò u0÷Q0>
-ûgŒ9
-Šğg÷Q‚OÏS‚WN/&0˜@L@WD00H@Ÿ@8V‚Æ„2J@(2‚ÎÂò°  0@ãBs± ãƒò 80K00ÿãş0p¡Ğ@M0‚Æ‡†NËV
-
-ãP
-0
-ùgY
-WògãPÃRK0‚ÎÀò°  3± ãa3¡80K00ÿããı0p¡È@]0‡OÛBßW8
-ò 
-çQ0<
-ûg38
-1ñgçQÇS‚Æ‚€VÉBòB‚Æ€‡†N!0Ô@ñ@Ú@ó@QP‚Æ„Q2
-	`OËP‚Æ†ƒYP	`‡.L00†OäB¹@¦Q±	÷øg`|.``y.0Ñ/0x/0«/0W/ñgf.ògı.÷gPÚ.÷gPB.ã è 0(20ä  90202æ *0#02j
-
-“€áÿÿ
-ñúcBáÿ 
-À``0A@	2Já  
-áŠZ™PaR
-M0—@A@.0yVe0•@2”@‚Æ… 2éB)20C0 ãË00L0C0ÿãNıM0Á@80‚Æ„…‚Æ†€V
-	(P0
-úg
-±:0ˆS0L0 ã¯2L00ÿã2ıU0Â@0C0€OäB V
-	P0
-ûg
-0‚Æ‡€hVO0¦lw'£ 
-	h `O0¦lw'£ áÿÿ
-“ûcCáÿ 
-Â``0Q@	2Já  
-áŠZ™QPaÊR
-#2Ñ¸	SE0
- hÚ/h‚áÿÿ
-iøc@áÿ 
-`À`0A@	2Já  
-áŠZ™PaRb‚Æ…éBïS(2!2hM00 ã>00M00ÿãÁü80\0ß@‚Æ†‚‚Æ„…QV
-2	iP0
-úg
- 2ùS0M0 ã!00M00ÿã¤üL0Á@0äB‚Æ†€ V
-	P0
-ûg
-0C0€OVO0¦lw'£ !áÿ 
-
-  KO/``ÿãü(0#áÿ 
-  KO™/"áÿ 
-KOo/•@0M0C@—@A@‚Æ…2ùWe0éB(2!200”@ ãÕ 00M0C0ÿãXüL0Á@82‚Æ‡…‚Æ†€V
-
-(PW0
-úg´
-²÷o(PˆS0M0 ã¸ 2M00ÿã;üT0Â@0C0€OÿBøW:
-
-ïQ0=
-øg”:
-’ñgïQG0€OV×S82Z/0˜@J@‚V:20J@Ÿ@@G0€N2e0_0ÛBL@‚Î Â3±  ‚ÎÀò°   ã ò (0K00ÿãü2¡<WÂ@…O‚Æ„ƒMW*
-800G0EQ(
-ùg\*
-Z÷gEQ•RK0‚ÎÀò°   ã_ ò (0K00ÿãáû00¡È@…OäBeW(
-_0]Q0+
-úg8(
-6ñg]QES‚Æ‡€VÉBòB‚Æ€†N!0Ô@ñ@ú@÷@QP‚Æ„NP
-
-
-`‚O×Q‚Æ…ºP•	hO0¦lw'£ ]0T0OäB“@aP‹	òøghğ/h`Š.
-0Ì/0p/90¨/:2P/ñgr.ògş.óoiPà.÷g(PO.gÿã‡û0' reel    ¬  <  ÿ:]ÿÿÿÿÿ í•ÿiÿÿH   ˆ         X    ÿÿ0  \    ÿÿ0  `          d          °   ÿÿà  º   ÿÿà  Ä   ÿÿ   È   ÿÿ   d        º   ÿÿ  Ğ   ÿÿ  Ú   ÿÿ0  â   ÿÿ  æ   ÿÿ0  ê   ÿÿ  H   ÿÿ   R   ÿÿ   r        ‚         †         ¾   ÿÿü  Â   ÿÿü  Ô   ÿÿô  Ü   ÿÿô  ø   ÿÿø  ü   ÿÿø      ÿÿğ  $   ÿÿğ  ğ   ÿÿô  ô   ÿÿø  ú   ÿÿô  ş   ÿÿø  
-   ÿÿ  ’
-   ÿÿ  ¤
-         ¨
-         ì   ÿÿ0  ğ   ÿÿ0  ş   ÿÿ     ÿÿ     ÿÿ$  ”   ÿÿ$  à   ÿÿ  ä   ÿÿ  Ì   ÿÿ  Ğ   ÿÿ     ÿÿ     ÿÿ  
-   ÿÿ     ÿÿ  ì   ÿÿ  ğ   ÿÿ  2   ÿÿ  6   ÿÿ  è   ÿÿ¬  ì   ÿÿ<      ÿÿH      ÿÿˆ        "    _op1_fx_page _read_fx_param_safe _op1_screen_draw_cached     hundekraft    Ã  "“      
+át) ‘»ûcCá? 	"á+zO~P‚Æ€R2”^U …E `æ> øcÄ*J OP€øPP°`3²`£O³±‚Æ’~P‚Î€r±  R(200 ã3¢l_ğ±r¡00 ãu0ùgÚ0Ê@2US²àÔ ³¡+
+ÏLR¾P‚Î€³¡  R2` O”^æ Ğ  5O‚ÎÀ±¡   ãM(0 Ì À5±  ğ°S01ä E0ÿãÿø2ä ñ¡E0÷°ÿãŞı á@ 0±õ°S01ä E0ÿãîø`1å *á@ ²à H”Ä €ÀBÄ@á€ÿ‚Æ'„ át22ŠZR•’B‚Æ:€RHO€Mˆ0şQ—‚Æ€8R2áÿÿ”^‘
+ `æ? Já  
+álºZ‘d“&mw'£ øc@á? 	G`£O³±…EªC³¡*R]RşP2‚Æ€R2”^ä>  P ÆAˆ²­Q	3²şP‚Æ€R2³¡`sM”^æ> QP>P2O2DŒ^Q°- á@ )‚ÎÂr±  0 ã­ ‚Î Ær¡  CM/©N‚Æq†³±ü`°O	ø±/P°
+/ùgEQ~P‚Æ€R2”^Ğ  † á@ 0± `ğ°1ä E0S0ÿãBø~P‚Æ€R2”^Ñ 0dMP‘ E÷°2ä ñ¡E0ÿãı=/*áH  `•Z“è  `/÷°2ä ñ¡E0ÿãÿü`/ `æ> øc OPP°*0À. *uM/`3²{/³¡+PPS^/÷°2ä ñ¡E0ÿãàüè.£äæ BR"å+ Z0` ææ ³¡ `‚ÎÂ0²  sMj0e/÷°2ä ñ¡E0ÿãÂüuMÑ.³¡		`3²³¡¡ææ sM0(0P/`‚Î Ê3²  </÷°2ä ñ¡E0ÿã§üt/gG‚C€ŠC
+×Y ã	 C7'    i£à	 `‚ÆÀ‚ÆÆ‹R‹	‚ÆÀÀC   g@AÿãÙÿ21Â@R'   €ÈDó   ÈL4“  Ä?€!1ƒÀ ƒÀ€À1ƒÆ€QÀNÀX1ƒÆ€QÄ?€	1Æ "Ì‚4‘     €ÀƒÆ€QÀFÀXƒÆ€QÄ?€‹À 8   reel    P  à  ÿ:]ÿÿÿÿÿ í•ÿiÿÿH   8        V    ÿÿx  Z    ÿÿx  t          x          à   ÿÿD  ä   ÿÿD  ø   ÿÿ<  ü   ÿÿ<     ÿÿ@     ÿÿ@  ,   ÿÿ8  0   ÿÿ8  T   ÿÿ(  ^   ÿÿ(  h   ÿÿh  l   ÿÿh          ^   ÿÿ\  t   ÿÿ\  ~   ÿÿx  †   ÿÿd  Š   ÿÿx     ÿÿd  ì   ÿÿh  ö   ÿÿh  
+   ÿÿÌ     ÿÿÌ          "        2         6         n   ÿÿD  r   ÿÿD  „   ÿÿ<  Œ   ÿÿ<  ¨   ÿÿ@  ¬   ÿÿ@  Ğ   ÿÿ8  Ô   ÿÿ8   	   ÿÿ<  ¤	   ÿÿ@  ª	   ÿÿ<  ®	   ÿÿ@  >   ÿÿT  B   ÿÿT  T         X             ÿÿx  ¤   ÿÿx  ²   ÿÿ\  º   ÿÿ\  `   ÿÿl  d   ÿÿl  0   ÿÿP  4   ÿÿà  H   ÿÿH   L   ÿÿ8        "   ;    _op1_fx_page _read_fx_param_safe _op1_screen_cached_extra _op1_screen_draw_cached    hundekraft    Ä  -      

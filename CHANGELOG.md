@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.2.4
+
+- Line clock now sets the OP-1's tempo. After the OP-1 had been plugged into a computer, a clock on line in was ignored, though the Line clock panel showed the right BPM. RATE also has 1 PPQ now, for clocks that send one pulse a beat.
+- Line clock starts off, and it only mutes line in while a clock is actually coming in. Before, it could mute line in with nothing plugged in, so VOX and SNAP heard nothing. To use it, hold Shift on the tempo screen and push blue to pick your clock's RATE.
+- The master LFO moved to T4 on the Shift + mixer page, the same layout as op1r. Press T4 again to turn it off or on (that was Shift + T3 in 3.2.3), and T3 to jump to the master effect; T4 from there brings you back.
+- Master LFO: + and - now go the whole way. At amount 100, a knob set to zero opens fully on +, where it used to stop halfway.
+- The metronome no longer goes through the master effect, so a reverb or delay on the master doesn't smear the click. Push orange on the settings page (Shift + help, T3) to send it through again; FX shows after the sound's name.
+- VOX, SNAP and Amp can process the tape: pick Ear as the input and they hear what the tape plays, without the track you're recording to. T2 shows TAPE.
+- Latch now catches the notes you're holding when you push orange, so you don't have to play them again. There's also a HOLD mode, where every note you play adds to the ones already sounding (the oldest stops when the voices run out). Press a held key to stop just that note. Orange turns latch on and off; to pick LATCH or HOLD, hold Shift on the envelope page and push green.
+- The arrow keys transpose C64arp, Oracle, Dots, Euclid, Grids, Peal, Trail, Hold and Composer while they play, like the OP-1's own sequencers. Changing octave in POLY no longer leaves a note stuck. Your saved patterns stay as written; one you entered with the octave shifted now plays that much higher or lower.
+- Quad LFO and master LFO: hold Shift and push an encoder to mute that one LFO. The mute is saved with the sound. A sound saved with a muted quad LFO can stop an older firmware from starting, so unmute first if you go back.
+- The master LFO has the two Lorenz waves from the quad LFO.
+- ENTE starts with the threshold at 0 dB, so picking it doesn't drop the level. Makeup goes to +24 dB; a sound saved with makeup gets twice as much as before.
+- FILTER starts as LP IV, fully open, with drive at 60 and no resonance. Sounds you saved keep their own settings.
+- CLOUDS and HAIL no longer make the sound quieter when you switch them on with the mix all the way dry. CLOUDS is about 9 dB louder overall, so sounds saved with it come out louder.
+- Stutter on the master effect starts on the beat at PLAY and stays on the grid. Picking Stutter no longer makes the audio hiccup, and its screen is lighter.
+- Tape effect: push white and it's synced at once, with the division showing; push again for FREE.
+- C64arp has a 1/2 rate, first on the green knob.
+- Fixed C64arp: after you edited a table, blue only went between OFF, CUSTOM and RANDOM. CUSTOM now sits between OFF and the chord tables.
+- Fixed MOAI: turning DET (Shift + blue) while a chord played could still move AMT and DRIVE.
+- Fixed the master effect list opening on FILTER instead of the effect you were using.
+- Fixed a crash on the first keys after a restart with Gin in a drum slot.
+- The effect page now follows a mode key at once instead of showing the previous effect's screen.
+
 ## 3.2.3
 
 - Father's CLASSIC is now a single push of white: push to switch it on, push again to switch it off. No more page to turn.
