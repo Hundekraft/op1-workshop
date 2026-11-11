@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.5
+
+- Hotfix: a funky, but not really useful tape screen glitch has been fixed. :)
+
 ## 3.2.4
 
 - Line clock now sets the OP-1's tempo. After the OP-1 had been plugged into a computer, a clock on line in was ignored, though the Line clock panel showed the right BPM. RATE also has 1 PPQ now, for clocks that send one pulse a beat.

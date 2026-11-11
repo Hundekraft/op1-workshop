@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "52d026c251913dd2",
+    "id": "4d01935767f488b1",
     "product": {
       "name": "hundekraft",
-      "version": "3.2.4",
-      "label": "hundekraft 3.2.4",
-      "slug": "hundekraft-3.2.4"
+      "version": "3.2.5",
+      "label": "hundekraft 3.2.5",
+      "slug": "hundekraft-3.2.5"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -1073,10 +1073,10 @@
   },
   "devupd": true,
   "runtime_sha256": "bcb7546f9a5dab29f27466bfcdbc04e2a65fa69132e75ac9d41d672afec44260",
-  "base_sha256": "428fe9adfd1a2e8bdb0df470c269dcecbc37296a336d38db2c65b7ecc437fcd8",
+  "base_sha256": "311cd817b155b9a33bde5e60dd15723361d89cbdeebe01042919edbabdaf8e8c",
   "variants": {
     "7ff": {
-      "sha256": "a5d260d5a902ae9125bf83454ce8d475649368995cdc1444ed7ffa19f9986666",
+      "sha256": "8b663b9ff81bd8cf58075c53261834564efee31f6779b5c8e5c1a02f34433425",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 30184,
@@ -2119,7 +2119,7 @@
       "core": {
         "start": 31457280,
         "len": 242356,
-        "crc": 1142323838
+        "crc": 2152391903
       }
     }
   },
@@ -3007,8 +3007,8 @@
   "core": {
     "start": 31457280,
     "len": 242356,
-    "crc": 1142323838
+    "crc": 2152391903
   },
   "plugin_max": 1048576,
-  "cores_sha256": "d658de71a4e291d189fedd78108712108b6c4687f067a654c28662d625814c59"
+  "cores_sha256": "0e520c0a6caacc0fcbb69d8d6094a9d4e45f62f03c94dfb3f7a6efdbe78a9f99"
 }

@@ -13,19 +13,19 @@
   {
    "path": "OP1_vdk.ldr",
    "orig_sha256": "f79d299f6f9019c998013a4176223a6a1bc999a2d8c54451346861f6ea455c74",
-   "result_sha256": "9998f8a6b94db0a97ff6fdde907bcce083376c5e90e165bf56065c1123c8da47",
+   "result_sha256": "16fad94f55ed2f62cea944d90666693d268738a30afcf5c2d12469e23af66f80",
    "ops": [
     {
      "op": "replace",
      "offset": 2,
      "old": "7f",
-     "new": "c5"
+     "new": "f9"
     },
     {
      "op": "replace",
      "offset": 12,
      "old": "d82221",
-     "new": "a0e524"
+     "new": "9ce524"
     },
     {
      "op": "replace",
@@ -1099,8 +1099,8 @@
      "op": "insert",
      "offset": 2171347,
      "blob": "OP1_vdk.ldr.insert.bin",
-     "sha256": "3bbe6f7514c7ec43aab094ab3f693ede2afd70fcd83f11bd61ac2d96c7bfe290",
-     "size": 246472
+     "sha256": "000be89d691c2dcb11f82c3018e04b1e8850981acf3bf557a2c3afe52b7410a4",
+     "size": 246468
     }
    ]
   },
@@ -1606,8 +1606,8 @@
   "fx": []
  },
  "result": {
-  "tar_sha256": "2cb77c832b97427db0ba3ae6b6867f0f91ab695c8f094cba483495be1343d667",
-  "sha256": "2a7c166f10e82e22bfaba9cc3e5dd383227e1e737b94faa241cc66dc5d46fc7f",
-  "size": 13019673
+  "tar_sha256": "2c82660dfe8171f19a8df373b9aafe355a82fd7c2fb2490b93046ad7d1a8b746",
+  "sha256": "c893f519d319dc09296f4b28324f82670e35c15f0efa3e28e626cae2eba4263b",
+  "size": 13019252
  }
 }
