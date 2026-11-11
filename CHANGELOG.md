@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.6
+
+- Fixed sampler+ crashing or freezing the OP-1 when it was on synth keys 5 to 8. On keys 2 to 4 its page now shows the right waveform too.
+
 ## 3.2.5
 
 - Hotfix: a funky, but not really useful tape screen glitch has been fixed. :)
