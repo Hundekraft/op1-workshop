@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "6454a0b561954363",
+    "id": "25d9fd459f711435",
     "product": {
       "name": "hundekraft",
-      "version": "3.2.6",
-      "label": "hundekraft 3.2.6",
-      "slug": "hundekraft-3.2.6"
+      "version": "3.3",
+      "label": "hundekraft 3.3",
+      "slug": "hundekraft-3.3"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -159,7 +159,7 @@
             "description": "Blend the wet signal with the dry"
           }
         ],
-        "screen_bytes": 21112,
+        "screen_bytes": 21152,
         "file": "washer.knl",
         "needs": []
       },
@@ -194,7 +194,8 @@
       }
     ],
     "preset_caps": [
-      300
+      300,
+      1024
     ],
     "utilities": [
       {
@@ -267,7 +268,7 @@
         "name": "Granular",
         "type": "granular sampler",
         "description": "Plays the slot's sample as grains.",
-        "screen_bytes": 1632,
+        "screen_bytes": 240,
         "file": "granular.knl",
         "needs": []
       },
@@ -277,7 +278,7 @@
         "name": "Tape",
         "type": "tape echo",
         "description": "Vintage tape echo.",
-        "screen_bytes": 14760,
+        "screen_bytes": 14736,
         "file": "tape.knl",
         "needs": []
       },
@@ -297,7 +298,7 @@
         "name": "Reverb",
         "type": "plate / hall reverb",
         "description": "Plate and hall reverb, after Mutable Instruments Elements.",
-        "screen_bytes": 68184,
+        "screen_bytes": 68192,
         "file": "reverb.knl",
         "needs": []
       },
@@ -516,7 +517,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 4704,
+        "screen_bytes": 4640,
         "file": "oracle.knl",
         "needs": []
       },
@@ -615,12 +616,10 @@
         "id": "usbout",
         "kind": "feature",
         "name": "USB out",
-        "always": true,
+        "reserved": true,
         "bases": [
           "kennel30-plugins"
-        ],
-        "file": "usbout.knl",
-        "needs": []
+        ]
       },
       {
         "id": "oxbow",
@@ -629,7 +628,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 182640,
+        "screen_bytes": 32808,
         "file": "oxbow.knl",
         "needs": []
       },
@@ -673,7 +672,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 64672,
+        "screen_bytes": 64696,
         "file": "sid.knl",
         "needs": []
       },
@@ -684,7 +683,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 245488,
+        "screen_bytes": 47792,
         "file": "c64arp.knl",
         "needs": []
       },
@@ -738,7 +737,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 25904,
+        "screen_bytes": 25928,
         "file": "gin.knl",
         "needs": []
       },
@@ -749,7 +748,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 67672,
+        "screen_bytes": 67640,
         "file": "amp.knl",
         "needs": []
       },
@@ -839,7 +838,7 @@
       {
         "id": "lander_bit",
         "kind": "feature",
-        "name": "(bit 64: the Lander core option)",
+        "name": "(bit 64: reserved, was the Lander core option; removed 2026-11-15)",
         "reserved": true,
         "bases": [
           "kennel30-plugins"
@@ -967,7 +966,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 36784,
+        "screen_bytes": 36808,
         "file": "reactor.knl",
         "needs": []
       },
@@ -1057,6 +1056,147 @@
         "screen_bytes": 400,
         "file": "ente.knl",
         "needs": []
+      },
+      {
+        "id": "strip",
+        "kind": "feature",
+        "name": "Channel strip",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "strip.knl",
+        "needs": []
+      },
+      {
+        "id": "dimension",
+        "kind": "synth",
+        "name": "DIMENSION",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 22472,
+        "file": "dimension.knl",
+        "needs": []
+      },
+      {
+        "id": "him",
+        "kind": "drum",
+        "name": "HIM",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 128,
+        "file": "him.knl",
+        "needs": []
+      },
+      {
+        "id": "khorus",
+        "kind": "fx",
+        "name": "KHORUS",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 39928,
+        "file": "khorus.knl",
+        "needs": []
+      },
+      {
+        "id": "kastle",
+        "kind": "synth",
+        "name": "KASTLE",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 128,
+        "file": "kastle.knl",
+        "needs": []
+      },
+      {
+        "id": "matrix",
+        "kind": "feature",
+        "name": "Matrix LFO",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 8000,
+        "lfo_type": true,
+        "file": "matrix.knl",
+        "needs": []
+      },
+      {
+        "id": "keyvel",
+        "kind": "feature",
+        "name": "Key velocity",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "keyvel.knl",
+        "needs": []
+      },
+      {
+        "id": "trigguard",
+        "kind": "feature",
+        "name": "Trigger guard",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "trigguard.knl",
+        "needs": []
+      },
+      {
+        "id": "dx",
+        "kind": "synth",
+        "name": "DX",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 128,
+        "file": "dx.knl",
+        "needs": []
+      },
+      {
+        "id": "drift",
+        "kind": "synth",
+        "name": "DRIFT",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 592,
+        "file": "drift.knl",
+        "needs": []
+      },
+      {
+        "id": "ludwig",
+        "kind": "synth",
+        "name": "LUDWIG",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 128,
+        "file": "ludwig.knl",
+        "needs": []
+      },
+      {
+        "id": "windwood",
+        "kind": "synth",
+        "name": "Windwood",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 59528,
+        "file": "windwood.knl",
+        "needs": []
+      },
+      {
+        "id": "pinboard",
+        "kind": "synth",
+        "name": "PINBOARD",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 128,
+        "file": "pinboard.knl",
+        "needs": []
       }
     ],
     "screen_budget": {
@@ -1065,36 +1205,36 @@
       "base": 4409868,
       "worst_screen": 250000,
       "lazy_cap": 409600,
-      "per_preset": 2785,
+      "per_preset": 188,
       "own_min": 16384,
       "own_svg_factor": 5.1,
       "own_size_factor": 2.25
     }
   },
   "devupd": true,
-  "runtime_sha256": "bcb7546f9a5dab29f27466bfcdbc04e2a65fa69132e75ac9d41d672afec44260",
-  "base_sha256": "311cd817b155b9a33bde5e60dd15723361d89cbdeebe01042919edbabdaf8e8c",
+  "runtime_sha256": "4cea8f0424d6c63dabf1974ba05c2207a770ed73e01562c8a4d420bfbf333077",
+  "base_sha256": "7514e2d5321f8504bddcab0738301452b97a2389a853cec3fe073ea2ee381a01",
   "variants": {
-    "7ff": {
-      "sha256": "63183b756a986f63209d6e82a0ed6b9748748227bc2792d998ce1c7c43b77f9b",
+    "200000000000007ff": {
+      "sha256": "0ac75d88fa295eab036a94ac7712484ed08770a863474b285b2bce4c460f6f0b",
       "sizes": {
         "image_bytes": 0,
-        "memory_bytes": 30184,
-        "plugin_arena_bytes": 2938908,
-        "plugin_arena_estimate": 3176476,
-        "plugin_arena_room": 4194304,
-        "plugin_arena_percent": 75.7,
+        "memory_bytes": 70728,
+        "plugin_arena_bytes": 4721544,
+        "plugin_arena_estimate": 5226496,
+        "plugin_arena_room": 5242880,
+        "plugin_arena_percent": 99.7,
         "plugin_arena_over_budget": false,
         "plugin_decl_bytes": 0,
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 3490260,
+        "plugin_file_bytes": 4838816,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
       "presets": {
-        "count": 248,
+        "count": 459,
         "by_engine": {
           "supersaw": 12,
           "fmbell": 12,
@@ -1104,22 +1244,35 @@
           "pew": 16,
           "elg": 16,
           "iter": 12,
-          "bloodmoon": 8,
-          "eva": 8,
-          "hollowsaint": 8,
+          "aether": 12,
+          "amp": 12,
+          "arc": 12,
+          "bloodmoon": 12,
+          "blot": 12,
+          "brassophone": 12,
+          "dddd": 12,
+          "dimension": 12,
+          "drift": 27,
+          "eva": 12,
+          "hollowsaint": 12,
           "juni": 12,
-          "mbira": 8,
+          "kastle": 12,
+          "ludwig": 12,
+          "mbira": 12,
+          "mixtur": 12,
           "monolit": 12,
-          "outatime": 4,
+          "outatime": 12,
           "oxbow": 16,
-          "reactor": 11,
-          "sid": 8,
-          "snap": 8,
-          "strum": 9,
+          "pinboard": 13,
+          "reactor": 12,
+          "sid": 12,
+          "snap": 12,
+          "strum": 12,
           "vapora": 15,
-          "vox": 9
+          "vox": 12,
+          "windwood": 12
         },
-        "sha256": "9f2c1081415dafd19d7b26f9090a769221409059a0f73d173dd0d626c14b548f",
+        "sha256": "840017821e50eb56cf64e7612fd467fe3be3f08745e3d2035493bb6a6f330c53",
         "exceeds_cap": false,
         "items": [
           [
@@ -1571,6 +1724,154 @@
             "snowglobe"
           ],
           [
+            "aether",
+            "spring"
+          ],
+          [
+            "aether",
+            "spring"
+          ],
+          [
+            "aether",
+            "nitro"
+          ],
+          [
+            "aether",
+            "delay"
+          ],
+          [
+            "aether",
+            "phone"
+          ],
+          [
+            "aether",
+            "delay"
+          ],
+          [
+            "aether",
+            "cwo"
+          ],
+          [
+            "aether",
+            "delay"
+          ],
+          [
+            "aether",
+            "punch"
+          ],
+          [
+            "aether",
+            ""
+          ],
+          [
+            "aether",
+            "spring"
+          ],
+          [
+            "aether",
+            "delay"
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            "spring"
+          ],
+          [
+            "amp",
+            "spring"
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            ""
+          ],
+          [
+            "amp",
+            "delay"
+          ],
+          [
+            "amp",
+            "phone"
+          ],
+          [
+            "amp",
+            "spring"
+          ],
+          [
+            "arc",
+            ""
+          ],
+          [
+            "arc",
+            "spring"
+          ],
+          [
+            "arc",
+            "punch"
+          ],
+          [
+            "arc",
+            "delay"
+          ],
+          [
+            "arc",
+            ""
+          ],
+          [
+            "arc",
+            "spring"
+          ],
+          [
+            "arc",
+            ""
+          ],
+          [
+            "arc",
+            "cwo"
+          ],
+          [
+            "arc",
+            "delay"
+          ],
+          [
+            "arc",
+            "spring"
+          ],
+          [
+            "arc",
+            "spring"
+          ],
+          [
+            "arc",
+            ""
+          ],
+          [
+            "bloodmoon",
+            "delay"
+          ],
+          [
             "bloodmoon",
             "delay"
           ],
@@ -1588,6 +1889,10 @@
           ],
           [
             "bloodmoon",
+            "delay"
+          ],
+          [
+            "bloodmoon",
             ""
           ],
           [
@@ -1596,6 +1901,10 @@
           ],
           [
             "bloodmoon",
+            ""
+          ],
+          [
+            "bloodmoon",
             "delay"
           ],
           [
@@ -1603,6 +1912,310 @@
             "delay"
           ],
           [
+            "bloodmoon",
+            "delay"
+          ],
+          [
+            "blot",
+            "delay"
+          ],
+          [
+            "blot",
+            ""
+          ],
+          [
+            "blot",
+            ""
+          ],
+          [
+            "blot",
+            "delay"
+          ],
+          [
+            "blot",
+            ""
+          ],
+          [
+            "blot",
+            "spring"
+          ],
+          [
+            "blot",
+            "delay"
+          ],
+          [
+            "blot",
+            ""
+          ],
+          [
+            "blot",
+            "delay"
+          ],
+          [
+            "blot",
+            ""
+          ],
+          [
+            "blot",
+            "spring"
+          ],
+          [
+            "blot",
+            ""
+          ],
+          [
+            "brassophone",
+            "spring"
+          ],
+          [
+            "brassophone",
+            "spring"
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "brassophone",
+            "delay"
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "brassophone",
+            "delay"
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "brassophone",
+            "delay"
+          ],
+          [
+            "brassophone",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            "spring"
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            "delay"
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dddd",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "dimension",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
+            "drift",
+            ""
+          ],
+          [
             "eva",
             "spring"
           ],
@@ -1620,11 +2233,27 @@
           ],
           [
             "eva",
+            "spring"
+          ],
+          [
+            "eva",
+            "delay"
+          ],
+          [
+            "eva",
             "delay"
           ],
           [
             "eva",
             "spring"
+          ],
+          [
+            "eva",
+            "spring"
+          ],
+          [
+            "eva",
+            ""
           ],
           [
             "eva",
@@ -1641,6 +2270,10 @@
           [
             "hollowsaint",
             "delay"
+          ],
+          [
+            "hollowsaint",
+            "spring"
           ],
           [
             "hollowsaint",
@@ -1652,7 +2285,15 @@
           ],
           [
             "hollowsaint",
+            ""
+          ],
+          [
+            "hollowsaint",
             "spring"
+          ],
+          [
+            "hollowsaint",
+            ""
           ],
           [
             "hollowsaint",
@@ -1665,6 +2306,10 @@
           [
             "hollowsaint",
             "spring"
+          ],
+          [
+            "hollowsaint",
+            "delay"
           ],
           [
             "juni",
@@ -1715,8 +2360,108 @@
             ""
           ],
           [
+            "kastle",
+            "delay"
+          ],
+          [
+            "kastle",
+            "spring"
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "kastle",
+            "delay"
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "kastle",
+            "spring"
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "kastle",
+            "phone"
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "kastle",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
+            "ludwig",
+            ""
+          ],
+          [
             "mbira",
             "crush"
+          ],
+          [
+            "mbira",
+            ""
           ],
           [
             "mbira",
@@ -1728,7 +2473,15 @@
           ],
           [
             "mbira",
+            "spring"
+          ],
+          [
+            "mbira",
             "palme"
+          ],
+          [
+            "mbira",
+            ""
           ],
           [
             "mbira",
@@ -1740,10 +2493,62 @@
           ],
           [
             "mbira",
+            "delay"
+          ],
+          [
+            "mbira",
             "plate"
           ],
           [
             "mbira",
+            "delay"
+          ],
+          [
+            "mixtur",
+            "delay"
+          ],
+          [
+            "mixtur",
+            "punch"
+          ],
+          [
+            "mixtur",
+            "spring"
+          ],
+          [
+            "mixtur",
+            "spring"
+          ],
+          [
+            "mixtur",
+            ""
+          ],
+          [
+            "mixtur",
+            "cwo"
+          ],
+          [
+            "mixtur",
+            "spring"
+          ],
+          [
+            "mixtur",
+            ""
+          ],
+          [
+            "mixtur",
+            ""
+          ],
+          [
+            "mixtur",
+            ""
+          ],
+          [
+            "mixtur",
+            "spring"
+          ],
+          [
+            "mixtur",
             "delay"
           ],
           [
@@ -1808,7 +2613,39 @@
           ],
           [
             "outatime",
+            "delay"
+          ],
+          [
+            "outatime",
+            "delay"
+          ],
+          [
+            "outatime",
             ""
+          ],
+          [
+            "outatime",
+            "spring"
+          ],
+          [
+            "outatime",
+            ""
+          ],
+          [
+            "outatime",
+            "spring"
+          ],
+          [
+            "outatime",
+            ""
+          ],
+          [
+            "outatime",
+            ""
+          ],
+          [
+            "outatime",
+            "spring"
           ],
           [
             "oxbow",
@@ -1875,6 +2712,58 @@
             ""
           ],
           [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            ""
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
+            "pinboard",
+            "spring"
+          ],
+          [
             "reactor",
             "spring"
           ],
@@ -1912,11 +2801,19 @@
           ],
           [
             "reactor",
+            "spring"
+          ],
+          [
+            "reactor",
             "delay"
           ],
           [
             "reactor",
             "delay"
+          ],
+          [
+            "sid",
+            ""
           ],
           [
             "sid",
@@ -1936,6 +2833,14 @@
           ],
           [
             "sid",
+            "spring"
+          ],
+          [
+            "sid",
+            ""
+          ],
+          [
+            "sid",
             ""
           ],
           [
@@ -1951,8 +2856,20 @@
             "crush"
           ],
           [
+            "sid",
+            "spring"
+          ],
+          [
             "snap",
             ""
+          ],
+          [
+            "snap",
+            "delay"
+          ],
+          [
+            "snap",
+            "spring"
           ],
           [
             "snap",
@@ -1983,12 +2900,32 @@
             ""
           ],
           [
+            "snap",
+            ""
+          ],
+          [
+            "snap",
+            ""
+          ],
+          [
+            "strum",
+            ""
+          ],
+          [
             "strum",
             "delay"
           ],
           [
             "strum",
             "spring"
+          ],
+          [
+            "strum",
+            "delay"
+          ],
+          [
+            "strum",
+            ""
           ],
           [
             "strum",
@@ -2084,6 +3021,10 @@
           ],
           [
             "vox",
+            "spring"
+          ],
+          [
+            "vox",
             "delay"
           ],
           [
@@ -2112,14 +3053,70 @@
           ],
           [
             "vox",
+            "delay"
+          ],
+          [
+            "vox",
+            ""
+          ],
+          [
+            "vox",
             "spring"
+          ],
+          [
+            "windwood",
+            "delay"
+          ],
+          [
+            "windwood",
+            ""
+          ],
+          [
+            "windwood",
+            ""
+          ],
+          [
+            "windwood",
+            ""
+          ],
+          [
+            "windwood",
+            ""
+          ],
+          [
+            "windwood",
+            ""
+          ],
+          [
+            "windwood",
+            "spring"
+          ],
+          [
+            "windwood",
+            "spring"
+          ],
+          [
+            "windwood",
+            "delay"
+          ],
+          [
+            "windwood",
+            "spring"
+          ],
+          [
+            "windwood",
+            "spring"
+          ],
+          [
+            "windwood",
+            "delay"
           ]
         ]
       },
       "core": {
         "start": 31457280,
-        "len": 242356,
-        "crc": 2152391903
+        "len": 354496,
+        "crc": 3923301885
       }
     }
   },
@@ -2135,7 +3132,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/aether.knl"
+        "arena": 9622,
+        "artCache": false,
+        "path": "content/aether.knl",
+        "packed": 8579
       },
       {
         "name": "amp",
@@ -2145,7 +3145,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/amp.knl"
+        "arena": 33434,
+        "artCache": false,
+        "path": "content/amp.knl",
+        "packed": 13975
       },
       {
         "name": "arc",
@@ -2155,7 +3158,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/arc.knl"
+        "arena": 19214,
+        "artCache": false,
+        "path": "content/arc.knl",
+        "packed": 8755
       },
       {
         "name": "bloodmoon",
@@ -2165,7 +3171,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/bloodmoon.knl"
+        "arena": 4710,
+        "artCache": false,
+        "path": "content/bloodmoon.knl",
+        "packed": 4514
       },
       {
         "name": "blot",
@@ -2175,7 +3184,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/blot.knl"
+        "arena": 10138,
+        "artCache": false,
+        "path": "content/blot.knl",
+        "packed": 6794
       },
       {
         "name": "brassophone",
@@ -2185,7 +3197,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/brassophone.knl"
+        "arena": 36054,
+        "artCache": false,
+        "path": "content/brassophone.knl",
+        "packed": 21227
       },
       {
         "name": "c64arp",
@@ -2195,7 +3210,23 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/c64arp.knl"
+        "arena": 9742,
+        "artCache": true,
+        "path": "content/c64arp.knl",
+        "packed": 10123
+      },
+      {
+        "name": "chimera",
+        "savedName": "chimera",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 55902,
+        "artCache": false,
+        "path": "content/chimera.knl",
+        "packed": 35374
       },
       {
         "name": "chord",
@@ -2207,7 +3238,10 @@
         "claimsKnown": true,
         "priority": 200,
         "source": "knl",
-        "path": "content/chord.knl"
+        "arena": 50574,
+        "artCache": false,
+        "path": "content/chord.knl",
+        "packed": 20762
       },
       {
         "name": "clouds",
@@ -2217,7 +3251,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/clouds.knl"
+        "arena": 49446,
+        "artCache": false,
+        "path": "content/clouds.knl",
+        "packed": 23642
       },
       {
         "name": "composer",
@@ -2227,7 +3264,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/composer.knl"
+        "arena": 95838,
+        "artCache": true,
+        "path": "content/composer.knl",
+        "packed": 47233
       },
       {
         "name": "countin",
@@ -2239,7 +3279,10 @@
         "claimsKnown": true,
         "priority": 420,
         "source": "knl",
-        "path": "content/countin.knl"
+        "arena": 9370,
+        "artCache": false,
+        "path": "content/countin.knl",
+        "packed": 7919
       },
       {
         "name": "crush",
@@ -2249,7 +3292,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/crush.knl"
+        "arena": 5578,
+        "artCache": false,
+        "path": "content/crush.knl",
+        "packed": 4555
       },
       {
         "name": "dddd",
@@ -2259,7 +3305,23 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/dddd.knl"
+        "arena": 25746,
+        "artCache": false,
+        "path": "content/dddd.knl",
+        "packed": 6495
+      },
+      {
+        "name": "dimension",
+        "savedName": "dimension",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 117610,
+        "artCache": false,
+        "path": "content/dimension.knl",
+        "packed": 21615
       },
       {
         "name": "dots",
@@ -2269,7 +3331,23 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/dots.knl"
+        "arena": 101678,
+        "artCache": false,
+        "path": "content/dots.knl",
+        "packed": 15232
+      },
+      {
+        "name": "drift",
+        "savedName": "drift",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 108242,
+        "artCache": false,
+        "path": "content/drift.knl",
+        "packed": 41879
       },
       {
         "name": "drumplus",
@@ -2279,7 +3357,23 @@
         "claimsKnown": true,
         "priority": 500,
         "source": "knl",
-        "path": "content/drumplus.knl"
+        "arena": 39722,
+        "artCache": false,
+        "path": "content/drumplus.knl",
+        "packed": 12940
+      },
+      {
+        "name": "dx",
+        "savedName": "dx",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 121266,
+        "artCache": false,
+        "path": "content/dx.knl",
+        "packed": 30294
       },
       {
         "name": "elg",
@@ -2289,7 +3383,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/elg.knl"
+        "arena": 29874,
+        "artCache": false,
+        "path": "content/elg.knl",
+        "packed": 21656
       },
       {
         "name": "ente",
@@ -2299,7 +3396,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/ente.knl"
+        "arena": 12606,
+        "artCache": false,
+        "path": "content/ente.knl",
+        "packed": 7703
       },
       {
         "name": "euclid",
@@ -2309,7 +3409,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/euclid.knl"
+        "arena": 22286,
+        "artCache": false,
+        "path": "content/euclid.knl",
+        "packed": 12299
       },
       {
         "name": "eva",
@@ -2319,7 +3422,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/eva.knl"
+        "arena": 21742,
+        "artCache": false,
+        "path": "content/eva.knl",
+        "packed": 23628
       },
       {
         "name": "fasterase",
@@ -2331,7 +3437,10 @@
         "claimsKnown": true,
         "priority": 430,
         "source": "knl",
-        "path": "content/fasterase.knl"
+        "arena": 838,
+        "artCache": false,
+        "path": "content/fasterase.knl",
+        "packed": 567
       },
       {
         "name": "father",
@@ -2341,7 +3450,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/father.knl"
+        "arena": 16210,
+        "artCache": false,
+        "path": "content/father.knl",
+        "packed": 13410
       },
       {
         "name": "file",
@@ -2353,7 +3465,10 @@
         "claimsKnown": true,
         "priority": 500,
         "source": "knl",
-        "path": "content/file.knl"
+        "arena": 5610,
+        "artCache": false,
+        "path": "content/file.knl",
+        "packed": 3729
       },
       {
         "name": "fmbell",
@@ -2363,7 +3478,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/fmbell.knl"
+        "arena": 1842,
+        "artCache": false,
+        "path": "content/fmbell.knl",
+        "packed": 2691
       },
       {
         "name": "gin",
@@ -2375,7 +3493,10 @@
         "claimsKnown": true,
         "priority": 50,
         "source": "knl",
-        "path": "content/gin.knl"
+        "arena": 417538,
+        "artCache": false,
+        "path": "content/gin.knl",
+        "packed": 119228
       },
       {
         "name": "granular",
@@ -2385,7 +3506,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/granular.knl"
+        "arena": 37050,
+        "artCache": false,
+        "path": "content/granular.knl",
+        "packed": 20921
       },
       {
         "name": "grids",
@@ -2395,7 +3519,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/grids.knl"
+        "arena": 13014,
+        "artCache": false,
+        "path": "content/grids.knl",
+        "packed": 7045
       },
       {
         "name": "hail",
@@ -2405,7 +3532,25 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/hail.knl"
+        "arena": 25966,
+        "artCache": true,
+        "path": "content/hail.knl",
+        "packed": 20759
+      },
+      {
+        "name": "him",
+        "savedName": "him",
+        "kind": "feature",
+        "claims": [
+          "drum:him"
+        ],
+        "claimsKnown": true,
+        "priority": 50,
+        "source": "knl",
+        "arena": 144854,
+        "artCache": false,
+        "path": "content/him.knl",
+        "packed": 33194
       },
       {
         "name": "hold",
@@ -2415,7 +3560,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/hold.knl"
+        "arena": 12114,
+        "artCache": true,
+        "path": "content/hold.knl",
+        "packed": 7790
       },
       {
         "name": "hollowsaint",
@@ -2425,7 +3573,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/hollowsaint.knl"
+        "arena": 36494,
+        "artCache": false,
+        "path": "content/hollowsaint.knl",
+        "packed": 17682
       },
       {
         "name": "in_a_room",
@@ -2435,7 +3586,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/in_a_room.knl"
+        "arena": 19510,
+        "artCache": false,
+        "path": "content/in_a_room.knl",
+        "packed": 12589
       },
       {
         "name": "juni",
@@ -2445,7 +3599,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/juni.knl"
+        "arena": 21322,
+        "artCache": true,
+        "path": "content/juni.knl",
+        "packed": 17171
       },
       {
         "name": "juni_chorus",
@@ -2455,7 +3612,96 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/juni_chorus.knl"
+        "arena": 21078,
+        "artCache": true,
+        "path": "content/juni_chorus.knl",
+        "packed": 12279
+      },
+      {
+        "name": "kastle",
+        "savedName": "kastle",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 169982,
+        "artCache": true,
+        "path": "content/kastle.knl",
+        "packed": 88248
+      },
+      {
+        "name": "keyvel",
+        "savedName": "keyvel",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "arena": 4610,
+        "artCache": false,
+        "settings": [
+          {
+            "label": "VELOCITY",
+            "type": "onoff",
+            "choices": [
+              "OFF",
+              "ON"
+            ],
+            "default": "OFF",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "SENSITIVITY",
+            "type": "number",
+            "choices": [
+              "1",
+              "16"
+            ],
+            "default": "8",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "CURVE",
+            "type": "choice",
+            "choices": [
+              "SOFT",
+              "LINEAR",
+              "HARD"
+            ],
+            "default": "LINEAR",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "MIN VELOCITY",
+            "type": "number",
+            "choices": [
+              "0",
+              "120"
+            ],
+            "default": "16",
+            "restart": false,
+            "push": null
+          }
+        ],
+        "path": "content/keyvel.knl",
+        "packed": 3861
+      },
+      {
+        "name": "khorus",
+        "savedName": "khorus",
+        "kind": "fx",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 60226,
+        "artCache": true,
+        "path": "content/khorus.knl",
+        "packed": 19480
       },
       {
         "name": "latch",
@@ -2468,7 +3714,10 @@
         "claimsKnown": true,
         "priority": 950,
         "source": "knl",
-        "path": "content/latch.knl"
+        "arena": 4894,
+        "artCache": false,
+        "path": "content/latch.knl",
+        "packed": 2871
       },
       {
         "name": "lineclock",
@@ -2484,7 +3733,23 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/lineclock.knl"
+        "arena": 8938,
+        "artCache": false,
+        "path": "content/lineclock.knl",
+        "packed": 6116
+      },
+      {
+        "name": "ludwig",
+        "savedName": "ludwig",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 806370,
+        "artCache": true,
+        "path": "content/ludwig.knl",
+        "packed": 485575
       },
       {
         "name": "markers",
@@ -2494,7 +3759,25 @@
         "claimsKnown": true,
         "priority": 400,
         "source": "knl",
-        "path": "content/markers.knl"
+        "arena": 5570,
+        "artCache": false,
+        "path": "content/markers.knl",
+        "packed": 3850
+      },
+      {
+        "name": "matrix",
+        "savedName": "matrix",
+        "kind": "feature",
+        "claims": [
+          "lfo:matrix"
+        ],
+        "claimsKnown": true,
+        "priority": 510,
+        "source": "knl",
+        "arena": 59418,
+        "artCache": false,
+        "path": "content/matrix.knl",
+        "packed": 21644
       },
       {
         "name": "mbira",
@@ -2504,7 +3787,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/mbira.knl"
+        "arena": 23730,
+        "artCache": true,
+        "path": "content/mbira.knl",
+        "packed": 15087
       },
       {
         "name": "midicc",
@@ -2517,7 +3803,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/midicc.knl"
+        "arena": 294,
+        "artCache": false,
+        "path": "content/midicc.knl",
+        "packed": 330
       },
       {
         "name": "midiseq",
@@ -2529,7 +3818,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/midiseq.knl"
+        "arena": 32026,
+        "artCache": false,
+        "path": "content/midiseq.knl",
+        "packed": 14244
       },
       {
         "name": "mixtur",
@@ -2539,7 +3831,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/mixtur.knl"
+        "arena": 6418,
+        "artCache": false,
+        "path": "content/mixtur.knl",
+        "packed": 5602
       },
       {
         "name": "moai",
@@ -2549,7 +3844,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/moai.knl"
+        "arena": 54738,
+        "artCache": false,
+        "path": "content/moai.knl",
+        "packed": 29434
       },
       {
         "name": "monolit",
@@ -2559,19 +3857,27 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/monolit.knl"
+        "arena": 11578,
+        "artCache": false,
+        "path": "content/monolit.knl",
+        "packed": 6547
       },
       {
         "name": "naming",
         "savedName": "naming",
         "kind": "feature",
         "claims": [
-          "snapshot.save"
+          "snapshot.save",
+          "key:browser:white",
+          "key:browser:shift+white"
         ],
         "claimsKnown": true,
         "priority": 600,
         "source": "knl",
-        "path": "content/naming.knl"
+        "arena": 3722,
+        "artCache": false,
+        "path": "content/naming.knl",
+        "packed": 2330
       },
       {
         "name": "nostromo",
@@ -2581,7 +3887,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/nostromo.knl"
+        "arena": 52206,
+        "artCache": false,
+        "path": "content/nostromo.knl",
+        "packed": 23634
       },
       {
         "name": "oblique",
@@ -2593,7 +3902,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/oblique.knl"
+        "arena": 10662,
+        "artCache": false,
+        "path": "content/oblique.knl",
+        "packed": 4335
       },
       {
         "name": "oracle",
@@ -2603,7 +3915,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/oracle.knl"
+        "arena": 12826,
+        "artCache": false,
+        "path": "content/oracle.knl",
+        "packed": 8667
       },
       {
         "name": "outatime",
@@ -2613,7 +3928,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/outatime.knl"
+        "arena": 36214,
+        "artCache": true,
+        "path": "content/outatime.knl",
+        "packed": 29295
       },
       {
         "name": "oxbow",
@@ -2623,7 +3941,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/oxbow.knl"
+        "arena": 24674,
+        "artCache": false,
+        "path": "content/oxbow.knl",
+        "packed": 18046
       },
       {
         "name": "palme",
@@ -2633,7 +3954,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/palme.knl"
+        "arena": 12810,
+        "artCache": false,
+        "path": "content/palme.knl",
+        "packed": 8313
       },
       {
         "name": "peal",
@@ -2643,7 +3967,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/peal.knl"
+        "arena": 12066,
+        "artCache": false,
+        "path": "content/peal.knl",
+        "packed": 8162
       },
       {
         "name": "pew",
@@ -2653,7 +3980,23 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/pew.knl"
+        "arena": 18850,
+        "artCache": true,
+        "path": "content/pew.knl",
+        "packed": 17899
+      },
+      {
+        "name": "pinboard",
+        "savedName": "pinboard",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 35358,
+        "artCache": true,
+        "path": "content/pinboard.knl",
+        "packed": 20018
       },
       {
         "name": "plate",
@@ -2663,7 +4006,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/plate.knl"
+        "arena": 28414,
+        "artCache": false,
+        "path": "content/plate.knl",
+        "packed": 13713
       },
       {
         "name": "punch",
@@ -2673,7 +4019,10 @@
         "claimsKnown": true,
         "priority": 410,
         "source": "knl",
-        "path": "content/punch.knl"
+        "arena": 1306,
+        "artCache": false,
+        "path": "content/punch.knl",
+        "packed": 1021
       },
       {
         "name": "quad",
@@ -2686,7 +4035,10 @@
         "claimsKnown": true,
         "priority": 500,
         "source": "knl",
-        "path": "content/quad.knl"
+        "arena": 24406,
+        "artCache": false,
+        "path": "content/quad.knl",
+        "packed": 15023
       },
       {
         "name": "rackverb",
@@ -2696,7 +4048,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/rackverb.knl"
+        "arena": 58102,
+        "artCache": false,
+        "path": "content/rackverb.knl",
+        "packed": 30787
       },
       {
         "name": "randomiser",
@@ -2709,7 +4064,58 @@
         "claimsKnown": true,
         "priority": 600,
         "source": "knl",
-        "path": "content/randomiser.knl"
+        "arena": 17498,
+        "artCache": false,
+        "settings": [
+          {
+            "label": "SYNTH",
+            "type": "onoff",
+            "choices": [
+              "OFF",
+              "ON"
+            ],
+            "default": "ON",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "ENV",
+            "type": "onoff",
+            "choices": [
+              "OFF",
+              "ON"
+            ],
+            "default": "ON",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "LFO",
+            "type": "choice",
+            "choices": [
+              "OFF",
+              "KEEP TYPE",
+              "NEW TYPE"
+            ],
+            "default": "NEW TYPE",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "FX",
+            "type": "choice",
+            "choices": [
+              "OFF",
+              "KEEP TYPE",
+              "NEW TYPE"
+            ],
+            "default": "NEW TYPE",
+            "restart": false,
+            "push": null
+          }
+        ],
+        "path": "content/randomiser.knl",
+        "packed": 5868
       },
       {
         "name": "reactor",
@@ -2719,7 +4125,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/reactor.knl"
+        "arena": 17158,
+        "artCache": false,
+        "path": "content/reactor.knl",
+        "packed": 14817
       },
       {
         "name": "reverb",
@@ -2729,7 +4138,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/reverb.knl"
+        "arena": 4414,
+        "artCache": false,
+        "path": "content/reverb.knl",
+        "packed": 11189
       },
       {
         "name": "samplerplus",
@@ -2741,7 +4153,10 @@
         "claimsKnown": true,
         "priority": 550,
         "source": "knl",
-        "path": "content/samplerplus.knl"
+        "arena": 41126,
+        "artCache": false,
+        "path": "content/samplerplus.knl",
+        "packed": 16364
       },
       {
         "name": "sampletools",
@@ -2760,7 +4175,10 @@
         "claimsKnown": true,
         "priority": 600,
         "source": "knl",
-        "path": "content/sampletools.knl"
+        "arena": 20442,
+        "artCache": false,
+        "path": "content/sampletools.knl",
+        "packed": 12349
       },
       {
         "name": "scale",
@@ -2772,7 +4190,10 @@
         "claimsKnown": true,
         "priority": 100,
         "source": "knl",
-        "path": "content/scale.knl"
+        "arena": 8758,
+        "artCache": false,
+        "path": "content/scale.knl",
+        "packed": 5345
       },
       {
         "name": "sid",
@@ -2782,7 +4203,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/sid.knl"
+        "arena": 23978,
+        "artCache": false,
+        "path": "content/sid.knl",
+        "packed": 16504
       },
       {
         "name": "sister",
@@ -2792,7 +4216,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/sister.knl"
+        "arena": 38866,
+        "artCache": true,
+        "path": "content/sister.knl",
+        "packed": 23782
       },
       {
         "name": "snap",
@@ -2802,7 +4229,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/snap.knl"
+        "arena": 64310,
+        "artCache": false,
+        "path": "content/snap.knl",
+        "packed": 20433
       },
       {
         "name": "snowglobe",
@@ -2812,7 +4242,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/snowglobe.knl"
+        "arena": 152802,
+        "artCache": false,
+        "path": "content/snowglobe.knl",
+        "packed": 5731
       },
       {
         "name": "steve",
@@ -2822,7 +4255,27 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/steve.knl"
+        "arena": 11938,
+        "artCache": false,
+        "path": "content/steve.knl",
+        "packed": 7245
+      },
+      {
+        "name": "strip",
+        "savedName": "strip",
+        "kind": "feature",
+        "claims": [
+          "key:mixer:shift+t2",
+          "bus:insert",
+          "tape:insert"
+        ],
+        "claimsKnown": true,
+        "priority": 1100,
+        "source": "knl",
+        "arena": 51954,
+        "artCache": false,
+        "path": "content/strip.knl",
+        "packed": 31136
       },
       {
         "name": "strum",
@@ -2832,7 +4285,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/strum.knl"
+        "arena": 265738,
+        "artCache": false,
+        "path": "content/strum.knl",
+        "packed": 176854
       },
       {
         "name": "stutter",
@@ -2842,7 +4298,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/stutter.knl"
+        "arena": 5034,
+        "artCache": true,
+        "path": "content/stutter.knl",
+        "packed": 14264
       },
       {
         "name": "supersaw",
@@ -2852,7 +4311,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/supersaw.knl"
+        "arena": 5450,
+        "artCache": false,
+        "path": "content/supersaw.knl",
+        "packed": 4994
       },
       {
         "name": "sysmon",
@@ -2864,7 +4326,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/sysmon.knl"
+        "arena": 20110,
+        "artCache": false,
+        "path": "content/sysmon.knl",
+        "packed": 9796
       },
       {
         "name": "taffy",
@@ -2874,7 +4339,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/taffy.knl"
+        "arena": 21726,
+        "artCache": true,
+        "path": "content/taffy.knl",
+        "packed": 15494
       },
       {
         "name": "tape",
@@ -2884,7 +4352,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/tape.knl"
+        "arena": 8022,
+        "artCache": false,
+        "path": "content/tape.knl",
+        "packed": 6771
       },
       {
         "name": "tapes",
@@ -2899,7 +4370,10 @@
         "claimsKnown": true,
         "priority": 440,
         "source": "knl",
-        "path": "content/tapes.knl"
+        "arena": 4386,
+        "artCache": false,
+        "path": "content/tapes.knl",
+        "packed": 2701
       },
       {
         "name": "trail",
@@ -2909,7 +4383,69 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "path": "content/trail.knl"
+        "arena": 16358,
+        "artCache": true,
+        "path": "content/trail.knl",
+        "packed": 10441
+      },
+      {
+        "name": "trigguard",
+        "savedName": "trigguard",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 1000,
+        "source": "knl",
+        "arena": 2434,
+        "artCache": false,
+        "settings": [
+          {
+            "label": "TRIG. GUARD",
+            "type": "onoff",
+            "choices": [
+              "OFF",
+              "ON"
+            ],
+            "default": "ON",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "WINDOW MS",
+            "type": "number",
+            "choices": [
+              "10",
+              "300"
+            ],
+            "default": "50",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "WINDOWS",
+            "type": "choice",
+            "choices": [
+              "PER NOTE",
+              "ALL"
+            ],
+            "default": "PER NOTE",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "HOLD RELEASE",
+            "type": "onoff",
+            "choices": [
+              "OFF",
+              "ON"
+            ],
+            "default": "ON",
+            "restart": false,
+            "push": null
+          }
+        ],
+        "path": "content/trigguard.knl",
+        "packed": 1939
       },
       {
         "name": "undo",
@@ -2926,19 +4462,10 @@
         "claimsKnown": true,
         "priority": 450,
         "source": "knl",
-        "path": "content/undo.knl"
-      },
-      {
-        "name": "usbout",
-        "savedName": "usbout",
-        "kind": "feature",
-        "claims": [
-          "page:t2"
-        ],
-        "claimsKnown": true,
-        "priority": 1000,
-        "source": "knl",
-        "path": "content/usbout.knl"
+        "arena": 15706,
+        "artCache": false,
+        "path": "content/undo.knl",
+        "packed": 10484
       },
       {
         "name": "vapora",
@@ -2948,7 +4475,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/vapora.knl"
+        "arena": 477306,
+        "artCache": false,
+        "path": "content/vapora.knl",
+        "packed": 391689
       },
       {
         "name": "vox",
@@ -2958,7 +4488,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/vox.knl"
+        "arena": 44210,
+        "artCache": false,
+        "path": "content/vox.knl",
+        "packed": 18150
       },
       {
         "name": "warble",
@@ -2968,7 +4501,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/warble.knl"
+        "arena": 6310,
+        "artCache": true,
+        "path": "content/warble.knl",
+        "packed": 8393
       },
       {
         "name": "washer",
@@ -2978,7 +4514,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/washer.knl"
+        "arena": 15874,
+        "artCache": false,
+        "path": "content/washer.knl",
+        "packed": 4531
       },
       {
         "name": "wavetable",
@@ -2988,7 +4527,23 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "path": "content/wavetable.knl"
+        "arena": 28718,
+        "artCache": true,
+        "path": "content/wavetable.knl",
+        "packed": 23826
+      },
+      {
+        "name": "windwood",
+        "savedName": "windwood",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 49274,
+        "artCache": false,
+        "path": "content/windwood.knl",
+        "packed": 20749
       }
     ],
     "builtins": [
@@ -3004,11 +4559,24 @@
       }
     ]
   },
+  "plugin_arena": {
+    "fixed": 200704,
+    "per_file": 1024,
+    "align": 16384,
+    "art_cache": 196608,
+    "max": 5242880,
+    "budget_pct": 100
+  },
+  "package": {
+    "limit": 15000000,
+    "base": 10997956,
+    "ratio": 0.8666
+  },
   "core": {
     "start": 31457280,
-    "len": 242356,
-    "crc": 2152391903
+    "len": 354496,
+    "crc": 3923301885
   },
   "plugin_max": 1048576,
-  "cores_sha256": "4eaaf3aa0bd20b74a547ce2c692d3aff8b66ffbecb3e7c985cbf0a401a0d1ef0"
+  "cores_sha256": "550cf09e512c52ef5d86451a452fdae0e0f0add4bb218446510ca80c1cca3dc8"
 }

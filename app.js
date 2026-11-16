@@ -1,13 +1,15 @@
 import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
-import {saveSelection, loadSelection, loadPlugins, savePlugins, reviewSignature, newPluginState} from './plugin-state.js?v=3.0-hostile-ui-20261018';
-import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK, leftovers} from './op1push.js?v=3.2-leftovers-20261104';
+import {saveSelection, loadSelection, loadPlugins, savePlugins, reviewSignature, newPluginState} from './plugin-state.js?v=3.3-rc12-20261115';
+import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK, leftovers} from './op1push.js?v=3.3-presets-20261113';
 import {connectionProblem, connectedText, newCoreText, recentlySent, MIDI_ASK, START_CLEAN, leftoverText} from './connect-result.js?v=3.2-leftovers-20261104';   // one message per connection result
 import {coreRoute, runningRelease} from './core-route.js?v=3.1-core-patch-20261102';      // which release the OP-1 runs; core patches
 import {initStartClean} from './backup.js?v=3.2-clean-20261104';                         // Start clean: steps and the disk-mode backup
 import {showPlan, claimText} from './plugin-plan.js?v=3.1-two-paths-20261027';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
-import {showInventory} from './inventory-debug.js?v=3.0-hostile-ui-20261018';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=3.2.2-cards-20261108';                  // the front page: what's in a build, by category
+import {showInventory} from './inventory-debug.js?v=3.3-rc12-20261115';           // ?push only: what a kennel OP-1 has installed
+import {CATEGORIES} from './categories.js?v=3.3-rc15-20261115';                  // the front page: what's in a build, by category
+import {initPresets} from './presets.js?v=3.3-rc15-20261115';                 // presets on the OP-1 (list, add, replace, delete; no restart)
+import {initDxBanks} from './dx-banks.js?v=3.3-rc15-20261115';               // DX voice banks (.syx) to user/dx/ (applied at the restart)
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
@@ -117,21 +119,21 @@ const targetMetadata = () => Object.fromEntries((release?.plugin_metadata?.plugi
 const targetBuiltins = () => release?.plugin_metadata?.builtins || [];
 const targetCore = () => {
   const core = release?.variants[configId(variantChoices(choices()), false)]?.core;
-  if (release?.catalog.core_options?.length && !core) throw Error('Core option information is missing. Reload the workshop before sending.');
   return core || release?.core;
 };
 const kennel = () => release.catalog.base.startsWith('kennel');
 // Maiko's tools: single plugin files on kennel bases; on 2.x bases one #249 image, so all or none
 const utilities = () => kennel() ? selected('utilities') : selected('utilities').length ? release.catalog.utilities.map(f => f.id) : [];
-const choices = () => ({ schema: 1, base: release.catalog.base, synths: selected('synths'), effects: selected('effects'), utilities: utilities(), preset_cap: $('expanded').checked ? 300 : 100, ...(hiddenPlugins().length ? {hidden: hiddenPlugins()} : {}), ...(document.querySelector('input[data-core=lander]')?.checked ? {lander: true} : {}) });
+const choices = () => ({ schema: 1, base: release.catalog.base, synths: selected('synths'), effects: selected('effects'), utilities: utilities(), preset_cap: Math.max(...release.catalog.preset_caps), ...(hiddenPlugins().length ? {hidden: hiddenPlugins()} : {}) });
 const selected = group => [...document.querySelectorAll(`#catalog input[type=checkbox][data-group="${group}"]:checked`)].map(input => input.value);
 const baseLabel = () => release.catalog.base.replace(/^op1r(\d+).*$/, 'op1r $1');
 // Same bits as runtime.config_id; op1r plugins hidden from the lists sit at a fixed position (op1r_plugins_bit).
 function configId(c, withHidden = true) {
-  const flags = [...release.catalog.synths.map(f => c.synths.includes(f.id)), ...release.catalog.effects.map(f => c.effects.includes(f.id)), c.preset_cap === 300, ...release.catalog.utilities.map(f => c.utilities.includes(f.id))];
+  const flags = [...release.catalog.synths.map(f => c.synths.includes(f.id)), ...release.catalog.effects.map(f => c.effects.includes(f.id)), c.preset_cap === 300 || c.preset_cap === 1024, ...release.catalog.utilities.map(f => c.utilities.includes(f.id))];
   let id = flags.reduce((sum, flag, i) => sum + (flag ? 1n << BigInt(i) : 0n), 0n);
   if (withHidden) (release.catalog.op1r_plugins || []).forEach((f, i) => { if (c.hidden?.includes(f.id)) id += 1n << BigInt(release.catalog.op1r_plugins_bit + i); });
-  if (c.lander) id |= 1n << 64n;
+  // bit 64 is reserved (was the Lander core option, removed 2026-11-15)
+  if (c.preset_cap === 1024) id |= 1n << 65n;   // 1,024 presets (3.3): its own bit; bit 6 alone keeps meaning 300
   return id.toString(16).padStart(2, '0');
 }
 // Match runtime.variant_config: only file-backed choices are forced into the source variant.
@@ -146,12 +148,13 @@ function variantChoices(c) {
 // unticked, and without a card (no box) they stay out; other entries without a box stay in.
 function pluginLeftOut(f, input) { return input ? !input.checked : f.default === false; }
 function validateChoices(c) {
+  // No preset-limit choice on kennel bases: saved choices from before (100 or 300) load as the one limit.
+  if (c && typeof c === 'object' && !Array.isArray(c) && kennel() && [100, 300].includes(c.preset_cap) && release.catalog.preset_caps.includes(1024)) c = {...c, preset_cap: 1024};
   const keys = ['base', 'effects', 'preset_cap', 'schema', 'synths'];
   if (!c || typeof c !== 'object' || Array.isArray(c) || Object.keys(c).filter(k => !['utilities', 'hidden', 'lander'].includes(k)).sort().join() !== keys.join() ||
       c.schema !== 1 || c.base !== release.catalog.base || !release.catalog.preset_caps.includes(c.preset_cap)) throw Error('These choices do not match this firmware base or preset capacity.');
-  if (Object.hasOwn(c, 'lander') && typeof c.lander !== 'boolean') throw Error('Unsupported Lander option.');
-  // A base without the Lander option (3.1) builds saved Lander choices without it; bit 64 stays reserved.
-  if (c.lander && !release.catalog.core_options?.some(f => f.id === 'lander')) { c = {...c}; delete c.lander; }
+  // Saved choices from before 2026-11-15 may carry `lander`: the option is gone, so it is dropped and bit 64 stays reserved.
+  if (Object.hasOwn(c, 'lander')) { if (typeof c.lander !== 'boolean') throw Error('Unsupported choices.'); c = {...c}; delete c.lander; }
   const out = {...c, utilities: Object.hasOwn(c, 'utilities') ? c.utilities : [], hidden: Object.hasOwn(c, 'hidden') ? c.hidden : []};
   for (const group of ['synths', 'effects', 'utilities', 'hidden']) {
     const entries = group === 'hidden' ? release.catalog.op1r_plugins || [] : release.catalog[group];
@@ -171,7 +174,7 @@ function clearDownloads() { urls.forEach(URL.revokeObjectURL); urls = []; $('dow
 function shareWithManual() {
   if (!release || !selectionsReady || storageBlocked) return;
   const c = choices();
-  const without = [...new Set([...(release.catalog.core_options || []).filter(f => !c[f.id]).map(f => f.id),...['synths', 'effects', 'utilities'].flatMap(group => release.catalog[group].filter(f => !c[group].includes(f.id)).map(f => f.id)), ...(c.hidden || [])])].sort();
+  const without = [...new Set([...['synths', 'effects', 'utilities'].flatMap(group => release.catalog[group].filter(f => !c[group].includes(f.id)).map(f => f.id)), ...(c.hidden || [])])].sort();
   const snapshot = {base: c.base, version: '3.0', without, plugins: (release.catalog.op1r_plugins || []).filter(f => !c.hidden?.includes(f.id) && !f.reserved).map(f => f.id), synths: c.synths, effects: c.effects, utilities: c.utilities, hidden: c.hidden || []};
   try { if (selectionStorageReady) localStorage.setItem('hundekraft-build', JSON.stringify(snapshot)); } catch (e) { /* private mode: the link below still carries it */ }
   const query = kennel() ? '?version=3.0' + (without.length ? '&without=' + without.map(encodeURIComponent).join(',') : '') : '';
@@ -203,9 +206,13 @@ function selectionReview() {
     + (own.length ? `<p>Your own files are added when you send; they are not part of the firmware download.${sending.conflicts.length ? ` Before sending, choose which whole plugin stays on: ${sending.conflicts.map(x => `${x.names.join(' / ')} (${claimText(x.claim)})`).map(escapeText).join('; ')}.` : ''}${sending.unknown.length ? ` Compatibility could not be checked for ${sending.unknown.map(escapeText).join(', ')}.` : ''} The OP–1’s installed plugins are checked again before sending.</p>` : '');
   // R246's drawing heap (runtime.screen_memory): the chosen files' screens, the preset cap and the user's own files
   const screens = screenMemory(c, ownScreens());
-  const overText = screens.over ? 'That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit.' : '';
-  if (overText) box.insertAdjacentHTML('beforeend', `<p class="screen-over" role="alert">${escapeText(overText)}</p>`);
-  if ($('screen-note')) { $('screen-note').textContent = overText; $('screen-note').hidden = !overText; }   // also next to Build and Review changes
+  const screenText = screens.over ? 'That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit.' : '';
+  // the updater takes 15,000,000 bytes at most (runtime.MAX_PACKAGE): estimated here, before the build refuses it
+  const pkg = packageEstimate(c);
+  // the package limit belongs to the firmware file only (te-boot's upload disk): it never blocks or shows under the USB update
+  if (screenText) box.insertAdjacentHTML('beforeend', `<p class="screen-over" role="alert">${escapeText(screenText)}</p>`);
+  if ($('screen-note')) { $('screen-note').textContent = screenText; $('screen-note').hidden = !screenText; }
+  showPackage(pkg);
   const apply = box.querySelector('[data-apply]');
   if (apply) {
     const chosen = () => Object.fromEntries(plan.conflicts.flatMap((x, i) => { const input = box.querySelector(`input[name=selection-claim${i}]:checked`); return input ? [[x.claim, input.value]] : []; }));
@@ -219,7 +226,99 @@ function selectionReview() {
       clearDownloads(); update(); status('Choices applied to your firmware, manual and preset pack.');
     };
   }
-  return screens.over ? {...plan, blocked: true} : plan;
+  const arena = pluginArena(c, ownArena());
+  showArena(arena);
+  return {...plan, ...(screens.over || arena?.over ? {blocked: true} : {}), ...(pkg?.over ? {packageOver: true} : {})};
+}
+// The updater package for this selection (runtime.package_estimate; release.json 'package' and each file's plugin_metadata
+// 'packed'): base + ratio x the chosen files' packed sizes. over: bytes past the 15,000,000-byte limit; biggest: the
+// chosen files by packed size, [name, bytes]. Files as runtime.files ships them; your own files are sent separately.
+function packageEstimate(c) {
+  const t = release?.package;
+  if (!t) return null;
+  const meta = new Map((release.plugin_metadata?.plugins || []).map(p => [p.path, p]));
+  const chosen = new Map();
+  for (const g of ['synths', 'effects', 'utilities', 'op1r_plugins']) for (const f of release.catalog[g] || []) {
+    if (!(f.always || (g === 'op1r_plugins' ? !c.hidden?.includes(f.id) : c[g].includes(f.id)))) continue;
+    for (const n of [f.file, ...(f.files || [])]) if (n && !chosen.has(n)) chosen.set(n, [f.name || f.id, meta.get('content/' + n)?.packed || 0]);
+  }
+  const need = t.base + Math.round(t.ratio * [...chosen.values()].reduce((n, [, b]) => n + b, 0));
+  const byName = new Map();
+  for (const [name, bytes] of chosen.values()) byName.set(name, (byName.get(name) || 0) + bytes);
+  return {need, limit: t.limit, percent: Math.round(1000 * need / t.limit) / 10, over: Math.max(0, need - t.limit + 1), biggest: [...byName].sort((x, y) => y[1] - x[1]).slice(0, 3)};
+}
+function packageText(p) {
+  const kb = b => b >= 1e6 ? `${(b / 1e6).toFixed(1)} MB` : `${Math.round(b / 1000)} KB`;
+  return `Too big for the firmware file. Untick something big to build the file: ${p.biggest.map(([n, b]) => `${n} ${kb(b)}`).join(', ')}. The USB update isn’t affected.`;
+}
+const PACKAGE_NEAR = 300000;                                    // orange within this many bytes of the limit, red over it
+let lastPackage = null;
+// shown only while the file path ("Use a firmware file instead") is open: the limit means nothing to a USB update
+function showPackage(p) {
+  const box = $('pkg');
+  if (!box) return;
+  lastPackage = p;
+  box.hidden = !p || !$('download-option')?.open;
+  if (box.hidden) return;
+  const mb = b => (b / 1e6).toFixed(1);
+  const level = p.over ? 'red' : p.need > p.limit - PACKAGE_NEAR ? 'orange' : 'green';
+  box.dataset.level = level;
+  $('pkg-pct').textContent = `${mb(p.need)} / ${mb(p.limit)} MB`;
+  $('pkg-fill').style.width = `${Math.min(100, p.need * 100 / p.limit)}%`;
+  $('pkg-note').textContent = level === 'red' ? packageText(p) : level === 'orange' ? 'Close to the limit, but the file still fits.' : '';
+  $('pkg-note').hidden = level === 'green';
+}
+// kennel's plugin arena for this selection (runtime.arena_need; release.json plugin_arena and each file's
+// plugin_metadata 'arena'): the core's terms, per_file for each file, each file's need, the static-art cache when a
+// file uses it, rounded up to the arena's step. Files as runtime.files ships them, plus own = [[need, artCache]]
+function pluginArena(c, own = []) {
+  const t = release?.plugin_arena;
+  if (!t) return null;
+  const meta = new Map((release.plugin_metadata?.plugins || []).map(p => [p.path, p]));
+  const names = new Set();
+  for (const g of ['synths', 'effects', 'utilities', 'op1r_plugins']) for (const f of release.catalog[g] || []) {
+    if (!(f.always || (g === 'op1r_plugins' ? !c.hidden?.includes(f.id) : c[g].includes(f.id)))) continue;
+    for (const n of [f.file, ...(f.files || [])]) if (n) names.add(n);
+  }
+  const files = [...names].map(n => [meta.get('content/' + n)?.arena || 0, !!meta.get('content/' + n)?.artCache]).concat(own);
+  const total = t.fixed + t.per_file * files.length + files.reduce((n, [a]) => n + a, 0) + (files.some(([, cache]) => cache) ? t.art_cache : 0);
+  const need = Math.ceil(total / t.align) * t.align;
+  return {need, percent: Math.round(1000 * need / t.max) / 10, over: Math.max(0, need - t.max)};
+}
+// your own files' arena needs (kn_load.c kn_peek: load size + call stubs + alignment pad; an .op1p's image + bss + 3),
+// and the ones the connected OP-1 reports that aren't listed here (only their size is known)
+function ownArena() {
+  const listed = new Map(ownFiles.map(([p, d]) => [pluginInfo(p, d).name, [p, d]]));
+  const out = [];
+  for (const [p, d] of listed.values()) {
+    try {
+      const dv = new DataView(d.buffer, d.byteOffset, d.byteLength);
+      if (p.endsWith('.op1p')) { const bin = dv.getUint32(d.length - 12, true); out.push([dv.getUint32(bin + 32, true) + dv.getUint32(bin + 36, true) + 3, false]); continue; }
+      let h = 0;
+      if (d[0] === 0x3C) { while (h < d.length && d[h]) h++; h = (h + 4) & ~3; }
+      const load = dv.getUint32(h + 76, true) + dv.getUint32(h + 80, true), align = dv.getUint32(h + 88, true), imports = dv.getUint32(h + 116, true);
+      out.push([load + 3 + 12 * imports + align - 1, new TextDecoder().decode(d).includes('_op1_screen_draw_cached')]);
+    } catch { out.push([d.length, false]); }
+  }
+  for (const r of observedOwn) if (!listed.has(r.name) && !/off|removed/.test(r.state || '')) out.push([r.size || 0, false]);
+  return out;
+}
+const ARENA_ORANGE = 92;                                         // the bar's colours: green up to 92 %, orange above, red over 100 %
+const ARENA_TEXT = {
+  orange: 'Nearly full. It still fits, but there’s not much room left for your own plugin files.',
+  red: 'Too much for the OP–1’s plugin memory. The last plugins wouldn’t load. Untick one or two to build.',
+};
+function showArena(a) {
+  const box = $('arena');
+  if (!box) return;
+  box.hidden = !a;
+  if (!a) return;
+  const level = a.percent > 100 ? 'red' : a.percent > ARENA_ORANGE ? 'orange' : 'green';
+  box.dataset.level = level;
+  $('arena-pct').textContent = `${a.percent.toFixed(1)} %`;
+  $('arena-fill').style.width = `${Math.min(100, a.percent)}%`;
+  $('arena-note').textContent = ARENA_TEXT[level] || '';
+  $('arena-note').hidden = level === 'green';
 }
 // Same sum as runtime.screen_memory: base + chosen files' screen_bytes + preset_cap x per_preset + own files + worst screen
 function screenMemory(c, ownBytes = 0) {
@@ -270,10 +369,8 @@ function update() {
   countTabs();
   const selection = selectionReview();
   updateSummary();
-  $('cap-warning').hidden = $('expanded').checked;               // R246 asserts at boot with more presets than the cap
-  document.querySelector('.capacity-number').textContent = $('cap-count').textContent;
-  $('build').disabled = busy || devicePending || storageBlocked || !release || !file || (selection.blocked || !!selection.conflicts.length);
-  for (const id of ['export', 'import', 'expanded']) $(id).disabled = editingLocked() || !release;
+  $('build').disabled = busy || devicePending || storageBlocked || !release || !file || (selection.blocked || selection.packageOver || !!selection.conflicts.length);
+  for (const id of ['export', 'import']) $(id).disabled = editingLocked() || !release;
   if (release) {
     const c = choices();
     // the prebuilt variant: on kennel bases every file choice on (the build leaves files out); on 2.x Maiko's tools all or none
@@ -304,8 +401,8 @@ function update() {
       $('preset-pack-download').href = `variants/${id}/presets.zip`;
       $('preset-pack-download').dataset.sha256 = presets.sha256;
       $('preset-pack-download').download = `${release.release.product?.slug || "op1-hundekraft"}-${id}.presets.zip`;
-      $('preset-warning').hidden = count <= ($('expanded').checked ? 300 : 100);
-      $('preset-warning').textContent = `This pack has ${count} presets; your selected limit is 100. Enable 300 presets below, or install a subset. Existing user presets also count toward the limit.`;
+      $('preset-warning').hidden = count <= c.preset_cap;
+      $('preset-warning').textContent = `This pack has ${count} presets, and your OP–1 holds ${c.preset_cap.toLocaleString('en-US')}. Install a subset. Existing user presets also count toward the limit.`;
     } else {
       $('preset-pack-download').hidden = true; $('preset-pack-download').removeAttribute('href'); $('preset-pack-make').hidden = true;
       $('preset-pack-later').hidden = false; $('preset-pack-later').textContent = 'This selection is unavailable in this release. Reload the workshop or choose another selection.'; $('preset-breakdown').replaceChildren();
@@ -375,7 +472,7 @@ $('firmware').addEventListener('change', e => chooseFile(e.target.files[0]));
 for (const event of ['dragenter', 'dragover']) $('drop-zone').addEventListener(event, e => { e.preventDefault(); if (!busy || firmwareWait) $('drop-zone').classList.add('dragover'); });
 $('drop-zone').addEventListener('dragleave', () => $('drop-zone').classList.remove('dragover'));
 $('drop-zone').addEventListener('drop', e => { e.preventDefault(); $('drop-zone').classList.remove('dragover'); chooseFile(e.dataTransfer.files[0]); });
-$('workshop').addEventListener('change', e => { if (e.target.matches('#expanded, #catalog input[type=checkbox][data-group], #catalog input[type=checkbox][data-plugin], #catalog input[type=checkbox][data-core]')) { clearDownloads(); updateStage(null); $('push-progress').hidden = true; pushStatus('Selections changed. Press Review changes to see what will be sent.'); update(); status(file ? 'Choices updated. Ready to build.' : 'Choose your original R246 firmware to continue.'); } });
+$('workshop').addEventListener('change', e => { if (e.target.matches('#catalog input[type=checkbox][data-group], #catalog input[type=checkbox][data-plugin], #catalog input[type=checkbox][data-core]')) { clearDownloads(); updateStage(null); $('push-progress').hidden = true; pushStatus('Selections changed. Press Review changes to see what will be sent.'); update(); status(file ? 'Choices updated. Ready to build.' : 'Choose your original R246 firmware to continue.'); } });
 $('cancel').addEventListener('click', () => {
   if (!worker) return;
   worker.cancelBuild?.(); worker.terminate(); worker = null; clearDownloads();
@@ -387,6 +484,7 @@ async function buildFirmware(forSend = false) {
   if (!source) throw Error('A full firmware update is needed. Choose your original op1_246.op1 to prepare the firmware update. Nothing has been sent.');
   const selection = selectionReview();
   if (selection.blocked || selection.conflicts.length) throw Error('Resolve the plugin choices above before building. Nothing has been sent.');
+  if (selection.packageOver && !forSend) throw Error('The firmware file would be too big. Untick something big to build the file. Nothing has been sent.');
   clearDownloads();
   if (!forSend) $('log').textContent = '';
   status('Starting the local patcher…');
@@ -414,7 +512,7 @@ async function buildFirmware(forSend = false) {
     });
     const report = JSON.parse(data.report);
     if (data.id !== configId(config)) throw Error('The build result does not match your selection. Build again.');
-    const stem = `${snapshot.release.product?.slug || 'op1_246-' + snapshot.catalog.base}${config.lander ? '-lander' : ''}`;
+    const stem = `${snapshot.release.product?.slug || 'op1_246-' + snapshot.catalog.base}`;
     // Keep the exact selection identity in the report, not in user-facing download names.
     report.config_id = data.id;
     report.filename = stem + '.op1';
@@ -700,7 +798,7 @@ async function settlePlan(inv, wanted, opts, full = false) {
     const needsReview = full || plan.changed || !plan.resolved || (plan.unknown.length && !unknownAccepted);
     if (needsReview && (!asked || !plan.resolved || (plan.unknown.length && !unknownAccepted))) {
       pushStatus(full ? 'This update includes new OP–1 firmware. Review it and the plugin changes. Nothing has been sent.' : 'Review installs, replacements and removals. Nothing has been sent.');
-      const r = await showPlan(box, plan, {ask: true, pending: manageOwn ? ownState.removals : [], saved, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander ${choices().lander ? 'on' : 'off'}` : ''});
+      const r = await showPlan(box, plan, {ask: true, pending: manageOwn ? ownState.removals : [], saved, full, deferredOwn: opts.deferredOwn || []});
       if (r.remove) { const e = plan.entries.find(e => e.path === r.remove); await removeOwn(e.name, e.path); acceptedSignature = null; continue; }
       if (r.undo) { await undoRemoval(r.undo); acceptedSignature = null; continue; }
       winners = r.winners; unknownAccepted = r.unknownAccepted; asked = true; acceptedSignature = signature;
@@ -715,7 +813,7 @@ async function settlePlan(inv, wanted, opts, full = false) {
       inv = current; acceptedSignature = null; continue;
     }
     assertResolvedPlan(plan);
-    await showPlan(box, plan, {ask: false, full, deferredOwn: opts.deferredOwn || [], coreNote: release.catalog.core_options?.length ? `Lander ${choices().lander ? 'on' : 'off'}` : ''});
+    await showPlan(box, plan, {ask: false, full, deferredOwn: opts.deferredOwn || []});
     return {...plan, reviewedInventory: current, managesOwn: manageOwn};
   }
 }
@@ -730,6 +828,7 @@ async function sendToOp1() {
   }
   const screens = screenMemory(choices(), ownScreens());
   if (screens.over) { ownStatus('That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit. Nothing has been sent.', true); return; }
+  if (pluginArena(choices(), ownArena())?.over) { ownStatus('Too much for the OP–1’s plugin memory: the last plugins wouldn’t load. Untick one or two first. Nothing has been sent.', true); return; }
   const own = ownFiles.map(([p, d]) => [p, d]);
   let expectedPlan = null;
   let files = ownOnly ? own : pushFiles, total = files.reduce((n, [, d]) => n + d.length, 0), port, sent = 0, extra = {}, pluginsOnly = false;
@@ -780,7 +879,7 @@ async function sendToOp1() {
     const ldr = files.find(([p]) => p === 'OP1_vdk.ldr')?.[1];
     // R246 stops at startup when it holds more user synth presets than the firmware's limit
     if (!ownOnly && inv?.presets && inv.presets.count > pushCap)
-      throw Error(`Your OP–1 holds ${inv.presets.count} user synth presets, more than this build's limit of ${pushCap}. It would stop at startup. Build with 300 presets, or delete some presets first.`);
+      throw Error(`Your OP–1 holds ${inv.presets.count} user synth presets, more than this build's limit of ${pushCap}. It would stop at startup. Delete some presets first, or start clean.`);
     if (ownOnly) {
       if (!inv?.plugins) throw Error('Your own plugins need hundekraft 3.0 on the OP–1. Build and send 3.0 first, then add them.');
       const plan = await settlePlan(inv, files, {own, metadata: targetMetadata(), recheck});
@@ -897,6 +996,8 @@ $('own-check').addEventListener('click', () => withDevice(async () => {
     if (!inv?.plugins) { pushStatus(found.text); if (found.needOriginal) deviceButtons({firmware: true}); return; }
     const confirmed = confirmInventory(inv);
     await rememberOwn(); showOwn(inv);
+    dxBanks.connected(inv);                                        // the DX banks inside the Presets section, when the OP-1 takes them and has DX
+    if (inv.presetsLive) await presets.connected(port);           // the Presets section, when the OP-1 takes them live
     if (confirmed) updateStage('verified');
     if (pendingUpdate()) { unresolvedUpdate(inv); return; }
     pushStatus(confirmed ? 'Update installed and verified. Your OP–1 is ready.' : ownState.verification ? 'Changes are not yet confirmed. If you cancelled on the OP–1, review and send again.' : found.text);
@@ -924,6 +1025,7 @@ $('device-cancel-pending').onclick = () => withDevice(async () => {
   finally { port?.close(); lock(false); showOwn(); }
 }, true);
 $('device-retry').onclick = () => retryAction === 'update' ? $('own-send').click() : $('own-check').click();
+$('download-option').addEventListener('toggle', () => showPackage(lastPackage));
 document.querySelectorAll('a[href="#drop-zone"]').forEach(a => a.addEventListener('click', () => { $('download-option').open = true; }));
 // Path B: the firmware file panel (also Build firmware file / Use a firmware file instead under device messages)
 function openFilePath() {
@@ -943,6 +1045,37 @@ $('path-connect').onclick = () => {
   $('own-check').click();
 };
 initStartClean();
+// The preset pack for the current selection (Presets section: send it over USB): the release's static pack when it
+// matches the selection (sha256 checked), else the pack filtered in the browser (worker.js presetsOnly)
+async function presetPackBytes() {
+  if (!release) return null;
+  const link = $('preset-pack-download');
+  if (!link.hidden && link.hasAttribute('href')) {
+    const response = await fetch(link.href, {cache: 'no-cache'});
+    if (!response.ok) throw Error('Could not get the preset pack. Check your connection and try again.');
+    const bytes = await response.arrayBuffer();
+    const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(b => b.toString(16).padStart(2, '0')).join('');
+    if (hash !== link.dataset.sha256) throw Error('The preset release changed. Reload the workshop and try again.');
+    return new Uint8Array(bytes);
+  }
+  if ($('preset-pack-make').hidden) return null;
+  const config = validateChoices(choices()), snapshot = release;
+  const active = new Worker('worker.js?v=3.1-core-patch-20261102', {type: 'module'});
+  try {
+    const data = await new Promise((resolve, reject) => {
+      active.onerror = e => reject(Error(e.message || 'The patcher could not start. Try again.'));
+      active.onmessage = ({data}) => { if (data.type === 'error') reject(Error(data.text)); if (data.type === 'presets') resolve(data); };
+      active.postMessage({config, release: snapshot, presetsJob: true});
+    });
+    if (data.id !== configId(config)) throw Error('The preset pack does not match your selection. Try again.');
+    return data.presets;
+  } finally { active.terminate(); }
+}
+const dxLog = text => { $('log').textContent += text + '\n'; };
+const dxBanks = initDxBanks({log: dxLog, onChange: () => {}});
+const presets = initPresets({withDevice, openDevice, pack: presetPackBytes, dx: dxBanks, log: dxLog});
+let releaseTimer = 0;
+$('workshop').addEventListener('change', () => { clearTimeout(releaseTimer); releaseTimer = setTimeout(() => presets.releaseChanged(), 600); });   // the plugin list changed: the release card follows
 const stopButton = document.createElement('button'); stopButton.id = 'verification-stop'; stopButton.type = 'button'; stopButton.textContent = 'Check later'; stopButton.hidden = true;
 stopButton.onclick = () => { stopVerification = true; verificationController?.abort(); stopButton.disabled = true; };
 $('device-feedback').append(stopButton);
@@ -1098,7 +1231,7 @@ $('import').addEventListener('change', async e => {
     document.querySelectorAll('#catalog input[type=checkbox][data-group]').forEach(el => el.checked = c[el.dataset.group].includes(el.value));
     document.querySelectorAll('input[data-plugin]').forEach(el => el.checked = !c.hidden.includes(el.dataset.plugin));
     document.querySelectorAll('#catalog input[type=checkbox][data-core]').forEach(el => el.checked = c[el.dataset.core] === true);
-    $('expanded').checked = kennel() || c.preset_cap === 300; clearDownloads(); update(); status('Choices loaded.');
+    clearDownloads(); update(); status('Choices loaded.');
   } catch (error) { status('Could not load choices: ' + error.message, true); }
   finally { e.target.value = ''; lock(false); }
 });
@@ -1106,7 +1239,7 @@ $('import').addEventListener('change', async e => {
 function renderCatalog() {
   const tabs = $('cat-tabs'), panels = $('cat-panels');
   // a choice the release offers; 'always' entries are built into this base's core, so they have no box
-  const has = pick => { const [g, id] = pick.split(':'); return (g === 'plugin' ? release.catalog.op1r_plugins || [] : g === 'core' ? release.catalog.core_options || [] : release.catalog[g] || []).some(f => f.id === id && !f.always); };
+  const has = pick => { const [g, id] = pick.split(':'); return (g === 'plugin' ? release.catalog.op1r_plugins || [] : release.catalog[g] || []).some(f => f.id === id && !f.always); };
   CATEGORIES.forEach((cat, k) => {
     // a pick the release doesn't offer as a choice is built in on this base: shown, always in, no box
     const items = cat.items.filter(it => (!it.kennel || kennel()) && (!it.requiresChoice || (it.pick && has(it.pick)))).map(it => !kennel() && it.pick2x ? {...it, pick: it.pick2x} : it)
@@ -1134,7 +1267,8 @@ function renderCatalog() {
       const line = document.createElement('span'); line.className = 'cat-line'; line.textContent = it.line + ' ';
       const more = document.createElement('a'); more.href = `manual.html#${it.manual}`; more.textContent = 'manual →'; line.append(more);
       const by = document.createElement('span'); by.className = 'cat-by'; by.textContent = it.by;
-      card.append(head, pic, line, by); panel.append(card);
+      card.append(head, pic, line, by);
+      panel.append(card);
     }
     tab.addEventListener('click', () => {
       tabs.querySelectorAll('[role=tab]').forEach(t => { t.setAttribute('aria-selected', String(t === tab)); t.tabIndex = t === tab ? 0 : -1; });
@@ -1185,14 +1319,12 @@ function updateSummary() {
     const count = categoryCounts(panel);
     row(cat.label, `${count.selected} / ${count.total}`);
   }
-  const lander = document.querySelector('input[data-core=lander]');
-  if (lander) row('Lander', lander.checked ? 'On' : 'Off');
   if ($('panel-your-plugins')) {
     const pending = $('own-list').querySelectorAll('[data-pending-removal=true]').length;
     const kept = $('own-list').children.length - pending;
     row('Your plugins', `${kept} kept${pending ? ` · ${pending} to remove` : ''}`);
   }
-  row('User preset limit', $('expanded').checked ? '300' : '100', 'cap-count');
+  row('User preset limit', choices().preset_cap.toLocaleString('en-US'), 'cap-count');
   $('selection-summary').replaceChildren(...rows);
 }
 function countTabs() {                                            // ticked / all on each tab
@@ -1214,11 +1346,6 @@ try {
   $('own').hidden = $('device-card').hidden;   // the plugin loader is kennel's
   // Path A and the USB hints only where this release can update over USB; path B is always there
   for (const id of ['path-usb', 'paths-unsure', 'usb-next']) $(id).hidden = $('device-card').hidden;
-  // kennel bases always have room for 300 presets (100 would stop an OP-1 holding more at startup): no choice
-  if (kennel()) {
-    $('expanded').checked = true; document.querySelector('fieldset.capacity').hidden = true;
-    document.querySelectorAll('.after > span').forEach(el => { el.textContent = el.textContent.replace(/^0(\d)/, (_, d) => '0' + (d - 1)); });
-  }
   let restored = false;
   try {
     let saved = loadSelection(release.catalog.base);
@@ -1226,7 +1353,7 @@ try {
       // Migrate the former manual-only snapshot once, before the initial update overwrites it.
       const legacy = JSON.parse(localStorage.getItem('hundekraft-build') || 'null');
       if (legacy?.base === release.catalog.base && ['synths', 'effects', 'utilities', 'plugins', 'hidden'].every(g => Array.isArray(legacy[g]))) {
-        saved = {cap: kennel() ? 300 : 100, inputs: {}};
+        saved = {cap: 1024, inputs: {}};
         for (const i of document.querySelectorAll('#catalog input[type=checkbox]')) {
           if (i.dataset.core) { saved.inputs[inputKey(i)] = false; } else if (i.dataset.plugin) {
             if (legacy.plugins.includes(i.dataset.plugin)) saved.inputs[inputKey(i)] = true;
@@ -1241,7 +1368,7 @@ try {
         if (Object.hasOwn(saved.inputs, key)) i.checked = saved.inputs[key] === true;
 
       }
-      $('expanded').checked = kennel() || saved.cap === 300; restored = true;
+      restored = true;
     }
     selectionStorageReady = true;
   } catch (e) { storageError = 'Could not restore selections; existing data was preserved: ' + e.message; }

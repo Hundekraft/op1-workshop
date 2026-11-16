@@ -9,7 +9,7 @@ export function loadSelection(base) {
   selections.set(base, raw);
   if (raw === null) return null;
   const v = JSON.parse(raw);
-  if (!record(v) || v.schema !== 1 || !record(v.inputs) || ![100, 300].includes(v.cap) || Object.values(v.inputs).some(x => typeof x !== 'boolean'))
+  if (!record(v) || v.schema !== 1 || !record(v.inputs) || ![100, 300, 1024].includes(v.cap) || Object.values(v.inputs).some(x => typeof x !== 'boolean'))
     throw Error('Unsupported saved selection; existing data was preserved');
   return v;
 }

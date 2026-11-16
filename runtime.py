@@ -31,12 +31,10 @@ def normalize(config, catalog):
     if type(config['schema']) is not int or config['schema'] != 1 or config['base'] != catalog['base']:
         raise ValueError('Unsupported configuration schema or base bundle')
     out = {'schema': 1, 'base': catalog['base']}
-    if 'lander' in config:
-        if type(config['lander']) is not bool:
-            raise ValueError('Unsupported Lander option')
-        # a base without the option (kennel 3.1: the L1 pool uses the Lander's memory) builds saved Lander choices without it
-        if config['lander'] and any(f['id'] == 'lander' for f in catalog.get('core_options', [])):
-            out['lander'] = True
+    if 'lander' in config and type(config['lander']) is not bool:
+        raise ValueError('Unsupported Lander option')
+    # 'lander' (bit 64) was a core option until 2026-11-15; a saved choice that has it is accepted and ignored, so it
+    # builds the same firmware and gets the same ID as without it.
 
     for group in ('synths', 'effects', 'utilities'):
         values = config.get(group, [])
@@ -167,6 +165,17 @@ def screen_memory(config, catalog, own_bytes=0):
     return {'need': need, 'room': room, 'over': max(0, need - room), 'heaviest': [i for _, i in sorted(chosen, reverse=True)[:5]]}
 
 
+def arena_need(files, terms):
+    """kennel's plugin arena for a set of plugin files (synth_sdk/kennel/kn_boot.c arena_need): the core's fixed terms
+    (boot tables, run-time op1_alloc, margin), per_file for each listed file, each file's need (load size + call stubs
+    + alignment pad, kn_load.c kn_peek; release plugin_metadata 'arena') and the static-art cache when any of them uses
+    it, rounded up to the arena's step. files: [(need, uses_art_cache)]; terms: release.json plugin_arena. -> need,
+    percent of the ceiling, and how far over the ceiling (a set over it can't load: the files past it are refused)."""
+    total = terms['fixed'] + terms['per_file'] * len(files) + sum(n for n, _ in files) + (terms['art_cache'] if any(c for _, c in files) else 0)
+    need = -(-total // terms['align']) * terms['align']
+    return {'need': need, 'percent': int(1000 * need / terms['max'] + 0.5) / 10, 'over': max(0, need - terms['max'])}   # half up, as app.js
+
+
 def own_screen_bytes(data, catalog):
     """A user's own .knl: its screen's estimated drawing-heap use from the SVG it carries (a .knl starts with the SVG
     and a NUL), at the worst measured ratio of our plugins (screen_budget own_svg_factor), at least own_min."""
@@ -193,7 +202,7 @@ def variant_config(config, catalog):
 def config_id(config, catalog):
     c = normalize(config, catalog)
     flags = [f['id'] in c[g] for g in ('synths', 'effects') for f in catalog[g]]
-    flags.append(c['preset_cap'] == 300)
+    flags.append(c['preset_cap'] in (300, 1024))       # bit 6: the larger table (300, as 3.x IDs mean)
     flags.extend(f['id'] in c.get('utilities', []) for f in catalog.get('utilities', []))
     mask = sum(int(v) << i for i, v in enumerate(flags))
     # Fixed position, so a shorter utilities list (public catalog) cannot move these bits.
@@ -201,8 +210,9 @@ def config_id(config, catalog):
     for i, f in enumerate(catalog.get('op1r_plugins', [])):
         if f['id'] in c.get('hidden', []):
             mask |= 1 << (bit + i)
-    if c.get('lander'):
-        mask |= 1 << 64  # separate from every published plugin/legacy selection bit
+    # bit 64 is reserved: it was the Lander core option (removed 2026-11-15); nothing sets it any more
+    if c['preset_cap'] == 1024:
+        mask |= 1 << 65  # 1,024 presets (3.3): its own bit, so a 3.x ID with bit 6 keeps meaning 300
     return f'{mask:02x}'
 
 
@@ -220,15 +230,58 @@ def unpack(op1):
     return members
 
 
-def pack_tar(members):
+def tar_order(members):
+    """The package's member order: directory entries first (parents before children, else as given), then the files
+    as given, except that a file over 1 KB whose bytes equal an earlier file's goes right after that file. LZMA's
+    8 MiB window then sees each duplicate next to its twin (the slot audio copies of factory sounds, ~2 MB packed),
+    and te-boot, which creates each file as it reads it, always has the parent directory already."""
+    # Keep the given directory order (a depth sort packed rc17 30 KB worse), pulling a parent forward if needed.
+    by_dir = {m[0].name.rstrip('/'): m for m in members if m[0].isdir()}
+    dirs, placed = [], set()
+    def place(name):
+        parent = name.rpartition('/')[0]
+        if parent in by_dir and parent not in placed:
+            place(parent)
+        if name not in placed:
+            placed.add(name)
+            dirs.append(by_dir[name])
+    for name in by_dir:
+        place(name)
+    first, follow = {}, {}
+    for i, (info, data) in enumerate(members):
+        if info.isdir():
+            continue
+        key = (len(data), hashlib.sha256(data).digest()) if data is not None and len(data) > 1024 else i
+        twin = first.setdefault(key, i)
+        follow.setdefault(twin, []).append(members[i])
+    return dirs + [m for i in sorted(follow) for m in follow[i]]
+
+
+def pack_tar(members, order=True):
+    """GNU tar of members, in tar_order (the package). order=False keeps the list order: manifests' tar_sha256 is
+    taken over that archive, so the published manifests (made before tar_order) still check."""
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode='w', format=tarfile.GNU_FORMAT) as archive:
-        for info, data in members:
+        for info, data in (tar_order(members) if order else members):
             info = copy.copy(info)
             if data is not None:
                 info.size = len(data)
             archive.addfile(info, io.BytesIO(data) if data is not None else None)
     return buf.getvalue()
+
+
+def packed_size(raw):
+    """What pack_op1 makes of raw, in bytes, without the limit check (release.py's package estimate)."""
+    return 4 + len(lzma.compress(raw, format=lzma.FORMAT_ALONE, filters=LZMA_FILTERS))
+
+
+def package_estimate(terms, packed):
+    """The updater package's size before building (app.js packageEstimate is the same sum). terms: release.json
+    'package' = {limit, base: the all-on build's package without its .knl files, ratio: what the all-on build's files
+    add to it over the sum of their packed sizes (they pack a little better together)}; packed: the chosen files'
+    packed sizes. -> (bytes, bytes over the limit)."""
+    need = terms['base'] + round(terms['ratio'] * sum(packed))
+    return need, max(0, need - terms['limit'] + 1)
 
 
 def pack_op1(raw):
@@ -296,7 +349,7 @@ def apply_manifest(members, manifest, read_blob):
             raise ValueError('Install cleanup template is not a directory')
         info = copy.copy(source); info.name = name
         by_name[name] = len(members); members.append((info, None))
-    checked(pack_tar(members), manifest['result']['tar_sha256'], 'Result archive')
+    checked(pack_tar(members, order=False), manifest['result']['tar_sha256'], 'Result archive')
     return members
 
 
@@ -322,13 +375,23 @@ def validate_ldr(data):
         raise ValueError('Invalid LDR block chain')
 
 
+# a plugin's picker-row table by its kind; 'lfo' is a feature that registers an LFO type (catalog "lfo_type": true)
+ROW_TABLE = {'drum': 'drum_types', 'seq': 'seq_types', 'fx': 'fx_types', 'lfo': 'lfo_types'}
+
+
+def row_kinds(catalog):
+    """{id: kind} for picker rows: op1r_plugins' kinds ('lfo' for a feature with "lfo_type"), synths, effects"""
+    kinds = {f['id']: 'lfo' if f.get('lfo_type') else f['kind'] for f in catalog.get('op1r_plugins', [])}
+    kinds.update({f['id']: 'synth' for f in catalog.get('synths', [])})
+    kinds.update({f['id']: 'fx' for f in catalog.get('effects', [])})
+    return kinds
+
+
 def hide_plugins(db, catalog, hidden, optional=()):
     """factory DB bytes -> without the picker rows of these synths/FX. hidden: each row must exist exactly once
     (op1r plugins whose code stays). optional: rows removed when the base has them (plugin files left out)."""
     import os, sqlite3, tempfile
-    kinds = {f['id']: f['kind'] for f in catalog.get('op1r_plugins', [])}
-    kinds.update({f['id']: 'synth' for f in catalog.get('synths', [])})
-    kinds.update({f['id']: 'fx' for f in catalog.get('effects', [])})
+    kinds = row_kinds(catalog)
     saved = {f['id']: saved_name(f) for g in ('synths', 'effects', 'op1r_plugins') for f in catalog.get(g, [])}
     fd, path = tempfile.mkstemp(suffix='.db')
     try:
@@ -336,11 +399,11 @@ def hide_plugins(db, catalog, hidden, optional=()):
         os.close(fd)
         con = sqlite3.connect(path)
         for name in hidden:
-            table = 'drum_types' if kinds[name] == 'drum' else ('seq_types' if kinds[name] == 'seq' else ('fx_types' if kinds[name] == 'fx' else 'synth_types'))
+            table = ROW_TABLE.get(kinds[name], 'synth_types')
             if con.execute(f'DELETE FROM {table} WHERE type=?', (saved[name],)).rowcount != 1:
                 raise ValueError('Base does not list ' + name)
         for name in optional:
-            table = 'drum_types' if kinds[name] == 'drum' else ('seq_types' if kinds[name] == 'seq' else ('fx_types' if kinds[name] == 'fx' else 'synth_types'))
+            table = ROW_TABLE.get(kinds[name], 'synth_types')
             con.execute(f'DELETE FROM {table} WHERE type=?', (saved[name],))
         for name in list(hidden) + list(optional):
             if kinds.get(name) == 'drum': con.execute('DELETE FROM drum_presets WHERE folder=?', (saved[name],))
@@ -404,10 +467,8 @@ def left_out_rows(config, catalog):
     (cores before kn_core_rows.h kept the rows of plugins that never loaded; since 3.2 the core removes them at boot
     too), so the OP-1 never lists a type whose file isn't there."""
     shipped = files(config, catalog)
-    kinds = {f['id']: f['kind'] for f in catalog.get('op1r_plugins', [])}
-    kinds.update({f['id']: 'synth' for f in catalog.get('synths', [])})
-    kinds.update({f['id']: 'fx' for f in catalog.get('effects', [])})
-    return [i for i, (_, name) in file_choices(catalog).items() if name not in shipped and kinds.get(i) in ('synth', 'fx', 'seq', 'drum')]
+    kinds = row_kinds(catalog)
+    return [i for i, (_, name) in file_choices(catalog).items() if name not in shipped and kinds.get(i) in ('synth', 'fx', 'seq', 'drum', 'lfo')]
 
 
 def apply_hidden(members, catalog, hidden, optional=()):
@@ -439,13 +500,11 @@ def patch(op1, base, variant, read_base, read_variant, log=lambda s: None, catal
     validate_ldr(by_name['OP1_vdk.ldr'])
     if by_name['te-boot.ldr'] != dict((m.name, d) for m, d in original)['te-boot.ldr']:
         raise ValueError('Bootloader changed')
-    raw = pack_tar(members)
-    checked(raw, variant['result']['tar_sha256'], 'Selected features')
+    checked(pack_tar(members, order=False), variant['result']['tar_sha256'], 'Selected features')
     rows = left_out_rows(config, catalog) if config is not None and choices else []
     if hidden or rows:
         log('Hiding ' + ', '.join(list(hidden) + rows) + '…')
         members = apply_hidden(members, catalog, hidden, rows)
-        raw = pack_tar(members)
     # plugin files (kennel): the variant has every file choice on; leave out the ones not chosen
     drop = set()
     if config is not None and choices:
@@ -457,7 +516,7 @@ def patch(op1, base, variant, read_base, read_variant, log=lambda s: None, catal
             raise ValueError('Variant lacks plugin files')
         log('Leaving out ' + ', '.join(sorted(n[8:] for n in drop)) + '…')
         members = [(m, d) for m, d in members if m.name not in drop]
-        raw = pack_tar(members)
+    raw = pack_tar(members)
     log('Compressing and verifying your firmware…')
     out = pack_op1(raw)
     # Verify the compressed stream as well as the exact archive before handing it out.
@@ -490,7 +549,7 @@ def preset_install_text(count, cap):
             'Copy the folders inside synth/ into the OP-1 disk’s synth/ directory, then eject.\n'
             'The OP-1 restarts by itself, syncs the new files and waits for a key press. Presets are separate from firmware.\n'
             f'Your firmware supports {cap} user synth presets TOTAL, including existing ones.\n'
-            + ('This pack exceeds that limit: enable 300 presets or install only a subset.\n' if count > cap else '')
+            + ('This pack exceeds that limit: install only a subset.\n' if count > cap else '')
             + 'Granular presets are settings: load or record a sample into the slot first.\n'
             'Washer/Snowglobe sounds are synth patches using those effects; they are not standalone FX presets.\n'
             'An existing patch with the same filename may keep its old sound after sync; use a fresh name to replace it.\n')

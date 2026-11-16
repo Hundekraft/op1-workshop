@@ -1,0 +1,2635 @@
+{
+  "config": {
+    "schema": 1,
+    "base": "kennel30-plugins",
+    "synths": [
+      "wavetable",
+      "taffy",
+      "pew",
+      "elg"
+    ],
+    "effects": [
+      "washer",
+      "snowglobe"
+    ],
+    "utilities": [
+      "file",
+      "scale",
+      "naming",
+      "undo"
+    ],
+    "preset_cap": 1024
+  },
+  "release": {
+    "id": "25d9fd459f711435",
+    "product": {
+      "name": "hundekraft",
+      "version": "3.3",
+      "label": "hundekraft 3.3",
+      "slug": "hundekraft-3.3"
+    },
+    "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
+    "experimental": true,
+    "compiler": "bfin-elf-gcc (GCC) 13.3.0"
+  },
+  "sizes": {
+    "image_bytes": 0,
+    "memory_bytes": 70728,
+    "plugin_arena_bytes": 4721544,
+    "plugin_arena_estimate": 5226496,
+    "plugin_arena_room": 5242880,
+    "plugin_arena_percent": 99.7,
+    "plugin_arena_over_budget": false,
+    "plugin_decl_bytes": 0,
+    "plugin_decl_room": 1048576,
+    "plugin_fx_lease_bytes": 1048576,
+    "plugin_file_max": 1048576,
+    "plugin_file_bytes": 4838816,
+    "branding_bytes": 64,
+    "branding_address": "0x1ef0000"
+  },
+  "filename": "hundekraft-3.3-200000000000007ff.op1",
+  "presets": {
+    "count": 459,
+    "by_engine": {
+      "supersaw": 12,
+      "fmbell": 12,
+      "granular": 12,
+      "wavetable": 16,
+      "taffy": 16,
+      "pew": 16,
+      "elg": 16,
+      "iter": 12,
+      "aether": 12,
+      "amp": 12,
+      "arc": 12,
+      "bloodmoon": 12,
+      "blot": 12,
+      "brassophone": 12,
+      "dddd": 12,
+      "dimension": 12,
+      "drift": 27,
+      "eva": 12,
+      "hollowsaint": 12,
+      "juni": 12,
+      "kastle": 12,
+      "ludwig": 12,
+      "mbira": 12,
+      "mixtur": 12,
+      "monolit": 12,
+      "outatime": 12,
+      "oxbow": 16,
+      "pinboard": 13,
+      "reactor": 12,
+      "sid": 12,
+      "snap": 12,
+      "strum": 12,
+      "vapora": 15,
+      "vox": 12,
+      "windwood": 12
+    },
+    "sha256": "840017821e50eb56cf64e7612fd467fe3be3f08745e3d2035493bb6a6f330c53",
+    "exceeds_cap": false,
+    "items": [
+      [
+        "supersaw",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "warble"
+      ],
+      [
+        "supersaw",
+        "plate"
+      ],
+      [
+        "supersaw",
+        "nitro"
+      ],
+      [
+        "fmbell",
+        "plate"
+      ],
+      [
+        "fmbell",
+        "delay"
+      ],
+      [
+        "fmbell",
+        "phone"
+      ],
+      [
+        "fmbell",
+        "plate"
+      ],
+      [
+        "granular",
+        "spring"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "granular",
+        "clouds"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "nitro"
+      ],
+      [
+        "supersaw",
+        "father"
+      ],
+      [
+        "supersaw",
+        "punch"
+      ],
+      [
+        "supersaw",
+        "spring"
+      ],
+      [
+        "supersaw",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "grid"
+      ],
+      [
+        "supersaw",
+        "delay"
+      ],
+      [
+        "supersaw",
+        "crush"
+      ],
+      [
+        "fmbell",
+        "warble"
+      ],
+      [
+        "fmbell",
+        "delay"
+      ],
+      [
+        "fmbell",
+        "cwo"
+      ],
+      [
+        "fmbell",
+        ""
+      ],
+      [
+        "fmbell",
+        "spring"
+      ],
+      [
+        "fmbell",
+        "snowglobe"
+      ],
+      [
+        "fmbell",
+        "in a room"
+      ],
+      [
+        "fmbell",
+        "nitro"
+      ],
+      [
+        "granular",
+        "spring"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "granular",
+        "father"
+      ],
+      [
+        "granular",
+        "delay"
+      ],
+      [
+        "granular",
+        ""
+      ],
+      [
+        "granular",
+        "phone"
+      ],
+      [
+        "granular",
+        "cwo"
+      ],
+      [
+        "granular",
+        ""
+      ],
+      [
+        "wavetable",
+        "father"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "spring"
+      ],
+      [
+        "wavetable",
+        "nitro"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "spring"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "wavetable",
+        "cwo"
+      ],
+      [
+        "wavetable",
+        "plate"
+      ],
+      [
+        "wavetable",
+        "delay"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "nitro"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "warble"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "punch"
+      ],
+      [
+        "taffy",
+        "delay"
+      ],
+      [
+        "taffy",
+        "spring"
+      ],
+      [
+        "taffy",
+        "cwo"
+      ],
+      [
+        "taffy",
+        "spring"
+      ],
+      [
+        "taffy",
+        ""
+      ],
+      [
+        "taffy",
+        "crush"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "pew",
+        ""
+      ],
+      [
+        "pew",
+        "warble"
+      ],
+      [
+        "pew",
+        "nitro"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "pew",
+        ""
+      ],
+      [
+        "pew",
+        "delay"
+      ],
+      [
+        "pew",
+        "spring"
+      ],
+      [
+        "pew",
+        "nitro"
+      ],
+      [
+        "pew",
+        "phone"
+      ],
+      [
+        "pew",
+        "delay"
+      ],
+      [
+        "pew",
+        "nostromo"
+      ],
+      [
+        "elg",
+        "spring"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "nitro"
+      ],
+      [
+        "elg",
+        "spring"
+      ],
+      [
+        "elg",
+        "cwo"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "punch"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "warble"
+      ],
+      [
+        "elg",
+        "spring"
+      ],
+      [
+        "elg",
+        "delay"
+      ],
+      [
+        "elg",
+        "grid"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        ""
+      ],
+      [
+        "iter",
+        "delay"
+      ],
+      [
+        "iter",
+        "nitro"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        "cwo"
+      ],
+      [
+        "iter",
+        "delay"
+      ],
+      [
+        "iter",
+        "punch"
+      ],
+      [
+        "iter",
+        "cwo"
+      ],
+      [
+        "iter",
+        "spring"
+      ],
+      [
+        "iter",
+        "hail"
+      ],
+      [
+        "wavetable",
+        "washer"
+      ],
+      [
+        "wavetable",
+        "washer"
+      ],
+      [
+        "wavetable",
+        "snowglobe"
+      ],
+      [
+        "wavetable",
+        "plate"
+      ],
+      [
+        "taffy",
+        "washer"
+      ],
+      [
+        "taffy",
+        "washer"
+      ],
+      [
+        "taffy",
+        "snowglobe"
+      ],
+      [
+        "taffy",
+        "snowglobe"
+      ],
+      [
+        "pew",
+        "washer"
+      ],
+      [
+        "pew",
+        "washer"
+      ],
+      [
+        "pew",
+        "father"
+      ],
+      [
+        "pew",
+        "snowglobe"
+      ],
+      [
+        "elg",
+        "washer"
+      ],
+      [
+        "elg",
+        "washer"
+      ],
+      [
+        "elg",
+        "snowglobe"
+      ],
+      [
+        "elg",
+        "snowglobe"
+      ],
+      [
+        "aether",
+        "spring"
+      ],
+      [
+        "aether",
+        "spring"
+      ],
+      [
+        "aether",
+        "nitro"
+      ],
+      [
+        "aether",
+        "delay"
+      ],
+      [
+        "aether",
+        "phone"
+      ],
+      [
+        "aether",
+        "delay"
+      ],
+      [
+        "aether",
+        "cwo"
+      ],
+      [
+        "aether",
+        "delay"
+      ],
+      [
+        "aether",
+        "punch"
+      ],
+      [
+        "aether",
+        ""
+      ],
+      [
+        "aether",
+        "spring"
+      ],
+      [
+        "aether",
+        "delay"
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        "spring"
+      ],
+      [
+        "amp",
+        "spring"
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        ""
+      ],
+      [
+        "amp",
+        "delay"
+      ],
+      [
+        "amp",
+        "phone"
+      ],
+      [
+        "amp",
+        "spring"
+      ],
+      [
+        "arc",
+        ""
+      ],
+      [
+        "arc",
+        "spring"
+      ],
+      [
+        "arc",
+        "punch"
+      ],
+      [
+        "arc",
+        "delay"
+      ],
+      [
+        "arc",
+        ""
+      ],
+      [
+        "arc",
+        "spring"
+      ],
+      [
+        "arc",
+        ""
+      ],
+      [
+        "arc",
+        "cwo"
+      ],
+      [
+        "arc",
+        "delay"
+      ],
+      [
+        "arc",
+        "spring"
+      ],
+      [
+        "arc",
+        "spring"
+      ],
+      [
+        "arc",
+        ""
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        "sister"
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        ""
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "bloodmoon",
+        "delay"
+      ],
+      [
+        "blot",
+        "delay"
+      ],
+      [
+        "blot",
+        ""
+      ],
+      [
+        "blot",
+        ""
+      ],
+      [
+        "blot",
+        "delay"
+      ],
+      [
+        "blot",
+        ""
+      ],
+      [
+        "blot",
+        "spring"
+      ],
+      [
+        "blot",
+        "delay"
+      ],
+      [
+        "blot",
+        ""
+      ],
+      [
+        "blot",
+        "delay"
+      ],
+      [
+        "blot",
+        ""
+      ],
+      [
+        "blot",
+        "spring"
+      ],
+      [
+        "blot",
+        ""
+      ],
+      [
+        "brassophone",
+        "spring"
+      ],
+      [
+        "brassophone",
+        "spring"
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "brassophone",
+        "delay"
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "brassophone",
+        "delay"
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "brassophone",
+        "delay"
+      ],
+      [
+        "brassophone",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        "spring"
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        "delay"
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dddd",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "dimension",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "drift",
+        ""
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "delay"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        ""
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "eva",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        "delay"
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        ""
+      ],
+      [
+        "hollowsaint",
+        "delay"
+      ],
+      [
+        "hollowsaint",
+        ""
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        ""
+      ],
+      [
+        "hollowsaint",
+        ""
+      ],
+      [
+        "hollowsaint",
+        "sister"
+      ],
+      [
+        "hollowsaint",
+        "spring"
+      ],
+      [
+        "hollowsaint",
+        "delay"
+      ],
+      [
+        "juni",
+        "tape"
+      ],
+      [
+        "juni",
+        ""
+      ],
+      [
+        "juni",
+        "sister"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "nostromo"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "tape"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "juni chorus"
+      ],
+      [
+        "juni",
+        "spring"
+      ],
+      [
+        "juni",
+        ""
+      ],
+      [
+        "kastle",
+        "delay"
+      ],
+      [
+        "kastle",
+        "spring"
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "kastle",
+        "delay"
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "kastle",
+        "spring"
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "kastle",
+        "phone"
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "kastle",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "ludwig",
+        ""
+      ],
+      [
+        "mbira",
+        "crush"
+      ],
+      [
+        "mbira",
+        ""
+      ],
+      [
+        "mbira",
+        "warble"
+      ],
+      [
+        "mbira",
+        "delay"
+      ],
+      [
+        "mbira",
+        "spring"
+      ],
+      [
+        "mbira",
+        "palme"
+      ],
+      [
+        "mbira",
+        ""
+      ],
+      [
+        "mbira",
+        "stutter"
+      ],
+      [
+        "mbira",
+        "steve"
+      ],
+      [
+        "mbira",
+        "delay"
+      ],
+      [
+        "mbira",
+        "plate"
+      ],
+      [
+        "mbira",
+        "delay"
+      ],
+      [
+        "mixtur",
+        "delay"
+      ],
+      [
+        "mixtur",
+        "punch"
+      ],
+      [
+        "mixtur",
+        "spring"
+      ],
+      [
+        "mixtur",
+        "spring"
+      ],
+      [
+        "mixtur",
+        ""
+      ],
+      [
+        "mixtur",
+        "cwo"
+      ],
+      [
+        "mixtur",
+        "spring"
+      ],
+      [
+        "mixtur",
+        ""
+      ],
+      [
+        "mixtur",
+        ""
+      ],
+      [
+        "mixtur",
+        ""
+      ],
+      [
+        "mixtur",
+        "spring"
+      ],
+      [
+        "mixtur",
+        "delay"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        "spring"
+      ],
+      [
+        "monolit",
+        "spring"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        ""
+      ],
+      [
+        "monolit",
+        "spring"
+      ],
+      [
+        "monolit",
+        "delay"
+      ],
+      [
+        "outatime",
+        "spring"
+      ],
+      [
+        "outatime",
+        "delay"
+      ],
+      [
+        "outatime",
+        "tape"
+      ],
+      [
+        "outatime",
+        "delay"
+      ],
+      [
+        "outatime",
+        "delay"
+      ],
+      [
+        "outatime",
+        ""
+      ],
+      [
+        "outatime",
+        "spring"
+      ],
+      [
+        "outatime",
+        ""
+      ],
+      [
+        "outatime",
+        "spring"
+      ],
+      [
+        "outatime",
+        ""
+      ],
+      [
+        "outatime",
+        ""
+      ],
+      [
+        "outatime",
+        "spring"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        "crush"
+      ],
+      [
+        "oxbow",
+        "plate"
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        "warble"
+      ],
+      [
+        "oxbow",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        "delay"
+      ],
+      [
+        "oxbow",
+        "spring"
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "oxbow",
+        ""
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        ""
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "pinboard",
+        "spring"
+      ],
+      [
+        "reactor",
+        "spring"
+      ],
+      [
+        "reactor",
+        ""
+      ],
+      [
+        "reactor",
+        "spring"
+      ],
+      [
+        "reactor",
+        ""
+      ],
+      [
+        "reactor",
+        ""
+      ],
+      [
+        "reactor",
+        "delay"
+      ],
+      [
+        "reactor",
+        "spring"
+      ],
+      [
+        "reactor",
+        "delay"
+      ],
+      [
+        "reactor",
+        ""
+      ],
+      [
+        "reactor",
+        "spring"
+      ],
+      [
+        "reactor",
+        "delay"
+      ],
+      [
+        "reactor",
+        "delay"
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        "warble"
+      ],
+      [
+        "sid",
+        "spring"
+      ],
+      [
+        "sid",
+        "spring"
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        ""
+      ],
+      [
+        "sid",
+        "plate"
+      ],
+      [
+        "sid",
+        "delay"
+      ],
+      [
+        "sid",
+        "crush"
+      ],
+      [
+        "sid",
+        "spring"
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        "delay"
+      ],
+      [
+        "snap",
+        "spring"
+      ],
+      [
+        "snap",
+        "spring"
+      ],
+      [
+        "snap",
+        "delay"
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "snap",
+        ""
+      ],
+      [
+        "strum",
+        ""
+      ],
+      [
+        "strum",
+        "delay"
+      ],
+      [
+        "strum",
+        "spring"
+      ],
+      [
+        "strum",
+        "delay"
+      ],
+      [
+        "strum",
+        ""
+      ],
+      [
+        "strum",
+        ""
+      ],
+      [
+        "strum",
+        "delay"
+      ],
+      [
+        "strum",
+        "spring"
+      ],
+      [
+        "strum",
+        ""
+      ],
+      [
+        "strum",
+        ""
+      ],
+      [
+        "strum",
+        "delay"
+      ],
+      [
+        "strum",
+        "spring"
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        "juni chorus"
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        "reverb"
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vapora",
+        ""
+      ],
+      [
+        "vox",
+        ""
+      ],
+      [
+        "vox",
+        "spring"
+      ],
+      [
+        "vox",
+        "delay"
+      ],
+      [
+        "vox",
+        "phone"
+      ],
+      [
+        "vox",
+        "delay"
+      ],
+      [
+        "vox",
+        "phone"
+      ],
+      [
+        "vox",
+        "delay"
+      ],
+      [
+        "vox",
+        "spring"
+      ],
+      [
+        "vox",
+        ""
+      ],
+      [
+        "vox",
+        "delay"
+      ],
+      [
+        "vox",
+        ""
+      ],
+      [
+        "vox",
+        "spring"
+      ],
+      [
+        "windwood",
+        "delay"
+      ],
+      [
+        "windwood",
+        ""
+      ],
+      [
+        "windwood",
+        ""
+      ],
+      [
+        "windwood",
+        ""
+      ],
+      [
+        "windwood",
+        ""
+      ],
+      [
+        "windwood",
+        ""
+      ],
+      [
+        "windwood",
+        "spring"
+      ],
+      [
+        "windwood",
+        "spring"
+      ],
+      [
+        "windwood",
+        "delay"
+      ],
+      [
+        "windwood",
+        "spring"
+      ],
+      [
+        "windwood",
+        "spring"
+      ],
+      [
+        "windwood",
+        "delay"
+      ]
+    ]
+  },
+  "patched_files": [
+    {
+      "path": "OP1_vdk.ldr",
+      "orig_sha256": "501a9ca3df6b05aabf447b1bfb82d3142a5915d4224d9dcbec60ea7a56ab15b1",
+      "result_sha256": "4bf608520669817664f37697bd1f5924a839c77efcb68c78a98281ce00eaeb89",
+      "ops": [
+        {
+          "op": "replace",
+          "offset": 2,
+          "old": "24",
+          "new": "44"
+        },
+        {
+          "op": "replace",
+          "offset": 12,
+          "old": "84",
+          "new": "e4"
+        },
+        {
+          "op": "replace",
+          "offset": 610878,
+          "old": "68db43e1dd",
+          "new": "000043e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 612854,
+          "old": "68db42e1dd",
+          "new": "000042e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1393008,
+          "old": "6400",
+          "new": "0004"
+        },
+        {
+          "op": "replace",
+          "offset": 1393026,
+          "old": "51",
+          "new": "f9"
+        },
+        {
+          "op": "replace",
+          "offset": 1405736,
+          "old": "6cdb46e1dd",
+          "new": "040046e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1406054,
+          "old": "6cdb40e1dd",
+          "new": "040040e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1406752,
+          "old": "6cdb45e1dd",
+          "new": "040045e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1407564,
+          "old": "6cdb47e1dd",
+          "new": "040047e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1419094,
+          "old": "6cdb46e1dd",
+          "new": "040046e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1419506,
+          "old": "68db41e1dd",
+          "new": "000041e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1419864,
+          "old": "51",
+          "new": "f9"
+        },
+        {
+          "op": "replace",
+          "offset": 1419878,
+          "old": "3e01",
+          "new": "ef04"
+        },
+        {
+          "op": "replace",
+          "offset": 1420224,
+          "old": "51",
+          "new": "f9"
+        },
+        {
+          "op": "replace",
+          "offset": 1420238,
+          "old": "3e01",
+          "new": "ef04"
+        },
+        {
+          "op": "replace",
+          "offset": 1420292,
+          "old": "6400",
+          "new": "0004"
+        },
+        {
+          "op": "replace",
+          "offset": 1421928,
+          "old": "3e0100e168db40e1dd",
+          "new": "ef0400e1000040e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1422100,
+          "old": "3e0100e168db40e1dd",
+          "new": "ef0400e1000040e1f2"
+        },
+        {
+          "op": "replace",
+          "offset": 1593130,
+          "old": "587340e18f",
+          "new": "000040e1ef"
+        },
+        {
+          "op": "insert",
+          "offset": 2564739,
+          "blob": "OP1_vdk.ldr.insert.bin",
+          "sha256": "f1cde517b874c35880cfed73e9e67b0dcd9a3a7db89754ab7d96ee1c1d05bd35",
+          "size": 96
+        }
+      ]
+    }
+  ],
+  "added_files": [
+    {
+      "path": "content/aether.knl",
+      "blob": "content_aether.knl",
+      "sha256": "43fb498453a9c85de10a5d697a4d1c818ee4a6adc25c350e18e5ce2ba883cc99",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/amp.knl",
+      "blob": "content_amp.knl",
+      "sha256": "9c00d7c24c1b51ba7719fc8eb32f28396734cc08acd7b04092173a4e7c88ed5d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/arc.knl",
+      "blob": "content_arc.knl",
+      "sha256": "c59a1a7d26d0f3a37e23523ff0610e91a75849bb1902c8db553ca61223d154ea",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/bloodmoon.knl",
+      "blob": "content_bloodmoon.knl",
+      "sha256": "934b8a78a6e42d7a4f13ddfbc8a6275e1db166acec3006b46430b18f254aac25",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/blot.knl",
+      "blob": "content_blot.knl",
+      "sha256": "9566eaf9c9dcbd91c22b2b052824d744a9787e323d40f2ef4cb6b6af898e5549",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/brassophone.knl",
+      "blob": "content_brassophone.knl",
+      "sha256": "75a9919345d29971c43430687a349cd22f99e37d4e75a4109bfd120f29a8b2e6",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/c64arp.knl",
+      "blob": "content_c64arp.knl",
+      "sha256": "cb0b42297e559d3809a1bcf55b0b46d8872abe39099c8646240924246074a071",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/chord.knl",
+      "blob": "content_chord.knl",
+      "sha256": "9b4ba16a5d5832e0f98ad5b4d6ae2cec7bc7b0471ce5a2068803fad7394f3642",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/clouds.knl",
+      "blob": "content_clouds.knl",
+      "sha256": "154c7aad97c07db001d9519d56b015469b71ec1a0d0f444ebf76ba9f708cdacc",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/composer.knl",
+      "blob": "content_composer.knl",
+      "sha256": "ac16ff73ff52706900370679eca5ef901b8735ae1837b6b78a8594990224359d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/countin.knl",
+      "blob": "content_countin.knl",
+      "sha256": "a0f1d9114bd04082025db79794b8a902f8d7f2b72ba20a97af0a98aa82cab76b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/crush.knl",
+      "blob": "content_crush.knl",
+      "sha256": "5141cacc58fe409363d7cd292ac5ce2ef574b12f6b352ae8f1529721db337e0e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/dddd.knl",
+      "blob": "content_dddd.knl",
+      "sha256": "451ea4fc8f59daf08b51ff939ad2a6db7ca4a319a3109025130cf8d6b1fc9ffe",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/dimension.knl",
+      "blob": "content_dimension.knl",
+      "sha256": "ba93f470d43338f421db151dd325d0b55458e017cc5491787b2f150969aff83e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/dots.knl",
+      "blob": "content_dots.knl",
+      "sha256": "06c3528e24dd6f64a86e3734f817a6d05b1df8ef209974288c5a61875f3aada4",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/drift.knl",
+      "blob": "content_drift.knl",
+      "sha256": "f22d11b8ae7085feca46b0f5faf8cc6c66f274fdd8476666a7a217810257a722",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/drumplus.knl",
+      "blob": "content_drumplus.knl",
+      "sha256": "19c343d42c024a42aaa5e7619ca258c5efde092803f4a6cd71fd957e4036fd40",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/dx.knl",
+      "blob": "content_dx.knl",
+      "sha256": "abbbb011fe944f372cb359dd1e8b142e5a8cdb2f2bdc945fc715b152a3f31bee",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/elg.knl",
+      "blob": "content_elg.knl",
+      "sha256": "e086fafc2db1d739137f3bd67e2434cb5097a0f16a13d0a0c4aad4291120b297",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/ente.knl",
+      "blob": "content_ente.knl",
+      "sha256": "d9e963b555740f01660c5796cd6f86f0c50358929c8c57240f916bd7cc5e8d08",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/euclid.knl",
+      "blob": "content_euclid.knl",
+      "sha256": "af7c7950bf1ceedfd5cb43d6adcbd7c9c0485c28b83807bb578f772ae7933221",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/eva.knl",
+      "blob": "content_eva.knl",
+      "sha256": "cfb8532e567476118f21474f5546fb61cdcc372dde8c0d06f10d6818fdd28567",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/fasterase.knl",
+      "blob": "content_fasterase.knl",
+      "sha256": "22bb484142ebf5bc7ced651cbbce7fe27851c2bd78b9a67a1e8d2917b9d25aeb",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/father.knl",
+      "blob": "content_father.knl",
+      "sha256": "11973689fa7b987f24783cbc8f71a138615ba59b3616d5110973ea2a6f766453",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/file.knl",
+      "blob": "content_file.knl",
+      "sha256": "3433b56afffd2498fdea2a39b08fc9958b61ecd3e64220cc25a8bd6ae5bfc0bf",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/fmbell.knl",
+      "blob": "content_fmbell.knl",
+      "sha256": "fbfd0b161ccbdcb3b3801ccb975c6975a92c11ebd9e30f1fbd921a6fd269ac35",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/gin.knl",
+      "blob": "content_gin.knl",
+      "sha256": "136ec9f8610b044b8b1494abb8b24a8d44dda48599da30eacc7b8bf8f15d26e9",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/granular.knl",
+      "blob": "content_granular.knl",
+      "sha256": "964f58bb13cc867999e4d40145052ffa3db6fb71aa77f6fe93ad6fd610550735",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/grids.knl",
+      "blob": "content_grids.knl",
+      "sha256": "0a429dd500a7b56abdb886a7ed195ffe27e2346ef8dd38a46d6caba9594a042d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/hail.knl",
+      "blob": "content_hail.knl",
+      "sha256": "52eeac37f6208987ad74cd6ad77d76780e2064c2ee22b5aeccbf792ad6e277c8",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/him.knl",
+      "blob": "content_him.knl",
+      "sha256": "24349a2a576ae0ad2556c48720a570b475bf210c9af0612bcce7f307fe7cdde7",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/hold.knl",
+      "blob": "content_hold.knl",
+      "sha256": "1804a8625c42bfb8a265baa72ce3fe55d71310815e3dc52101774c0e4b4ac4e3",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/hollowsaint.knl",
+      "blob": "content_hollowsaint.knl",
+      "sha256": "d46b64a65fdd23477424df77a7036f59e1d4b8682ac95c7aa9e2dece5c84846c",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/in_a_room.knl",
+      "blob": "content_in_a_room.knl",
+      "sha256": "a80ac4835a19abe849846fcd2b97218028430ff18ef105f554cea0ff420038f6",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/juni.knl",
+      "blob": "content_juni.knl",
+      "sha256": "a3bf040141709125e96385f6f28fcae9ab6b0f59986a1b341f5ea751eb1373cd",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/juni_chorus.knl",
+      "blob": "content_juni_chorus.knl",
+      "sha256": "718f94e8a357dbc1afda85e7a9a61bf3feed91a579d6d2dabff6e25f53c92305",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/kastle.knl",
+      "blob": "content_kastle.knl",
+      "sha256": "8401bb8ab433e3511b126f7b47d10682bc8c025f577db1bff44c1fb13afc6e1b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/keyvel.knl",
+      "blob": "content_keyvel.knl",
+      "sha256": "cc04391f5559f340b027c02fc4eefff826b12ab28abbd4480798a360f91e6cad",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/khorus.knl",
+      "blob": "content_khorus.knl",
+      "sha256": "c7f9dbaf4efb229a1f32ec91dbd10447149d6aa63f42fb0007f1a0acabc29d28",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/latch.knl",
+      "blob": "content_latch.knl",
+      "sha256": "ad40d42366551e378ec8f84bd1044d407a02b7c3ee0b599d5d4a89b8a3f76edc",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/lineclock.knl",
+      "blob": "content_lineclock.knl",
+      "sha256": "c89d6cb51c9e84ee9ce674ca172ce40b723b32329093db4fe29d74981be19f57",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/ludwig.knl",
+      "blob": "content_ludwig.knl",
+      "sha256": "3b2c6d285b3a598940073253d189c1e5e690d4d1aef7d1a1582aa7f8eb32ded7",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/markers.knl",
+      "blob": "content_markers.knl",
+      "sha256": "f615f0fbaff8afbe33ecb8ac2f5a9d633d304879b5fac2047e767556d0069c7b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/matrix.knl",
+      "blob": "content_matrix.knl",
+      "sha256": "dd7b31010004b2beaecd6ff654bf5807b4063fc62004895e2dc4a0a7c2e14c66",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/mbira.knl",
+      "blob": "content_mbira.knl",
+      "sha256": "568fd26c1207d26c7554688f16709f46bf5c5aca76aa1ed5711bf4fdfb15a7e1",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/midicc.knl",
+      "blob": "content_midicc.knl",
+      "sha256": "aba71cb9dc83af63b35d04d1cee8480a697d29d489adb1e74c00bce51df5cd7e",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/midiseq.knl",
+      "blob": "content_midiseq.knl",
+      "sha256": "8f6e3ad1315a9ccb75cec0325317e5efb2dbe7f453da1410986489c4c066b4d1",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/mixtur.knl",
+      "blob": "content_mixtur.knl",
+      "sha256": "3ae8b0d2a35a1542052bfcbe1587dbc9a77af8f9d554bcb108d699b49bc315ad",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/moai.knl",
+      "blob": "content_moai.knl",
+      "sha256": "857c7f381b1f856926b23014f1b6ef5f6eeb3731a5500a8eb1551cbd33bb6253",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/monolit.knl",
+      "blob": "content_monolit.knl",
+      "sha256": "5dc998992db94147e4f53834e400eae271d3f3ce25d5100fd5e4947db23ada98",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/naming.knl",
+      "blob": "content_naming.knl",
+      "sha256": "87ea1b3e033d3bde7df021bc41641d901e12582cf3425a7306e87f288c5e09a6",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/nostromo.knl",
+      "blob": "content_nostromo.knl",
+      "sha256": "a30acf10a86dcc15bc7ecec15c02edd8d6f2d02ea1944c6d7184b8e6621a37ad",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/oblique.knl",
+      "blob": "content_oblique.knl",
+      "sha256": "185827e64b55c8ce541ea0a14439f7966556412f3bf275429c361328a4f3ff17",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/oracle.knl",
+      "blob": "content_oracle.knl",
+      "sha256": "0cae4ff148ad65acccb7ecc6f95bccf5d7a2de453ba3cc6f8cbace0aa701eb07",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/outatime.knl",
+      "blob": "content_outatime.knl",
+      "sha256": "27a1f91e9c2d91ae18f1a918336e1e9c9f5b50f5f531f3639fd2381d94101d64",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/oxbow.knl",
+      "blob": "content_oxbow.knl",
+      "sha256": "a4c8595dc62b6623359688fbabbb0c82b087b9c9db490f8e1544ede0a57d9d6c",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/palme.knl",
+      "blob": "content_palme.knl",
+      "sha256": "3208fa1ea8dda21675936bf87ee71be095e357b1e99df822215ef707b46b542d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/peal.knl",
+      "blob": "content_peal.knl",
+      "sha256": "0dea649d5cdba90e3e1aaf8151e246fa61ba60e405b6760ae7bcb30e6691c412",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/pew.knl",
+      "blob": "content_pew.knl",
+      "sha256": "c0eedf59bca3451e29c97755c82b38459da3cbb32ef4da56b458687d5547410b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/pinboard.knl",
+      "blob": "content_pinboard.knl",
+      "sha256": "5bf7a4ab48065316737c2bd19500a14c4d526ec2a6ddca67ede75de400d11476",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/plate.knl",
+      "blob": "content_plate.knl",
+      "sha256": "2b5c37cca1f7ab63646ae0e930052dad5f60512e5fab08c1482216e80525f689",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/punch.knl",
+      "blob": "content_punch.knl",
+      "sha256": "b69d1f56c423c81c082974ca0db4277dcced8b6b97ae78a9a584827265b3490c",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/quad.knl",
+      "blob": "content_quad.knl",
+      "sha256": "f5e4516371b245b0edf6686f89be506fdbb63dd1255ee9dfe8350c5781bb3b7b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/rackverb.knl",
+      "blob": "content_rackverb.knl",
+      "sha256": "f841a771a3c2c4f7f6428db924efe6771a69429a4f1bc313248172fc8e45a968",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/randomiser.knl",
+      "blob": "content_randomiser.knl",
+      "sha256": "dd480fb87f28c431c6254a59debf1ba8ef5c896605177d2f80fb5ab97e33894b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/reactor.knl",
+      "blob": "content_reactor.knl",
+      "sha256": "bc59a6775c9b4eee32c3916d5720f1c585dcd75c92ea712229a8381d5d42e2cd",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/reverb.knl",
+      "blob": "content_reverb.knl",
+      "sha256": "51e80147e11e2c190070c61057e93b0b20f3b090c133a563c3676720ca8bf0a4",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/samplerplus.knl",
+      "blob": "content_samplerplus.knl",
+      "sha256": "3785d6c24c117136e7da21c2ade3c0d701f8cd7609461e8bf54b855def8ef4bf",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sampletools.knl",
+      "blob": "content_sampletools.knl",
+      "sha256": "24af2d9501f31f52827e097930e1fbd495d2226b5c378d7dd62b0ee01bdf3c87",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/scale.knl",
+      "blob": "content_scale.knl",
+      "sha256": "38c35784c20cb8b5f133e3b9a36b50ef90c3d2faf63f7610a0612d99c901ca49",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sid.knl",
+      "blob": "content_sid.knl",
+      "sha256": "7a719d2a7aefc3ce8eb462fff10eeb357ac012630f147c64b4ff224a38683778",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sister.knl",
+      "blob": "content_sister.knl",
+      "sha256": "54a8f21df10063260cdea1083184a326bf3e098f4d790b07cf378806a758a0d1",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/snap.knl",
+      "blob": "content_snap.knl",
+      "sha256": "0dab5f1e4b432b255fd01474c644cd31f90b8bf15bd8f27a168b250afd548099",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/snowglobe.knl",
+      "blob": "content_snowglobe.knl",
+      "sha256": "58e991332ba0263d88b0be11d449f81b765c362ae962e02b40b74a59384b1c3b",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/steve.knl",
+      "blob": "content_steve.knl",
+      "sha256": "59d2dcafc549c7b0e2eccd44dacce956442e1d10e020e3349c019a484f6ed574",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/strip.knl",
+      "blob": "content_strip.knl",
+      "sha256": "762521d6720067e59bdf0644c0075e5f9657acf3b25909ccc3e861dbc4abe554",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/strum.knl",
+      "blob": "content_strum.knl",
+      "sha256": "b1cbc52a6ee1f72137b755b88243436fd6b77803937c0aa9dcdd9048b573f6d4",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/stutter.knl",
+      "blob": "content_stutter.knl",
+      "sha256": "5ab7bbf4a66548a00f1a36594ec2144a0b9aa5919a2b6cc7cb52ca3a0781d0dd",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/supersaw.knl",
+      "blob": "content_supersaw.knl",
+      "sha256": "389a1d985111cfd2ad6f2ad60838e3eee99fdfa294bfb72543a1c13f9955869d",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/sysmon.knl",
+      "blob": "content_sysmon.knl",
+      "sha256": "a5f9080e0f213aed56dfa30b7ba02738c52052ba08957ec69b44f1d4eed3e4fa",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/taffy.knl",
+      "blob": "content_taffy.knl",
+      "sha256": "780cb27fe9e648f59c182e491145974b0b9bc5a06060236e703576a6a2e82e89",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/tape.knl",
+      "blob": "content_tape.knl",
+      "sha256": "18f69347a95627447614d8edf28ca809528fcb6cbcb21c8d22e93ec41a8056e8",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/tapes.knl",
+      "blob": "content_tapes.knl",
+      "sha256": "bda92e441f159736b85ed52ed8b4678a49af3f64c9765631b5d23d941321a014",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/trail.knl",
+      "blob": "content_trail.knl",
+      "sha256": "5a7efd198923b3ab4e964f815ca6d38ccbe27354577320a0d69bc7189d5d8a03",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/trigguard.knl",
+      "blob": "content_trigguard.knl",
+      "sha256": "4a99d1f882e94b7bcc043677cd05047937cec32dd7b5353ab70979ea25c43232",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/undo.knl",
+      "blob": "content_undo.knl",
+      "sha256": "9294ec8c30936856a3b58b640ce579c38c303014374abdbec26efdba458a61bf",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/vapora.knl",
+      "blob": "content_vapora.knl",
+      "sha256": "2538626f5e2f700060d0a30fb285073ee74d2b959ab015738e650c4c9b2c5184",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/vox.knl",
+      "blob": "content_vox.knl",
+      "sha256": "b8f8162c169bcf974aafeae156a95e948876df2c60df4e9216dff31ec4cd1147",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/warble.knl",
+      "blob": "content_warble.knl",
+      "sha256": "b49ec4e29d938c341c6085262cecfe4550417dfbf468ce9b10585fc7876ecfa4",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/washer.knl",
+      "blob": "content_washer.knl",
+      "sha256": "aa5c4261134bb67afa061ca299b3853aee3927d55b0dfb6842ecec9d146186b7",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/wavetable.knl",
+      "blob": "content_wavetable.knl",
+      "sha256": "7bf1dae698e1c57f54565750add75ea527f82b1e8874ac7b65ec73214aea63d3",
+      "template": "content/display/iter.svg"
+    },
+    {
+      "path": "content/windwood.knl",
+      "blob": "content_windwood.knl",
+      "sha256": "d1205fd0bb2ee4a58446d15b95957ce6c48d369edc9183c1911741b51137c2da",
+      "template": "content/display/iter.svg"
+    }
+  ],
+  "added_directories": [
+    {
+      "path": "op1r_stage",
+      "template": "content"
+    },
+    {
+      "path": "kennel_recovery",
+      "template": "content"
+    }
+  ],
+  "result": {
+    "tar_sha256": "6c77395e911573c3660ff5c371e9f35e456c54d8734a1eb8b1c0e837906966d5"
+  }
+}

@@ -145,7 +145,7 @@
           "description": "Blend the wet signal with the dry"
         }
       ],
-      "screen_bytes": 21112,
+      "screen_bytes": 21152,
       "file": "washer.knl",
       "needs": []
     },
@@ -180,7 +180,8 @@
     }
   ],
   "preset_caps": [
-    300
+    300,
+    1024
   ],
   "utilities": [
     {
@@ -253,7 +254,7 @@
       "name": "Granular",
       "type": "granular sampler",
       "description": "Plays the slot's sample as grains.",
-      "screen_bytes": 1632,
+      "screen_bytes": 240,
       "file": "granular.knl",
       "needs": []
     },
@@ -263,7 +264,7 @@
       "name": "Tape",
       "type": "tape echo",
       "description": "Vintage tape echo.",
-      "screen_bytes": 14760,
+      "screen_bytes": 14736,
       "file": "tape.knl",
       "needs": []
     },
@@ -283,7 +284,7 @@
       "name": "Reverb",
       "type": "plate / hall reverb",
       "description": "Plate and hall reverb, after Mutable Instruments Elements.",
-      "screen_bytes": 68184,
+      "screen_bytes": 68192,
       "file": "reverb.knl",
       "needs": []
     },
@@ -502,7 +503,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 4704,
+      "screen_bytes": 4640,
       "file": "oracle.knl",
       "needs": []
     },
@@ -601,12 +602,10 @@
       "id": "usbout",
       "kind": "feature",
       "name": "USB out",
-      "always": true,
+      "reserved": true,
       "bases": [
         "kennel30-plugins"
-      ],
-      "file": "usbout.knl",
-      "needs": []
+      ]
     },
     {
       "id": "oxbow",
@@ -615,7 +614,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 182640,
+      "screen_bytes": 32808,
       "file": "oxbow.knl",
       "needs": []
     },
@@ -659,7 +658,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 64672,
+      "screen_bytes": 64696,
       "file": "sid.knl",
       "needs": []
     },
@@ -670,7 +669,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 245488,
+      "screen_bytes": 47792,
       "file": "c64arp.knl",
       "needs": []
     },
@@ -724,7 +723,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 25904,
+      "screen_bytes": 25928,
       "file": "gin.knl",
       "needs": []
     },
@@ -735,7 +734,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 67672,
+      "screen_bytes": 67640,
       "file": "amp.knl",
       "needs": []
     },
@@ -825,7 +824,7 @@
     {
       "id": "lander_bit",
       "kind": "feature",
-      "name": "(bit 64: the Lander core option)",
+      "name": "(bit 64: reserved, was the Lander core option; removed 2026-11-15)",
       "reserved": true,
       "bases": [
         "kennel30-plugins"
@@ -953,7 +952,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 36784,
+      "screen_bytes": 36808,
       "file": "reactor.knl",
       "needs": []
     },
@@ -1043,6 +1042,147 @@
       "screen_bytes": 400,
       "file": "ente.knl",
       "needs": []
+    },
+    {
+      "id": "strip",
+      "kind": "feature",
+      "name": "Channel strip",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "strip.knl",
+      "needs": []
+    },
+    {
+      "id": "dimension",
+      "kind": "synth",
+      "name": "DIMENSION",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 22472,
+      "file": "dimension.knl",
+      "needs": []
+    },
+    {
+      "id": "him",
+      "kind": "drum",
+      "name": "HIM",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 128,
+      "file": "him.knl",
+      "needs": []
+    },
+    {
+      "id": "khorus",
+      "kind": "fx",
+      "name": "KHORUS",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 39928,
+      "file": "khorus.knl",
+      "needs": []
+    },
+    {
+      "id": "kastle",
+      "kind": "synth",
+      "name": "KASTLE",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 128,
+      "file": "kastle.knl",
+      "needs": []
+    },
+    {
+      "id": "matrix",
+      "kind": "feature",
+      "name": "Matrix LFO",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 8000,
+      "lfo_type": true,
+      "file": "matrix.knl",
+      "needs": []
+    },
+    {
+      "id": "keyvel",
+      "kind": "feature",
+      "name": "Key velocity",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "keyvel.knl",
+      "needs": []
+    },
+    {
+      "id": "trigguard",
+      "kind": "feature",
+      "name": "Trigger guard",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "trigguard.knl",
+      "needs": []
+    },
+    {
+      "id": "dx",
+      "kind": "synth",
+      "name": "DX",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 128,
+      "file": "dx.knl",
+      "needs": []
+    },
+    {
+      "id": "drift",
+      "kind": "synth",
+      "name": "DRIFT",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 592,
+      "file": "drift.knl",
+      "needs": []
+    },
+    {
+      "id": "ludwig",
+      "kind": "synth",
+      "name": "LUDWIG",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 128,
+      "file": "ludwig.knl",
+      "needs": []
+    },
+    {
+      "id": "windwood",
+      "kind": "synth",
+      "name": "Windwood",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 59528,
+      "file": "windwood.knl",
+      "needs": []
+    },
+    {
+      "id": "pinboard",
+      "kind": "synth",
+      "name": "PINBOARD",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 128,
+      "file": "pinboard.knl",
+      "needs": []
     }
   ],
   "screen_budget": {
@@ -1051,7 +1191,7 @@
     "base": 4409868,
     "worst_screen": 250000,
     "lazy_cap": 409600,
-    "per_preset": 2785,
+    "per_preset": 188,
     "own_min": 16384,
     "own_svg_factor": 5.1,
     "own_size_factor": 2.25

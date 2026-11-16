@@ -1,7 +1,7 @@
 // Debug view of what a kennel OP-1 has installed, only with ?push in the URL. Send to OP–1 reads the inventory first
 // (op1push.js push() check) and app.js hands it to showInventory; no extra click. Saving the switched-off list opens
 // its own session. Not the conflict screen (kennel PLAN phase 7 gets its own design); this only shows the raw data.
-import {openWebMidi, session} from './op1push.js?v=3.0-hostile-ui-20261018';
+import {openWebMidi, session} from './op1push.js?v=3.3-presets-20261113';
 
 const params = new URLSearchParams(location.search);
 export let showInventory = () => {};

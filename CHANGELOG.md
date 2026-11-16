@@ -1,5 +1,83 @@
 # Changelog
 
+## 3.3
+
+Highlights:
+
+- [Presets over USB](https://hundekraft.github.io/op1-workshop/manual.html#presets-usb): with the OP-1 plugged in, the workshop's Presets section shows the synth presets and drum kits on it. Add, replace and delete them from your browser, with no disk mode and no restart. Your own `.aif` files and DX banks go the same way.
+- [Key velocity](https://hundekraft.github.io/op1-workshop/manual.html#keyvel) for the original OP-1: the accelerometer feels how hard each key hits the case, so harder hits play louder. It starts off; switch it on in settings. (Hundekraft)
+- [Room for 1,024 presets](https://hundekraft.github.io/op1-workshop/manual.html#presets) and 256 drum kits of your own, up from 300 and 34, and the preset list stays quick. Going back to an older version needs a format first.
+- [Manage presets on the OP-1](https://hundekraft.github.io/op1-workshop/manual.html#naming): save over a preset, rename it or delete it, right from the preset browser.
+- [Channel strips](https://hundekraft.github.io/op1-workshop/manual.html#strip) for the synth and the drums: high-pass, low-pass, an EQ band, drive and level, before the effect. [Each tape track](https://hundekraft.github.io/op1-workshop/manual.html#tape-strips) gets one too, saved with the tape. (Hundekraft)
+- [Every synth comes with at least 12 presets](https://hundekraft.github.io/op1-workshop/manual.html#presets), and the workshop sends only the presets for what's in your build.
+
+New synths and drums:
+
+- [DRIFT](https://hundekraft.github.io/op1-workshop/manual.html#drift): a small neural net draws the waveform, and the four knobs move through its sound space. The screen is a landscape made of the waves it draws. (Hundekraft)
+- [LUDWIG](https://hundekraft.github.io/op1-workshop/manual.html#ludwig): a piano built from measured recordings of a Yamaha grand. You hear the real hammer attack, then every overtone at its own pitch, so the [tuning](https://hundekraft.github.io/op1-workshop/manual.html#ludwig-tuning) can go anywhere from meantone to stretched. It has a [sustain pedal](https://hundekraft.github.io/op1-workshop/manual.html#ludwig-pedal) too. (Hundekraft; samples from the Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0; screen art by Rackes)
+- [PINBOARD](https://hundekraft.github.io/op1-workshop/manual.html#pinboard): a synth you patch with pins, after the EMS VCS3. Two oscillators, noise, a ring modulator, a filter that squeals and a third oscillator that runs slow or at audio rate. Pick one of 64 pin patterns or [wire your own board](https://hundekraft.github.io/op1-workshop/manual.html#pinboard-edit). (Hundekraft)
+- [Windwood](https://hundekraft.github.io/op1-workshop/manual.html#windwood): a clarinet made from a reed, air and a tube instead of samples, with growl, flutter-tongue and smooth slurs from note to note. (nvmsocool)
+- [DX](https://hundekraft.github.io/op1-workshop/manual.html#dx): six-operator FM that plays DX7 voices, with all 32 algorithms. [Add `.syx` banks in the workshop](https://hundekraft.github.io/op1-workshop/manual.html#dx-banks) and they show up on the OP-1 after a restart. A file with several banks is split for you. (LizardMan; kennel port by Hundekraft)
+- [KASTLE](https://hundekraft.github.io/op1-workshop/manual.html#kastle): a four-operator FM drone. A castle and its village sit on the screen, and rain, lightning and fire follow the knobs. (displayname808; kennel port by Hundekraft)
+- [DIMENSION](https://hundekraft.github.io/op1-workshop/manual.html#dimension): an oscillator that morphs from noise to saw, with a sub, a resonant filter and a thick ensemble. Hold Shift for a filter envelope with accent and slide, for 303-style lines. (LizardMan; kennel port by Hundekraft)
+- [HIM](https://hundekraft.github.io/op1-workshop/manual.html#him): a synthesized drum kit. Every hit throws a solid around a glass box on the screen. Four HIM kits are in the drum presets. (LizardMan; kennel port by Hundekraft)
+
+New effect and LFO:
+
+- [KHORUS](https://hundekraft.github.io/op1-workshop/manual.html#khorus): a chorus with one to three voices and a page that moves with it. (LizardMan; kennel port by Hundekraft)
+- [MATRIX](https://hundekraft.github.io/op1-workshop/manual.html#matrix): a new LFO type with up to eight rows of LFOs and envelopes, each aimed at a knob, the envelope, the effect, pitch, volume or another row. (LizardMan; kennel port by Hundekraft)
+
+Sounds that changed:
+
+- [JUNI](https://hundekraft.github.io/op1-workshop/manual.html#juni) is voiced like a Juno-106: a brighter filter that sings at the top of RESONANCE, and the 106's chorus. Saved JUNI sounds come out brighter. (After FM-106 by PatttF and KR-106 by Karl LaRocca)
+- [JUNI chorus](https://hundekraft.github.io/op1-workshop/manual.html#juni-chorus) gets the same 106 chorus, in stereo.
+- [Release times](https://hundekraft.github.io/op1-workshop/manual.html#presets): many of our presets had their release the wrong way round, so pads cut off and basses rang on. That's fixed in the presets of 22 synths.
+- [PLATE](https://hundekraft.github.io/op1-workshop/manual.html#plate) has a new plate reverb, with decay up to 20 s. The old one is still there as [CLASSIC](https://hundekraft.github.io/op1-workshop/manual.html#plate-classic), and sounds you saved use it, so they sound the same.
+- [Elg](https://hundekraft.github.io/op1-workshop/manual.html#elg) has a new sound: every note is a moose call, with throat, breath, a sub and a slow aurora behind it. The old Elg is still there as [CLASSIC](https://hundekraft.github.io/op1-workshop/manual.html#elg-classic), and sounds you saved open in it.
+- [OUTATIME](https://hundekraft.github.io/op1-workshop/manual.html#outatime) has four kinds of drive (warm, hard, tube and fold), and the time circuits show the OP-1's own date and time. Sounds you saved stay warm.
+- [REACTOR](https://hundekraft.github.io/op1-workshop/manual.html#reactor) plays two octaves lower, where it sounds best. Saved REACTOR sounds drop too.
+- [Oxbow](https://hundekraft.github.io/op1-workshop/manual.html#oxbow) has a new screen: a geometric ox head with a gauge in each corner.
+
+Playing and sequencing:
+
+- [Trigger guard](https://hundekraft.github.io/op1-workshop/manual.html#trigguard): a worn key that bounces plays one note, not two. It's on from the start. (Hundekraft, after an idea by Andromax_sussybaka)
+- [HOLD](https://hundekraft.github.io/op1-workshop/manual.html#hold): patterns up to 32 steps, a MULTI mode with four mono tracks, and an octave lock. On the drum page it keeps your pads when you change octave, and transpose changes their pitch.
+- [Composer](https://hundekraft.github.io/op1-workshop/manual.html#composer): eleven new styles, five classical and six written for piano, from ragtime to montuno. Its [drums](https://hundekraft.github.io/op1-workshop/manual.html#composer-drums) vary more from song to song.
+- [Quad LFO](https://hundekraft.github.io/op1-workshop/manual.html#quad) is laid out like the master LFO and has a new polarity setting: both ways, only up or only down. Phase offset and Lorenz chaos are off the knobs; sounds you saved keep theirs.
+- [C64arp](https://hundekraft.github.io/op1-workshop/manual.html#c64arp): RANDOM picks the octave at random too, and the screen is sharper.
+- The [metronome's](https://hundekraft.github.io/op1-workshop/manual.html#settings) TICK and WOOD clicks are as loud as the OP-1's own click now. They were about 20 dB quieter.
+
+Sampling:
+
+- [Drum sample editor](https://hundekraft.github.io/op1-workshop/manual.html#sampedit): lazy chop (play the sample and tap keys to slice it across the pads), auto-cut on a beat grid at your tempo, and tuning for one pad or all 24.
+- [Granular](https://hundekraft.github.io/op1-workshop/manual.html#granular): pitch and grain shape on the pushes, and a new screen. Grains now stay inside the recording, so saved granular sounds play a little differently.
+- [In a room](https://hundekraft.github.io/op1-workshop/manual.html#in-a-room): a synced loop keeps playing at a slower tape speed or tempo, and free loops wrap without a dip and run up to 7.6 s.
+
+Settings, USB and the workshop:
+
+- [USB audio](https://hundekraft.github.io/op1-workshop/manual.html#usb): master only, or master plus the four tracks, taken before or after their faders.
+- [Settings](https://hundekraft.github.io/op1-workshop/manual.html#settings): plugins with settings get pages of their own, and the [RANDOMISER](https://hundekraft.github.io/op1-workshop/manual.html#randomiser) page picks what Shift + drop changes.
+- [More room for plugins](https://hundekraft.github.io/op1-workshop/manual.html#own-plugins): 5 MB instead of 4. The workshop shows a memory bar for your selection and won't build one that doesn't fit.
+- The [firmware file](https://hundekraft.github.io/op1-workshop/manual.html#build) is about 2 MB smaller, so everything you pick fits the OP-1's updater again.
+- Presets load faster at boot, and the [resource monitor](https://hundekraft.github.io/op1-workshop/manual.html#monitor) shows how long each boot stage took.
+- A [crash screen](https://hundekraft.github.io/op1-workshop/manual.html#troubleshooting): when the firmware stops on an error or locks up, it says what went wrong and which plugin was running, instead of freezing on a blank screen. (op1r's xoza and tencur; kennel port by Hundekraft)
+
+Fixes:
+
+- [Gin](https://hundekraft.github.io/op1-workshop/manual.html#gin) no longer crashes when you change an effect after a restart, and no longer gets stuck on UNAVAILABLE, SAVE RETRY or ERROR. Edits made after a restart are saved.
+- [Euclid](https://hundekraft.github.io/op1-workshop/manual.html#euclid), [Dots](https://hundekraft.github.io/op1-workshop/manual.html#dots), [Peal](https://hundekraft.github.io/op1-workshop/manual.html#peal) and [Oracle](https://hundekraft.github.io/op1-workshop/manual.html#oracle) no longer leave notes hanging. Euclid no longer fires on every tick after about half an hour.
+- [MIDI sequencer](https://hundekraft.github.io/op1-workshop/manual.html#midiseq): a power cut no longer leaves it freezing the OP-1 at every boot, a read error no longer overwrites your song, and LIFT on a big range no longer loses notes.
+- [drum+](https://hundekraft.github.io/op1-workshop/manual.html#drumplus): a note still ringing when you switch kits keeps its own kit's settings.
+- [AMP](https://hundekraft.github.io/op1-workshop/manual.html#amp), VOX and SNAP in Ear mode hear the tape the way you do: muted tracks drop out, and each track's volume and pan count.
+- The [drum sampler](https://hundekraft.github.io/op1-workshop/manual.html#sampletools) no longer clicks at the start and end of a sample, or when a note is cut short.
+- [Drum sample editor](https://hundekraft.github.io/op1-workshop/manual.html#sampedit): trims, fades and undo behave, a dropped sample stops at the next pad, and SEQ, REC or the input close the editor first. (tencur, op1r)
+- A shared [sampler+](https://hundekraft.github.io/op1-workshop/manual.html#samplerplus) or [drum+](https://hundekraft.github.io/op1-workshop/manual.html#drumplus) preset with broken values no longer crashes the OP-1.
+- The [resource monitor](https://hundekraft.github.io/op1-workshop/manual.html#monitor) no longer freezes the OP-1 when its memory bookkeeping is damaged.
+- Scrolling an [FX list](https://hundekraft.github.io/op1-workshop/manual.html#effects) no longer clicks.
+- [Help](https://hundekraft.github.io/op1-workshop/manual.html#map)'s fade no longer freezes when nothing else on the screen moves.
+
+From op1r by pcppcp (with fixes by tencur and xoza); In a room by ultralazr; Granular features from displayname808's Granular 0.10.0.
+
 ## 3.2.6
 
 - Fixed sampler+ crashing or freezing the OP-1 when it was on synth keys 5 to 8. On keys 2 to 4 its page now shows the right waveform too.

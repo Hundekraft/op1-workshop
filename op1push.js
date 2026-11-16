@@ -56,7 +56,30 @@ export function parseReply(m) {
 }
 // the device's allow-list (du_path_ok): OP1_vdk.ldr(.knp, a core patch), content/..., plugins/<file>.knl|.op1p (kennel),
 // never te-boot
+// User presets (kennel devupd, HELLO capability 16; docs/sysex-update.md "Presets"): presets/<synth|drum>/<folder>/<name>.aif,
+// folder 1..24 and name 1..32 of a-z 0-9 space _ -, no space at either end, folder not "user". A DELETE of that path
+// removes the preset. Capability 32: PRESET_APPLY puts them in at once (no restart), PRESET_LIST reads them back.
+export const CAP_PRESETS = 16, CAP_PRESET_LIVE = 32, PRESET_APPLY = 13, PRESET_LIST = 14, PRESET_FOLDER = 24, PRESET_NAME = 32;
+export const PRESET_BATCH = 128;
+// what the OP-1 did with each sent preset (kennel kn_presets.c), PRESET_LIST what 2
+export const PRESET_RESULT = {1: 'added', 2: 'replaced', 3: 'deleted', 4: 'not on the OP–1', 16: 'not an OP–1 preset file',
+  17: 'the preset text can’t be read', 18: 'the sample must be 16-bit mono, up to 6 s (synth) or 12 s (kit)',
+  19: 'no room for more synth presets', 20: 'no room for more sampler presets', 21: 'no room for more kits',
+  22: 'the OP–1 refused the sound settings', 23: 'couldn’t be written', 24: 'the OP–1 didn’t report its preset limit',
+  25: 'couldn’t be deleted', 26: 'name not allowed'};                                   // files per update (du.h DU_MAX_FILES)
+export function presetPath(p) {
+  const m = /^presets\/(synth|drum)\/([a-z0-9 _-]+)\/([a-z0-9 _-]+)\.aif$/.exec(p || '');
+  if (!m || p.length >= 96) return false;
+  const [, , folder, name] = m, trim = x => x === x.trim();
+  return folder.length <= PRESET_FOLDER && name.length <= PRESET_NAME && trim(folder) && trim(name) && folder !== 'user';
+}
+// DX voice banks (kennel devupd, HELLO capability 64; docs/sysex-update.md "DX voice banks"): user/dx/<name>.syx, name
+// 1..13 of a-z 0-9 _ -, exactly 4104 bytes (32 voices) or 163 (one voice). A DELETE of that path removes the bank. Both
+// are applied at the restart (T1), like plugin files.
+export const CAP_DX_BANKS = 64, DX_NAME = 13, DX_BANK = 4104, DX_VOICE = 163, DX_MAX_BANKS = 16;
+export const dxPath = p => /^user\/dx\/[a-z0-9_-]{1,13}\.syx$/.test(p || '') && !/te-boot|te_boot|teboot/.test(p);
 export function pathOk(p) {
+  if (presetPath(p) || dxPath(p)) return true;
   if (!p || p.length >= 96 || !/^[A-Za-z0-9_.\/-]+$/.test(p) || p.startsWith('/') || p.endsWith('/')) return false;
   if (/te-boot|te_boot|teboot/i.test(p) || p.includes('..') || p.includes('//')) return false;
   return p === 'OP1_vdk.ldr' || p === CORE_PATCH || p.startsWith('content/') || /^plugins\/[^/.][^/]*\.(knl|op1p)$/.test(p);
@@ -116,9 +139,10 @@ class Inbox {
 // Resolves when the OP-1 accepted COMMIT (it then restarts and applies). Throws on refusal, cancel or silence.
 export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 8, dataTimeoutMs = 3000, dataTries = 5,
                                          resume = {}, log = () => {}, progress = () => {}, confirm = () => {}, check, signal,
-                                         deletes = [], off} = {}) {
+                                         deletes = [], off, apply = false} = {}) {
   for (const [p] of files) if (!pathOk(p)) throw Error(`${p}: not allowed (only OP1_vdk.ldr, content/ and plugin files)`);
-  for (const p of deletes) if (!pluginPath(p)) throw Error(`${p}: only plugin files can be removed`);
+  for (const p of deletes) if (!pluginPath(p) && !presetPath(p) && !dxPath(p)) throw Error(`${p}: only plugin files can be removed`);
+  if (apply && [...files.map(([p]) => p), ...deletes].some(p => !presetPath(p))) throw Error('Only presets go in without a restart');
   for (const [p] of files) {                                       // BEGIN must fit in one USB transfer too
     try { build(BEGIN, 0, Uint8Array.from([0, 0, 0, 0, 0, 0, 0, 0, ...new TextEncoder().encode(p), 0])); }
     catch { throw Error(`${p}: path too long to send over USB MIDI`); }
@@ -148,6 +172,10 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
   log(`OP–1 update protocol ${rd32(hello[1])}`);
   if ((deletes.length || off !== undefined) && !(hello[1][4] & CAP_PLUGINS))
     throw Error('This OP–1 cannot apply plugin choices over USB. Install the downloaded firmware through the update menu.');
+  if ([...files.map(([p]) => p), ...deletes].some(presetPath) && !(hello[1][4] & (apply ? CAP_PRESET_LIVE : CAP_PRESETS)))
+    throw coded(Error('This OP–1 can’t take presets over USB yet. Update it to the newest hundekraft first.'), 'no-presets');
+  if ([...files.map(([p]) => p), ...deletes].some(dxPath) && !(hello[1][4] & CAP_DX_BANKS))
+    throw coded(Error('This OP–1 can’t take DX banks over USB yet. Update it to the newest hundekraft first.'), 'no-dx');
   const total = files.reduce((n, [, d]) => n + d.length, 0);
   const dataMsg = (data, off) => Uint8Array.from([...u32(off), ...data.subarray(off, off + Math.min(USB_MAX_DATA, data.length - off))]);
   let first = 0, acked = 0;
@@ -212,12 +240,20 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
       stop();
       const r = await s.ask(DELETE, Uint8Array.from([...new TextEncoder().encode(p), 0]));
       if (r[2] !== OK) { resume.key = null; throw Error(`${p}: removing refused (${statusText(r[2])})`); }
-      log(`${p}: removed at the restart`);
+      log(`${p}: ${apply ? 'to be removed' : 'removed at the restart'}`);
     }
     if (off) { await s.setOff(off); log(`switched off: ${off.length ? off.join(', ') : 'nothing'}`); }
     final = async c => { const r = await s.ask(c); return [r[2], r[3]]; };
   }
   if (!files.length && !deletes.length) cmd = RESTART;              // nothing staged: only the restart
+  if (apply) {                                                      // presets: in at once, no key, no restart
+    const r = await final(PRESET_APPLY);
+    if (!r) throw silent(PRESET_APPLY);
+    resume.key = null;
+    if (r[0] !== OK) throw Error(`The OP–1 refused the presets (${statusText(r[0])})`);
+    log('presets applied on the OP–1');
+    return {apply: rd32(r[1])};
+  }
   log('confirm on the OP-1: T1 restart, T2 cancel');
   let asked = false;
   for (;;) {
@@ -321,7 +357,8 @@ export function session(port, {timeoutMs = 3000, tries = 5, log = () => {}, sign
     async hello() {                                                // {version, inventory, plugins}
       if (!hello) {
         const r = await ask(HELLO), caps = r[3].length > 4 ? r[3][4] : 0;
-        hello = {version: rd32(r[3]), inventory: !!(caps & CAP_INVENTORY), plugins: !!(caps & CAP_PLUGINS), patch: !!(caps & CAP_PATCH)};
+        hello = {version: rd32(r[3]), inventory: !!(caps & CAP_INVENTORY), plugins: !!(caps & CAP_PLUGINS), patch: !!(caps & CAP_PATCH),
+                 presets: !!(caps & CAP_PRESETS), presetsLive: !!(caps & CAP_PRESET_LIVE), dxBanks: !!(caps & CAP_DX_BANKS)};
         log(`OP–1 update protocol ${hello.version}${hello.inventory ? ', inventory' : ''}`);
       }
       return hello;
@@ -338,6 +375,41 @@ export function session(port, {timeoutMs = 3000, tries = 5, log = () => {}, sign
         off += n;
       }
       return off === size ? {size, crc} : null;
+    },
+    async presetAsk(what, from) {                                  // PRESET_LIST: the payload after the status
+      const r = await ask(PRESET_LIST, Uint8Array.from([what, ...u32(from)]));
+      if (r[2] !== OK) throw Error(`The OP–1 refused the preset list (${statusText(r[2])})`);
+      return r[3];
+    },
+    // [{kind, folder, name, sampler, cut}] or null. cut: a row too long for one record, its folder and name shortened
+    // (a fourth field "c"); out.incomplete: an older OP-1 stopped on such a row, so the rest of that list is missing
+    async presets() {
+      if (!(await s.hello()).presetsLive) return null;
+      const out = [];
+      for (const [what, kind] of [[0, 'synth'], [1, 'drum']]) {
+        let from = 0;
+        for (;;) {
+          const p = await s.presetAsk(what, from), last = rd32(p);
+          for (const line of new TextDecoder().decode(p.subarray(5)).split('\n').filter(l => l)) {
+            const [folder, name, t, c] = line.split('\t');
+            if (name === undefined || t === undefined) continue;   // a broken record: left out
+            out.push({kind, folder, name, sampler: t === 's', cut: c === 'c'});
+          }
+          if (!p[4]) break;
+          if (last === from) { out.incomplete = true; break; }
+          from = last;
+        }
+      }
+      return out;
+    },
+    async presetResults() {                                        // {apply, running, results: [code per sent file]}
+      const p = await s.presetAsk(2, 0), n = p[5], results = [...p.subarray(6)];
+      while (results.length < n) results.push(...(await s.presetAsk(2, results.length)).subarray(6));
+      return {apply: rd32(p), running: !!p[4], results: results.slice(0, n)};
+    },
+    async presetCounts() {                                         // {synth, sampler, drum}: {have, cap (null: unknown)}
+      const p = await s.presetAsk(3, 0), v = i => p[i] | p[i + 1] << 8, c = i => v(i) === 0xFFFF ? null : v(i);
+      return {synth: {have: v(0), cap: c(2)}, sampler: {have: v(4), cap: c(6)}, drum: {have: v(8), cap: c(10)}};
     },
     async list() {                                                 // [{kind, name, source, path, ..., claims}] or null
       return (await s.inventory())?.records ?? null;
@@ -398,7 +470,9 @@ export async function readInventory(port, opts) {
   const s = session(port, opts);
   const inv = await s.inventory();
   if (!inv) return null;
-  return {...inv, plugins: (await s.hello()).plugins, patch: (await s.hello()).patch, off: await s.getOff(), offBoot: await s.getOff({atBoot: true})};
+  return {...inv, plugins: (await s.hello()).plugins, patch: (await s.hello()).patch, presetsLive: (await s.hello()).presetsLive,
+          dxBanks: (await s.hello()).dxBanks,
+          off: await s.getOff(), offBoot: await s.getOff({atBoot: true})};
 }
 export const list = (port, opts) => session(port, opts).list();
 export const readCoreFile = (port, opts) => session(port, opts).coreFile();

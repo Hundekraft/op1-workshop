@@ -203,7 +203,7 @@ Use `op1_sin`, `op1_sin_tab` and `op1_sin_q` from render and from an FX's init o
 
 Stay with the existing SDK services for ordinary plugin development: build and distribute your `.knl` independently. A new core hook or exported service is core development. Request or contribute that service separately; it needs review and a full firmware release before plugins can use it. Your plugin still ships as a `.knl`, with the required core version stated in its instructions.
 
-If a player's installed core needs upgrading, the workshop prepares that full update and asks for original R246 when needed. The plugin author does not need to build custom firmware for each recipient. Lander is a deliberate exception to file-based choices: its workshop checkbox selects a full-firmware core variant, with no plugin adapter.
+If a player's installed core needs upgrading, the workshop prepares that full update and asks for original R246 when needed. The plugin author does not need to build custom firmware for each recipient.
 
 ## Declare controls and coexist with other plugins
 
