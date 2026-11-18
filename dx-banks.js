@@ -3,7 +3,7 @@
 // The OP-1 has no list of its banks, so the page remembers the names it sent from this browser (names only, never the
 // bytes). Shown when the OP-1 reports the capability and has the DX engine.
 // Copyright (C) 2026 Hundekraft. GPL-3.0-or-later.
-import {push, dxPath, DX_BANK, DX_VOICE, DX_NAME, DX_MAX_BANKS} from './op1push.js?v=3.3-presets-20261113';
+import {push, dxPath, DX_BANK, DX_VOICE, DX_NAME, DX_MAX_BANKS} from './op1push.js?v=3.3.1-opmodown-20261118';
 
 // what a .syx file is: {voices: 32 | 1} for a DX7 32-voice bulk dump or a single-voice dump the engine reads
 // (plugins/dx/dx_bank.c syx_check_bank32 / syx_check_voice1), else {error: why not}

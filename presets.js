@@ -3,8 +3,8 @@
 // capability. The same section also takes the DX banks (dx-banks.js: .syx files, sent from this browser, applied at the
 // restart). Each update holds at most PRESET_BATCH files, so a bigger send goes as several updates, deletes first.
 // Copyright (C) 2026 Hundekraft. GPL-3.0-or-later.
-import {push, session, presetPath, PRESET_BATCH, PRESET_FOLDER, PRESET_NAME, PRESET_RESULT, DX_NAME, DX_MAX_BANKS} from './op1push.js?v=3.3-presets-20261113';
-import {bankName} from './dx-banks.js?v=3.3-rc15-20261115';
+import {push, session, presetPath, PRESET_BATCH, PRESET_FOLDER, PRESET_NAME, PRESET_RESULT, DX_NAME, DX_MAX_BANKS} from './op1push.js?v=3.3.1-opmodown-20261118';
+import {bankName} from './dx-banks.js?v=3.3.1-opmodown-20261118';
 
 // a name the OP-1 accepts over USB: lower case, a-z 0-9 space _ -, no space at the ends, at most `max` characters
 export function usbName(s, max = PRESET_NAME) {

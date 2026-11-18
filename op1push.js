@@ -78,8 +78,13 @@ export function presetPath(p) {
 // are applied at the restart (T1), like plugin files.
 export const CAP_DX_BANKS = 64, DX_NAME = 13, DX_BANK = 4104, DX_VOICE = 163, DX_MAX_BANKS = 16;
 export const dxPath = p => /^user\/dx\/[a-z0-9_-]{1,13}\.syx$/.test(p || '') && !/te-boot|te_boot|teboot/.test(p);
+// The plugin bridge (kennel synth_sdk/opus, HELLO capability 128): Opus plugin files the user picks go to
+// opus/<name>.opmod (kn_foreign_path_ok: name 1..33 of a-z 0-9 _ -); a DELETE of that path removes one. Both are
+// applied at the restart (T1). Files the workshop bundles ship as content/<name>.opmod, beside the .knl files.
+export const CAP_FOREIGN = 128;
+export const opusPath = p => /^opus\/[a-z0-9_-]{1,33}\.opmod$/.test(p || '');
 export function pathOk(p) {
-  if (presetPath(p) || dxPath(p)) return true;
+  if (presetPath(p) || dxPath(p) || opusPath(p)) return true;
   if (!p || p.length >= 96 || !/^[A-Za-z0-9_.\/-]+$/.test(p) || p.startsWith('/') || p.endsWith('/')) return false;
   if (/te-boot|te_boot|teboot/i.test(p) || p.includes('..') || p.includes('//')) return false;
   return p === 'OP1_vdk.ldr' || p === CORE_PATCH || p.startsWith('content/') || /^plugins\/[^/.][^/]*\.(knl|op1p)$/.test(p);
@@ -91,7 +96,7 @@ export const NO_UPDATE_TEXT = "Your OP–1 is connected but doesn't answer the U
 // error.code on the connection failures below, so the page can tell them apart without reading the text:
 // 'no-midi' (no Web MIDI), 'midi-denied', 'no-port' (no OP-1 port), 'no-reply' (error.cmd got no answer)
 const coded = (error, code, cmd) => Object.assign(error, {code}, cmd === undefined ? {} : {cmd});
-export const pluginPath = p => pathOk(p) && /^(content|plugins)\/[^/.][^/]*\.(knl|op1p)$/.test(p);
+export const pluginPath = p => pathOk(p) && (/^(content|plugins)\/[^/.][^/]*\.(knl|op1p)$/.test(p) || /^content\/[a-z0-9_-]{1,33}\.opmod$/.test(p));
 const u32 = v => [v & 0xFF, v >>> 8 & 0xFF, v >>> 16 & 0xFF, v >>> 24 & 0xFF];
 const rd32 = b => (b[0] | b[1] << 8 | b[2] << 16 | b[3] << 24) >>> 0;
 
@@ -141,7 +146,7 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
                                          resume = {}, log = () => {}, progress = () => {}, confirm = () => {}, check, signal,
                                          deletes = [], off, apply = false} = {}) {
   for (const [p] of files) if (!pathOk(p)) throw Error(`${p}: not allowed (only OP1_vdk.ldr, content/ and plugin files)`);
-  for (const p of deletes) if (!pluginPath(p) && !presetPath(p) && !dxPath(p)) throw Error(`${p}: only plugin files can be removed`);
+  for (const p of deletes) if (!pluginPath(p) && !presetPath(p) && !dxPath(p) && !opusPath(p)) throw Error(`${p}: only plugin files can be removed`);
   if (apply && [...files.map(([p]) => p), ...deletes].some(p => !presetPath(p))) throw Error('Only presets go in without a restart');
   for (const [p] of files) {                                       // BEGIN must fit in one USB transfer too
     try { build(BEGIN, 0, Uint8Array.from([0, 0, 0, 0, 0, 0, 0, 0, ...new TextEncoder().encode(p), 0])); }
@@ -167,6 +172,14 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
     return null;
   }
   const silent = cmd => coded(Error(NO_UPDATE_TEXT), 'no-reply', cmd);
+  async function remove(paths) {
+    for (const p of paths) {
+      const r = await ask(DELETE, Uint8Array.from([...new TextEncoder().encode(p), 0]));
+      if (!r) throw silent(DELETE);
+      if (r[0] !== OK) { resume.key = null; throw Error(`${p}: removing refused (${statusText(r[0])})`); }
+      log(`${p}: ${apply ? 'to be removed' : 'removed at the restart'}`);
+    }
+  }
   const hello = await ask(HELLO);
   if (!hello) throw silent(HELLO);
   log(`OP–1 update protocol ${rd32(hello[1])}`);
@@ -176,6 +189,8 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
     throw coded(Error('This OP–1 can’t take presets over USB yet. Update it to the newest hundekraft first.'), 'no-presets');
   if ([...files.map(([p]) => p), ...deletes].some(dxPath) && !(hello[1][4] & CAP_DX_BANKS))
     throw coded(Error('This OP–1 can’t take DX banks over USB yet. Update it to the newest hundekraft first.'), 'no-dx');
+  if ([...files.map(([p]) => p), ...deletes].some(opusPath) && !(hello[1][4] & CAP_FOREIGN))   // (bundled content/ files ride a full update to any core)
+    throw coded(Error('This OP–1 can’t take Opus plugin files yet. Update it to the newest hundekraft first.'), 'no-opus');
   const total = files.reduce((n, [, d]) => n + d.length, 0);
   const dataMsg = (data, off) => Uint8Array.from([...u32(off), ...data.subarray(off, off + Math.min(USB_MAX_DATA, data.length - off))]);
   let first = 0, acked = 0;
@@ -190,6 +205,10 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
   if (!first && !acked) {                                           // start over: staging on the OP-1 cleared
     if (!await ask(ABORT)) throw silent(ABORT);
     Object.assign(resume, {key, index: 0, open: false, acked: 0});
+    // File removals are staged before the files, so the OP-1 applies them first (du_fw.c walks the staged list in
+    // order): a retired port's file is gone before its replacement goes in. A resumed send staged them already.
+    // Preset removals stay after the files: the apply's results (presets.js) are read in that order.
+    await remove(deletes.filter(p => !presetPath(p)));
   }
   let done = files.slice(0, first).reduce((n, [, d]) => n + d.length, 0);
   for (let i = first; i < files.length; i++) {
@@ -232,17 +251,12 @@ export async function push(port, files, {window = 1, timeoutMs = 10000, tries = 
     done += data.length; acked = 0;
     log(`${path}: sent (${data.length} bytes)`);
   }
+  await remove(deletes.filter(presetPath));
   let final = ask, cmd = COMMIT;
-  if (deletes.length || off) {                                     // kennel: removals and the switched-off list
+  if (off) {                                                       // kennel: the switched-off list
     const s = session(port, {timeoutMs, tries, log});               // (from here on its inbox gets the replies)
     if (!(await s.hello()).plugins) throw Error('This OP–1 can only take a full update. Send the whole firmware instead.');
-    for (const p of deletes) {
-      stop();
-      const r = await s.ask(DELETE, Uint8Array.from([...new TextEncoder().encode(p), 0]));
-      if (r[2] !== OK) { resume.key = null; throw Error(`${p}: removing refused (${statusText(r[2])})`); }
-      log(`${p}: ${apply ? 'to be removed' : 'removed at the restart'}`);
-    }
-    if (off) { await s.setOff(off); log(`switched off: ${off.length ? off.join(', ') : 'nothing'}`); }
+    await s.setOff(off); log(`switched off: ${off.length ? off.join(', ') : 'nothing'}`);
     final = async c => { const r = await s.ask(c); return [r[2], r[3]]; };
   }
   if (!files.length && !deletes.length) cmd = RESTART;              // nothing staged: only the restart
@@ -331,8 +345,13 @@ export function parseInventory(text) {
   const presets = pc.length === 4 && pc[2] === 'cap' ? {count: parseInt(pc[1], 10), cap: parseInt(pc[3], 10)} : null;
   return {presets, core: core && core.len ? core : null, records: lines.slice(1).filter(l => l).map(l => {
     const [kind, name, source, path, version, author, size, crc, state, claims, reason] = l.split('\t');
-    return {kind, name, source, path, version, author, size: +size, crc: parseInt(crc, 16) >>> 0, state, reason: reason || '',
-            claims: (claims ? claims.split(',') : []).map(c => ({name: c.slice(1), state: {'+': 'won', '!': 'lost', '~': 'none'}[c[0]] || 'none'}))};
+    let list = (claims ? claims.split(',') : []).map(c => ({name: c.slice(1), state: {'+': 'won', '!': 'lost', '~': 'none'}[c[0]] || 'none'}));
+    // the plugin bridge's files carry their manifest's CPU figure as a "cpu N" line (plan D8: shown, never a claim)
+    const cpu = source === 'foreign' ? list.find(c => /^cpu \d+$/.test(c.name))?.name.slice(4) ?? null : null;
+    if (source === 'foreign') list = list.filter(c => !/^cpu /.test(c.name));
+    // a bridge file goes by its path: the inventory cuts the manifest id at 15 characters, so two files could share a name
+    return {kind, name: source === 'foreign' && path ? path : name, source, path, version, author, size: +size, crc: parseInt(crc, 16) >>> 0, state, reason: reason || '',
+            claims: list, ...(source === 'foreign' ? {cpu: cpu === null ? null : +cpu, id: name} : {})};
   })};
 }
 // a protocol session on a port: one message in flight, every reply matched by command and sequence number
@@ -358,7 +377,8 @@ export function session(port, {timeoutMs = 3000, tries = 5, log = () => {}, sign
       if (!hello) {
         const r = await ask(HELLO), caps = r[3].length > 4 ? r[3][4] : 0;
         hello = {version: rd32(r[3]), inventory: !!(caps & CAP_INVENTORY), plugins: !!(caps & CAP_PLUGINS), patch: !!(caps & CAP_PATCH),
-                 presets: !!(caps & CAP_PRESETS), presetsLive: !!(caps & CAP_PRESET_LIVE), dxBanks: !!(caps & CAP_DX_BANKS)};
+                 presets: !!(caps & CAP_PRESETS), presetsLive: !!(caps & CAP_PRESET_LIVE), dxBanks: !!(caps & CAP_DX_BANKS),
+                 foreign: !!(caps & CAP_FOREIGN)};
         log(`OP–1 update protocol ${hello.version}${hello.inventory ? ', inventory' : ''}`);
       }
       return hello;
@@ -471,7 +491,7 @@ export async function readInventory(port, opts) {
   const inv = await s.inventory();
   if (!inv) return null;
   return {...inv, plugins: (await s.hello()).plugins, patch: (await s.hello()).patch, presetsLive: (await s.hello()).presetsLive,
-          dxBanks: (await s.hello()).dxBanks,
+          dxBanks: (await s.hello()).dxBanks, foreign: (await s.hello()).foreign,
           off: await s.getOff(), offBoot: await s.getOff({atBoot: true})};
 }
 export const list = (port, opts) => session(port, opts).list();
@@ -482,19 +502,38 @@ export const setOff = (port, names, opts) => session(port, opts).setOff(names);
 // ---- Single plugin files (kennel, HELLO capability 2): what to send, delete and switch off ----
 const KINDS = {1: 'synth', 2: 'fx', 3: 'feature'};
 // what a .knl or .op1p file says: {name, kind, crc (the CRC it carries, as LIST reports it), claims, author, version}
+// A .knl's header: after the screen SVG's NUL and the per-panel SVG chunks ('K' 'V' code 0 | u32 size | text | NUL),
+// on the next 4-byte boundary, as kennel's loader finds it (kn_load.c header_offset / skip_svg_chunks). svgEnd: the end
+// of the screen SVG and its chunks (0 without a screen). A malformed chunk ends the walk, and the KNPL check then fails.
+export function knlHeader(d) {
+  if (d[0] !== 0x3C) return {h: 0, svgEnd: 0};
+  let p = 0;
+  while (p < d.length && d[p]) p++;
+  p++;
+  while (p + 8 <= d.length && d[p] === 0x4B && d[p + 1] === 0x56) {
+    const n = (d[p + 4] | d[p + 5] << 8 | d[p + 6] << 16 | d[p + 7] << 24) >>> 0;
+    if (d[p + 3] || n < 10 || n > 1 << 22 || p + n > d.length || d[p + n - 1]) break;
+    p += n;
+  }
+  return {h: (p + 3) & ~3, svgEnd: Math.min(p, d.length)};
+}
 export function pluginInfo(path, d) {
   const id = path.split('/').pop().replace(/\.(knl|op1p)$/i, '');
   const dv = new DataView(d.buffer, d.byteOffset, d.byteLength), cstr = (o, max) => {
     let e = o; while (e < Math.min(d.length, o + max) && d[e]) e++;
     return new TextDecoder().decode(d.subarray(o, e));
   };
+  if (path.endsWith('.opmod')) {                                   // the plugin bridge: named by its path, as parseInventory names it
+    const m = opmodManifest(d);
+    return {name: path, savedName: m.id || id, kind: 'fx', crc: dv.getUint32(12, true), claims: [], claimsKnown: true,
+            author: m.author || '', version: m.version || '', size: d.length};
+  }
   if (path.endsWith('.op1p')) {                                    // trailer: magic, bin_off, bin_len, crc32
     const t = d.length - 16, bin = dv.getUint32(t + 4, true);
     return {name: id, savedName: cstr(bin + 16, 16), kind: dv.getUint32(bin + 12, true) === 1 ? 'fx' : 'synth', crc: dv.getUint32(t + 12, true),
             claims: [], claimsKnown: false, author: '', version: '', size: d.length};
   }
-  let h = 0;                                                       // .knl: header after the screen SVG and its NUL
-  if (d[0] === 0x3C) { while (h < d.length && d[h]) h++; h = (h + 4) & ~3; }
+  const {h} = knlHeader(d);                                        // .knl: header after the screen SVG and its chunks
   if (cstr(h, 4) !== 'KNPL') throw Error(`${path}: not a kennel plugin file`);
   const info = {name: id, savedName: cstr(h + 20, 16), kind: KINDS[d[h + 18]] || '-', crc: dv.getUint32(h + 12, true),
                 claims: [], claimsKnown: false, author: '', version: '', size: d.length};
@@ -508,6 +547,18 @@ export function pluginInfo(path, d) {
     e += 4 + ((n + 3) & ~3);
   }
   return info;
+}
+// an .opmod's manifest lines as {key: first value} (the header's offset 0x10 / length 0x14); {} when it has none
+export function opmodManifest(d) {
+  const dv = new DataView(d.buffer, d.byteOffset, d.byteLength), out = {};
+  if (d.length < 0x60 || dv.getUint32(0, true) !== 0x444D504F) return out;
+  const at = dv.getUint32(0x10, true), n = dv.getUint32(0x14, true);
+  if (at + n > d.length) return out;
+  for (const line of new TextDecoder().decode(d.subarray(at, at + n)).split('\n')) {
+    const m = /^(\S+)\s+(.*?)\s*$/.exec(line);
+    if (m && !m[1].startsWith('#') && !(m[1] in out)) out[m[1]] = m[2];
+  }
+  return out;
 }
 // ---- Your own plugin files (BYOP): the loader's checks (kennel kn_load.c kn_parse, plugload/op1p_load.c op1p_parse)
 // on the page, so a file the OP-1 would skip at boot is refused before it is sent ----
@@ -539,8 +590,8 @@ export function checkPlugin(fileName, d, max = PLUGIN_MAX) {
       if (!/^[a-z0-9 _-]{1,15}$/.test(name)) throw bad('the plugin name is invalid');
       while (svgEnd < binOff && d[svgEnd]) svgEnd++;
     } else {
-      let h = 0;
-      if (d[0] === 0x3C) { while (h < d.length && d[h]) h++; svgEnd = h; h = (h + 4) & ~3; }
+      const k = knlHeader(d), h = k.h;
+      svgEnd = k.svgEnd;
       if (h + 144 > d.length || new TextDecoder().decode(d.subarray(h, h + 4)) !== 'KNPL') throw bad('not a kennel plugin file');
       if (dv.getUint16(h + 4, true) !== 1) throw bad('plugin format not supported');
       if (dv.getUint16(h + 6, true) < 144 || h + dv.getUint16(h + 6, true) > d.length) throw bad('the file is cut short or damaged');
@@ -602,12 +653,20 @@ export function comparePluginVersions(a, b) {
 // the second file with a name), one named like a built-in replaces the built-in (replaces = what it takes over).
 // keepContent: send only own files, keep everything else on the OP-1 (no build to compare with). drop: plugins/
 // files on the OP-1 the user chose to remove. Rows the user may remove (plugins/ files that stay) get removable.
+// Opus plugin files the user added (opus/<name>.opmod, named by path) travel as own files: drop removes one, and a
+// pushed opus/ file the OP-1 has stays unless dropped (only content/ files follow the build).
+// retired: {path: replacement name} of plugin files retired from the workshop (3.3.1: the six ports, content/<id>.knl;
+// app.js retiredFiles from the catalog's replaced_by). One on the OP-1 is always removed, whatever else is chosen and
+// with keepContent too, and never sent; its removed row carries retired = the replacement's name. Matched by path only:
+// the Opus dx and dimension that replace two of them have the ports' names.
 // -> {send, deletes, off, offChanged, conflicts: [{claim, names, winner}], entries, removed, changed}
-export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], keepContent = false, metadata = {}, builtins, forceOn = [], forceOff = []} = {}) {
+export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], keepContent = false, metadata = {}, builtins, forceOn = [], forceOff = [], retired = {}} = {}) {
+  const gone = new Map(Object.entries(retired || {}));
   const ownNames = new Set(own.map(([p, d]) => pluginInfo(p, d).name)), ownPaths = new Set(own.map(([p]) => p));
   const installedOwn = new Set((inv.records || []).filter(r => r.path?.startsWith('plugins/') && !drop.includes(r.path)).map(r => r.name));
   const replaced = new Map();                                      // own name -> what it takes over
   wanted = [...wanted.filter(([p, d]) => {
+    if (gone.has(p)) return false;                                 // a retired file never goes back
     const n = pluginInfo(p, d).name;
     if (ownNames.has(n) || installedOwn.has(n)) { replaced.set(n, 'the workshop’s ' + n); return false; }
     return true;
@@ -616,14 +675,16 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
   inv = {...inv, off: inv.off || []};
   const files = inv.records.filter(r => r.source !== 'builtin' && r.path);
   const byPath = new Map(files.map(r => [r.path, r]));
-  const send = wanted.filter(([p]) => !(byPath.get(p) && byPath.get(p).crc === info.get(p).crc && byPath.get(p).state !== 'failed'));
-  const removed = files.filter(r => pluginPath(r.path) && !info.has(r.path) && (
+  // a failed file goes again (a damaged copy); an Opus file the bridge refused (plugin memory, a missing part) would
+  // only be refused again, so the same bytes stay and Your plugins shows why
+  const send = wanted.filter(([p]) => !(byPath.get(p) && byPath.get(p).crc === info.get(p).crc && (byPath.get(p).state !== 'failed' || opusPath(p))));
+  const removed = files.filter(r => (pluginPath(r.path) || opusPath(r.path)) && !info.has(r.path) && (gone.has(r.path) ||
     (r.path.startsWith('content/') && !keepContent) || ownNames.has(r.name) || drop.includes(r.path)));
   for (const r of removed) if (ownNames.has(r.name) && !replaced.has(r.name)) replaced.set(r.name, r.path);
   for (const r of inv.records) if (r.source === 'builtin' && ownNames.has(r.name)) replaced.set(r.name, 'the built-in ' + r.name);
   const entries = [];
   for (const [p] of wanted) {
-    const i = info.get(p), now = byPath.get(p), previous = now || inv.records.find(r => r.name === i.name);
+    const i = info.get(p), now = byPath.get(p), previous = now || inv.records.find(r => r.name === i.name && !gone.has(r.path));
     if (!ownPaths.has(p)) {
       const m = metadata[i.name];
       if (m && (!m.path || m.path === p)) {
@@ -638,9 +699,9 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
                   restoration: !ownPaths.has(p) && files.some(r => r.path.startsWith('plugins/') && r.name === i.name && drop.includes(r.path)),
                   downgrade: !!previous && (previous.path !== p || previous.crc !== i.crc) && comparePluginVersions(i.version, previous.version) === -1});
   }
-  // Older inventory cannot prove an explicit empty declaration for a retained file.
+  // Older inventory cannot prove an explicit empty declaration for a retained file. (The bridge's files claim nothing.)
   for (const r of files) if (!info.has(r.path) && !removed.includes(r))
-    entries.push({...r, claimsKnown: r.source === 'builtin' || !!r.claims?.length, claims: (r.claims || []).map(c => typeof c === 'string' ? c : c.name), action: 'keep', was: r, removable: r.path.startsWith('plugins/')});
+    entries.push({...r, claimsKnown: r.source === 'builtin' || r.source === 'foreign' || !!r.claims?.length, claims: (r.claims || []).map(c => typeof c === 'string' ? c : c.name), action: 'keep', was: r, removable: r.path.startsWith('plugins/') || opusPath(r.path)});
   const names = new Set(entries.map(e => e.name));
   for (const r of builtins ?? inv.records.filter(r => r.source === 'builtin'))
     if (!names.has(r.name)) entries.push({...r, claimsKnown: Array.isArray(r.claims), claims: (r.claims || []).map(c => typeof c === 'string' ? c : c.name), action: 'built-in', was: r,
@@ -659,7 +720,8 @@ export function planPlugins(inv, wanted, {winners = {}, own = [], drop = [], kee
   const offChanged = resolution.off.join(',') !== [...inv.off].sort().join(',');
   const restartNeeded = (Array.isArray(inv.offBoot) && resolution.off.join(',') !== [...inv.offBoot].sort().join(',')) ||
     resolution.entries.some(e => e.was && ['off', 'skipped', 'failed'].includes(e.was.state) && e.on);
-  return {...resolution, initialOff: [...off], send, deletes: removed.map(r => r.path), offChanged, restartNeeded, removed,
+  return {...resolution, initialOff: [...off], send, deletes: removed.map(r => r.path), offChanged, restartNeeded,
+          removed: removed.map(r => gone.has(r.path) ? {...r, retired: gone.get(r.path)} : r),
           changed: !!(send.length || removed.length || offChanged || restartNeeded)};
 }
 

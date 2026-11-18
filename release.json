@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "25d9fd459f711435",
+    "id": "1d6cca544492b2ec",
     "product": {
       "name": "hundekraft",
-      "version": "3.3",
-      "label": "hundekraft 3.3",
-      "slug": "hundekraft-3.3"
+      "version": "3.3.1",
+      "label": "hundekraft 3.3.1",
+      "slug": "hundekraft-3.3.1"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -298,7 +298,7 @@
         "name": "Reverb",
         "type": "plate / hall reverb",
         "description": "Plate and hall reverb, after Mutable Instruments Elements.",
-        "screen_bytes": 68192,
+        "screen_bytes": 68224,
         "file": "reverb.knl",
         "needs": []
       },
@@ -366,7 +366,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 144384,
+        "screen_bytes": 144408,
         "file": "eva.knl",
         "needs": []
       },
@@ -399,7 +399,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 134416,
+        "screen_bytes": 134408,
         "file": "hail.knl",
         "needs": []
       },
@@ -683,7 +683,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 47792,
+        "screen_bytes": 47760,
         "file": "c64arp.knl",
         "needs": []
       },
@@ -737,7 +737,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 25928,
+        "screen_bytes": 25904,
         "file": "gin.knl",
         "needs": []
       },
@@ -748,7 +748,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 67640,
+        "screen_bytes": 77648,
         "file": "amp.knl",
         "needs": []
       },
@@ -1070,58 +1070,52 @@
       {
         "id": "dimension",
         "kind": "synth",
-        "name": "DIMENSION",
+        "name": "(reserved: was the DIMENSION port; retired for the bundled dimension_o file, owner 2026-11-17)",
+        "reserved": true,
+        "replaced_by": "dimension_o",
         "bases": [
           "kennel30-plugins"
-        ],
-        "screen_bytes": 22472,
-        "file": "dimension.knl",
-        "needs": []
+        ]
       },
       {
         "id": "him",
         "kind": "drum",
-        "name": "HIM",
+        "name": "(reserved: was the HIM port; retired for the bundled sim file, owner 2026-11-17)",
+        "reserved": true,
+        "replaced_by": "sim",
         "bases": [
           "kennel30-plugins"
-        ],
-        "screen_bytes": 128,
-        "file": "him.knl",
-        "needs": []
+        ]
       },
       {
         "id": "khorus",
         "kind": "fx",
-        "name": "KHORUS",
+        "name": "(reserved: was the KHORUS port; retired for the bundled chorus file, owner 2026-11-17)",
+        "reserved": true,
+        "replaced_by": "chorus",
         "bases": [
           "kennel30-plugins"
-        ],
-        "screen_bytes": 39928,
-        "file": "khorus.knl",
-        "needs": []
+        ]
       },
       {
         "id": "kastle",
         "kind": "synth",
-        "name": "KASTLE",
+        "name": "(reserved: was the KASTLE port; retired for the bundled castle file, owner 2026-11-17)",
+        "reserved": true,
+        "replaced_by": "castle",
         "bases": [
           "kennel30-plugins"
-        ],
-        "screen_bytes": 128,
-        "file": "kastle.knl",
-        "needs": []
+        ]
       },
       {
         "id": "matrix",
         "kind": "feature",
-        "name": "Matrix LFO",
+        "name": "(reserved: was the MATRIX port; retired for the bundled matrix file, owner 2026-11-17)",
+        "reserved": true,
+        "replaced_by": "matrix_o",
         "bases": [
           "kennel30-plugins"
-        ],
-        "screen_bytes": 8000,
-        "lfo_type": true,
-        "file": "matrix.knl",
-        "needs": []
+        ]
       },
       {
         "id": "keyvel",
@@ -1146,13 +1140,12 @@
       {
         "id": "dx",
         "kind": "synth",
-        "name": "DX",
+        "name": "(reserved: was the DX port; retired for the bundled dx_o file, owner 2026-11-17)",
+        "reserved": true,
+        "replaced_by": "dx_o",
         "bases": [
           "kennel30-plugins"
-        ],
-        "screen_bytes": 128,
-        "file": "dx.knl",
-        "needs": []
+        ]
       },
       {
         "id": "drift",
@@ -1183,7 +1176,7 @@
         "bases": [
           "kennel30-plugins"
         ],
-        "screen_bytes": 59528,
+        "screen_bytes": 59704,
         "file": "windwood.knl",
         "needs": []
       },
@@ -1196,6 +1189,168 @@
         ],
         "screen_bytes": 128,
         "file": "pinboard.knl",
+        "needs": []
+      },
+      {
+        "id": "dimension_o",
+        "kind": "synth",
+        "name": "dimension",
+        "opmod": [
+          "opus.dimension"
+        ],
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "dimension.opmod",
+        "needs": []
+      },
+      {
+        "id": "outatime_o",
+        "kind": "synth",
+        "name": "(reserved: was the bundled outatime file; not bundled, owner 2026-11-17)",
+        "reserved": true,
+        "bases": [
+          "kennel30-plugins"
+        ]
+      },
+      {
+        "id": "dx_o",
+        "kind": "synth",
+        "name": "dx",
+        "opmod": [
+          "opus.dx"
+        ],
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "dx.opmod",
+        "needs": []
+      },
+      {
+        "id": "amp_o",
+        "kind": "synth",
+        "name": "(reserved: was the bundled amp file; not bundled, our Amp stays, owner 2026-11-17)",
+        "reserved": true,
+        "bases": [
+          "kennel30-plugins"
+        ]
+      },
+      {
+        "id": "sim",
+        "kind": "drum",
+        "name": "sim",
+        "opmod": [
+          "opus.sim",
+          "opus.orbit3d"
+        ],
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "sim.opmod",
+        "files": [
+          "orbit3d.opmod"
+        ],
+        "needs": []
+      },
+      {
+        "id": "bitcrush",
+        "kind": "fx",
+        "name": "Bitcrush",
+        "opmod": [
+          "opus.bitcrush"
+        ],
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "bitcrush.opmod",
+        "needs": []
+      },
+      {
+        "id": "chorus",
+        "kind": "fx",
+        "name": "Chorus",
+        "opmod": [
+          "opus.chorus",
+          "opus.orbit3d"
+        ],
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "chorus.opmod",
+        "files": [
+          "orbit3d.opmod"
+        ],
+        "needs": []
+      },
+      {
+        "id": "plate_o",
+        "kind": "fx",
+        "name": "plate_o",
+        "opmod": [
+          "opus.plate",
+          "opus.orbit3d"
+        ],
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "plate.opmod",
+        "files": [
+          "orbit3d.opmod"
+        ],
+        "needs": []
+      },
+      {
+        "id": "castle",
+        "kind": "synth",
+        "name": "castle",
+        "opmod": [
+          "displayname808.castle"
+        ],
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "castle.opmod",
+        "needs": []
+      },
+      {
+        "id": "ploc",
+        "kind": "synth",
+        "name": "PLOC",
+        "files": [
+          "plocctrl.knl"
+        ],
+        "default": false,
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 28968,
+        "file": "ploc.knl",
+        "needs": []
+      },
+      {
+        "id": "matrix_o",
+        "kind": "feature",
+        "name": "matrix",
+        "opmod": [
+          "opus.matrix"
+        ],
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "file": "matrix.opmod",
+        "needs": []
+      },
+      {
+        "id": "quant",
+        "kind": "seq",
+        "name": "QUANT",
+        "bases": [
+          "kennel30-plugins"
+        ],
+        "screen_bytes": 240,
+        "file": "quant.knl",
         "needs": []
       }
     ],
@@ -1212,29 +1367,30 @@
     }
   },
   "devupd": true,
-  "runtime_sha256": "4cea8f0424d6c63dabf1974ba05c2207a770ed73e01562c8a4d420bfbf333077",
-  "base_sha256": "7514e2d5321f8504bddcab0738301452b97a2389a853cec3fe073ea2ee381a01",
+  "runtime_sha256": "4836a30152a0fce5f7a85ea40dea6bb7d521f000349809b1051f3dd423614fc3",
+  "base_sha256": "54ea482ec34d4c149dc0b81216a433dab8e2e96463517b771d33c8015d949d49",
   "variants": {
     "200000000000007ff": {
-      "sha256": "0ac75d88fa295eab036a94ac7712484ed08770a863474b285b2bce4c460f6f0b",
+      "sha256": "852f9c64f781a862d5f1e96197a607e15c4a345c93dd8f916e558f75f463d4dc",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 70728,
-        "plugin_arena_bytes": 4721544,
-        "plugin_arena_estimate": 5226496,
-        "plugin_arena_room": 5242880,
-        "plugin_arena_percent": 99.7,
+        "plugin_arena_bytes": 4119936,
+        "plugin_arena_estimate": 5275648,
+        "plugin_arena_room": 6291456,
+        "plugin_arena_foreign": 650976,
+        "plugin_arena_percent": 83.9,
         "plugin_arena_over_budget": false,
         "plugin_decl_bytes": 0,
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 4838816,
+        "plugin_file_bytes": 5435556,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
       "presets": {
-        "count": 459,
+        "count": 443,
         "by_engine": {
           "supersaw": 12,
           "fmbell": 12,
@@ -1251,12 +1407,10 @@
           "blot": 12,
           "brassophone": 12,
           "dddd": 12,
-          "dimension": 12,
           "drift": 27,
           "eva": 12,
           "hollowsaint": 12,
           "juni": 12,
-          "kastle": 12,
           "ludwig": 12,
           "mbira": 12,
           "mixtur": 12,
@@ -1264,6 +1418,7 @@
           "outatime": 12,
           "oxbow": 16,
           "pinboard": 13,
+          "ploc": 8,
           "reactor": 12,
           "sid": 12,
           "snap": 12,
@@ -1272,7 +1427,7 @@
           "vox": 12,
           "windwood": 12
         },
-        "sha256": "840017821e50eb56cf64e7612fd467fe3be3f08745e3d2035493bb6a6f330c53",
+        "sha256": "213c079742aeac3c42970ff1a8482cc8d911113296e8bca40838319e9df1a23b",
         "exceeds_cap": false,
         "items": [
           [
@@ -2060,54 +2215,6 @@
             ""
           ],
           [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
-            "dimension",
-            ""
-          ],
-          [
             "drift",
             ""
           ],
@@ -2357,54 +2464,6 @@
           ],
           [
             "juni",
-            ""
-          ],
-          [
-            "kastle",
-            "delay"
-          ],
-          [
-            "kastle",
-            "spring"
-          ],
-          [
-            "kastle",
-            ""
-          ],
-          [
-            "kastle",
-            "delay"
-          ],
-          [
-            "kastle",
-            ""
-          ],
-          [
-            "kastle",
-            "spring"
-          ],
-          [
-            "kastle",
-            ""
-          ],
-          [
-            "kastle",
-            "phone"
-          ],
-          [
-            "kastle",
-            ""
-          ],
-          [
-            "kastle",
-            ""
-          ],
-          [
-            "kastle",
-            ""
-          ],
-          [
-            "kastle",
             ""
           ],
           [
@@ -2764,6 +2823,38 @@
             "spring"
           ],
           [
+            "ploc",
+            "reverb"
+          ],
+          [
+            "ploc",
+            "reverb"
+          ],
+          [
+            "ploc",
+            "spring"
+          ],
+          [
+            "ploc",
+            "snowglobe"
+          ],
+          [
+            "ploc",
+            "spring"
+          ],
+          [
+            "ploc",
+            "snowglobe"
+          ],
+          [
+            "ploc",
+            "delay"
+          ],
+          [
+            "ploc",
+            "delay"
+          ],
+          [
             "reactor",
             "spring"
           ],
@@ -3115,8 +3206,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 354496,
-        "crc": 3923301885
+        "len": 483124,
+        "crc": 2066339031
       }
     }
   },
@@ -3145,10 +3236,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 33434,
+        "arena": 37774,
         "artCache": false,
         "path": "content/amp.knl",
-        "packed": 13975
+        "packed": 16730
       },
       {
         "name": "arc",
@@ -3210,10 +3301,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 9742,
+        "arena": 10158,
         "artCache": true,
         "path": "content/c64arp.knl",
-        "packed": 10123
+        "packed": 10387
       },
       {
         "name": "chimera",
@@ -3238,10 +3329,10 @@
         "claimsKnown": true,
         "priority": 200,
         "source": "knl",
-        "arena": 50574,
+        "arena": 48626,
         "artCache": false,
         "path": "content/chord.knl",
-        "packed": 20762
+        "packed": 20420
       },
       {
         "name": "clouds",
@@ -3264,10 +3355,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 95838,
+        "arena": 98718,
         "artCache": true,
         "path": "content/composer.knl",
-        "packed": 47233
+        "packed": 49269
       },
       {
         "name": "countin",
@@ -3292,10 +3383,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 5578,
+        "arena": 5790,
         "artCache": false,
         "path": "content/crush.knl",
-        "packed": 4555
+        "packed": 7607
       },
       {
         "name": "dddd",
@@ -3309,19 +3400,6 @@
         "artCache": false,
         "path": "content/dddd.knl",
         "packed": 6495
-      },
-      {
-        "name": "dimension",
-        "savedName": "dimension",
-        "kind": "synth",
-        "claims": [],
-        "claimsKnown": true,
-        "priority": null,
-        "source": "knl",
-        "arena": 117610,
-        "artCache": false,
-        "path": "content/dimension.knl",
-        "packed": 21615
       },
       {
         "name": "dots",
@@ -3361,19 +3439,6 @@
         "artCache": false,
         "path": "content/drumplus.knl",
         "packed": 12940
-      },
-      {
-        "name": "dx",
-        "savedName": "dx",
-        "kind": "synth",
-        "claims": [],
-        "claimsKnown": true,
-        "priority": null,
-        "source": "knl",
-        "arena": 121266,
-        "artCache": false,
-        "path": "content/dx.knl",
-        "packed": 30294
       },
       {
         "name": "elg",
@@ -3422,10 +3487,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 21742,
+        "arena": 19726,
         "artCache": false,
         "path": "content/eva.knl",
-        "packed": 23628
+        "packed": 21697
       },
       {
         "name": "fasterase",
@@ -3450,10 +3515,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 16210,
+        "arena": 16138,
         "artCache": false,
         "path": "content/father.knl",
-        "packed": 13410
+        "packed": 15195
       },
       {
         "name": "file",
@@ -3468,7 +3533,7 @@
         "arena": 5610,
         "artCache": false,
         "path": "content/file.knl",
-        "packed": 3729
+        "packed": 3737
       },
       {
         "name": "fmbell",
@@ -3519,10 +3584,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 13014,
+        "arena": 13398,
         "artCache": false,
         "path": "content/grids.knl",
-        "packed": 7045
+        "packed": 7176
       },
       {
         "name": "hail",
@@ -3532,25 +3597,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 25966,
+        "arena": 25926,
         "artCache": true,
         "path": "content/hail.knl",
-        "packed": 20759
-      },
-      {
-        "name": "him",
-        "savedName": "him",
-        "kind": "feature",
-        "claims": [
-          "drum:him"
-        ],
-        "claimsKnown": true,
-        "priority": 50,
-        "source": "knl",
-        "arena": 144854,
-        "artCache": false,
-        "path": "content/him.knl",
-        "packed": 33194
+        "packed": 28441
       },
       {
         "name": "hold",
@@ -3586,10 +3636,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 19510,
+        "arena": 20002,
         "artCache": false,
         "path": "content/in_a_room.knl",
-        "packed": 12589
+        "packed": 12865
       },
       {
         "name": "juni",
@@ -3616,19 +3666,6 @@
         "artCache": true,
         "path": "content/juni_chorus.knl",
         "packed": 12279
-      },
-      {
-        "name": "kastle",
-        "savedName": "kastle",
-        "kind": "synth",
-        "claims": [],
-        "claimsKnown": true,
-        "priority": null,
-        "source": "knl",
-        "arena": 169982,
-        "artCache": true,
-        "path": "content/kastle.knl",
-        "packed": 88248
       },
       {
         "name": "keyvel",
@@ -3689,19 +3726,6 @@
         ],
         "path": "content/keyvel.knl",
         "packed": 3861
-      },
-      {
-        "name": "khorus",
-        "savedName": "khorus",
-        "kind": "fx",
-        "claims": [],
-        "claimsKnown": true,
-        "priority": null,
-        "source": "knl",
-        "arena": 60226,
-        "artCache": true,
-        "path": "content/khorus.knl",
-        "packed": 19480
       },
       {
         "name": "latch",
@@ -3765,21 +3789,6 @@
         "packed": 3850
       },
       {
-        "name": "matrix",
-        "savedName": "matrix",
-        "kind": "feature",
-        "claims": [
-          "lfo:matrix"
-        ],
-        "claimsKnown": true,
-        "priority": 510,
-        "source": "knl",
-        "arena": 59418,
-        "artCache": false,
-        "path": "content/matrix.knl",
-        "packed": 21644
-      },
-      {
         "name": "mbira",
         "savedName": "mbira",
         "kind": "synth",
@@ -3818,10 +3827,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 32026,
+        "arena": 35910,
         "artCache": false,
         "path": "content/midiseq.knl",
-        "packed": 14244
+        "packed": 16385
       },
       {
         "name": "mixtur",
@@ -3844,10 +3853,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 54738,
+        "arena": 55230,
         "artCache": false,
         "path": "content/moai.knl",
-        "packed": 29434
+        "packed": 29554
       },
       {
         "name": "monolit",
@@ -3877,7 +3886,7 @@
         "arena": 3722,
         "artCache": false,
         "path": "content/naming.knl",
-        "packed": 2330
+        "packed": 2332
       },
       {
         "name": "nostromo",
@@ -3887,10 +3896,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 52206,
+        "arena": 52650,
         "artCache": false,
         "path": "content/nostromo.knl",
-        "packed": 23634
+        "packed": 31566
       },
       {
         "name": "oblique",
@@ -3905,7 +3914,7 @@
         "arena": 10662,
         "artCache": false,
         "path": "content/oblique.knl",
-        "packed": 4335
+        "packed": 4348
       },
       {
         "name": "oracle",
@@ -3928,10 +3937,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 36214,
+        "arena": 34446,
         "artCache": true,
         "path": "content/outatime.knl",
-        "packed": 29295
+        "packed": 32149
       },
       {
         "name": "oxbow",
@@ -3993,10 +4002,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 35358,
+        "arena": 33782,
         "artCache": true,
         "path": "content/pinboard.knl",
-        "packed": 20018
+        "packed": 19843
       },
       {
         "name": "plate",
@@ -4012,6 +4021,34 @@
         "packed": 13713
       },
       {
+        "name": "ploc",
+        "savedName": "ploc",
+        "kind": "synth",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "knl",
+        "arena": 25926,
+        "artCache": true,
+        "path": "content/ploc.knl",
+        "packed": 15175
+      },
+      {
+        "name": "plocctrl",
+        "savedName": "plocctrl",
+        "kind": "feature",
+        "claims": [
+          "key:synth:ploc-editor"
+        ],
+        "claimsKnown": true,
+        "priority": 80,
+        "source": "knl",
+        "arena": 1118,
+        "artCache": false,
+        "path": "content/plocctrl.knl",
+        "packed": 1120
+      },
+      {
         "name": "punch",
         "savedName": "punch",
         "kind": "feature",
@@ -4019,10 +4056,36 @@
         "claimsKnown": true,
         "priority": 410,
         "source": "knl",
-        "arena": 1306,
+        "arena": 4434,
         "artCache": false,
+        "settings": [
+          {
+            "label": "QUANT PUNCH",
+            "type": "onoff",
+            "choices": [
+              "OFF",
+              "ON"
+            ],
+            "default": "OFF",
+            "restart": false,
+            "push": null
+          },
+          {
+            "label": "PUNCH GRID",
+            "type": "choice",
+            "choices": [
+              "BAR",
+              "1/4",
+              "1/8",
+              "1/16"
+            ],
+            "default": "BAR",
+            "restart": false,
+            "push": null
+          }
+        ],
         "path": "content/punch.knl",
-        "packed": 1021
+        "packed": 3293
       },
       {
         "name": "quad",
@@ -4039,6 +4102,19 @@
         "artCache": false,
         "path": "content/quad.knl",
         "packed": 15023
+      },
+      {
+        "name": "quant",
+        "savedName": "quant",
+        "kind": "feature",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": 150,
+        "source": "knl",
+        "arena": 27718,
+        "artCache": true,
+        "path": "content/quant.knl",
+        "packed": 8049
       },
       {
         "name": "rackverb",
@@ -4115,7 +4191,7 @@
           }
         ],
         "path": "content/randomiser.knl",
-        "packed": 5868
+        "packed": 5859
       },
       {
         "name": "reactor",
@@ -4175,10 +4251,10 @@
         "claimsKnown": true,
         "priority": 600,
         "source": "knl",
-        "arena": 20442,
+        "arena": 22526,
         "artCache": false,
         "path": "content/sampletools.knl",
-        "packed": 12349
+        "packed": 13857
       },
       {
         "name": "scale",
@@ -4190,10 +4266,10 @@
         "claimsKnown": true,
         "priority": 100,
         "source": "knl",
-        "arena": 8758,
+        "arena": 8806,
         "artCache": false,
         "path": "content/scale.knl",
-        "packed": 5345
+        "packed": 5377
       },
       {
         "name": "sid",
@@ -4266,16 +4342,19 @@
         "kind": "feature",
         "claims": [
           "key:mixer:shift+t2",
+          "key:synth-fx:shift+t2",
+          "key:drum-fx:shift+t2",
+          "key:mixer-fx:shift+t2",
           "bus:insert",
           "tape:insert"
         ],
         "claimsKnown": true,
         "priority": 1100,
         "source": "knl",
-        "arena": 51954,
+        "arena": 54738,
         "artCache": false,
         "path": "content/strip.knl",
-        "packed": 31136
+        "packed": 32225
       },
       {
         "name": "strum",
@@ -4285,10 +4364,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 265738,
+        "arena": 265418,
         "artCache": false,
         "path": "content/strum.knl",
-        "packed": 176854
+        "packed": 176853
       },
       {
         "name": "stutter",
@@ -4329,7 +4408,7 @@
         "arena": 20110,
         "artCache": false,
         "path": "content/sysmon.knl",
-        "packed": 9796
+        "packed": 9769
       },
       {
         "name": "taffy",
@@ -4383,10 +4462,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 16358,
+        "arena": 19246,
         "artCache": true,
         "path": "content/trail.knl",
-        "packed": 10441
+        "packed": 12269
       },
       {
         "name": "trigguard",
@@ -4445,7 +4524,7 @@
           }
         ],
         "path": "content/trigguard.knl",
-        "packed": 1939
+        "packed": 1935
       },
       {
         "name": "undo",
@@ -4501,10 +4580,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 6310,
+        "arena": 6714,
         "artCache": true,
         "path": "content/warble.knl",
-        "packed": 8393
+        "packed": 20988
       },
       {
         "name": "washer",
@@ -4544,6 +4623,132 @@
         "artCache": false,
         "path": "content/windwood.knl",
         "packed": 20749
+      },
+      {
+        "name": "content/bitcrush.opmod",
+        "savedName": "opus.bitcrush",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "2.0.3",
+        "author": "opus",
+        "foreignArena": 8320,
+        "path": "content/bitcrush.opmod",
+        "packed": 1779
+      },
+      {
+        "name": "content/castle.opmod",
+        "savedName": "displayname808.castle",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "1.1",
+        "author": "displayname808",
+        "foreignArena": 293248,
+        "path": "content/castle.opmod",
+        "packed": 103679
+      },
+      {
+        "name": "content/chorus.opmod",
+        "savedName": "opus.chorus",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "2.3.1",
+        "author": "opus",
+        "foreignArena": 55584,
+        "path": "content/chorus.opmod",
+        "packed": 12226
+      },
+      {
+        "name": "content/dimension.opmod",
+        "savedName": "opus.dimension",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "1.0.4",
+        "author": "opus",
+        "foreignArena": 42240,
+        "path": "content/dimension.opmod",
+        "packed": 13387
+      },
+      {
+        "name": "content/dx.opmod",
+        "savedName": "opus.dx",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "0.4.1",
+        "author": "opus",
+        "foreignArena": 50368,
+        "path": "content/dx.opmod",
+        "packed": 28392
+      },
+      {
+        "name": "content/matrix.opmod",
+        "savedName": "opus.matrix",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "0.5.1",
+        "author": "opus",
+        "foreignArena": 46304,
+        "path": "content/matrix.opmod",
+        "packed": 13295
+      },
+      {
+        "name": "content/orbit3d.opmod",
+        "savedName": "opus.orbit3d",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "0.2.8",
+        "author": "opus",
+        "foreignArena": 51360,
+        "path": "content/orbit3d.opmod",
+        "packed": 17196
+      },
+      {
+        "name": "content/plate.opmod",
+        "savedName": "opus.plate",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "2.4.3",
+        "author": "opus",
+        "foreignArena": 50528,
+        "path": "content/plate.opmod",
+        "packed": 19681
+      },
+      {
+        "name": "content/sim.opmod",
+        "savedName": "opus.sim",
+        "kind": "foreign",
+        "claims": [],
+        "claimsKnown": true,
+        "priority": null,
+        "source": "foreign",
+        "version": "0.1.9",
+        "author": "opus",
+        "foreignArena": 53024,
+        "path": "content/sim.opmod",
+        "packed": 16363
       }
     ],
     "builtins": [
@@ -4564,19 +4769,19 @@
     "per_file": 1024,
     "align": 16384,
     "art_cache": 196608,
-    "max": 5242880,
+    "max": 6291456,
     "budget_pct": 100
   },
   "package": {
     "limit": 15000000,
-    "base": 10997956,
-    "ratio": 0.8666
+    "base": 11071788,
+    "ratio": 0.8697
   },
   "core": {
     "start": 31457280,
-    "len": 354496,
-    "crc": 3923301885
+    "len": 483124,
+    "crc": 2066339031
   },
   "plugin_max": 1048576,
-  "cores_sha256": "550cf09e512c52ef5d86451a452fdae0e0f0add4bb218446510ca80c1cca3dc8"
+  "cores_sha256": "668d661976599d7a3fcfc8bc58f50c9127eb30ce59ff91528185226dad2be3fb"
 }

@@ -10,7 +10,9 @@ export function updateDifferences(inv, expected) {
     const now = installed.get(f.path), name = f.path.split('/').pop();
     if (!now) differences.push(`${name} is missing`);
     else if (now.crc !== f.crc) differences.push(`${name} contents do not match`);
-    else if (now.state !== (f.on ? 'loaded' : 'off')) differences.push(`${name}: ${now.state || 'unknown'}${now.reason ? ' — ' + now.reason : ''}`);
+    // an Opus plugin file the user added may be refused by the bridge at boot (plugin memory, a missing part): that is
+    // its result, shown in Your plugins, not an update that failed to land
+    else if (!(f.path.startsWith('opus/') && now.state === 'failed') && now.state !== (f.on ? 'loaded' : 'off')) differences.push(`${name}: ${now.state || 'unknown'}${now.reason ? ' — ' + now.reason : ''}`);
   }
   for (const path of expected.deletes) if (installed.has(path)) differences.push(`${path.split('/').pop()} has not been removed`);
   if (!sameNames(inv.off, expected.off)) differences.push('Saved on/off choices do not match');

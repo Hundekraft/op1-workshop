@@ -21,7 +21,7 @@
 .cat-tag{margin-left:auto;font:8px/1.2 "SFMono-Regular",Consolas,monospace;letter-spacing:.04em;color:var(--muted);text-align:right}.cat-new{margin-left:auto;color:#ff3a5d;font:700 12px/1.2 "Helvetica Neue",Helvetica,sans-serif;white-space:nowrap}.cat-new+.cat-tag{margin-left:0}
 .cat-card img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:contain;background:#101013;border:1px solid #aaafa6;padding:4px}
 .cat-card:has(input:not(:checked)) img{opacity:.45}.cat-card:has(input:focus-visible){outline:3px solid #267bb2;outline-offset:5px}.cat-card input:focus-visible{outline:none}
-.cat-line{display:block;font-size:12px;line-height:1.45;padding:7px 0 2px}.cat-line a{color:var(--muted);white-space:nowrap}.cat-by{display:block;font:9px/1.5 "SFMono-Regular",Consolas,monospace;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+.cat-line{display:block;font-size:12px;line-height:1.45;padding:7px 0 2px}.cat-line a{color:var(--muted);white-space:nowrap}.cat-by{display:block;font:9px/1.5 "SFMono-Regular",Consolas,monospace;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}.cat-by a{color:inherit}.cat-line .cat-cups{float:right;display:inline-flex;gap:6px;margin:0 0 0 8px;height:17px;align-items:center}.cat-line .cat-cup{display:inline-flex;color:#c2541f}.cat-line .cat-cup:hover{color:var(--ink)}
 @media(max-width:1100px){.cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.cat-grid{grid-template-columns:minmax(0,1fr);gap:22px 12px}.cat-tabs button{padding:8px 10px}}
 .preset-later{font-size:12px;margin:10px 0}
 .cap-warning{font-size:12px;line-height:1.5;color:#9b3026;margin:10px 0 0;max-width:520px}
@@ -43,9 +43,9 @@
 #push-plan .plan-group summary{cursor:pointer;list-style:none}#push-plan .plan-group summary::-webkit-details-marker{display:none}
 #push-plan .plan-group summary .plan-name:after{content:" ▸";color:var(--muted)}#push-plan .plan-group details[open] summary .plan-name:after{content:" ▾"}
 #push-plan .plan-sign{width:12px;flex:none;font:13px "Helvetica Neue",Helvetica,sans-serif;color:var(--muted)}
-#push-plan .plan-name{flex:1;min-width:0;font-size:13px;font-weight:600;overflow-wrap:anywhere}
+#push-plan .plan-name{flex:1 1 40%;min-width:6em;font-size:13px;font-weight:600;overflow-wrap:anywhere}
 #push-plan .plan-name small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
-#push-plan .plan-meta{font:10px/1.4 "SFMono-Regular",Consolas,monospace;color:var(--muted);text-align:right}
+#push-plan .plan-meta{flex:0 1 auto;max-width:55%;font:10px/1.4 "SFMono-Regular",Consolas,monospace;color:var(--muted);text-align:right}
 #push-plan .plan-warn .plan-sign,#push-plan .plan-warn .plan-meta{color:#8a5a12}
 #push-plan .plan-note .plan-name{font-weight:400;color:var(--muted)}
 #push-plan .plan-state{font:10px "SFMono-Regular",Consolas,monospace}
@@ -92,3 +92,21 @@ button.preset-link{background:none;border:0;padding:0;color:inherit;text-align:l
 .presets-progress{margin-top:12px}.presets-progress .push-row span{white-space:normal}
 
 .older-changes{margin-top:18px;border-top:1px solid var(--line);padding-top:10px}.older-changes>summary{font-size:13px;color:var(--muted)}
+
+/* Plugin selection: filter band under the category tabs, and a slightly cleaner card grid. */
+.cat-tabs{margin:20px 0 0;border-bottom:1px solid var(--ink);gap:0}.cat-tabs button{padding:11px 14px;letter-spacing:.05em}.cat-tabs button:not([aria-selected=true]):hover{background:rgba(37,41,38,.07)}
+.cat-filter{padding:18px 0 20px;border-bottom:1px solid var(--line);margin-bottom:26px}.cat-filter[hidden]{display:none}
+.cf-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}.cf-foot{justify-content:space-between;margin-top:14px;font:11px "SFMono-Regular",Consolas,monospace;color:var(--muted);letter-spacing:.02em}
+.cf-search{position:relative;flex:0 1 260px;min-width:200px;display:block}.cf-search input{width:100%;height:36px;padding:0 10px 0 34px;border:1px solid var(--ink);border-radius:3px;background:#f6f5ef;color:var(--ink);font-size:13px}
+.cf-search input::placeholder{color:var(--muted)}.cf-search input:focus-visible{outline:3px solid #267bb2;outline-offset:2px}
+.cf-icon{position:absolute;left:11px;top:50%;width:11px;height:11px;margin-top:-7px;border:1.5px solid var(--ink);border-radius:50%}.cf-icon:after{content:"";position:absolute;left:8px;top:9px;width:6px;height:1.5px;background:var(--ink);transform:rotate(45deg);transform-origin:0 50%}
+.cf-group{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}.cf-group[hidden]{display:none}.cf-label{font:10px "SFMono-Regular",Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cf-pills{display:flex;flex-wrap:wrap;gap:6px}
+.cf-pill{font:10px/1 "SFMono-Regular",Consolas,monospace;letter-spacing:.05em;text-transform:uppercase;padding:9px 11px;border:1px solid var(--ink);border-radius:3px;background:transparent;color:var(--ink)}
+.cf-pill:hover{background:rgba(37,41,38,.08)}.cf-pill[aria-pressed=true]{background:var(--ink);color:#fff}
+.cf-clear{border:0;background:none;padding:2px 0;font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.cat-grid{gap:16px 24px}.cat-card img{border-color:#9ea49b}.cat-line{padding-top:9px}
+.cat-card[hidden]{display:none}.cat-empty{grid-column:1/-1;margin:8px 0;font-size:14px;color:var(--muted)}.cat-empty[hidden]{display:none}
+@media(max-width:640px){.cat-filter{padding:14px 0 16px}.cf-search{flex-basis:100%}.cf-row{gap:12px 16px}.cat-tabs button{padding:9px 10px}.cat-grid{gap:14px 12px}}
+.cf-more{position:relative;display:inline-block}.cf-menu{position:absolute;z-index:5;left:0;top:calc(100% + 4px);min-width:220px;max-height:440px;overflow:auto;background:#f6f5ef;border:1px solid var(--ink);border-radius:3px;box-shadow:0 8px 22px rgba(0,0,0,.18);padding:4px}.cf-menu[hidden]{display:none}
+.cf-menu button{display:flex;justify-content:space-between;gap:16px;width:100%;border:0;background:none;padding:8px 10px;font:12px "SFMono-Regular",Consolas,monospace;color:var(--ink);text-align:left}.cf-menu button:hover{background:rgba(37,41,38,.08)}.cf-menu button[aria-pressed=true]{background:var(--ink);color:#fff}.cf-menu small{color:inherit;opacity:.65;font-size:11px}

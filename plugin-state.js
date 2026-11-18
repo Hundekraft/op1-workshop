@@ -20,6 +20,30 @@ export function saveSelection(base, inputs, cap) {
   if (raw !== current) localStorage.setItem(key, raw);
   selections.set(base, raw);
 }
+// Plugins retired from the workshop for a bundled replacement (3.3.1: the six ports; the catalog's reserved entries with
+// replaced_by): {id, path: the file the workshop put on the OP-1 (content/<id>.knl), by: the replacement's id, name: its
+// shown name}. planPlugins removes such a file whatever was ticked (op1push.js, retired).
+export function retiredPorts(catalog) {
+  const all = catalog?.op1r_plugins || [];
+  return all.filter(f => f.reserved && f.replaced_by).map(f => ({id: f.id, path: `content/${f.id}.knl`, by: f.replaced_by,
+    name: all.find(g => g.id === f.replaced_by)?.name || f.replaced_by}));
+}
+export const retiredFiles = catalog => Object.fromEntries(retiredPorts(catalog).map(r => [r.path, r.name]));
+// Saved catalog ticks (loadSelection inputs) that still name a retired plugin: the key goes, and its replacement takes
+// the tick (a retired plugin left on ticks it; one left off unticks it unless the replacement has its own saved tick),
+// as runtime.normalize maps a hidden one. -> {inputs, moved: [[old id, replacement name]] of the ticked ones}
+export function migrateRetired(inputs, catalog) {
+  const out = {...inputs}, moved = [];
+  for (const r of retiredPorts(catalog)) {
+    const key = 'plugin:' + r.id, to = 'plugin:' + r.by;
+    if (!Object.hasOwn(out, key)) continue;
+    const on = out[key] === true;
+    delete out[key];
+    if (on) { out[to] = true; moved.push([r.id, r.name]); }
+    else if (!Object.hasOwn(inputs, to)) out[to] = false;
+  }
+  return {inputs: out, moved};
+}
 let database;
 function open() {
   if (!database) {

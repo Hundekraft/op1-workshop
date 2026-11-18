@@ -1,22 +1,26 @@
-import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.0-not-applied-20261021';
-import {saveSelection, loadSelection, loadPlugins, savePlugins, reviewSignature, newPluginState} from './plugin-state.js?v=3.3-rc12-20261115';
-import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, pluginPath, ldrRangeCrc, checkPlugin, PLUGIN_MAX, sizeText, session, ABORT, OK, leftovers} from './op1push.js?v=3.3-presets-20261113';
+import {sameCore, matchesUpdate, updateDifferences, updateNotApplied} from './update-state.js?v=3.3.1-opmodown-20261118';
+import {saveSelection, loadSelection, loadPlugins, savePlugins, reviewSignature, newPluginState, retiredFiles, migrateRetired} from './plugin-state.js?v=3.3.1-retired-20261118';
+import {push, openWebMidi, readInventory, readCoreFile, planPlugins, planFullUpdate, assertResolvedPlan, pluginInfo, knlHeader, pluginPath, ldrRangeCrc, PLUGIN_MAX, sizeText, session, ABORT, OK, leftovers, opusPath} from './op1push.js?v=3.3.1-opmodown-20261118';
 import {connectionProblem, connectedText, newCoreText, recentlySent, MIDI_ASK, START_CLEAN, leftoverText} from './connect-result.js?v=3.2-leftovers-20261104';   // one message per connection result
 import {coreRoute, runningRelease} from './core-route.js?v=3.1-core-patch-20261102';      // which release the OP-1 runs; core patches
 import {initStartClean} from './backup.js?v=3.2-clean-20261104';                         // Start clean: steps and the disk-mode backup
-import {showPlan, claimText} from './plugin-plan.js?v=3.1-two-paths-20261027';                       // kennel OP-1, same core: single plugin files
+import {showPlan, claimText} from './plugin-plan.js?v=3.3.1-planrow-20261118';                       // kennel OP-1, same core: single plugin files
 import {resolveConflicts} from './conflicts.js';
-import {showInventory} from './inventory-debug.js?v=3.3-rc12-20261115';           // ?push only: what a kennel OP-1 has installed
-import {CATEGORIES} from './categories.js?v=3.3-rc15-20261115';                  // the front page: what's in a build, by category
-import {initPresets} from './presets.js?v=3.3-rc15-20261115';                 // presets on the OP-1 (list, add, replace, delete; no restart)
-import {initDxBanks} from './dx-banks.js?v=3.3-rc15-20261115';               // DX voice banks (.syx) to user/dx/ (applied at the restart)
+import {showInventory} from './inventory-debug.js?v=3.3.1-opmodown-20261118';           // ?push only: what a kennel OP-1 has installed
+import {CATEGORIES, TYPES, MAKER_PILLS} from './categories.js?v=3.3.1-cats8-20261118';                  // the front page: what's in a build, by category
+import {SUPPORT} from './creators.js?v=3.3.1-support3-20261118';                                // creators' own support links: a cup after their name
+import {initPresets} from './presets.js?v=3.3.1-opmodown-20261118';                 // presets on the OP-1 (list, add, replace, delete; no restart)
+import {initDxBanks} from './dx-banks.js?v=3.3.1-opmodown-20261118';               // DX voice banks (.syx) to user/dx/ (applied at the restart)
+import {checkOwnFile, opusRecords, opusArena, cpuPercent, OPUS_STATE} from './opus.js?v=3.3.1-opmodown-20261118';   // Opus plugin files (.opmod) in Your plugins, to opus/ (the plugin bridge)
 const $ = id => document.getElementById(id);
 let release, file, worker, busy = false, urls = [], fileCheck = 0, pushFiles = [], pushBuild = '', pushResume = {}, installingUntil = 0, pushCap = 300;
 let ownState = newPluginState(), selectionsReady = false, pluginStorageReady = false, selectionStorageReady = false, storageBlocked = false, storageError = '';
 let coreState = null;                                            // {installed, route, disk} of the connected OP-1 (coreCheck)
 let autoReview = false;                                          // Choose op1_246.op1 from the device card: review once it's verified
 let observedOwn = [];                                            // your own plugins the connected OP-1 reports (inventory records)
-let ownFiles = [];                                              // your own plugin files: [[plugins/ path, bytes, file name]]
+let observedOpus = [];                                           // the Opus plugin files (opus/) the connected OP-1 reports (foreign records)
+let ownFiles = [];                                              // your own plugin files: [[plugins/ or opus/ path, bytes, file name]]
+const ownPath = p => !!p && (p.startsWith('plugins/') || opusPath(p));   // a file Your plugins adds and removes
 let stopConnectionWatch = null, deviceInventory = null, firmwareWait = null, stopVerification = false, verificationController = null, retryAction = 'connect';
 let reviewBlocked = false;                                    // no MIDI / no OP-1 / not hundekraft 3: Review changes hidden
 let devicePending = false;                                    // includes the asynchronous Web Lock acquisition
@@ -47,9 +51,9 @@ const removalId = r => r.name || r.path;
 async function removeOwn(name, path) {
   if (pendingUpdate()) throw Error('Verify the previous update or cancel its pending files before changing plugins.');
   name = name || '';
-  if (!name && !path?.startsWith('plugins/')) throw Error('This plugin has no removable identity');
+  if (!name && !ownPath(path)) throw Error('This plugin has no removable identity');
   const file = ownFiles.find(([p, d]) => pluginInfo(p, d).name === name);
-  const unsent = file && deviceInventory && !deviceInventory.records.some(r => r.path?.startsWith('plugins/') && removalMatches({name, path: path || file[0]}, r));
+  const unsent = file && deviceInventory && !deviceInventory.records.some(r => ownPath(r.path) && removalMatches({name, path: path || file[0]}, r));
   if (!unsent && !ownState.removals.some(r => removalId(r) === (name || path))) ownState.removals.push({name, path: path || file?.[0] || null, file: file || null});
   ownFiles = ownFiles.filter(([p, d]) => pluginInfo(p, d).name !== name);
   delete ownState.toggles[name];
@@ -107,6 +111,7 @@ function confirmInventory(inv) {
   ownState.removals = ownState.removals.filter(r => !v.removals.includes(removalId(r)));
   ownState.verification = null; ownState.toggles = {}; ownStatus('');
   observedOwn = (inv.records || []).filter(r => r.path?.startsWith('plugins/'));
+  observedOpus = opusRecords(inv).filter(r => opusPath(r.path));
   return true;
 }
 // Send to OP-1 (SysEx update, docs/sysex-update.md): only for releases whose builds have it, or ?push for testing.
@@ -156,6 +161,9 @@ function validateChoices(c) {
   // Saved choices from before 2026-11-15 may carry `lander`: the option is gone, so it is dropped and bit 64 stays reserved.
   if (Object.hasOwn(c, 'lander')) { if (typeof c.lander !== 'boolean') throw Error('Unsupported choices.'); c = {...c}; delete c.lander; }
   const out = {...c, utilities: Object.hasOwn(c, 'utilities') ? c.utilities : [], hidden: Object.hasOwn(c, 'hidden') ? c.hidden : []};
+  // A retired plugin left out in saved choices (3.3's ports) leaves out the bundled file that replaced it (runtime.normalize).
+  const gone = new Map((release.catalog.op1r_plugins || []).filter(f => f.reserved && f.replaced_by).map(f => [f.id, f.replaced_by]));
+  if (Array.isArray(out.hidden) && out.hidden.some(id => gone.has(id))) out.hidden = [...new Set(out.hidden.map(id => gone.get(id) || id))];
   for (const group of ['synths', 'effects', 'utilities', 'hidden']) {
     const entries = group === 'hidden' ? release.catalog.op1r_plugins || [] : release.catalog[group];
     if (!Array.isArray(out[group]) || out[group].some(id => typeof id !== 'string') || new Set(out[group]).size !== out[group].length ||
@@ -280,22 +288,24 @@ function pluginArena(c, own = []) {
     if (!(f.always || (g === 'op1r_plugins' ? !c.hidden?.includes(f.id) : c[g].includes(f.id)))) continue;
     for (const n of [f.file, ...(f.files || [])]) if (n) names.add(n);
   }
-  const files = [...names].map(n => [meta.get('content/' + n)?.arena || 0, !!meta.get('content/' + n)?.artCache]).concat(own);
-  const total = t.fixed + t.per_file * files.length + files.reduce((n, [a]) => n + a, 0) + (files.some(([, cache]) => cache) ? t.art_cache : 0);
+  // the plugin bridge's .opmod files: their own term (kn_foreign_need, no per_file), bundled ones and the opus/ files in Your plugins
+  const foreign = [...names].filter(n => n.endsWith('.opmod')).reduce((s, n) => s + (meta.get('content/' + n)?.foreignArena || 0), 0) +
+    opusArena(ownFiles, observedOpus, ownState.removals.map(r => r.path).filter(Boolean));
+  const files = [...names].filter(n => !n.endsWith('.opmod')).map(n => [meta.get('content/' + n)?.arena || 0, !!meta.get('content/' + n)?.artCache]).concat(own);
+  const total = t.fixed + t.per_file * files.length + files.reduce((n, [a]) => n + a, 0) + foreign + (files.some(([, cache]) => cache) ? t.art_cache : 0);
   const need = Math.ceil(total / t.align) * t.align;
   return {need, percent: Math.round(1000 * need / t.max) / 10, over: Math.max(0, need - t.max)};
 }
 // your own files' arena needs (kn_load.c kn_peek: load size + call stubs + alignment pad; an .op1p's image + bss + 3),
 // and the ones the connected OP-1 reports that aren't listed here (only their size is known)
 function ownArena() {
-  const listed = new Map(ownFiles.map(([p, d]) => [pluginInfo(p, d).name, [p, d]]));
+  const listed = new Map(ownFiles.filter(([p]) => !opusPath(p)).map(([p, d]) => [pluginInfo(p, d).name, [p, d]]));
   const out = [];
   for (const [p, d] of listed.values()) {
     try {
       const dv = new DataView(d.buffer, d.byteOffset, d.byteLength);
       if (p.endsWith('.op1p')) { const bin = dv.getUint32(d.length - 12, true); out.push([dv.getUint32(bin + 32, true) + dv.getUint32(bin + 36, true) + 3, false]); continue; }
-      let h = 0;
-      if (d[0] === 0x3C) { while (h < d.length && d[h]) h++; h = (h + 4) & ~3; }
+      const {h} = knlHeader(d);
       const load = dv.getUint32(h + 76, true) + dv.getUint32(h + 80, true), align = dv.getUint32(h + 88, true), imports = dv.getUint32(h + 116, true);
       out.push([load + 3 + 12 * imports + align - 1, new TextDecoder().decode(d).includes('_op1_screen_draw_cached')]);
     } catch { out.push([d.length, false]); }
@@ -343,7 +353,7 @@ function screenMemory(c, ownBytes = 0) {
 function ownScreens() {
   const b = release?.catalog?.screen_budget;
   if (!b) return 0;
-  const listed = new Map(ownFiles.map(([p, d]) => [pluginInfo(p, d).name, d]));
+  const listed = new Map(ownFiles.filter(([p]) => !opusPath(p)).map(([p, d]) => [pluginInfo(p, d).name, d]));   // .opmod: no screen record
   let n = 0;
   for (const d of listed.values()) { const svg = d[0] === 0x3C ? d.indexOf(0) : 0; n += Math.max(b.own_min, Math.ceil(Math.max(svg, 0) * b.own_svg_factor)); }
   for (const r of observedOwn) if (!listed.has(r.name) && !/off|removed/.test(r.state || '')) n += Math.max(b.own_min, Math.ceil((r.size || 0) * b.own_size_factor));
@@ -560,7 +570,7 @@ function observeConnection(port) {
   stopConnectionWatch?.();
   stopConnectionWatch = port.watchConnection?.(connected => {
     if (!connected && !installingUntil) {
-      deviceInventory = null; observedOwn = []; showOwn();
+      deviceInventory = null; observedOwn = []; observedOpus = []; showOwn();
       deviceState('OP–1 disconnected · reconnect USB to continue', 'warn');
       $('own-check').textContent = 'Connect my OP–1';
     }
@@ -775,14 +785,16 @@ function planBox() {                                           // the plugin lis
 // that could be removed. Draws the final list under the progress bar.
 async function settlePlan(inv, wanted, opts, full = false) {
   const box = planBox(), planner = full ? planFullUpdate : planPlugins;
+  opts = {...opts, retired: retiredFiles(release.catalog)};       // the retired ports: removed whatever is ticked
   let winners = {}, asked = false, unknownAccepted = false, acceptedSignature = null;
   for (;;) {
     rememberSelection();
     if (storageBlocked) throw Error(storageError);
     const manageOwn = opts.includeOwn !== false;
-    const drop = manageOwn ? inv.records.filter(r => r.path?.startsWith('plugins/') && ownState.removals.some(x => removalMatches(x, r))).map(r => r.path) : [];
+    const drop = manageOwn ? inv.records.filter(r => ownPath(r.path) && ownState.removals.some(x => removalMatches(x, r))).map(r => r.path) : [];
     // Refresh desired files after every Remove/Undo, keeping workshop selections independent.
-    const own = manageOwn ? ownFiles.map(([p, d]) => [p, d]) : [];
+    // Opus plugin files only go to an OP-1 that takes them (HELLO bit 128, inv.foreign); push() refuses them otherwise
+    const own = manageOwn ? ownFiles.filter(([p]) => inv.foreign || !opusPath(p)).map(([p, d]) => [p, d]) : [];
     const desired = wanted;
     const preliminary = planner(inv, desired, {...opts, own, drop});
     const forceOn = [], forceOff = [];
@@ -882,10 +894,11 @@ async function sendToOp1() {
       throw Error(`Your OP–1 holds ${inv.presets.count} user synth presets, more than this build's limit of ${pushCap}. It would stop at startup. Delete some presets first, or start clean.`);
     if (ownOnly) {
       if (!inv?.plugins) throw Error('Your own plugins need hundekraft 3.0 on the OP–1. Build and send 3.0 first, then add them.');
+      if (!inv.foreign && ownFiles.some(([p]) => opusPath(p))) throw Error('This OP–1 can’t take Opus plugin files yet. Update it to the newest hundekraft first, or remove the .opmod files from Your plugins.');
       const plan = await settlePlan(inv, files, {own, metadata: targetMetadata(), recheck});
       if (!plan.changed) {
         const reviewed = plan.reviewedInventory;
-        ownState.removals = ownState.removals.filter(r => reviewed.records.some(e => e.path?.startsWith('plugins/') && removalMatches(r, e)));
+        ownState.removals = ownState.removals.filter(r => reviewed.records.some(e => ownPath(e.path) && removalMatches(r, e)));
         if (ownState.verification) confirmInventory(reviewed);
         await rememberOwn(); showOwn(reviewed);
         if (!ownState.verification) updateStage('verified');
@@ -899,7 +912,7 @@ async function sendToOp1() {
       if (!release.plugin_metadata?.complete) throw Error('Cannot check this firmware’s built-in controls: release information is missing. Use a release with plugin metadata.');
       log('sending the whole firmware; checking its target controls and the plugins you keep');
       const plan = await settlePlan(inv || {records: [], off: []}, files.filter(([p]) => pluginPath(p)),
-        {own, metadata: targetMetadata(), builtins: targetBuiltins(), recheck, includeOwn: !!inv?.plugins, deferredOwn: !inv?.plugins ? ownFiles.map(([p,d]) => pluginInfo(p,d).name) : []}, true);
+        {own, metadata: targetMetadata(), builtins: targetBuiltins(), recheck, includeOwn: !!inv?.plugins, deferredOwn: ownFiles.filter(([p]) => !inv?.plugins || (!inv.foreign && opusPath(p))).map(([p,d]) => pluginInfo(p,d).name)}, true);
       if (!inv?.plugins && (plan.deletes.length || plan.off.length)) throw Error('This device updater cannot apply plugin removals or on/off choices. Install the downloaded firmware through the boot menu first.');
       if (!inv?.plugins && ownFiles.length) log('Your saved own plugins wait until the new core is installed. Send plugin changes after restart.');
       expectedPlan = plan;
@@ -1082,16 +1095,23 @@ $('device-feedback').append(stopButton);
 // Your own plugin files: checked as the OP-1's loader would, kept across rebuilds, one per name
 const ownStatus = (text, error = false) => { $('own-status').textContent = text; $('own-status').classList.toggle('error', error); };
 function showOwn(inv) {
-  if (inv) { deviceInventory = inv; observedOwn = inv.records.filter(r => r.path?.startsWith('plugins/')); }
+  if (inv) { deviceInventory = inv; observedOwn = inv.records.filter(r => r.path?.startsWith('plugins/')); observedOpus = opusRecords(inv).filter(r => opusPath(r.path)); }
   const rows = new Map(observedOwn.map(r => [r.name || r.path, {name: r.name, path: r.path, label: `Your plugin · Installed${r.state === 'loaded' ? '' : ' · ' + r.state}`}]));
-  for (const [p, d, fileName] of ownFiles) { const i = pluginInfo(p, d); rows.set(i.name, {name: i.name, path: p, label: `Your plugin · ${observedOwn.some(r => r.path === p && r.crc === i.crc) ? 'Installed' : 'Ready to add / update'} · ${fileName} · ${Math.max(1, Math.round(d.length / 1024))} KB`}); }
+  // Opus plugin files (opus/, named by path): what the bridge made of each at the last start, with its reason and CPU figure
+  const opusLabel = r => [`Opus plugin · ${OPUS_STATE[r.state] || r.state}${r.state !== 'loaded' && r.reason ? ': ' + r.reason : ''}`, r.version && `v${r.version}`,
+    r.cpu != null && `CPU about ${cpuPercent(r.cpu)} %`].filter(Boolean).join(' · ');
+  for (const r of observedOpus) rows.set(r.name, {name: r.name, path: r.path, title: r.id, label: opusLabel(r)});
+  for (const [p, d, fileName] of ownFiles) {
+    const i = pluginInfo(p, d), on = [...observedOwn, ...observedOpus].find(r => r.path === p && r.crc === i.crc);
+    rows.set(i.name, {name: i.name, path: p, title: opusPath(p) ? i.savedName : '', label: `${opusPath(p) ? 'Opus plugin' : 'Your plugin'} · ${on ? (opusPath(p) ? opusLabel(on).replace(/^Opus plugin · /, '') : 'Installed') : 'Ready to add / update'} · ${fileName} · ${Math.max(1, Math.round(d.length / 1024))} KB`});
+  }
   for (const r of ownState.removals) rows.set(removalId(r), {...r, pending: true, label: 'Your plugin · Will be removed on update'});
   const found = showLeftovers();
   for (const o of found.old) { const row = rows.get(o.name); if (row) row.label = row.pending ? 'Old copy · Will be removed on update' : 'Old copy from op1r or an earlier build · Installed'; }
   $('own-list').replaceChildren(...[...rows.values()].map(r => {
     const li = document.createElement('li'), name = document.createElement('span'), btn = document.createElement('button');
     li.dataset.pendingRemoval = String(!!r.pending);
-    name.textContent = `${r.name || r.path} · ${r.label}`;
+    name.textContent = `${r.title ? `${r.title} (${r.path})` : r.name || r.path} · ${r.label}`;
     btn.type = 'button'; btn.textContent = pendingUpdate() ? 'Verify first' : r.pending ? 'Undo' : 'Remove'; btn.disabled = busy || devicePending;
     btn.onclick = async () => {
       if (pendingUpdate()) { $('own-check').click(); return; }
@@ -1157,13 +1177,13 @@ async function addOwn(list) {
   for (const f of list) {
     try {
       if (f.size > pluginMax()) throw Error(`${f.name}: too big to load (${sizeText(pluginMax())} at most)`);
-      const d = new Uint8Array(await f.arrayBuffer()), {path, info} = checkPlugin(f.name, d, pluginMax());
+      const d = new Uint8Array(await f.arrayBuffer()), {path, info} = checkOwnFile(f.name, d, pluginMax());   // .knl, .op1p or .opmod
       const same = ownFiles.findIndex(([p, bytes]) => pluginInfo(p, bytes).name === info.name);
       if (same >= 0) ownFiles.splice(same, 1);              // the same plugin again: the newer file wins
       ownFiles.push([path, d, f.name]);
       ownState.removals = ownState.removals.filter(r => r.name !== info.name);
       ownState.reviews = {}; ownState.verification = null;
-      $('log').textContent += `your plugin ${info.name} (${info.kind}${info.version ? ' ' + info.version : ''}): checked\n`;
+      $('log').textContent += `your plugin ${info.name} (${opusPath(path) ? 'opmod ' + info.savedName : info.kind}${info.version ? ' ' + info.version : ''}): checked\n`;
     } catch (e) { errors.push(e.message); }
   }
   await rememberOwn(); showOwn();
@@ -1236,6 +1256,37 @@ $('import').addEventListener('change', async e => {
   finally { e.target.value = ''; lock(false); }
 });
 // One tab per category; every card the same size: screen, name, a line, who made it. A tick where it can be left out.
+// A card's credit line: byLink [name, url] links that name to the maker's site (Gin: SquareWave Studio), and every name
+// with a support link in creators.js gets a cup, floated right on the first line of the card's description (design C, owner 2026-11-18). Longest names first, no overlaps.
+const CUP = '<svg viewBox="0 0 16 16" width="17" height="17" aria-hidden="true"><path d="M2.5 6h8.5v3.5a3.5 3.5 0 0 1-3.5 3.5h-1.5a3.5 3.5 0 0 1-3.5-3.5z M11 7h1a1.75 1.75 0 0 1 0 3.5h-1 M5 2.5v1.5 M7.5 2v2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function creditNodes(it) {
+  const text = it.by || '', marks = [];
+  const free = (s, e) => !marks.some(m => s < m.end && e > m.start);
+  if (it.byLink) { const s = text.indexOf(it.byLink[0]); if (s >= 0) marks.push({start: s, end: s + it.byLink[0].length, name: it.byLink[0], href: it.byLink[1]}); }
+  for (const name of Object.keys(SUPPORT).sort((a, b) => b.length - a.length)) {
+    const s = text.indexOf(name), links = SUPPORT[name]?.links || [];
+    if (s < 0 || !links.length) continue;
+    const m = marks.find(x => x.start === s && x.end === s + name.length);
+    if (m) m.support = links[0]; else if (free(s, s + name.length)) marks.push({start: s, end: s + name.length, name, support: links[0]});
+  }
+  marks.sort((a, b) => a.start - b.start);
+  const cupped = new Set();                                         // one cup per person ("pcppcp / op1r": op1r is pcppcp's)
+  for (const m of marks) if (m.support) { const who = SUPPORT[m.name]?.alias || m.name; if (cupped.has(who)) m.support = null; else cupped.add(who); }
+  const names = document.createElement('span'), cups = document.createElement('span'); let at = 0;
+  names.className = 'cat-by-names'; cups.className = 'cat-cups';
+  for (const m of marks) {
+    names.append(text.slice(at, m.start));
+    if (m.href) { const a = document.createElement('a'); a.href = m.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = m.name; names.append(a); }
+    else names.append(m.name);
+    if (m.support) {                                                // the cup sits apart, at the right end of the line (owner: design C)
+      const c = document.createElement('a'); c.className = 'cat-cup'; c.href = m.support.url; c.target = '_blank'; c.rel = 'noopener';
+      c.title = `Support ${m.name} (${m.support.label})`; c.setAttribute('aria-label', c.title); c.innerHTML = CUP; cups.append(c);
+    }
+    at = m.end;
+  }
+  names.append(text.slice(at));
+  return cups.childNodes.length ? [names, cups] : [names];
+}
 function renderCatalog() {
   const tabs = $('cat-tabs'), panels = $('cat-panels');
   // a choice the release offers; 'always' entries are built into this base's core, so they have no box
@@ -1253,6 +1304,7 @@ function renderCatalog() {
     panel.setAttribute('aria-labelledby', tab.id); panel.hidden = tabs.children.length > 0;
     for (const it of items) {
       const card = document.createElement(it.pick ? 'label' : 'div'); card.className = 'cat-card';
+      card.dataset.type = it.type || ''; card.dataset.maker = String(it.maker).toLowerCase(); card.dataset.makerName = it.maker; card.dataset.search = `${it.name} ${it.line} ${it.maker}`.toLowerCase();
       const head = document.createElement('span'); head.className = 'cat-head';
       if (it.pick) {
         const [group, id] = it.pick.split(':'), input = document.createElement('input');
@@ -1266,16 +1318,21 @@ function renderCatalog() {
       const pic = document.createElement('img'), nativePic = kennel() && it.kennelImg; pic.src = nativePic || it.img; pic.alt = (nativePic ? it.kennelImageAlt : it.imageAlt) || `${it.name} on the OP–1 screen`; pic.width = 400; pic.height = 200; pic.loading = 'lazy';
       const line = document.createElement('span'); line.className = 'cat-line'; line.textContent = it.line + ' ';
       const more = document.createElement('a'); more.href = `manual.html#${it.manual}`; more.textContent = 'manual →'; line.append(more);
-      const by = document.createElement('span'); by.className = 'cat-by'; by.textContent = it.by;
+      const by = document.createElement('span'); by.className = 'cat-by';
+      const [names, cups] = creditNodes(it); by.replaceChildren(names);
+      if (cups) line.prepend(cups);                                  // the cups float right on the description's first line (owner)
       card.append(head, pic, line, by);
       panel.append(card);
     }
     tab.addEventListener('click', () => {
       tabs.querySelectorAll('[role=tab]').forEach(t => { t.setAttribute('aria-selected', String(t === tab)); t.tabIndex = t === tab ? 0 : -1; });
       panels.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p !== panel; });
+      showFilters(cat.id);
     });
+    const empty = document.createElement('p'); empty.className = 'cat-empty'; empty.hidden = true; empty.textContent = 'Nothing here matches.'; panel.append(empty);
     tabs.append(tab); panels.append(panel);
   });
+  buildFilters();
   if (kennel() && pushEnabled()) {
     const tab = document.createElement('button'); tab.type = 'button'; tab.role = 'tab'; tab.id = 'tab-your-plugins';
     tab.tabIndex = -1; tab.setAttribute('aria-controls', 'panel-your-plugins'); tab.setAttribute('aria-selected', 'false');
@@ -1285,6 +1342,7 @@ function renderCatalog() {
     tab.onclick = () => {
       for (const t of tabs.querySelectorAll('[role=tab]')) { t.setAttribute('aria-selected', String(t === tab)); t.tabIndex = t === tab ? 0 : -1; }
       for (const p of panels.querySelectorAll('[role=tabpanel]')) p.hidden = p !== panel;
+      showFilters(null);
     };
     tabs.append(tab); panels.append(panel);
   }
@@ -1300,6 +1358,72 @@ function renderCatalog() {
     if (e.target.dataset.group === 'utilities') panels.querySelectorAll('input[data-group=utilities]').forEach(i => { i.checked = e.target.checked; });
   });
   $('catalog-base').textContent = kennel() ? 'BUILT ON OP1R AND KENNEL' : `BUILT ON ${baseLabel().toUpperCase()}`;
+}
+// Filters: UI state for this visit only (never saved). Search and maker cover every tab; the type is kept per tab.
+const filters = {q: '', maker: '', types: {}};
+const activeCategory = () => document.querySelector('#cat-tabs [role=tab][aria-selected=true]')?.id.replace(/^tab-/, '') || '';
+function buildFilters() {
+  const bar = $('cat-filter');
+  bar.innerHTML = `<div class="cf-row"><label class="cf-search"><span class="cf-icon" aria-hidden="true"></span><input type="search" id="cf-q" placeholder="Search name, sound or maker" aria-label="Search name, sound or maker" autocomplete="off" spellcheck="false"></label>
+<div class="cf-group" id="cf-type-group" role="group" aria-label="Type"><span class="cf-label">Type</span><span class="cf-pills" id="cf-types"></span></div>
+<div class="cf-group" role="group" aria-label="Maker"><span class="cf-label">Maker</span><span class="cf-pills" id="cf-makers"></span></div></div>
+<div class="cf-row cf-foot"><span id="cf-count" role="status" aria-live="polite"></span><button type="button" id="cf-clear" class="cf-clear">Clear filters</button></div>`;
+  const pill = (label, value, attr) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'cf-pill'; b.textContent = label; b.dataset[attr] = value; return b; };
+  $('cf-makers').append(pill('All makers', '', 'maker'), ...MAKER_PILLS.map(([v, l]) => pill(l, v, 'maker')));
+  const named = new Set(MAKER_PILLS.map(([v]) => v)), more = new Map();
+  for (const card of document.querySelectorAll('#cat-panels .cat-card')) if (!named.has(card.dataset.maker)) { const m = more.get(card.dataset.maker) || {name: card.dataset.makerName, n: 0}; m.n++; more.set(card.dataset.maker, m); }
+  const wrap = document.createElement('span'); wrap.className = 'cf-more'; wrap.id = 'cf-more';
+  const toggle = document.createElement('button'); toggle.type = 'button'; toggle.className = 'cf-pill'; toggle.id = 'cf-more-btn'; toggle.setAttribute('aria-haspopup', 'true'); toggle.setAttribute('aria-expanded', 'false');
+  const list = document.createElement('div'); list.className = 'cf-menu'; list.id = 'cf-menu'; list.hidden = true;
+  for (const [key, m] of [...more].sort((x, y) => y[1].n - x[1].n || x[1].name.localeCompare(y[1].name))) {
+    const b = document.createElement('button'); b.type = 'button'; b.dataset.maker = key; b.dataset.name = m.name; b.innerHTML = '<span></span><small></small>'; b.firstChild.textContent = m.name; b.lastChild.textContent = m.n; list.append(b);
+  }
+  wrap.append(toggle, list); $('cf-makers').append(wrap);
+  const closeMenu = () => { list.hidden = true; toggle.setAttribute('aria-expanded', 'false'); };
+  toggle.addEventListener('click', e => { e.stopPropagation(); list.hidden = !list.hidden; toggle.setAttribute('aria-expanded', String(!list.hidden)); });
+  document.addEventListener('click', e => { if (!wrap.contains(e.target)) closeMenu(); });
+  wrap.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); toggle.focus(); } });
+  list.addEventListener('click', closeMenu);
+  $('cf-q').addEventListener('input', e => { filters.q = e.target.value.trim().toLowerCase(); applyFilters(); });
+  $('cf-q').addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); if (e.key === 'Escape' && e.target.value) { e.target.value = ''; filters.q = ''; applyFilters(); } });
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'cf-clear') { filters.q = ''; filters.maker = ''; filters.types = {}; $('cf-q').value = ''; }
+    else if (b.dataset.maker !== undefined) filters.maker = b.dataset.maker;
+    else if (b.dataset.type !== undefined) filters.types[activeCategory()] = b.dataset.type;
+    applyFilters();
+  });
+  showFilters(activeCategory());
+}
+function showFilters(id) {                                        // the band belongs to the category tabs, not to Your plugins
+  $('cat-filter').hidden = !id;
+  const types = TYPES[id] || [], group = $('cf-type-group');
+  group.hidden = !types.length;
+  const pill = (label, value) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'cf-pill'; b.textContent = label; b.dataset.type = value; return b; };
+  $('cf-types').replaceChildren(...(types.length ? [pill('All', ''), ...types.map(t => pill(t, t))] : []));
+  applyFilters();
+}
+function applyFilters() {
+  const id = activeCategory(), {q, maker} = filters;
+  for (const panel of document.querySelectorAll('#cat-panels .cat-grid')) {
+    const type = filters.types[panel.id.replace(/^panel-/, '')] || '';
+    let shown = 0;
+    for (const card of panel.querySelectorAll('.cat-card')) {
+      const ok = (!q || card.dataset.search.includes(q)) && (!maker || card.dataset.maker === maker) && (!type || card.dataset.type === type);
+      card.hidden = !ok; if (ok) shown++;
+    }
+    const empty = panel.querySelector('.cat-empty'); empty.hidden = shown > 0; empty.textContent = q ? 'No matches in this tab. The other tabs show their match counts.' : 'Nothing here matches.';
+    panel.dataset.shown = shown;
+  }
+  const panel = $(`panel-${id}`), type = filters.types[id] || '';
+  for (const b of document.querySelectorAll('#cf-types .cf-pill')) b.setAttribute('aria-pressed', String(b.dataset.type === type));
+  for (const b of document.querySelectorAll('#cf-makers > .cf-pill')) b.setAttribute('aria-pressed', String(b.dataset.maker === maker));
+  const picked = document.querySelector(`#cf-menu button[data-maker="${CSS.escape(maker)}"]`), mb = $('cf-more-btn');
+  mb.textContent = picked ? `${picked.dataset.name} ▾` : 'More ▾'; mb.setAttribute('aria-pressed', String(!!picked));
+  for (const b of document.querySelectorAll('#cf-menu button')) b.setAttribute('aria-pressed', String(b === picked));
+  if (panel) $('cf-count').textContent = `${panel.dataset.shown} of ${panel.querySelectorAll('.cat-card').length} shown`;
+  $('cf-clear').style.visibility = q || maker || Object.values(filters.types).some(Boolean) ? 'visible' : 'hidden';
+  countTabs();
 }
 function categoryCounts(panel) {
   const cards = [...panel.querySelectorAll('.cat-card')];
@@ -1330,8 +1454,8 @@ function updateSummary() {
 function countTabs() {                                            // ticked / all on each tab
   for (const tab of document.querySelectorAll('#cat-tabs [role=tab]')) {
     if (tab.id === 'tab-your-plugins') { tab.querySelector('[data-count]').textContent = $('own-list').children.length; continue; }
-    const count = categoryCounts($(tab.getAttribute('aria-controls')));
-    tab.querySelector('[data-count]').textContent = `${count.selected}/${count.total}`;
+    const panel = $(tab.getAttribute('aria-controls')), count = categoryCounts(panel);
+    tab.querySelector('[data-count]').textContent = filters.q ? `${panel.dataset.shown ?? count.total} found` : `${count.selected}/${count.total}`;
   }
 }
 try {
@@ -1346,7 +1470,7 @@ try {
   $('own').hidden = $('device-card').hidden;   // the plugin loader is kennel's
   // Path A and the USB hints only where this release can update over USB; path B is always there
   for (const id of ['path-usb', 'paths-unsure', 'usb-next']) $(id).hidden = $('device-card').hidden;
-  let restored = false;
+  let restored = false, retiredNotice = '', retiredMigrated = false;
   try {
     let saved = loadSelection(release.catalog.base);
     if (!saved) {
@@ -1363,6 +1487,10 @@ try {
       }
     }
     if (saved) {
+      const migrated = migrateRetired(saved.inputs, release.catalog);   // ticks of a retired port move to its replacement
+      if (migrated.moved.length) retiredNotice = 'Your saved picks had retired plugins, so their replacements are ticked: ' + migrated.moved.map(([a, b]) => a === b ? b : `${b} (was ${a})`).join(', ') + '. ';
+      if (Object.keys(migrated.inputs).length !== Object.keys(saved.inputs).length || migrated.moved.length) retiredMigrated = true;
+      saved = {...saved, inputs: migrated.inputs};
       for (const i of document.querySelectorAll('#catalog input[type=checkbox]')) {
         const key = inputKey(i);
         if (Object.hasOwn(saved.inputs, key)) i.checked = saved.inputs[key] === true;
@@ -1376,28 +1504,31 @@ try {
     ownState = await loadPlugins(release.catalog.base);
     if (ownState.schema !== 1 || !Array.isArray(ownState.files) || !Array.isArray(ownState.removals) || !ownState.reviews || Array.isArray(ownState.reviews) || typeof ownState.reviews !== 'object' || !ownState.toggles || Array.isArray(ownState.toggles) || typeof ownState.toggles !== 'object') throw Error('Unsupported own-plugin storage format');
     const v = ownState.verification;
-    if (v && (!Array.isArray(v.files) || !v.files.every(f => pluginPath(f.path) && Number.isInteger(f.crc) && typeof f.on === 'boolean') ||
-      !Array.isArray(v.deletes) || !v.deletes.every(pluginPath) || !Array.isArray(v.removals) || !v.removals.every(n => typeof n === 'string') ||
+    const filePath = p => pluginPath(p) || opusPath(p);            // a plugin file, or an Opus plugin file (opus/)
+    if (v && (!Array.isArray(v.files) || !v.files.every(f => filePath(f.path) && Number.isInteger(f.crc) && typeof f.on === 'boolean') ||
+      !Array.isArray(v.deletes) || !v.deletes.every(filePath) || !Array.isArray(v.removals) || !v.removals.every(n => typeof n === 'string') ||
       !Array.isArray(v.off) || !v.off.every(n => typeof n === 'string') ||
-      v.before && (!Array.isArray(v.before) || !v.before.every(b => pluginPath(b.path) && (b.crc === null || Number.isInteger(b.crc)))) ||
+      v.before && (!Array.isArray(v.before) || !v.before.every(b => filePath(b.path) && (b.crc === null || Number.isInteger(b.crc)))) ||
       v.builtins && (!Array.isArray(v.builtins) || !v.builtins.every(e => typeof e.name === 'string' && typeof e.on === 'boolean')))) throw Error('Invalid saved device confirmation; existing data was preserved');
     if (v && (v.phase != null && !['sending', 'installing'].includes(v.phase) || v.notBefore != null && (!Number.isFinite(v.notBefore) || v.notBefore < 0))) throw Error('Invalid pending update phase');
     installingUntil = v?.notBefore || 0;
     const restoreFile = ([p, raw, name]) => {
-      const bytes = new Uint8Array(raw), checked = checkPlugin(name, bytes, pluginMax());
+      const bytes = new Uint8Array(raw), checked = checkOwnFile(name, bytes, pluginMax());
       if (checked.path !== p) throw Error('Saved plugin identity changed: ' + name);
       return [p, bytes, name];
     };
     ownFiles = ownState.files.map(restoreFile);
     for (const r of ownState.removals) {
-      if (!/^[a-z0-9_-]{1,15}$/.test(r.name) && !(r.name === '' && /^plugins\/[a-z0-9_-]{1,15}\.(knl|op1p)$/.test(r.path || ''))) throw Error('Invalid saved removal identity');
+      if (!/^[a-z0-9_-]{1,15}$/.test(r.name) && !(r.name === '' && /^plugins\/[a-z0-9_-]{1,15}\.(knl|op1p)$/.test(r.path || '')) &&
+          !(opusPath(r.name) && r.path === r.name)) throw Error('Invalid saved removal identity');
       if (r.file) r.file = restoreFile(r.file);
     }
     pluginStorageReady = true;
   } catch (e) { ownState = newPluginState(); ownFiles = []; storageError = 'Could not restore own plugins: ' + e.message; }
   selectionsReady = true; busy = false; showOwn();
+  if (retiredMigrated) rememberSelection();                       // saved without the retired keys: the notice shows once
   update(); setControls();
   if (storageError) ownStatus(storageError, true);
   $('path-connect').disabled = $('device-card').hidden;
-  status((restored ? 'Saved selections restored. ' : '') + ($('device-card').hidden ? 'Choose your original R246 firmware to build.' : 'Choose your original R246 firmware to build, or connect your OP–1 to update over USB.'));
+  status((restored ? 'Saved selections restored. ' : '') + retiredNotice + ($('device-card').hidden ? 'Choose your original R246 firmware to build.' : 'Choose your original R246 firmware to build, or connect your OP–1 to update over USB.'));
 } catch (error) { release = null; $('download-option').open = true; status(error.message, true); }

@@ -1,5 +1,47 @@
 # Changelog
 
+## 3.3.1
+
+Highlights:
+
+- [Opus plugins](https://hundekraft.github.io/op1-workshop/manual.html#opus): hundekraft now runs plugin files made for Opus as they are. Send your own `.opmod` files from the workshop, or use the bundled ones. LizardMan's dimension, dx, sim, matrix and chorus and displayname808's castle 1.1 are ticked from the start, and bitcrush and plate are there to tick. Their settings share one page, [OPUS PLUGINS](https://hundekraft.github.io/op1-workshop/manual.html#settings-opus), at the end of settings. They take the place of the earlier hundekraft KASTLE, DX, HIM, DIMENSION, MATRIX and KHORUS, which are gone from the list. Updating removes them from your OP-1. A sound you saved with one of those may sound different or fall back to a stock engine. A plugin with the same name as one of ours gets `_o` after its name. Our own Amp and outatime stay, so Opus's amp and outatime aren't bundled, but a file you send yourself still loads, as amp_o and outatime_o.
+- [QUANT](https://hundekraft.github.io/op1-workshop/manual.html#quant): a sequencer that records what you play after a bar of count-in and loops it on the grid. Grid, strength and swing can be changed back at any time, and REC + [Shift] + the high C# puts the loop on tape in time. Add it from the plugin list. The idea is u/Infamous_Call_6492's.
+- [Print a MIDI track onto the tape](https://hundekraft.github.io/op1-workshop/manual.html#midiseq-print): [Shift] + [drop] in the MIDI sequencer records the selected track as audio, perfectly in time, then mutes it. The idea is u/Infamous_Call_6492's.
+- Restoring a backup of tape 2, 3 or 4 through disk mode no longer crashes the OP-1. Copying the files back used to write every second of silence as well, and that filled the flash. Now only the recorded audio takes space, the restored tape gets its clips back, and tape 1 keeps its own.
+
+Tapes:
+
+- If the flash fills up while you copy in disk mode, the computer gets a write error and the OP-1 keeps running.
+- [Last tape at start-up](https://hundekraft.github.io/op1-workshop/manual.html#tapes): the OP-1 comes back on the tape you used last. It opens on tape 1 and switches a few seconds later. The idea is u/Infamous_Call_6492's.
+- Hold [Shift] and an arrow on the tape screen and the jump to the next grid line repeats until you let go. The idea is u/Infamous_Call_6492's.
+- [Quantized punch](https://hundekraft.github.io/op1-workshop/manual.html#punch): with QUANT PUNCH on, a recording starts on the next grid step after you press REC and stops on a step too. The grid is a bar, 1/4, 1/8 or 1/16. The idea is u/Infamous_Call_6492's.
+
+Sampler:
+
+- [Tune a sample by hand](https://hundekraft.github.io/op1-workshop/manual.html#sampletools): on the synth sampler, hold [Shift] and turn the green encoder for semitones or the white one for cents. The idea is BarneyBrown's.
+- [Lazy chop](https://hundekraft.github.io/op1-workshop/manual.html#sampedit-controls) waits for you now: after TAP, nothing plays until you press a key, and that key starts the sample from the top. The idea is BarneyBrown's.
+
+Sequencers and MIDI:
+
+- [Grids starts with the tape](https://hundekraft.github.io/op1-workshop/manual.html#seq-tape): hold REC and press [Shift] + the high C#, as with Euclid and Dots. The idea is u/Infamous_Call_6492's.
+- [Scale](https://hundekraft.github.io/op1-workshop/manual.html#scale) and [chord mode](https://hundekraft.github.io/op1-workshop/manual.html#chord) now reach USB MIDI out: with either on, the keys send the notes the synth plays, mapped to the scale and with the whole chord, instead of the keys you pressed.
+- [Composer](https://hundekraft.github.io/op1-workshop/manual.html#composer) and [Trail](https://hundekraft.github.io/op1-workshop/manual.html#trail) have new screens. The notes get most of the room, the song's sections sit along the top, and the values at the bottom are bigger, with bars. Trail draws the phrase it's playing in white, with earlier ones fading out behind it.
+
+Sounds and effects:
+
+- [PLOC](https://hundekraft.github.io/op1-workshop/manual.html#ploc): a water synth by Nicolas Franck Pauly. Keys play drops, spray and ripples, and the tap on the screen turns with FLOW. It comes with eight presets and a small companion, PLOCCTRL. Add it from the plugin list.
+- [Amp](https://hundekraft.github.io/op1-workshop/manual.html#amp) has two new voices, High Gain and Metal: several gain stages in a row into a 4x12-style cabinet, with a tighter gate. The idea is u/Infamous_Call_6492's.
+- [Channel strip](https://hundekraft.github.io/op1-workshop/manual.html#strip): hold [Shift] and push the green encoder to move a strip after the effect (POST FX) and back, without a click. The idea is BarneyBrown's. The strip also has meters in and out, opens with [Shift] + [T2] on the synth, drum and master effect pages, and DRIVE goes further in its top half. A new [MASTER strip](https://hundekraft.github.io/op1-workshop/manual.html#strip-master) works on the whole mix.
+
+Settings and the workshop:
+
+- The workshop's plugin list has a search box and filters by type and by maker.
+- [Support the creators](https://hundekraft.github.io/op1-workshop/manual.html#support-creators): a plugin's card has a small coffee cup next to its maker's name that goes to their own Ko-fi or tip page.
+- [Picker step](https://hundekraft.github.io/op1-workshop/manual.html#settings): a new PICKER STEP row in settings sets how many encoder clicks move the synth, effect, LFO and sequencer lists and the preset browser one row: 1, 2 or 4. 4 is how it has always been. The idea is u/Infamous_Call_6492's.
+- Sharper screens: text and thin lines now land on whole pixels of your OP-1's screen, whichever panel it has, so they don't blur. The screens that looked worst were redrawn too. The idea is u/Infamous_Call_6492's.
+- Pop-up messages on the OP-1 no longer turn capital letters into icons or apostrophes into question marks.
+
+
 ## 3.3
 
 Highlights:
@@ -17,15 +59,7 @@ New synths and drums:
 - [LUDWIG](https://hundekraft.github.io/op1-workshop/manual.html#ludwig): a piano built from measured recordings of a Yamaha grand. You hear the real hammer attack, then every overtone at its own pitch, so the [tuning](https://hundekraft.github.io/op1-workshop/manual.html#ludwig-tuning) can go anywhere from meantone to stretched. It has a [sustain pedal](https://hundekraft.github.io/op1-workshop/manual.html#ludwig-pedal) too. (Hundekraft; samples from the Salamander Grand Piano V3 by Alexander Holm, CC BY 3.0; screen art by Rackes)
 - [PINBOARD](https://hundekraft.github.io/op1-workshop/manual.html#pinboard): a synth you patch with pins, after the EMS VCS3. Two oscillators, noise, a ring modulator, a filter that squeals and a third oscillator that runs slow or at audio rate. Pick one of 64 pin patterns or [wire your own board](https://hundekraft.github.io/op1-workshop/manual.html#pinboard-edit). (Hundekraft)
 - [Windwood](https://hundekraft.github.io/op1-workshop/manual.html#windwood): a clarinet made from a reed, air and a tube instead of samples, with growl, flutter-tongue and smooth slurs from note to note. (nvmsocool)
-- [DX](https://hundekraft.github.io/op1-workshop/manual.html#dx): six-operator FM that plays DX7 voices, with all 32 algorithms. [Add `.syx` banks in the workshop](https://hundekraft.github.io/op1-workshop/manual.html#dx-banks) and they show up on the OP-1 after a restart. A file with several banks is split for you. (LizardMan; kennel port by Hundekraft)
-- [KASTLE](https://hundekraft.github.io/op1-workshop/manual.html#kastle): a four-operator FM drone. A castle and its village sit on the screen, and rain, lightning and fire follow the knobs. (displayname808; kennel port by Hundekraft)
-- [DIMENSION](https://hundekraft.github.io/op1-workshop/manual.html#dimension): an oscillator that morphs from noise to saw, with a sub, a resonant filter and a thick ensemble. Hold Shift for a filter envelope with accent and slide, for 303-style lines. (LizardMan; kennel port by Hundekraft)
-- [HIM](https://hundekraft.github.io/op1-workshop/manual.html#him): a synthesized drum kit. Every hit throws a solid around a glass box on the screen. Four HIM kits are in the drum presets. (LizardMan; kennel port by Hundekraft)
 
-New effect and LFO:
-
-- [KHORUS](https://hundekraft.github.io/op1-workshop/manual.html#khorus): a chorus with one to three voices and a page that moves with it. (LizardMan; kennel port by Hundekraft)
-- [MATRIX](https://hundekraft.github.io/op1-workshop/manual.html#matrix): a new LFO type with up to eight rows of LFOs and envelopes, each aimed at a knob, the envelope, the effect, pitch, volume or another row. (LizardMan; kennel port by Hundekraft)
 
 Sounds that changed:
 

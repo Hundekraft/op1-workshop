@@ -16,7 +16,7 @@ export function claimText(c) {
   if (c.startsWith('tape.')) return `the tape ${c.slice(5)} hook`;
   return c;
 }
-export const needsChoice = plan => plan.changed || plan.conflicts.length > 0 || !!plan.unknown?.length || plan.entries.some(e => e.path?.startsWith('plugins/'));
+export const needsChoice = plan => plan.changed || plan.conflicts.length > 0 || !!plan.unknown?.length || plan.entries.some(e => /^(plugins|opus)\//.test(e.path || ''));
 export const cancelledPlan = () => new Error('Cancelled before transfer. No device changes were sent; pending selections are saved.');
 export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], saved = {}, full = false, coreNote = '', deferredOwn = []} = {}) {
   box.onchange = null;
@@ -26,7 +26,7 @@ export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], save
   const involved = new Set(plan.conflicts.flatMap(c => c.names));
   const changed = e => !['keep', 'built-in'].includes(e.action) || e.was && (e.on !== (e.was.state === 'loaded') || ['failed', 'skipped'].includes(e.was.state)) || involved.has(e.name);
   const changes = rows.filter(changed), unchanged = rows.filter(e => !changed(e));
-  const controls = e => !ask ? '' : e.action !== 'remove' && e.path?.startsWith('plugins/')
+  const controls = e => !ask ? '' : e.action !== 'remove' && /^(plugins|opus)\//.test(e.path || '')
     ? `<button type="button" data-remove="${esc(e.path)}">Remove plugin</button>` : '';
   const stateChanged = e => e.was && e.on !== (e.was.state === 'loaded');
   const failed = e => ['failed', 'skipped'].includes(e.was?.state);
@@ -35,12 +35,15 @@ export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], save
   const key = changes.filter(e => !routine(e)), updated = changes.filter(routine);
   const ver = e => e.was?.version && e.version && e.was.version !== e.version ? `${e.was.version} → ${e.version}` : e.version ? `v${e.version}` : '';
   const sign = e => e.action === 'remove' ? '−' : e.action === 'install' ? '+' : e.downgrade || e.restoration || failed(e) ? '!' : e.action === 'update' ? '↻' : '·';
-  const tag = e => e.action === 'remove' ? 'removed' : e.action === 'install' ? 'new' : e.restoration ? 'workshop version' : e.downgrade ? 'older version' : stateChanged(e) ? (e.on ? 'turned on' : 'turned off') : e.action === 'update' ? 'updated' : '';
+  // a retired port (planPlugins retired): always removed, no choice; the row names what replaced it
+  const tag = e => e.retired ? `retired · replaced by ${e.retired}` : e.action === 'remove' ? 'removed' : e.action === 'install' ? 'new' : e.restoration ? 'workshop version' : e.downgrade ? 'older version' : stateChanged(e) ? (e.on ? 'turned on' : 'turned off') : e.action === 'update' ? 'updated' : '';
+  // shown name: a bridged file is named by its path (content/dx.opmod); the list shows just the plugin's name
+  const shown = e => String(e.name || e.path || '').replace(/^.*\//, '').replace(/\.(opmod|knl|op1p)$/i, '');
   const warn = e => e.downgrade || e.restoration || failed(e);
   // Workshop plugins are chosen on the main page, your own files with Remove: the review shows the state, no switch
   const toggle = e => e.action === 'remove' ? '' : `<span class="plan-state" data-state>${e.on ? 'On' : 'Off'}</span>`;
-  const row = e => `<li class="plan-row${warn(e) ? ' plan-warn' : ''}"${e.action === 'remove' ? '' : ` data-plugin-name="${esc(e.name)}"`}><span class="plan-sign" aria-hidden="true">${sign(e)}</span><span class="plan-name">${esc(e.name || e.path)}${e.source === 'own' ? ' <small>your file</small>' : ''}${e.replaces ? `<small>replaces ${esc(e.replaces)}</small>` : ''}${failed(e) ? `<small>last boot ${esc(e.was.state)}${e.was.reason ? ': ' + esc(e.was.reason) : ''}</small>` : ''}</span><span class="plan-meta">${esc([tag(e), ver(e), kb(e.size)].filter(Boolean).join(' · '))}</span>${toggle(e)}${controls(e)}</li>`;
-  const brief = e => `<li data-plugin-name="${esc(e.name)}">${esc(e.name || e.path)}${ver(e) ? ` <span>${esc(ver(e))}</span>` : ''}${e.source === 'own' ? ' <span>your file</span>' : ''}${controls(e)}</li>`;
+  const row = e => `<li class="plan-row${warn(e) ? ' plan-warn' : ''}"${e.action === 'remove' ? '' : ` data-plugin-name="${esc(e.name)}"`}><span class="plan-sign" aria-hidden="true">${sign(e)}</span><span class="plan-name">${esc(shown(e))}${e.source === 'own' ? ' <small>your file</small>' : ''}${e.replaces ? `<small>replaces ${esc(e.replaces)}</small>` : ''}${failed(e) ? `<small>last boot ${esc(e.was.state)}${e.was.reason ? ': ' + esc(e.was.reason) : ''}</small>` : ''}</span><span class="plan-meta">${esc([tag(e), ver(e), kb(e.size)].filter(Boolean).join(' · '))}</span>${toggle(e)}${controls(e)}</li>`;
+  const brief = e => `<li data-plugin-name="${esc(e.name)}">${esc(shown(e))}${ver(e) ? ` <span>${esc(ver(e))}</span>` : ''}${e.source === 'own' ? ' <span>your file</span>' : ''}${controls(e)}</li>`;
   const total = list => kb(list.reduce((n, e) => n + (e.size || 0), 0));
   const count = n => `${n} plugin${n === 1 ? '' : 's'}`;
   box.innerHTML = `<h3>${full ? 'Firmware upgrade' : changes.length ? 'Ready to update' : 'Your plugins are up to date'}</h3>
@@ -51,7 +54,7 @@ ${updated.length ? `<li class="plan-group"><details><summary><span class="plan-s
 ${unchanged.length ? `<li class="plan-group"><details class="unchanged-plugins"><summary><span class="plan-sign" aria-hidden="true">=</span><span class="plan-name">${unchanged.length} unchanged</span></summary><ul class="plan-brief">${unchanged.map(brief).join('')}</ul></details></li>` : ''}
 ${coreNote && full ? `<li class="plan-row plan-note"><span class="plan-sign" aria-hidden="true">·</span><span class="plan-name">${esc(coreNote)}</span></li>` : ''}</ul>
 ${plan.restartNeeded ? '<p>The update will restart the OP–1 to apply plugin settings.</p>' : ''}
-${ask ? pending.map(r => `<p>Removal pending: ${esc(r.name || r.path)} <button type="button" data-undo="${esc(r.name || r.path)}">Undo</button></p>`).join('') : ''}
+${ask ? pending.map(r => `<p>Removal pending: ${esc(shown(r))} <button type="button" data-undo="${esc(r.name || r.path)}">Undo</button></p>`).join('') : ''}
 ${plan.conflicts.map((c, i) => `<fieldset${ask ? '' : ' disabled'}><legend>${esc(c.names.join(' and '))} both want ${esc(claimText(c.claim))}. Choose which whole plugin stays on.</legend>
 ${c.names.map(n => `<label><input type="radio" name="claim${i}" value="${esc(n)}"${n === c.choice ? ' checked' : ''}> ${esc(n)}</label>`).join('')}<p data-implied="${i}" hidden>Resolved by the plugins switched off above.</p></fieldset>`).join('')}
 ${unknown ? `<p role="alert">Compatibility is unknown for ${esc(plan.unknown.join(', '))}. Undeclared conflicts cannot be checked.</p>` : ''}

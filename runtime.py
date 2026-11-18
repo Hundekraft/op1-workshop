@@ -52,6 +52,11 @@ def normalize(config, catalog):
     # configurations without it stay as they were.
     hidden = config.get('hidden', [])
     valid = [f['id'] for f in catalog.get('op1r_plugins', [])]
+    # A retired plugin left out in a saved choice (3.3: the ports KASTLE, DX, HIM, DIMENSION, MATRIX, KHORUS) leaves out
+    # the bundled file that replaced it (its reserved entry's replaced_by), so the user's choice carries over.
+    gone = {f['id']: f['replaced_by'] for f in catalog.get('op1r_plugins', []) if f.get('reserved') and f.get('replaced_by')}
+    if isinstance(hidden, list) and any(v in gone for v in hidden if isinstance(v, str)):
+        hidden = list(dict.fromkeys(gone.get(v, v) if isinstance(v, str) else v for v in hidden))
     if (not isinstance(hidden, list) or any(not isinstance(v, str) for v in hidden)
             or len(set(hidden)) != len(hidden) or any(v not in valid for v in hidden)):
         raise ValueError('Unknown or duplicate hidden plugins: ' + ', '.join(_bad(hidden, valid)))
@@ -77,7 +82,8 @@ def path_ok(p):
         return False
     if re.search(r'te-boot|te_boot|teboot', p, re.I) or '..' in p or '//' in p:
         return False
-    return p == 'OP1_vdk.ldr' or p.startswith('content/') or re.fullmatch(r'plugins/[^/.][^/]*\.(knl|op1p)', p) is not None
+    return (p == 'OP1_vdk.ldr' or p.startswith('content/') or re.fullmatch(r'plugins/[^/.][^/]*\.(knl|op1p)', p) is not None
+            or re.fullmatch(r'opus/[a-z0-9_-]{1,33}\.opmod', p) is not None)   # the plugin bridge (kn_foreign_path_ok)
 
 
 def _bad(values, valid):
@@ -165,13 +171,14 @@ def screen_memory(config, catalog, own_bytes=0):
     return {'need': need, 'room': room, 'over': max(0, need - room), 'heaviest': [i for _, i in sorted(chosen, reverse=True)[:5]]}
 
 
-def arena_need(files, terms):
+def arena_need(files, terms, foreign=0):
     """kennel's plugin arena for a set of plugin files (synth_sdk/kennel/kn_boot.c arena_need): the core's fixed terms
     (boot tables, run-time op1_alloc, margin), per_file for each listed file, each file's need (load size + call stubs
     + alignment pad, kn_load.c kn_peek; release plugin_metadata 'arena') and the static-art cache when any of them uses
     it, rounded up to the arena's step. files: [(need, uses_art_cache)]; terms: release.json plugin_arena. -> need,
-    percent of the ceiling, and how far over the ceiling (a set over it can't load: the files past it are refused)."""
-    total = terms['fixed'] + terms['per_file'] * len(files) + sum(n for n, _ in files) + (terms['art_cache'] if any(c for _, c in files) else 0)
+    percent of the ceiling, and how far over the ceiling (a set over it can't load: the files past it are refused).
+    foreign: the plugin bridge's .opmod files, counted as kn_foreign_need does (opmods.arena; no per_file)."""
+    total = terms['fixed'] + terms['per_file'] * len(files) + sum(n for n, _ in files) + foreign + (terms['art_cache'] if any(c for _, c in files) else 0)
     need = -(-total // terms['align']) * terms['align']
     return {'need': need, 'percent': int(1000 * need / terms['max'] + 0.5) / 10, 'over': max(0, need - terms['max'])}   # half up, as app.js
 
@@ -431,8 +438,11 @@ def boot_owned_types(catalog):
 
 def core_rows(data):
     """kennel synth_sdk/core_rows.json -> ({(table, key)}, {table}): the rows a core with kn_core_rows.h keeps right at
-    boot (added when missing, removed when their plugin isn't there) and kennel's own tables."""
-    return {(r['table'], r.get('type', r.get('folder'))) for r in data['rows']}, set(data.get('tables', []))
+    boot (added when missing, removed when their plugin isn't there), plus its "dropped" rows (a retired port's rows an
+    older build put in the factory DB, removed at boot while their type isn't registered: HIM's drum type and kits and
+    the matrix LFO row, 3.3 -> 3.3.1), and kennel's own tables."""
+    rows = data['rows'] + data.get('dropped', [])
+    return {(r['table'], r.get('type', r.get('folder'))) for r in rows}, set(data.get('tables', []))
 
 
 def factory_digest(db, owned, tables=('kennel_seq_owned',)):

@@ -284,7 +284,7 @@
       "name": "Reverb",
       "type": "plate / hall reverb",
       "description": "Plate and hall reverb, after Mutable Instruments Elements.",
-      "screen_bytes": 68192,
+      "screen_bytes": 68224,
       "file": "reverb.knl",
       "needs": []
     },
@@ -352,7 +352,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 144384,
+      "screen_bytes": 144408,
       "file": "eva.knl",
       "needs": []
     },
@@ -385,7 +385,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 134416,
+      "screen_bytes": 134408,
       "file": "hail.knl",
       "needs": []
     },
@@ -669,7 +669,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 47792,
+      "screen_bytes": 47760,
       "file": "c64arp.knl",
       "needs": []
     },
@@ -723,7 +723,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 25928,
+      "screen_bytes": 25904,
       "file": "gin.knl",
       "needs": []
     },
@@ -734,7 +734,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 67640,
+      "screen_bytes": 77648,
       "file": "amp.knl",
       "needs": []
     },
@@ -1056,58 +1056,52 @@
     {
       "id": "dimension",
       "kind": "synth",
-      "name": "DIMENSION",
+      "name": "(reserved: was the DIMENSION port; retired for the bundled dimension_o file, owner 2026-11-17)",
+      "reserved": true,
+      "replaced_by": "dimension_o",
       "bases": [
         "kennel30-plugins"
-      ],
-      "screen_bytes": 22472,
-      "file": "dimension.knl",
-      "needs": []
+      ]
     },
     {
       "id": "him",
       "kind": "drum",
-      "name": "HIM",
+      "name": "(reserved: was the HIM port; retired for the bundled sim file, owner 2026-11-17)",
+      "reserved": true,
+      "replaced_by": "sim",
       "bases": [
         "kennel30-plugins"
-      ],
-      "screen_bytes": 128,
-      "file": "him.knl",
-      "needs": []
+      ]
     },
     {
       "id": "khorus",
       "kind": "fx",
-      "name": "KHORUS",
+      "name": "(reserved: was the KHORUS port; retired for the bundled chorus file, owner 2026-11-17)",
+      "reserved": true,
+      "replaced_by": "chorus",
       "bases": [
         "kennel30-plugins"
-      ],
-      "screen_bytes": 39928,
-      "file": "khorus.knl",
-      "needs": []
+      ]
     },
     {
       "id": "kastle",
       "kind": "synth",
-      "name": "KASTLE",
+      "name": "(reserved: was the KASTLE port; retired for the bundled castle file, owner 2026-11-17)",
+      "reserved": true,
+      "replaced_by": "castle",
       "bases": [
         "kennel30-plugins"
-      ],
-      "screen_bytes": 128,
-      "file": "kastle.knl",
-      "needs": []
+      ]
     },
     {
       "id": "matrix",
       "kind": "feature",
-      "name": "Matrix LFO",
+      "name": "(reserved: was the MATRIX port; retired for the bundled matrix file, owner 2026-11-17)",
+      "reserved": true,
+      "replaced_by": "matrix_o",
       "bases": [
         "kennel30-plugins"
-      ],
-      "screen_bytes": 8000,
-      "lfo_type": true,
-      "file": "matrix.knl",
-      "needs": []
+      ]
     },
     {
       "id": "keyvel",
@@ -1132,13 +1126,12 @@
     {
       "id": "dx",
       "kind": "synth",
-      "name": "DX",
+      "name": "(reserved: was the DX port; retired for the bundled dx_o file, owner 2026-11-17)",
+      "reserved": true,
+      "replaced_by": "dx_o",
       "bases": [
         "kennel30-plugins"
-      ],
-      "screen_bytes": 128,
-      "file": "dx.knl",
-      "needs": []
+      ]
     },
     {
       "id": "drift",
@@ -1169,7 +1162,7 @@
       "bases": [
         "kennel30-plugins"
       ],
-      "screen_bytes": 59528,
+      "screen_bytes": 59704,
       "file": "windwood.knl",
       "needs": []
     },
@@ -1182,6 +1175,168 @@
       ],
       "screen_bytes": 128,
       "file": "pinboard.knl",
+      "needs": []
+    },
+    {
+      "id": "dimension_o",
+      "kind": "synth",
+      "name": "dimension",
+      "opmod": [
+        "opus.dimension"
+      ],
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "dimension.opmod",
+      "needs": []
+    },
+    {
+      "id": "outatime_o",
+      "kind": "synth",
+      "name": "(reserved: was the bundled outatime file; not bundled, owner 2026-11-17)",
+      "reserved": true,
+      "bases": [
+        "kennel30-plugins"
+      ]
+    },
+    {
+      "id": "dx_o",
+      "kind": "synth",
+      "name": "dx",
+      "opmod": [
+        "opus.dx"
+      ],
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "dx.opmod",
+      "needs": []
+    },
+    {
+      "id": "amp_o",
+      "kind": "synth",
+      "name": "(reserved: was the bundled amp file; not bundled, our Amp stays, owner 2026-11-17)",
+      "reserved": true,
+      "bases": [
+        "kennel30-plugins"
+      ]
+    },
+    {
+      "id": "sim",
+      "kind": "drum",
+      "name": "sim",
+      "opmod": [
+        "opus.sim",
+        "opus.orbit3d"
+      ],
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "sim.opmod",
+      "files": [
+        "orbit3d.opmod"
+      ],
+      "needs": []
+    },
+    {
+      "id": "bitcrush",
+      "kind": "fx",
+      "name": "Bitcrush",
+      "opmod": [
+        "opus.bitcrush"
+      ],
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "bitcrush.opmod",
+      "needs": []
+    },
+    {
+      "id": "chorus",
+      "kind": "fx",
+      "name": "Chorus",
+      "opmod": [
+        "opus.chorus",
+        "opus.orbit3d"
+      ],
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "chorus.opmod",
+      "files": [
+        "orbit3d.opmod"
+      ],
+      "needs": []
+    },
+    {
+      "id": "plate_o",
+      "kind": "fx",
+      "name": "plate_o",
+      "opmod": [
+        "opus.plate",
+        "opus.orbit3d"
+      ],
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "plate.opmod",
+      "files": [
+        "orbit3d.opmod"
+      ],
+      "needs": []
+    },
+    {
+      "id": "castle",
+      "kind": "synth",
+      "name": "castle",
+      "opmod": [
+        "displayname808.castle"
+      ],
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "castle.opmod",
+      "needs": []
+    },
+    {
+      "id": "ploc",
+      "kind": "synth",
+      "name": "PLOC",
+      "files": [
+        "plocctrl.knl"
+      ],
+      "default": false,
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 28968,
+      "file": "ploc.knl",
+      "needs": []
+    },
+    {
+      "id": "matrix_o",
+      "kind": "feature",
+      "name": "matrix",
+      "opmod": [
+        "opus.matrix"
+      ],
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "file": "matrix.opmod",
+      "needs": []
+    },
+    {
+      "id": "quant",
+      "kind": "seq",
+      "name": "QUANT",
+      "bases": [
+        "kennel30-plugins"
+      ],
+      "screen_bytes": 240,
+      "file": "quant.knl",
       "needs": []
     }
   ],
