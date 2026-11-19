@@ -1,0 +1,686 @@
+From 73c016501ea6a066efd0705dbee0af7aa3fe59d6 Mon Sep 17 00:00:00 2001
+From: tencur <60955077+tencur@users.noreply.github.com>
+Date: Tue, 17 Nov 2026 03:24:45 +0000
+Subject: [PATCH] boot: create and write kennel's tables without the asserting
+ exec
+
+Kennel created its op1.db tables (op1rsettings, op1rplugins, euclid, dots,
+the sq_store stores, tape markers, chord) and the seq_types ownership table
+in op1_factory.db through db2::exec (0x0196F950), which asserts on any
+sqlite error. A missing table needs free pages, so with the flash full the
+OP-1 asserted at boot, every boot; the plugin crash marker then made every
+other boot skip plugins without fixing it.
+
+Tables are now created with op1_db_write. When that fails the store skips
+its reads (db2's get asserts on a missing table too), starts from defaults
+and is not saved this boot. The settings INSERTs in settings_store.c and
+chord.c, and the seq_types ownership INSERT / DELETE, go through
+op1_db_write too; a failed ownership step stops before seq_types is
+touched. Same approach as op1r-src #72.
+
+harness/settings_db_full_test.c runs kn_settings.c and settings_store.c
+against a model op1.db at R246's addresses: 6/18 ok before, 18/18 after.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ ext/kennel/synth_sdk/chord/chord.c            |  20 ++-
+ .../synth_sdk/harness/settings_db_full_test.c | 166 ++++++++++++++++++
+ ext/kennel/synth_sdk/kennel/kn_boot.c         |  18 +-
+ ext/kennel/synth_sdk/kennel/kn_exports.c      |   2 +-
+ ext/kennel/synth_sdk/kennel/kn_seq_rows.h     |  17 +-
+ ext/kennel/synth_sdk/kennel/kn_settings.c     |  19 +-
+ ext/kennel/synth_sdk/screens/settings_store.c |  32 ++--
+ ext/kennel/synth_sdk/seq/dots.c               |   9 +-
+ ext/kennel/synth_sdk/seq/euclid.c             |  14 +-
+ ext/kennel/synth_sdk/seq/seq_text.h           |  11 +-
+ ext/kennel/synth_sdk/tape/markers.c           |   7 +-
+ 11 files changed, 256 insertions(+), 59 deletions(-)
+ create mode 100644 ext/kennel/synth_sdk/harness/settings_db_full_test.c
+
+diff --git a/ext/kennel/synth_sdk/chord/chord.c b/ext/kennel/synth_sdk/chord/chord.c
+index c6fd58f..f411ac2 100644
+--- a/ext/kennel/synth_sdk/chord/chord.c
++++ b/ext/kennel/synth_sdk/chord/chord.c
+@@ -789,14 +789,22 @@ static void rec_get(char *buf, int size) { int i = 0; for (; chord_host_rec[i] &
+ static void rec_put(const char *str) { int i = 0; for (; str[i] && i < 127; i++) chord_host_rec[i] = str[i]; chord_host_rec[i] = 0; }
+ #else
+ #define DB_HANDLE ((void *(*)(void))0x0196DD44)
+-#define DB_EXEC   ((void (*)(void *, const char *))0x0196F950)
+ #define DB_GET    ((void (*)(void *, void *, const char *))0x0196FBD0)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } ch_dstr;
+ static const char CH_CREATE[] = "CREATE TABLE IF NOT EXISTS op1rsettings (key TEXT PRIMARY KEY, val INTEGER NOT NULL)";
++/* The table without db2::exec (0x0196F950), which asserts on any sqlite error: a CREATE needs free pages, so a full
++ * flash on an OP-1 without the table asserted on load. Without it: no chord / recording read or saved, no assert
++ * (db2_get asserts on a missing table too). As kennel/kn_settings.c. */
++static volatile uint8_t ch_made;
++static int ch_table(void *db)
++{
++    if (!ch_made && !op1_db_write(db, CH_CREATE)) ch_made = 1;
++    return ch_made;
++}
+ static void ch_load(void)
+ {
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CH_CREATE);
++    if (!ch_table(db)) return;
+     ch_dstr s = { 0 };
+     DB_GET(&s, db, "SELECT val FROM op1rsettings WHERE key='chord'");
+     const char *p = s.cap > 15 ? s.u.ptr : s.u.buf;
+@@ -807,7 +815,7 @@ static void ch_load(void)
+ static void rec_get(char *buf, int size)                    /* the recording as text (op1rsettings is flexibly typed) */
+ {
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CH_CREATE);
++    if (!ch_table(db)) { buf[0] = 0; return; }
+     ch_dstr s = { 0 };
+     DB_GET(&s, db, "SELECT val FROM op1rsettings WHERE key='chordrec'");
+     const char *p = s.cap > 15 ? s.u.ptr : s.u.buf;
+@@ -824,8 +832,7 @@ static void rec_put(const char *str)
+     for (int i = 0; str[i] && n < 156; i++) q[n++] = str[i];
+     q[n++] = '\''; q[n++] = ')'; q[n] = 0;
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CH_CREATE);
+-    DB_EXEC(db, q);
++    if (ch_table(db)) op1_db_write(db, q);                  /* (full flash: not saved, no assert) */
+ }
+ static void ch_save(int32_t v)
+ {
+@@ -835,8 +842,7 @@ static void ch_save(int32_t v)
+     do d[n++] = (char)('0' + v % 10); while (v /= 10);
+     for (int i = 0; i < 10; i++) p[i] = i < 10 - n ? ' ' : d[9 - i];
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CH_CREATE);
+-    DB_EXEC(db, q);
++    if (ch_table(db)) op1_db_write(db, q);                  /* (full flash: not saved, no assert) */
+ }
+ #endif
+ /* recording as text: 'r', then 6 characters per chord: bass, the three upper intervals (0 = none) and the root
+diff --git a/ext/kennel/synth_sdk/harness/settings_db_full_test.c b/ext/kennel/synth_sdk/harness/settings_db_full_test.c
+new file mode 100644
+index 0000000..9f59fdc
+--- /dev/null
++++ b/ext/kennel/synth_sdk/harness/settings_db_full_test.c
+@@ -0,0 +1,166 @@
++/* Host test: settings on a full flash (kennel/kn_settings.c, screens/settings_store.c) must not reach db2::exec.
++ *
++ *   cd ext/kennel/synth_sdk && cc -g -O1 -fsanitize=address,undefined -fno-sanitize-recover=undefined -I. \
++ *       harness/settings_db_full_test.c kennel/kn_settings.c screens/settings_store.c -o /tmp/settings_db_full_test \
++ *       && /tmp/settings_db_full_test
++ *
++ * Built WITHOUT -DOP1_HOST on purpose: kn_settings.c has no host branch, and settings_store.c's host branch is a RAM
++ * table, so the firmware DB code is what runs here. Its R246 calls go to fixed addresses; this maps that range and
++ * puts a jump at each one to a model below (an empty op1.db: tables, rows, a "flash full" switch):
++ *   0x0196DD44 db handle, 0x0196F950 db2::exec (asserts on any error: here a longjmp that fails the check),
++ *   0x0196FBD0 db2::get (asserts when the statement does not prepare, e.g. a missing table), 0x019C9460 sqlite3_exec
++ *   (what op1_db_write calls), 0x01A5E310 operator delete, 0x01BAB718 db2's lock (0: none).
++ * Prints "N/M ok"; exit 0 only when every check passes. 64-bit Linux, aarch64 or x86_64. */
++#include <setjmp.h>
++#include <stdint.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <sys/mman.h>
++
++/* what the two files expect from the rest of the core */
++int32_t op1_db_last_err;
++uint8_t ci_beats = 4, ci_click, ci_click_fx;
++int kn_setcache_get(const char *feature, const char *key, int32_t *out) { (void)feature; (void)key; (void)out; return 0; }
++void kn_setcache_put(const char *feature, const char *key, int32_t v) { (void)feature; (void)key; (void)v; }
++int32_t op1_setting_get(const char *, const char *, int32_t);
++void op1_setting_set(const char *, const char *, int32_t);
++int op1_setting_get_str(const char *, const char *, char *, int);
++void op1_setting_set_str(const char *, const char *, const char *);
++void kn_off_store(const char *);
++const char *kn_off_boot(void);
++int usbout_load(void);
++void usbout_save(int);
++void countin_load(void);
++void countin_save(int);
++void click_save(int);
++void settings_flush(void);
++
++/* ---- op1.db model: table op1rsettings (key, val as text) ---- */
++static int full, have_table, asserts, writes;
++static struct { char key[40], val[200]; } rows[32];
++static int nrows;
++static const char *row(const char *key) { for (int i = 0; i < nrows; i++) if (!strcmp(rows[i].key, key)) return rows[i].val; return 0; }
++static int model_exec(const char *sql)              /* sqlite3_exec: 0, or 13 SQLITE_FULL / 1 no such table */
++{
++    if (!strncmp(sql, "CREATE TABLE IF NOT EXISTS op1rsettings ", 40)) {
++        if (have_table) return 0;                   /* IF NOT EXISTS: nothing written */
++        if (full) return 13;                        /* a new table needs free pages */
++        have_table = 1; return 0;
++    }
++    const char *h = "INSERT OR REPLACE INTO op1rsettings VALUES ('";
++    if (!strncmp(sql, h, strlen(h))) {
++        if (!have_table) return 1;
++        if (full) return 13;
++        const char *k = sql + strlen(h), *ke = strchr(k, '\''), *v = ke + 2, *ve = strrchr(sql, ')');
++        if (*v == '\'') { v++; ve--; }
++        char key[40]; snprintf(key, sizeof key, "%.*s", (int)(ke - k), k);
++        int i = 0; while (i < nrows && strcmp(rows[i].key, key)) i++;
++        if (i == nrows) nrows++;
++        strcpy(rows[i].key, key); snprintf(rows[i].val, sizeof rows[i].val, "%.*s", (int)(ve - v), v);
++        while (rows[i].val[0] == ' ') memmove(rows[i].val, rows[i].val + 1, strlen(rows[i].val));
++        writes++;
++        return 0;
++    }
++    fprintf(stderr, "model: unknown SQL %s\n", sql);
++    abort();
++}
++static jmp_buf on_assert;
++static void db2_assert(const char *what, const char *sql) { printf("    (db2 assert in %s: %s)\n", what, sql); asserts++; longjmp(on_assert, 1); }
++
++static struct { void *conn; } handle = { (void *)&handle };
++static void *f_handle(void) { return &handle; }
++static void f_exec(void *db, const char *sql) { (void)db; if (model_exec(sql)) db2_assert("db2::exec", sql); }
++static int f_sqlite_exec(void *conn, const char *sql, void *cb, void *arg, char **err)
++{
++    (void)conn; (void)cb; (void)arg; (void)err;
++    return model_exec(sql);
++}
++typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } dstr;
++static void f_get(void *out, void *db, const char *sql)
++{
++    (void)db;
++    const char *h = "SELECT val FROM op1rsettings WHERE key='";
++    if (strncmp(sql, h, strlen(h))) { fprintf(stderr, "model: unknown SELECT %s\n", sql); abort(); }
++    if (!have_table) db2_assert("db2::get", sql);  /* no such table: the statement does not prepare */
++    char key[40]; snprintf(key, sizeof key, "%.*s", (int)strlen(sql + strlen(h)) - 1, sql + strlen(h));
++    const char *v = row(key);
++    dstr *s = out;
++    memset(s, 0, sizeof *s);
++    if (!v) return;
++    s->size = (uint32_t)strlen(v);
++    if (s->size > 15) { s->cap = s->size; s->u.ptr = strdup(v); } else { s->cap = 15; strcpy(s->u.buf, v); }
++}
++static void f_delete(void *p) { free(p); }
++
++static void jump(uintptr_t at, void *to)            /* a jump at a fixed address to one of the models */
++{
++    uint8_t *p = (uint8_t *)at;
++#if defined(__aarch64__)
++    static const uint32_t code[2] = { 0x58000050, 0xd61f0200 };          /* ldr x16, #8; br x16 */
++    memcpy(p, code, 8); memcpy(p + 8, &to, 8);
++#elif defined(__x86_64__)
++    p[0] = 0x48; p[1] = 0xB8; memcpy(p + 2, &to, 8); p[10] = 0xFF; p[11] = 0xE0;   /* movabs rax; jmp rax */
++#else
++#error "aarch64 or x86_64"
++#endif
++    __builtin___clear_cache((char *)p, (char *)p + 16);
++}
++static void map_r246(void)
++{
++    void *m = mmap((void *)0x01900000, 0x300000, PROT_READ | PROT_WRITE | PROT_EXEC,
++                   MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED_NOREPLACE, -1, 0);
++    if (m != (void *)0x01900000) { perror("mmap 0x01900000"); exit(2); }
++    jump(0x0196DD44, (void *)f_handle);
++    jump(0x0196F950, (void *)f_exec);
++    jump(0x0196FBD0, (void *)f_get);
++    jump(0x019C9460, (void *)f_sqlite_exec);
++    jump(0x01A5E310, (void *)f_delete);
++}
++
++static int n_ok, n_all;
++#define CHECK(name, body, cond) do { \
++        n_all++; int a0 = asserts; volatile int ok = 0; \
++        if (!setjmp(on_assert)) { body; ok = (cond); } \
++        ok = ok && asserts == a0; n_ok += ok; \
++        printf("%s %s\n", ok ? "ok  " : "FAIL", name); \
++    } while (0)
++
++int main(void)
++{
++    map_r246();
++    char t[64];
++    printf("full flash, no op1rsettings table (first boot on a full OP-1):\n");
++    full = 1;
++    CHECK("boot: kn_off_boot reads no switched-off list", , kn_off_boot()[0] == 0);
++    CHECK("boot: countin_load keeps the defaults", countin_load(), ci_beats == 4 && ci_click == 0 && ci_click_fx == 0);
++    CHECK("boot: usbout_load is master (0)", , usbout_load() == 0);
++    CHECK("op1_setting_get gives the default", , op1_setting_get("chord", "voice", 7) == 7);
++    CHECK("op1_setting_get_str gives nothing", , op1_setting_get_str("chord", "name", t, sizeof t) == 0 && t[0] == 0);
++    CHECK("op1_setting_set: not saved, no assert", op1_setting_set("chord", "voice", 5), !have_table && writes == 0);
++    CHECK("op1_setting_set_str: not saved, no assert", op1_setting_set_str("chord", "name", "abc"), writes == 0);
++    CHECK("kn_off_store: not saved, no assert", kn_off_store("a,b"), writes == 0);
++    CHECK("usbout_save: not saved, no assert", usbout_save(2), writes == 0);
++    CHECK("settings_flush: not saved, no assert", (countin_save(1), click_save(2), settings_flush()), writes == 0);
++
++    printf("space freed (same boot):\n");
++    full = 0;
++    CHECK("op1_setting_set creates the table and saves", op1_setting_set("chord", "voice", 5),
++          have_table && op1_setting_get("chord", "voice", 7) == 5);
++    CHECK("op1_setting_set_str saves", op1_setting_set_str("chord", "name", "abc"),
++          op1_setting_get_str("chord", "name", t, sizeof t) == 3 && !strcmp(t, "abc"));
++    CHECK("usbout save / load", usbout_save(1), usbout_load() == 1);
++    CHECK("countin save / flush / load", (countin_save(2), settings_flush(), countin_load()), ci_beats == 16);
++
++    printf("flash full again, table there:\n");
++    full = 1;
++    CHECK("op1_setting_get reads the row", , op1_setting_get("chord", "voice", 7) == 5);
++    CHECK("op1_setting_set: INSERT fails, no assert", op1_setting_set("chord", "voice", 9),
++          op1_setting_get("chord", "voice", 7) == 5 && op1_db_last_err == 13);
++    CHECK("usbout_save: INSERT fails, no assert", usbout_save(2), usbout_load() == 1);
++    int w = writes;
++    CHECK("settings_flush: INSERT fails, no assert", (countin_save(0), settings_flush()), writes == w && !strcmp(row("countin"), "2"));
++
++    printf("%d/%d ok, %d db2 asserts\n", n_ok, n_all, asserts);
++    return n_ok == n_all ? 0 : 1;
++}
+diff --git a/ext/kennel/synth_sdk/kennel/kn_boot.c b/ext/kennel/synth_sdk/kennel/kn_boot.c
+index ff84f36..caa56e3 100644
+--- a/ext/kennel/synth_sdk/kennel/kn_boot.c
++++ b/ext/kennel/synth_sdk/kennel/kn_boot.c
+@@ -68,7 +68,6 @@ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t
+ #define OP_DELETE  ((void (*)(void *))0x01A5E310)
+ #define DB_HANDLE  ((void *(*)(void))0x0196DD44)                  /* user/op1.db: the number map */
+ #define DB_FACTORY ((void *(*)(void))0x0196DD38)                  /* content/op1_factory.db: synth_types / fx_types */
+-#define DB_EXEC    ((void (*)(void *, const char *))0x0196F950)
+ #define DB_GET     ((void (*)(void *, void *, const char *))0x0196FBD0)
+ 
+ #define DIR_PLUGINS   "/yaffs2/plugins"
+@@ -210,10 +209,16 @@ void kn_log_line(const char *file, const char *msg)
+ /* ---- name -> number map, one text row in op1.db, op1r's format: "s:name=n,f:name=n," (- prefix: plugin gone) ---- */
+ #define MAP_MAX 128                                             /* both kinds: up to 63 numbers each */
+ static struct { char kind, present; char name[16]; int n; } map[MAP_MAX] kn_farbss;
+-static int map_n, map_dirty;
++static int map_n, map_dirty, map_nostore;
+ static void map_load(void *db)
+ {
+-    DB_EXEC(db, "CREATE TABLE IF NOT EXISTS op1rplugins (id INTEGER PRIMARY KEY, data TEXT NOT NULL)");
++    /* Not db2::exec (0x0196F950): it asserts on any sqlite error, and a CREATE needs free pages, so a full flash on
++     * an OP-1 without the table asserted here, every boot. No table: an empty map (numbers for this boot only), not
++     * read (db2_get asserts on a missing table too) and not saved (op1r-src 72). */
++    if (op1_db_write(db, "CREATE TABLE IF NOT EXISTS op1rplugins (id INTEGER PRIMARY KEY, data TEXT NOT NULL)")) {
++        map_nostore = 1;
++        return;
++    }
+     kn_dstr s; dstr_init(&s);
+     DB_GET(&s, db, "SELECT data FROM op1rplugins WHERE id=0");
+     const char *p = s.cap > 15 ? s.u.ptr : s.u.buf, *e = p + s.size;
+@@ -238,6 +243,7 @@ static void map_load(void *db)
+ static void map_save_row(void *db, int id)                       /* id 0: the map; 1: the copy kept before a compaction */
+ {
+     static char sql[64 + MAP_MAX * 24];
++    if (map_nostore) return;                                    /* a map we could not read: don't overwrite its rows */
+     char *o = scat(sql, id ? "INSERT OR REPLACE INTO op1rplugins VALUES (1,'" : "INSERT OR REPLACE INTO op1rplugins VALUES (0,'");
+     for (int i = 0; i < map_n; i++) {
+         if (!map[i].present) *o++ = '-';
+@@ -666,7 +672,7 @@ static const char *load_knl(int in_plugins, const char *file, const uint8_t *buf
+             char path[48];
+             if (svg_path(path, in_plugins, file)) kn_ds_asset(f->drum_synth, path);
+         }
+-        if (!r && f->seq) kn_seq_row_ensure(DB_FACTORY(), in.type_name, DB_EXEC, op1_db_has);
++        if (!r && f->seq) kn_seq_row_ensure(DB_FACTORY(), in.type_name, op1_db_write, op1_db_has);
+         if (!r && in.settings) kn_settings_add(f->name, in.settings, in.settings_len);   /* copied: a bad table drops only them */
+         if (r) {                                                  /* not registered: its memory back, and the */
+             release(save);                                        /* inventory forgets the pointer into it */
+@@ -1424,10 +1430,10 @@ void kn_boot_hook(void *clips)
+     extern const char *kn_seq_foreign_name(int i);              /* foreign types (kn_seq.c): rows as a .knl type's */
+     for (int i = 0; kn_seq_foreign_name(i) && seq_count < 48; i++) {
+         seq_names[seq_count++] = kn_seq_foreign_name(i);
+-        if (!kn_skipped) kn_seq_row_ensure(DB_FACTORY(), kn_seq_foreign_name(i), DB_EXEC, op1_db_has);
++        if (!kn_skipped) kn_seq_row_ensure(DB_FACTORY(), kn_seq_foreign_name(i), op1_db_write, op1_db_has);
+     }
+     if (!kn_skipped) {                       /* (a boot that skipped every file: their rows stay for the next one) */
+-        kn_seq_rows_cleanup(DB_FACTORY(), seq_names, seq_count, DB_EXEC, op1_db_has);
++        kn_seq_rows_cleanup(DB_FACTORY(), seq_names, seq_count, op1_db_write, op1_db_has);
+         kn_rows_finish(seq_names, seq_count);
+     }
+     extern void kn_artcache_init(int users);
+diff --git a/ext/kennel/synth_sdk/kennel/kn_exports.c b/ext/kennel/synth_sdk/kennel/kn_exports.c
+index 6d45d4f..3c00939 100644
+--- a/ext/kennel/synth_sdk/kennel/kn_exports.c
++++ b/ext/kennel/synth_sdk/kennel/kn_exports.c
+@@ -172,7 +172,7 @@ const kn_export kn_exports[] = {
+     { "_tm_n",                (uint32_t)&tm_n },
+     { "_tm_xoff",             (uint32_t)&tm_xoff },           /* STEFAN's transport keep-alive jumps (tape/tm.c; midiseq) */
+     { "_pu_mode",             (uint32_t)&pu_mode },
+-    { "_op1_db_last_err",     (uint32_t)&op1_db_last_err },   /* op1_db_write (op1_synth.h): tape markers */
++    { "_op1_db_last_err",     (uint32_t)&op1_db_last_err },   /* op1_db_write (op1_synth.h): tape markers, chord */
+     { "_op1_key_down",        (uint32_t)op1_key_down },
+     { "_op1_key_up",          (uint32_t)op1_key_up },
+     { "_op1_text_entry",       (uint32_t)op1_text_entry },      /* text entry, undo area, tape edits (Maiko rebuild) */
+diff --git a/ext/kennel/synth_sdk/kennel/kn_seq_rows.h b/ext/kennel/synth_sdk/kennel/kn_seq_rows.h
+index 694b508..ab27a8c 100644
+--- a/ext/kennel/synth_sdk/kennel/kn_seq_rows.h
++++ b/ext/kennel/synth_sdk/kennel/kn_seq_rows.h
+@@ -8,18 +8,21 @@
+ static char *kn_sr_cat(char *d,const char *s){while(*s)*d++=*s++;*d=0;return d;}
+ static int kn_sr_name(const char *s){unsigned n=0;if(!s)return 0;for(;s[n];n++)if(n>=15||!((s[n]>='a'&&s[n]<='z')||(s[n]>='0'&&s[n]<='9')||s[n]=='_'||s[n]=='-'))return 0;return n>0;}
+ /* has(db, select): 1 when the SELECT returns a row (op1_db_has). Both run their writes only when something would
+- * change, so a boot with the same sequencers writes nothing (op1r 46 3f733a8's pattern). */
+-static __attribute__((noinline)) void kn_seq_row_ensure(void *db,const char *name,void (*exec)(void *,const char *),int (*has)(void *,const char *)){
++ * change, so a boot with the same sequencers writes nothing (op1r 46 3f733a8's pattern).
++ * exec(db, sql): op1_db_write, 0 or the sqlite error. Not db2::exec (0x0196F950): that asserts on any error, so a
++ * full flash asserted at boot on the first CREATE / INSERT / DELETE here. A step that fails ends the call, so a
++ * seq_types row is only added once it is marked ours (else it would stay for good as a foreign row). */
++static __attribute__((noinline)) void kn_seq_row_ensure(void *db,const char *name,int (*exec)(void *,const char *),int (*has)(void *,const char *)){
+  if(!kn_sr_name(name))return;
+  char sql[256],*o;
+  o=kn_sr_cat(sql,"SELECT id FROM seq_types WHERE type='");kn_sr_cat(kn_sr_cat(o,name),"'");
+  if(has(db,sql))return;                                 /* there (stock, build row or ours from an earlier boot) */
+- exec(db,"CREATE TABLE IF NOT EXISTS kennel_seq_owned (type TEXT PRIMARY KEY)");
+- o=kn_sr_cat(sql,"INSERT OR IGNORE INTO kennel_seq_owned SELECT '");o=kn_sr_cat(kn_sr_cat(o,name),"' WHERE NOT EXISTS (SELECT 1 FROM seq_types WHERE type='");kn_sr_cat(kn_sr_cat(o,name),"')");exec(db,sql);
++ if(exec(db,"CREATE TABLE IF NOT EXISTS kennel_seq_owned (type TEXT PRIMARY KEY)"))return;
++ o=kn_sr_cat(sql,"INSERT OR IGNORE INTO kennel_seq_owned SELECT '");o=kn_sr_cat(kn_sr_cat(o,name),"' WHERE NOT EXISTS (SELECT 1 FROM seq_types WHERE type='");kn_sr_cat(kn_sr_cat(o,name),"')");if(exec(db,sql))return;
+  o=kn_sr_cat(sql,"INSERT INTO seq_types SELECT (SELECT COALESCE(MAX(id),0)+1 FROM seq_types),'");o=kn_sr_cat(kn_sr_cat(o,name),"' WHERE NOT EXISTS (SELECT 1 FROM seq_types WHERE type='");kn_sr_cat(kn_sr_cat(o,name),"')");exec(db,sql);
+ }
+-static __attribute__((noinline)) void kn_seq_rows_cleanup(void *db,const char *const *names,unsigned count,void (*exec)(void *,const char *),int (*has)(void *,const char *)){
+- char list[48*18+8],sql[1100],*o;exec(db,"CREATE TABLE IF NOT EXISTS kennel_seq_owned (type TEXT PRIMARY KEY)");
++static __attribute__((noinline)) void kn_seq_rows_cleanup(void *db,const char *const *names,unsigned count,int (*exec)(void *,const char *),int (*has)(void *,const char *)){
++ char list[48*18+8],sql[1100],*o;if(exec(db,"CREATE TABLE IF NOT EXISTS kennel_seq_owned (type TEXT PRIMARY KEY)"))return;
+  o=kn_sr_cat(list,"('");
+  for(unsigned i=0;i<count&&i<48;i++)if(kn_sr_name(names[i]))o=kn_sr_cat(kn_sr_cat(o,names[i]),"','");
+  kn_sr_cat(o,"')");
+@@ -27,7 +30,7 @@ static __attribute__((noinline)) void kn_seq_rows_cleanup(void *db,const char *c
+  o=kn_sr_cat(kn_sr_cat(sql,"SELECT type FROM kennel_seq_owned WHERE type NOT IN "),list);
+  kn_sr_cat(o," OR type NOT IN (SELECT type FROM seq_types)");
+  if(!has(db,sql))return;
+- o=kn_sr_cat(kn_sr_cat(sql,"DELETE FROM seq_types WHERE type IN (SELECT type FROM kennel_seq_owned) AND type NOT IN "),list);exec(db,sql);
++ o=kn_sr_cat(kn_sr_cat(sql,"DELETE FROM seq_types WHERE type IN (SELECT type FROM kennel_seq_owned) AND type NOT IN "),list);if(exec(db,sql))return;
+  /* Remove ownership only after its corresponding row is gone. */
+  exec(db,"DELETE FROM kennel_seq_owned WHERE type NOT IN (SELECT type FROM seq_types)");
+ }
+diff --git a/ext/kennel/synth_sdk/kennel/kn_settings.c b/ext/kennel/synth_sdk/kennel/kn_settings.c
+index bc089b2..f3a0296 100644
+--- a/ext/kennel/synth_sdk/kennel/kn_settings.c
++++ b/ext/kennel/synth_sdk/kennel/kn_settings.c
+@@ -10,7 +10,6 @@
+ #include "../op1_feature.h"
+ 
+ #define DB_HANDLE ((void *(*)(void))0x0196DD44)
+-#define DB_EXEC   ((void (*)(void *, const char *))0x0196F950)
+ #define DB_GET    ((void (*)(void *, void *, const char *))0x0196FBD0)
+ #define OP_DELETE ((void (*)(void *))0x01A5E310)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } st_dstr;
+@@ -25,6 +24,16 @@ static int ok_char(char c)
+ static int ok_str(const char *s, int max) { int i = 0; for (; s[i]; i++) if (i >= max || !ok_char(s[i])) return 0; return 1; }
+ static char *key_of(char *o, const char *feature, const char *key) { return cat(cat(cat(o, feature), "."), key); }
+ 
++/* The table, made once without db2::exec (0x0196F950): that asserts on any sqlite error, and a CREATE needs free
++ * pages, so a full flash on an OP-1 without the table asserted at boot (kn_off_boot), every boot. Without the table:
++ * defaults, nothing saved (db2_get asserts on a missing table too). op1r-src 72. */
++static volatile uint8_t made;
++static int table(void *db)
++{
++    if (!made && !op1_db_write(db, CREATE)) made = 1;
++    return made;
++}
++
+ /* the row's value as text into out (size bytes); its length, 0 if there is none */
+ static int get_text(const char *feature, const char *key, char *out, int size)
+ {
+@@ -32,7 +41,7 @@ static int get_text(const char *feature, const char *key, char *out, int size)
+     char sql[128];
+     cat(key_of(cat(sql, "SELECT val FROM op1rsettings WHERE key='"), feature, key), "'");
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CREATE);
++    if (!table(db)) { out[0] = 0; return 0; }
+     st_dstr s = { 0 };
+     DB_GET(&s, db, sql);
+     const char *p = s.cap > 15 ? s.u.ptr : s.u.buf;
+@@ -49,8 +58,7 @@ static void put(const char *feature, const char *key, const char *val, int quote
+     char sql[256], *o = key_of(cat(sql, "INSERT OR REPLACE INTO op1rsettings VALUES ('"), feature, key);
+     o = cat(cat(cat(cat(o, "',"), quoted ? "'" : ""), val), quoted ? "')" : ")");
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CREATE);
+-    op1_db_write(db, sql);
++    if (table(db)) op1_db_write(db, sql);                       /* (full flash: not saved, no assert) */
+ }
+ 
+ int kn_setcache_get(const char *feature, const char *key, int32_t *out);   /* kn_setpage.c: declared keys */
+@@ -106,8 +114,7 @@ void kn_off_store(const char *names)                             /* OFF_SET (du_
+     if (!ok_str(names, KN_OFF_MAX)) return;                       /* letters only: no quoting to escape */
+     cat(cat(cat(sql, "INSERT OR REPLACE INTO op1rsettings VALUES ('kennel.off','"), names), "')");
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, CREATE);
+-    op1_db_write(db, sql);
++    if (table(db)) op1_db_write(db, sql);                       /* (full flash: not saved, no assert) */
+ }
+ static char off_list[KN_OFF_MAX + 1];                                       /* as read at boot: changes apply at the next boot */
+ const char *kn_off_boot(void)
+diff --git a/ext/kennel/synth_sdk/screens/settings_store.c b/ext/kennel/synth_sdk/screens/settings_store.c
+index e49aae2..508eec1 100644
+--- a/ext/kennel/synth_sdk/screens/settings_store.c
++++ b/ext/kennel/synth_sdk/screens/settings_store.c
+@@ -25,14 +25,22 @@ void clickfx_save(int v) { cf_pending = v; }
+ void settings_flush(void) { if (ss_pending >= 0) { settings_host_saved = ss_pending; ss_pending = -1; } if (ck_pending >= 0) { click_host_saved = ck_pending; ck_pending = -1; } if (cf_pending >= 0) { clickfx_host_saved = cf_pending; cf_pending = -1; } if (pk_pending >= 0) { pick_host_saved = pk_pending; pk_pending = -1; } }
+ #else
+ #define DB_HANDLE ((void *(*)(void))0x0196DD44)
+-#define DB_EXEC   ((void (*)(void *, const char *))0x0196F950)
+ #define DB_GET    ((void (*)(void *, void *, const char *))0x0196FBD0)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } ss_dstr;
+ static const char SS_CREATE[] = "CREATE TABLE IF NOT EXISTS op1rsettings (key TEXT PRIMARY KEY, val INTEGER NOT NULL)";
++/* The table without db2::exec (0x0196F950), which asserts on any sqlite error: a CREATE needs free pages, so a full
++ * flash on an OP-1 without the table asserted at boot (countin_load), every boot. Without the table these settings
++ * read as defaults and are not saved; the INSERTs go through op1_db_write too. As kennel/kn_settings.c. */
++static volatile uint8_t ss_made;
++static int ss_table(void *db)
++{
++    if (!ss_made && !op1_db_write(db, SS_CREATE)) ss_made = 1;
++    return ss_made;
++}
+ static char ss_get(const char *q)                               /* first char of the value, 0 if no row */
+ {
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, SS_CREATE);
++    if (!ss_table(db)) return 0;                                /* (db2_get asserts on a missing table) */
+     ss_dstr s = { 0 };
+     DB_GET(&s, db, q);
+     const char *p = s.cap > 15 ? s.u.ptr : s.u.buf;             /* (heap copy for long strings, not freed: 1 char) */
+@@ -47,10 +55,10 @@ int usbout_load(void)                                           /* 0 master, 1 +
+ void usbout_save(int v)
+ {
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, SS_CREATE);
+-    DB_EXEC(db, v == 2 ? "INSERT OR REPLACE INTO op1rsettings VALUES ('usbtracks',2)"
+-              : v == 1 ? "INSERT OR REPLACE INTO op1rsettings VALUES ('usbtracks',1)"
+-                       : "INSERT OR REPLACE INTO op1rsettings VALUES ('usbtracks',0)");
++    if (!ss_table(db)) return;
++    op1_db_write(db, v == 2 ? "INSERT OR REPLACE INTO op1rsettings VALUES ('usbtracks',2)"
++                   : v == 1 ? "INSERT OR REPLACE INTO op1rsettings VALUES ('usbtracks',1)"
++                            : "INSERT OR REPLACE INTO op1rsettings VALUES ('usbtracks',0)");
+ }
+ void countin_load(void)                                         /* boot, screen load (dispatcher.c) */
+ {
+@@ -72,29 +80,29 @@ void settings_flush(void)                                     /* KeyHandler, at
+ {
+     if (ss_pending < 0 && ck_pending < 0 && cf_pending < 0 && pk_pending < 0) return;
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, SS_CREATE);
++    if (!ss_table(db)) { ss_pending = ck_pending = cf_pending = -1; return; }   /* (full flash: not saved) */
+     if (ss_pending >= 0) {
+         static char q[] = "INSERT OR REPLACE INTO op1rsettings VALUES ('countin',0)";
+         q[sizeof q - 3] = (char)('0' + ss_pending);
+         ss_pending = -1;
+-        DB_EXEC(db, q);
++        op1_db_write(db, q);
+     }
+     if (ck_pending >= 0) {
+         static char q[] = "INSERT OR REPLACE INTO op1rsettings VALUES ('click',0)";
+         q[sizeof q - 3] = (char)('0' + ck_pending);
+         ck_pending = -1;
+-        DB_EXEC(db, q);
++        op1_db_write(db, q);
+     }
+     if (cf_pending >= 0) {
+-        DB_EXEC(db, cf_pending ? "INSERT OR REPLACE INTO op1rsettings VALUES ('clickfx',1)"
+-                               : "INSERT OR REPLACE INTO op1rsettings VALUES ('clickfx',0)");
++        op1_db_write(db, cf_pending ? "INSERT OR REPLACE INTO op1rsettings VALUES ('clickfx',1)"
++                                    : "INSERT OR REPLACE INTO op1rsettings VALUES ('clickfx',0)");
+         cf_pending = -1;
+     }
+     if (pk_pending >= 0) {
+         static char q[] = "INSERT OR REPLACE INTO op1rsettings VALUES ('pickstep',0)";
+         q[sizeof q - 3] = (char)('0' + pk_pending);
+         pk_pending = -1;
+-        DB_EXEC(db, q);
++        op1_db_write(db, q);
+     }
+ }
+ #endif
+diff --git a/ext/kennel/synth_sdk/seq/dots.c b/ext/kennel/synth_sdk/seq/dots.c
+index 1937f98..bf80473 100644
+--- a/ext/kennel/synth_sdk/seq/dots.c
++++ b/ext/kennel/synth_sdk/seq/dots.c
+@@ -852,7 +852,6 @@ static struct { const uint32_t *vt; uint32_t pad[7]; } dt_player = { dt_vt, { 0
+ #define DT_BG_REGISTER ((void (*)(void *))0x0193F010)
+ #define DT_BG_DIRTY    ((void (*)(void *))0x0193EF3C)
+ #define DT_DB_HANDLE   ((void *(*)(void))0x0196DD44)
+-#define DT_DB_EXEC     ((void (*)(void *, const char *))0x0196F950)
+ #define DT_DB_GET      ((void (*)(void *, void *, const char *))0x0196FBD0)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } dt_dstr;
+ static const char DT_CREATE[] = "CREATE TABLE IF NOT EXISTS dotsseq (id INTEGER PRIMARY KEY, data TEXT NOT NULL)";
+@@ -863,7 +862,7 @@ static void dt_bg_save(void *self)                      /* saver thread */
+ {
+     (void)self;
+     void *db = DT_DB_HANDLE();
+-    DT_DB_EXEC(db, DT_CREATE);
++    op1_db_write(db, DT_CREATE);
+     for (int id = 0; id < 6 * DT_PATS; id++) {          /* id = mode * 4 + pattern (steps), + 8 (fx locks), + 16 (synth locks) */
+         static const char head[] = "INSERT OR REPLACE INTO dotsseq VALUES (";
+         char *o = dt_sql;
+@@ -879,12 +878,12 @@ static void dt_bg_save(void *self)                      /* saver thread */
+ }
+ static const uint32_t dt_bg_vt[6] = { 0, 0, 0, (uint32_t)dt_bg_nop, 0, (uint32_t)dt_bg_save };
+ static struct { uint8_t dirty, saving, pad[2]; const uint32_t *vt; uint32_t more[2]; } dt_bg;
+-static uint8_t dt_bg_ready;
+-static void dt_changed(void) { if (dt_bg_ready) DT_BG_DIRTY(&dt_bg); }
++static uint8_t dt_bg_ready;                             /* 1: loaded + saver, 2: no table (as euclid) */
++static void dt_changed(void) { if (dt_bg_ready == 1) DT_BG_DIRTY(&dt_bg); }
+ static void dt_load(void)
+ {
+     void *db = DT_DB_HANDLE();
+-    DT_DB_EXEC(db, DT_CREATE);
++    if (op1_db_write(db, DT_CREATE)) { dt_bg_ready = 2; return; }   /* (no assert: euclid.c eu_load) */
+     for (int id = 0; id < 6 * DT_PATS; id++) {          /* steps first (ids 0..7), then their locks (8..15, 16..23) */
+         static char q[] = "SELECT data FROM dotsseq WHERE id=00";
+         q[sizeof q - 3] = (char)('0' + id / 10); q[sizeof q - 2] = (char)('0' + id % 10);
+diff --git a/ext/kennel/synth_sdk/seq/euclid.c b/ext/kennel/synth_sdk/seq/euclid.c
+index e53c212..040732c 100644
+--- a/ext/kennel/synth_sdk/seq/euclid.c
++++ b/ext/kennel/synth_sdk/seq/euclid.c
+@@ -598,11 +598,11 @@ static struct { const uint32_t *vt; uint32_t pad[7]; } eu_player = { eu_vt, { 0
+ /* ---- persistence via the firmware's background saver (bg_saver, as finger's okseq) ----
+  * object {u8 dirty, u8 saving, .., vtable @+4}; register 0x0193F010(obj) (sets the base vtable -> ours after),
+  * mark dirty 0x0193EF3C(obj) (wakes the saver thread), the saver calls vt+0x14 save(obj) in its own thread.
+- * DB: 0x0196DD44() (as okseq); exec 0x0196F950(db, sql); get_string 0x0196FBD0(&out_string, db, sql). */
++ * DB: 0x0196DD44() (as okseq); exec op1_db_write(db, sql) (not db2::exec 0x0196F950: it asserts on any error);
++ * get_string 0x0196FBD0(&out_string, db, sql). */
+ #define BG_REGISTER ((void (*)(void *))0x0193F010)
+ #define BG_DIRTY    ((void (*)(void *))0x0193EF3C)
+ #define DB_HANDLE   ((void *(*)(void))0x0196DD44)
+-#define DB_EXEC     ((void (*)(void *, const char *))0x0196F950)
+ #define DB_GET      ((void (*)(void *, void *, const char *))0x0196FBD0)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } eu_dstr;
+ static const char EU_CREATE[] = "CREATE TABLE IF NOT EXISTS euclidseq (is_synth INTEGER PRIMARY KEY, data TEXT NOT NULL)";
+@@ -612,7 +612,7 @@ static void eu_bg_save(void *self)
+     (void)self;
+     static char sql[1400];                              /* 4 patterns: <= ~1250 chars per row */
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, EU_CREATE);
++    op1_db_write(db, EU_CREATE);
+     for (int pos = 0; pos < 2; pos++) {
+         static const char head[] = "INSERT OR REPLACE INTO euclidseq VALUES (";
+         int o = 0;
+@@ -625,12 +625,14 @@ static void eu_bg_save(void *self)
+ }
+ static const uint32_t eu_bg_vt[6] = { 0, 0, 0, (uint32_t)eu_bg_nop, 0, (uint32_t)eu_bg_save };
+ static struct { uint8_t dirty, saving, pad[2]; const uint32_t *vt; uint32_t more[2]; } eu_bg;
+-static uint8_t eu_bg_ready;
+-static void eu_changed(void) { if (eu_bg_ready) BG_DIRTY(&eu_bg); }
++static uint8_t eu_bg_ready;                             /* 1: loaded + saver, 2: no table, defaults, not saved */
++static void eu_changed(void) { if (eu_bg_ready == 1) BG_DIRTY(&eu_bg); }
+ static void eu_load(void)
+ {
+     void *db = DB_HANDLE();
+-    DB_EXEC(db, EU_CREATE);
++    /* no db2::exec: it asserts, and a CREATE needs free pages (full flash on the first op1r boot: assert every
++     * boot). No table: its reads would assert too, and a save could overwrite rows we could not read. */
++    if (op1_db_write(db, EU_CREATE)) { eu_bg_ready = 2; return; }
+     for (int pos = 0; pos < 2; pos++) {
+         eu_dstr s = { 0 };
+         DB_GET(&s, db, pos ? "SELECT data FROM euclidseq WHERE is_synth=0" : "SELECT data FROM euclidseq WHERE is_synth=1");
+diff --git a/ext/kennel/synth_sdk/seq/seq_text.h b/ext/kennel/synth_sdk/seq/seq_text.h
+index 93a2aaa..ce98284 100644
+--- a/ext/kennel/synth_sdk/seq/seq_text.h
++++ b/ext/kennel/synth_sdk/seq/seq_text.h
+@@ -230,19 +230,18 @@ typedef struct {
+     int (*ser)(int pos, char *out, int n);              /* row text of mode pos */
+     int (*parse)(int pos, const char *s, int len);
+     char *sql; int16_t cap, maxlen;                     /* statement buffer, longest row text accepted */
+-    uint8_t ready;
++    uint8_t ready;                                      /* 1: loaded + saver, 2: no table, not saved */
+ } sq_store_t;
+ #ifdef OCC_TEXT_IMPL
+ #define SQ_BG_REGISTER ((void (*)(void *))0x0193F010)
+ #define SQ_BG_DIRTY    ((void (*)(void *))0x0193EF3C)
+ #define SQ_DB_HANDLE   ((void *(*)(void))0x0196DD44)
+-#define SQ_DB_EXEC     ((void (*)(void *, const char *))0x0196F950)
+ #define SQ_DB_GET      ((void (*)(void *, void *, const char *))0x0196FBD0)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } sq_dstr;
+-static void sq_create(sq_store_t *st, void *db)
++static int sq_create(sq_store_t *st, void *db)          /* no db2::exec assert (euclid.c eu_load); 0 = table there */
+ {
+     sq_cat(sq_cat(sq_cat(st->sql, "CREATE TABLE IF NOT EXISTS "), st->name), " (is_synth INTEGER PRIMARY KEY, data TEXT NOT NULL)");
+-    SQ_DB_EXEC(db, st->sql);
++    return op1_db_write(db, st->sql);
+ }
+ static void sq_bg_nop(void *self) { (void)self; }
+ static void sq_bg_save(void *self)                      /* saver thread */
+@@ -260,14 +259,14 @@ static void sq_bg_save(void *self)                      /* saver thread */
+     }
+ }
+ static const uint32_t sq_bg_vt[6] = { 0, 0, 0, (uint32_t)sq_bg_nop, 0, (uint32_t)sq_bg_save };
+-void sq_store_dirty(sq_store_t *st) { if (st->ready) SQ_BG_DIRTY(st); }
++void sq_store_dirty(sq_store_t *st) { if (st->ready == 1) SQ_BG_DIRTY(st); }
+ #pragma GCC push_options
+ #pragma GCC optimize("O2")                              /* (-Os clears the string with a memset call: none here) */
+ void sq_store_load(sq_store_t *st)
+ {
+     if (st->ready) return;
+     void *db = SQ_DB_HANDLE();
+-    sq_create(st, db);
++    if (sq_create(st, db)) { st->ready = 2; return; }
+     for (int pos = 0; pos < 2; pos++) {
+         sq_dstr s = { 0 };
+         sq_cat(sq_cat(sq_cat(st->sql, "SELECT data FROM "), st->name), pos ? " WHERE is_synth=0" : " WHERE is_synth=1");
+diff --git a/ext/kennel/synth_sdk/tape/markers.c b/ext/kennel/synth_sdk/tape/markers.c
+index 6eb4426..66d0597 100644
+--- a/ext/kennel/synth_sdk/tape/markers.c
++++ b/ext/kennel/synth_sdk/tape/markers.c
+@@ -61,26 +61,27 @@ static void tm_save(void) { tm_fmt(tm_host_saved); }
+ static void tm_load(void) { int n = 0; while (tm_host_saved[n]) n++; tm_parse(tm_host_saved, n); }
+ #else
+ #define TM_DB_HANDLE ((void *(*)(void))0x0196DD44)
+-#define TM_DB_EXEC   ((void (*)(void *, const char *))0x0196F950)
+ #define TM_DB_GET    ((void (*)(void *, void *, const char *))0x0196FBD0)
+ typedef struct { uint32_t alloc; union { char buf[16]; char *ptr; } u; uint32_t size, cap; uint32_t pad; } tm_dstr;
+ static char tm_sql[64 + TM_MAX * 9];
+ static const char TM_CREATE[] = "CREATE TABLE IF NOT EXISTS op1rmarkers (id INTEGER PRIMARY KEY, data TEXT NOT NULL)";
++static uint8_t tm_nostore;                                  /* no table: markers live until power off (euclid.c eu_load) */
+ static void tm_save(void)                                   /* KeyHandler thread, on change */
+ {
++    if (tm_nostore) return;
+     static const char head[] = "INSERT OR REPLACE INTO op1rmarkers VALUES (0,'";
+     char *o = tm_sql;
+     for (const char *h = head; *h; h++) *o++ = *h;
+     o += tm_fmt(o);
+     *o++ = '\''; *o++ = ')'; *o = 0;
+     void *db = TM_DB_HANDLE();
+-    TM_DB_EXEC(db, TM_CREATE);
++    op1_db_write(db, TM_CREATE);
+     op1_db_write(db, tm_sql);                         /* (no assert: long statement) */
+ }
+ static void tm_load(void)
+ {
+     void *db = TM_DB_HANDLE();
+-    TM_DB_EXEC(db, TM_CREATE);
++    if (op1_db_write(db, TM_CREATE)) { tm_nostore = 1; return; }
+     tm_dstr s = { 0 };
+     TM_DB_GET(&s, db, "SELECT data FROM op1rmarkers WHERE id=0");
+     if (s.size) tm_parse(s.cap > 15 ? s.u.ptr : s.u.buf, (int)s.size);   /* (heap copy once per boot, not freed) */
+-- 
+2.47.3
+
