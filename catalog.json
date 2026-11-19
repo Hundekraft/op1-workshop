@@ -1086,9 +1086,9 @@
     {
       "id": "kastle",
       "kind": "synth",
-      "name": "(reserved: was the KASTLE port; retired for the bundled castle file, owner 2026-11-17)",
+      "name": "(reserved: was the KASTLE port; retired with nothing replacing it, owner 2026-11-19)",
       "reserved": true,
-      "replaced_by": "castle",
+      "retired": true,
       "bases": [
         "kennel30-plugins"
       ]
@@ -1290,15 +1290,11 @@
     {
       "id": "castle",
       "kind": "synth",
-      "name": "castle",
-      "opmod": [
-        "displayname808.castle"
-      ],
+      "name": "(reserved: was the bundled castle file; not bundled since 3.4, a castle file you send yourself still loads, owner 2026-11-19)",
+      "reserved": true,
       "bases": [
         "kennel30-plugins"
-      ],
-      "file": "castle.opmod",
-      "needs": []
+      ]
     },
     {
       "id": "ploc",

@@ -36,7 +36,7 @@ export function showPlan(box, plan, {ask = needsChoice(plan), pending = [], save
   const ver = e => e.was?.version && e.version && e.was.version !== e.version ? `${e.was.version} → ${e.version}` : e.version ? `v${e.version}` : '';
   const sign = e => e.action === 'remove' ? '−' : e.action === 'install' ? '+' : e.downgrade || e.restoration || failed(e) ? '!' : e.action === 'update' ? '↻' : '·';
   // a retired port (planPlugins retired): always removed, no choice; the row names what replaced it
-  const tag = e => e.retired ? `retired · replaced by ${e.retired}` : e.action === 'remove' ? 'removed' : e.action === 'install' ? 'new' : e.restoration ? 'workshop version' : e.downgrade ? 'older version' : stateChanged(e) ? (e.on ? 'turned on' : 'turned off') : e.action === 'update' ? 'updated' : '';
+  const tag = e => e.retired === true ? 'retired' : e.retired ? `retired · replaced by ${e.retired}` : e.action === 'remove' ? 'removed' : e.action === 'install' ? 'new' : e.restoration ? 'workshop version' : e.downgrade ? 'older version' : stateChanged(e) ? (e.on ? 'turned on' : 'turned off') : e.action === 'update' ? 'updated' : '';
   // shown name: a bridged file is named by its path (content/dx.opmod); the list shows just the plugin's name
   const shown = e => String(e.name || e.path || '').replace(/^.*\//, '').replace(/\.(opmod|knl|op1p)$/i, '');
   const warn = e => e.downgrade || e.restoration || failed(e);

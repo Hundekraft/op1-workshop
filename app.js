@@ -162,8 +162,9 @@ function validateChoices(c) {
   if (Object.hasOwn(c, 'lander')) { if (typeof c.lander !== 'boolean') throw Error('Unsupported choices.'); c = {...c}; delete c.lander; }
   const out = {...c, utilities: Object.hasOwn(c, 'utilities') ? c.utilities : [], hidden: Object.hasOwn(c, 'hidden') ? c.hidden : []};
   // A retired plugin left out in saved choices (3.3's ports) leaves out the bundled file that replaced it (runtime.normalize).
-  const gone = new Map((release.catalog.op1r_plugins || []).filter(f => f.reserved && f.replaced_by).map(f => [f.id, f.replaced_by]));
-  if (Array.isArray(out.hidden) && out.hidden.some(id => gone.has(id))) out.hidden = [...new Set(out.hidden.map(id => gone.get(id) || id))];
+  const gone = new Map((release.catalog.op1r_plugins || []).filter(f => f.reserved && (f.replaced_by || f.retired)).map(f => [f.id, f.replaced_by || null]));
+  // (one retired with nothing replacing it, KASTLE since 3.4, just drops out)
+  if (Array.isArray(out.hidden) && out.hidden.some(id => gone.has(id))) out.hidden = [...new Set(out.hidden.filter(id => !(gone.has(id) && !gone.get(id))).map(id => gone.get(id) || id))];
   for (const group of ['synths', 'effects', 'utilities', 'hidden']) {
     const entries = group === 'hidden' ? release.catalog.op1r_plugins || [] : release.catalog[group];
     if (!Array.isArray(out[group]) || out[group].some(id => typeof id !== 'string') || new Set(out[group]).size !== out[group].length ||

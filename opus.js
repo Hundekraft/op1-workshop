@@ -8,7 +8,7 @@ import {crc32, checkPlugin, pluginInfo} from './op1push.js?v=3.3.1-opmodown-2026
 export const OPMOD_MAGIC = 0x444D504F, OPMOD_HDR = 0x60, OPMOD_MAX = 512 * 1024;   // opus.h OPMOD_MAX_FILE
 export const PER_FILE = 6144, LFO_STATE = 20 * 1024;                               // opus_boot.c kn_foreign_need
 const kb = n => `${Math.max(1, Math.round(n / 1024))} KB`;
-// a manifest's "cpu N" in percent of a block: N / 5805 (castle 144565 = the plan's 24.9 %, plate 23.7 %, chorus 13.2 %)
+// a manifest's "cpu N" in percent of a block: N / 5805 (plate 23.7 %, chorus 13.2 %)
 export const cpuPercent = n => n == null ? null : Math.round(n / 580.5) / 10;
 
 // What an .opmod is, as far as the page can check it (opus_load.c ol_check's first steps and the boot's refusals that

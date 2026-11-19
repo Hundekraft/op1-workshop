@@ -22,13 +22,15 @@ export function saveSelection(base, inputs, cap) {
 }
 // Plugins retired from the workshop for a bundled replacement (3.3.1: the six ports; the catalog's reserved entries with
 // replaced_by): {id, path: the file the workshop put on the OP-1 (content/<id>.knl), by: the replacement's id, name: its
-// shown name}. planPlugins removes such a file whatever was ticked (op1push.js, retired).
+// shown name}. planPlugins removes such a file whatever was ticked (op1push.js, retired). One retired with nothing
+// replacing it (KASTLE since 3.4: reserved + "retired": true, no replaced_by) has by and name null; retiredFiles
+// gives it the value true (the review shows "retired").
 export function retiredPorts(catalog) {
   const all = catalog?.op1r_plugins || [];
-  return all.filter(f => f.reserved && f.replaced_by).map(f => ({id: f.id, path: `content/${f.id}.knl`, by: f.replaced_by,
-    name: all.find(g => g.id === f.replaced_by)?.name || f.replaced_by}));
+  return all.filter(f => f.reserved && (f.replaced_by || f.retired)).map(f => ({id: f.id, path: `content/${f.id}.knl`, by: f.replaced_by || null,
+    name: f.replaced_by ? all.find(g => g.id === f.replaced_by)?.name || f.replaced_by : null}));
 }
-export const retiredFiles = catalog => Object.fromEntries(retiredPorts(catalog).map(r => [r.path, r.name]));
+export const retiredFiles = catalog => Object.fromEntries(retiredPorts(catalog).map(r => [r.path, r.name || true]));
 // Saved catalog ticks (loadSelection inputs) that still name a retired plugin: the key goes, and its replacement takes
 // the tick (a retired plugin left on ticks it; one left off unticks it unless the replacement has its own saved tick),
 // as runtime.normalize maps a hidden one. -> {inputs, moved: [[old id, replacement name]] of the ticked ones}
@@ -37,11 +39,14 @@ export function migrateRetired(inputs, catalog) {
   for (const r of retiredPorts(catalog)) {
     const key = 'plugin:' + r.id, to = 'plugin:' + r.by;
     if (!Object.hasOwn(out, key)) continue;
+    if (!r.by) { delete out[key]; continue; }                   // nothing replaces it (KASTLE since 3.4): the saved tick just goes
     const on = out[key] === true;
     delete out[key];
     if (on) { out[to] = true; moved.push([r.id, r.name]); }
     else if (!Object.hasOwn(inputs, to)) out[to] = false;
   }
+  // a saved tick of a reserved entry that is not a port (castle, since 3.4) is dead too
+  for (const f of catalog?.op1r_plugins || []) if (f.reserved && !f.replaced_by && !f.retired) delete out['plugin:' + f.id];
   return {inputs: out, moved};
 }
 let database;

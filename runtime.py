@@ -54,9 +54,10 @@ def normalize(config, catalog):
     valid = [f['id'] for f in catalog.get('op1r_plugins', [])]
     # A retired plugin left out in a saved choice (3.3: the ports KASTLE, DX, HIM, DIMENSION, MATRIX, KHORUS) leaves out
     # the bundled file that replaced it (its reserved entry's replaced_by), so the user's choice carries over.
-    gone = {f['id']: f['replaced_by'] for f in catalog.get('op1r_plugins', []) if f.get('reserved') and f.get('replaced_by')}
+    # One retired with nothing replacing it (KASTLE since 3.4: "retired": true, no replaced_by) just drops out.
+    gone = {f['id']: f.get('replaced_by') for f in catalog.get('op1r_plugins', []) if f.get('reserved') and (f.get('replaced_by') or f.get('retired'))}
     if isinstance(hidden, list) and any(v in gone for v in hidden if isinstance(v, str)):
-        hidden = list(dict.fromkeys(gone.get(v, v) if isinstance(v, str) else v for v in hidden))
+        hidden = list(dict.fromkeys(gone.get(v, v) if isinstance(v, str) else v for v in hidden if not (isinstance(v, str) and v in gone and gone[v] is None)))
     if (not isinstance(hidden, list) or any(not isinstance(v, str) for v in hidden)
             or len(set(hidden)) != len(hidden) or any(v not in valid for v in hidden)):
         raise ValueError('Unknown or duplicate hidden plugins: ' + ', '.join(_bad(hidden, valid)))

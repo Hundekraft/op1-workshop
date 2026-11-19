@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "release": {
-    "id": "1d6cca544492b2ec",
+    "id": "f91e9f23fb91a853",
     "product": {
       "name": "hundekraft",
       "version": "3.3.1",
@@ -1100,9 +1100,9 @@
       {
         "id": "kastle",
         "kind": "synth",
-        "name": "(reserved: was the KASTLE port; retired for the bundled castle file, owner 2026-11-17)",
+        "name": "(reserved: was the KASTLE port; retired with nothing replacing it, owner 2026-11-19)",
         "reserved": true,
-        "replaced_by": "castle",
+        "retired": true,
         "bases": [
           "kennel30-plugins"
         ]
@@ -1304,15 +1304,11 @@
       {
         "id": "castle",
         "kind": "synth",
-        "name": "castle",
-        "opmod": [
-          "displayname808.castle"
-        ],
+        "name": "(reserved: was the bundled castle file; not bundled since 3.4, a castle file you send yourself still loads, owner 2026-11-19)",
+        "reserved": true,
         "bases": [
           "kennel30-plugins"
-        ],
-        "file": "castle.opmod",
-        "needs": []
+        ]
       },
       {
         "id": "ploc",
@@ -1367,25 +1363,25 @@
     }
   },
   "devupd": true,
-  "runtime_sha256": "4836a30152a0fce5f7a85ea40dea6bb7d521f000349809b1051f3dd423614fc3",
+  "runtime_sha256": "43bf788504681c2e2e168d4f70543858425aaca6efc566fffa8d4d9fd70a2424",
   "base_sha256": "54ea482ec34d4c149dc0b81216a433dab8e2e96463517b771d33c8015d949d49",
   "variants": {
     "200000000000007ff": {
-      "sha256": "852f9c64f781a862d5f1e96197a607e15c4a345c93dd8f916e558f75f463d4dc",
+      "sha256": "d9127bd9f7204a9192d6a57fb2c188a66b5613807e1647a66d049defb4a311e3",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 70728,
         "plugin_arena_bytes": 4119936,
-        "plugin_arena_estimate": 5275648,
+        "plugin_arena_estimate": 4980736,
         "plugin_arena_room": 6291456,
-        "plugin_arena_foreign": 650976,
-        "plugin_arena_percent": 83.9,
+        "plugin_arena_foreign": 357728,
+        "plugin_arena_percent": 79.2,
         "plugin_arena_over_budget": false,
         "plugin_decl_bytes": 0,
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 5435556,
+        "plugin_file_bytes": 5217300,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -4639,20 +4635,6 @@
         "packed": 1779
       },
       {
-        "name": "content/castle.opmod",
-        "savedName": "displayname808.castle",
-        "kind": "foreign",
-        "claims": [],
-        "claimsKnown": true,
-        "priority": null,
-        "source": "foreign",
-        "version": "1.1",
-        "author": "displayname808",
-        "foreignArena": 293248,
-        "path": "content/castle.opmod",
-        "packed": 103679
-      },
-      {
         "name": "content/chorus.opmod",
         "savedName": "opus.chorus",
         "kind": "foreign",
@@ -4775,7 +4757,7 @@
   "package": {
     "limit": 15000000,
     "base": 11071788,
-    "ratio": 0.8697
+    "ratio": 0.8658
   },
   "core": {
     "start": 31457280,
@@ -4783,5 +4765,5 @@
     "crc": 2066339031
   },
   "plugin_max": 1048576,
-  "cores_sha256": "668d661976599d7a3fcfc8bc58f50c9127eb30ce59ff91528185226dad2be3fb"
+  "cores_sha256": "b7e775f59322fd0c390620cf2f3d3b7ae9ddaa7a445316a4b33b663a6c6ad6f9"
 }

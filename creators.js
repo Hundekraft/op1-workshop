@@ -44,7 +44,7 @@ export const SUPPORT =
   ]
  },
  "displayname808": {
-  "made": "castle, and the Granular features",
+  "made": "the Granular features",
   "links": [
    {
     "label": "Ko-fi",

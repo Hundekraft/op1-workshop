@@ -21,7 +21,7 @@
     "preset_cap": 1024
   },
   "release": {
-    "id": "1d6cca544492b2ec",
+    "id": "f91e9f23fb91a853",
     "product": {
       "name": "hundekraft",
       "version": "3.3.1",
@@ -36,16 +36,16 @@
     "image_bytes": 0,
     "memory_bytes": 70728,
     "plugin_arena_bytes": 4119936,
-    "plugin_arena_estimate": 5275648,
+    "plugin_arena_estimate": 4980736,
     "plugin_arena_room": 6291456,
-    "plugin_arena_foreign": 650976,
-    "plugin_arena_percent": 83.9,
+    "plugin_arena_foreign": 357728,
+    "plugin_arena_percent": 79.2,
     "plugin_arena_over_budget": false,
     "plugin_decl_bytes": 0,
     "plugin_decl_room": 1048576,
     "plugin_fx_lease_bytes": 1048576,
     "plugin_file_max": 1048576,
-    "plugin_file_bytes": 5435556,
+    "plugin_file_bytes": 5217300,
     "branding_bytes": 64,
     "branding_address": "0x1ef0000"
   },
@@ -2051,12 +2051,6 @@
       "template": "content/display/iter.svg"
     },
     {
-      "path": "content/castle.opmod",
-      "blob": "content_castle.opmod",
-      "sha256": "0e699069a254b1dedecd6a5e6d583e8ce35a23de340248c8e4e5c7b6aebde204",
-      "template": "content/display/iter.svg"
-    },
-    {
       "path": "content/chord.knl",
       "blob": "content_chord.knl",
       "sha256": "f0aac3364965ee41c6ffabc9bfe5df62ddca0ec7831bbf2e2158901c7607d13a",
@@ -2602,6 +2596,6 @@
     }
   ],
   "result": {
-    "tar_sha256": "f8ab21b7a0bdfda563bc0d06bc2fa77ecb16fa29562930ef1686f025abf103ff"
+    "tar_sha256": "1f37a6d08d1e3655bf8925db14765bbcea0d61cb597b88c030f9331b90758376"
   }
 }
