@@ -40,6 +40,7 @@ Settings and the workshop:
 - [Picker step](https://hundekraft.github.io/op1-workshop/manual.html#settings): a new PICKER STEP row in settings sets how many encoder clicks move the synth, effect, LFO and sequencer lists and the preset browser one row: 1, 2 or 4. 4 is how it has always been. The idea is u/Infamous_Call_6492's.
 - Sharper screens: text and thin lines now land on whole pixels of your OP-1's screen, whichever panel it has, so they don't blur. The screens that looked worst were redrawn too. The idea is u/Infamous_Call_6492's.
 - Pop-up messages on the OP-1 no longer turn capital letters into icons or apostrophes into question marks.
+- **Add your own** in the Presets section takes DX7 `.syx` banks for dx again. Since dx became LizardMan's file in 3.3.1, the page hadn't seen it and only took `.aif` presets.
 
 
 ## 3.3

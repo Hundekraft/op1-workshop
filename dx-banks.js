@@ -64,6 +64,11 @@ export function planBanks(adds, sent, removing = []) {
   return {problems, total, tooMany: total > DX_MAX_BANKS};
 }
 
+// the DX engine in an inventory record: the bridged dx (manifest id opus.dx, named by its path, e.g. content/dx.opmod)
+// or the earlier kennel DX port (a synth called dx)
+export const hasDxEngine = r => r?.id === 'opus.dx' || /(^|\/)dx\.opmod$/.test(r?.path || r?.name || '') ||
+  (r?.kind === 'synth' && r?.name === 'dx');
+
 // The DX part of the presets section (presets.js draws it): the banks sent from this browser, their marks, and the send
 // path. `onChange` redraws the section. Banks go in at the restart, so a send ends with the OP-1 restarting (T1).
 export function initDxBanks({log = () => {}, onChange = () => {}} = {}) {
@@ -72,7 +77,7 @@ export function initDxBanks({log = () => {}, onChange = () => {}} = {}) {
   return {
     // after the page connected: this OP-1 takes banks and has the DX engine
     connected(inv) {
-      state.available = !!inv?.dxBanks && !!inv.records?.some(r => r.kind === 'synth' && r.name === 'dx');
+      state.available = !!inv?.dxBanks && !!inv.records?.some(hasDxEngine);
       onChange();
       return state.available;
     },

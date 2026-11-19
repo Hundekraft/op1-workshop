@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "release": {
-    "id": "f91e9f23fb91a853",
+    "id": "ffa70884a076c72d",
     "product": {
       "name": "hundekraft",
       "version": "3.3.1",
@@ -1367,7 +1367,7 @@
   "base_sha256": "54ea482ec34d4c149dc0b81216a433dab8e2e96463517b771d33c8015d949d49",
   "variants": {
     "200000000000007ff": {
-      "sha256": "d9127bd9f7204a9192d6a57fb2c188a66b5613807e1647a66d049defb4a311e3",
+      "sha256": "208253258ab340c5db95a1951a2089416971da96cae8f7874c5fd0d64ccf9ba5",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 70728,
@@ -4765,5 +4765,5 @@
     "crc": 2066339031
   },
   "plugin_max": 1048576,
-  "cores_sha256": "b7e775f59322fd0c390620cf2f3d3b7ae9ddaa7a445316a4b33b663a6c6ad6f9"
+  "cores_sha256": "7b5585a5cfcb4f5213cadb431169c274f31cd118c41a6329a58781a3b3ac5054"
 }
