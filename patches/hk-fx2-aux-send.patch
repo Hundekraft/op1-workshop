@@ -1,0 +1,199 @@
+From 649e6d4131804a150fe2857994d8af68ba94d523 Mon Sep 17 00:00:00 2001
+From: tencur <60955077+tencur@users.noreply.github.com>
+Date: Tue, 17 Nov 2026 03:24:49 +0000
+Subject: [PATCH] fxroute: FX2 aux sends only fresh track outs, and sums
+ without overflow
+
+With FX2 source AUX, fr_route_aux built the send from tr_out every block. While the
+tape is stopped R246 runs no track pass, so tr_out keeps its last block and that
+block was sent again every block: a 689 Hz whine (44100 / 64) on the master FX
+(GH #11). The send now uses the sidechain freshness rule (tr_at == sc_blk) and
+sends silence otherwise. fr_snap keeps a stale tr_at behind sc_blk, so the 8-bit
+counter no longer makes an old block look fresh every 256 blocks (this also hit
+the sidechain sources). The USB track ring (usbtrack.c ring_put) gets the same
+check.
+
+The four send products were summed in int32 before >> 15; loud tracks overflowed
+and flipped sign. Each term is shifted on its own now.
+
+harness/fxroute_aux_test.c: fails on 3.3, passes with this.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../synth_sdk/harness/fxroute_aux_test.c      | 111 ++++++++++++++++++
+ ext/kennel/synth_sdk/screens/fxroute.c        |  15 ++-
+ ext/kennel/synth_sdk/screens/usbtrack.c       |   4 +-
+ 3 files changed, 126 insertions(+), 4 deletions(-)
+ create mode 100644 ext/kennel/synth_sdk/harness/fxroute_aux_test.c
+
+diff --git a/ext/kennel/synth_sdk/harness/fxroute_aux_test.c b/ext/kennel/synth_sdk/harness/fxroute_aux_test.c
+new file mode 100644
+index 0000000..a8900ed
+--- /dev/null
++++ b/ext/kennel/synth_sdk/harness/fxroute_aux_test.c
+@@ -0,0 +1,111 @@
++/* FX2 aux send (screens/fxroute.c fr_route_aux): GH #11, the whine with source AUX.
++ *   cc -DOP1_HOST -O1 -g -fsanitize=address,undefined -o /tmp/fxroute_aux_test harness/fxroute_aux_test.c -lm && /tmp/fxroute_aux_test
++ * (from ext/kennel/synth_sdk). Exit 0 = pass.
++ * Builds fxroute.c on its own: the 3.3 tarball has no harness/op1_host.h, so the few SDK pieces fxroute.c uses are
++ * given here (same definitions as op1_plugin.h / op1_feature.h) and the real headers are skipped by their guards.
++ * Block order as R246 runs it: the track pass (usbtrack.c tr_finish: tr_out, tr_at = sc_blk + 1), fr_snap, then the
++ * master FX (fr_route). Tape stopped: no track pass, tr_out keeps its last block.
++ * 1. stale: 2 s of a 220 Hz note on T1 (send 50), then 4 s stopped. The send must be silent after the stop, also
++ *    past the 8-bit block counter's wrap (256 blocks), and the sidechain T1 source must stay "not fresh".
++ * 2. sum: 3 tracks at 24000 (and 4 at 17000), sends 100: the send saturates at +32767, never flips sign. */
++#include <stdint.h>
++#include <stdio.h>
++#include <string.h>
++#include <math.h>
++
++#define OP1_SYNTH_H                                         /* skip the real headers (they need harness/op1_host.h) */
++#define OP1_PLUGIN_H
++#define OP1_FEATURE_H
++#define OP1_FX_BLOCK 64
++#define OP1_Q10(v) ((int32_t)((v) * 1024))
++enum { OP1_SC_T1 = 1, OP1_SC_T2, OP1_SC_T3, OP1_SC_T4, OP1_SC_TAPE, OP1_SC_IN, OP1_SC_INST };
++static inline int16_t op1_sat16(int32_t x) { return x > 32767 ? 32767 : (x < -32768 ? -32768 : (int16_t)x); }
++typedef struct { int32_t x, y; } op1_pt;
++typedef struct { void (*init)(void *scr); void (*update)(void *scr, int dt); } op1_screen_t;
++static void op1_raster_line(void *r, const op1_pt *a, const op1_pt *b, int32_t w, const uint8_t *c) { (void)r; (void)a; (void)b; (void)w; (void)c; }
++static void op1_screen_draw(void *s, int dt) { (void)s; (void)dt; }
++static void *op1_raster(void) { return 0; }
++int32_t op1_setting_get(const char *f, const char *k, int32_t d) { (void)f; (void)k; return d; }
++void op1_setting_set(const char *f, const char *k, int32_t v) { (void)f; (void)k; (void)v; }
++void tp_decide(void) {}
++int16_t tr_out[4][64];                                      /* screens/usbtrack.c */
++
++#include "../screens/fxroute.c"
++
++static int16_t seen[64];                                    /* the send the FX got this block */
++static void fx_wet(void *s, int16_t *a, int16_t *b, const int16_t *p)   /* records its input, output 2 x input */
++{
++    (void)s; (void)p;
++    memcpy(seen, a, sizeof seen);
++    for (int i = 0; i < 64; i++) a[i] = b[i] = op1_sat16(2 * a[i]);
++}
++
++static int fails;
++static void check(int ok, const char *what) { printf("%s  %s\n", ok ? "PASS" : "FAIL", what); if (!ok) fails++; }
++
++static void block(int play, double *ph, int16_t *l, int16_t *r)
++{
++    if (play) {                                             /* track pass: this block's track outs */
++        for (int i = 0; i < 64; i++) { tr_out[0][i] = (int16_t)(12000 * sin(*ph)); *ph += 2 * M_PI * 220 / 44100; }
++        tr_at = (uint8_t)(sc_blk + 1);
++    }
++    fr_snap();
++    memset(l, 0, 64 * sizeof *l); memset(r, 0, 64 * sizeof *r);   /* master: tape and synth silent */
++    int16_t p[8] = { 0 };
++    fr_route(fx_wet, 0, l, r, p);
++}
++
++int main(void)
++{
++    /* 1. stale track outs */
++    fr_src = 2; fr_out = 0; fr_send[0] = 50; fr_live();
++    double ph = 0; int16_t l[64], r[64];
++    int bad_play = 0, sent_play = 0;
++    for (int b = 0; b < 689 * 2; b++) {
++        block(1, &ph, l, r);
++        const int32_t g = q15(q15(q15(0x7FFF, 0x7FFF), 0x7FFF), 50 * 327);
++        for (int i = 0; i < 64; i++) { if (seen[i] != op1_sat16(tr_out[0][i] * g >> 15)) bad_play++; if (seen[i]) sent_play++; }
++    }
++    check(!bad_play && sent_play, "playing: the send is T1 x gain (track outs fresh)");
++    int32_t pk_send = 0; double e = 0, h1 = 0; int nonzero_blocks = 0, sc_fresh = 0;
++    const int nstop = 689 * 4;
++    for (int b = 0; b < nstop; b++) {
++        block(0, &ph, l, r);
++        int nz = 0;
++        for (int i = 0; i < 64; i++) {
++            const int32_t a = seen[i] < 0 ? -seen[i] : seen[i]; if (a > pk_send) pk_send = a; nz |= seen[i];
++            e += (double)l[i] * l[i]; h1 += l[i] * cos(2 * M_PI * i / 64.0);
++        }
++        nonzero_blocks += nz != 0;
++        int16_t sc[64]; sc_fresh += op1_sc_source(OP1_SC_T1, sc);
++    }
++    const double rms = sqrt(e / (nstop * 64.0));
++    printf("      stopped %d blocks: send peak %d, blocks with a send %d, master L rms %.0f (%.1f dBFS), 689 Hz amp %.0f\n",
++           nstop, (int)pk_send, nonzero_blocks, rms, rms > 0 ? 20 * log10(rms / 32768) : -999.0, fabs(h1) * 2 / (nstop * 64.0));
++    check(pk_send == 0 && rms == 0, "stopped: the send is silent (no 689 Hz loop of the last block)");
++    printf("      sidechain T1 reported fresh in %d of %d stopped blocks\n", sc_fresh, nstop);
++    check(sc_fresh == 0, "stopped: sidechain T1 stays stale past the block counter's wrap");
++
++    /* 2. the send sum */
++    for (int t = 0; t < 4; t++) fr_send[t] = 100;
++    fr_live();
++    memset(tr_out, 0, sizeof tr_out);
++    for (int i = 0; i < 64; i++) for (int t = 0; t < 3; t++) tr_out[t][i] = 24000;
++    tr_at = (uint8_t)(sc_blk + 1); fr_snap();
++    { int16_t p[8] = { 0 }; memset(l, 0, sizeof l); memset(r, 0, sizeof r); fr_route(fx_wet, 0, l, r, p); }
++    printf("      3 tracks x 24000, sends 100: send %d\n", seen[0]);
++    check(seen[0] == 32767, "3 loud tracks: the send saturates at +32767");
++    for (int i = 0; i < 64; i++) for (int t = 0; t < 4; t++) tr_out[t][i] = 17000;
++    tr_at = (uint8_t)(sc_blk + 1); fr_snap();
++    { int16_t p[8] = { 0 }; memset(l, 0, sizeof l); memset(r, 0, sizeof r); fr_route(fx_wet, 0, l, r, p); }
++    printf("      4 tracks x 17000, sends 100: send %d\n", seen[0]);
++    check(seen[0] == 32767, "4 tracks: the send saturates at +32767");
++    for (int i = 0; i < 64; i++) for (int t = 0; t < 4; t++) tr_out[t][i] = -32768;
++    tr_at = (uint8_t)(sc_blk + 1); fr_snap();
++    { int16_t p[8] = { 0 }; memset(l, 0, sizeof l); memset(r, 0, sizeof r); fr_route(fx_wet, 0, l, r, p); }
++    printf("      4 tracks x -32768, sends 100: send %d\n", seen[0]);
++    check(seen[0] == -32768, "4 full negative tracks: the send saturates at -32768");
++
++    printf(fails ? "FAILED (%d)\n" : "all passed\n", fails);
++    return fails != 0;
++}
+diff --git a/ext/kennel/synth_sdk/screens/fxroute.c b/ext/kennel/synth_sdk/screens/fxroute.c
+index d5f119d..b24a982 100644
+--- a/ext/kennel/synth_sdk/screens/fxroute.c
++++ b/ext/kennel/synth_sdk/screens/fxroute.c
+@@ -110,6 +110,9 @@ kn_audio_text void fr_snap(void)                                          /* aud
+ #ifndef OP1_HOST
+     *(volatile uint8_t *)0x01DD591E = 0;                    /* the stock body of 0x019C9D04 */
+ #endif
++    if (tr_at != (uint8_t)(sc_blk + 1)) tr_at = sc_blk;    /* no track outs for this block: keep tr_at behind, else the
++                                                             * 8-bit counter meets it again every 256 blocks and an old
++                                                             * block reads as fresh (FX2 aux, sidechains) */
+     sc_blk++;                                               /* once per block, after the tape mix (sidechain freshness) */
+     if (sc_want) sc_want--;
+ #ifndef OP1_HOST
+@@ -151,12 +154,18 @@ static void fr_route_aux(fr_fx_t fx, void *self, int16_t *l, int16_t *r, const i
+      * a tail fades out. It used to run on the whole master here, which made send 0 sound like "full send" and any
+      * send up like "FX off" (2026-11-05 user report) */
+     uint32_t sel = fr_out ? (uint32_t)TRACK : 4;            /* mono tape: the recording track's send muted */
++    /* only this block's track outs (the sidechain rule, fr_tape_feed): R246 skips the track pass while the tape is
++     * stopped and for the first block after the track work was off, and tr_out then still holds an old block. Sent
++     * every block, that one block looped at 44100 / 64 = 689 Hz (GH #11, the whine). Not fresh: send silence */
++    const int fresh = tr_at == sc_blk;
+     int32_t g[4];
+     for (int t = 0; t < 4; t++)                             /* post-fader send gain, Q15 */
+-        g[t] = t == (int)sel ? 0 : q15(q15(q15(T_VOL[t], T_LEV[t]), T_MUTE[t]), fr_send[t] * 327);
++        g[t] = !fresh || t == (int)sel ? 0 : q15(q15(q15(T_VOL[t], T_LEV[t]), T_MUTE[t]), fr_send[t] * 327);
+     int16_t *x = fr_x, *a = fr_a, *b = fr_b;
+-    for (int i = 0; i < FR_N; i++) {
+-        int32_t v = (tr_out[0][i] * g[0] + tr_out[1][i] * g[1] + tr_out[2][i] * g[2] + tr_out[3][i] * g[3]) >> 15;
++    for (int i = 0; i < FR_N; i++) {                        /* each term >> 15 alone: four products of up to 2^30
++                                                             * overflow int32 together (loud tracks flipped sign) */
++        int32_t v = (tr_out[0][i] * g[0] >> 15) + (tr_out[1][i] * g[1] >> 15) + (tr_out[2][i] * g[2] >> 15)
++                  + (tr_out[3][i] * g[3] >> 15);
+         x[i] = a[i] = b[i] = op1_sat16(v);
+     }
+     fx(self, a, b, params);
+diff --git a/ext/kennel/synth_sdk/screens/usbtrack.c b/ext/kennel/synth_sdk/screens/usbtrack.c
+index e5061a9..be443e6 100644
+--- a/ext/kennel/synth_sdk/screens/usbtrack.c
++++ b/ext/kennel/synth_sdk/screens/usbtrack.c
+@@ -496,7 +496,9 @@ kn_audio_text static void ring_put(uint32_t wr0, int silent)
+ {
+     uint32_t wr1 = RING_WR;
+     if (wr1 == wr0) return;                                         /* USB audio not active: nothing pushed */
+-    if (!usb_tracks_live) silent = 1;
++    extern volatile uint8_t sc_blk, tr_at;                 /* screens/fxroute.c: track outs fresh this block */
++    if (!usb_tracks_live || tr_at != sc_blk) silent = 1;    /* tape stopped (no track pass): tr_out is an old block,
++                                                             * which repeated every block is a 689 Hz tone */
+     int32_t g[TR_N];                                                /* post fader (usb_tracks_live 2, op1r-src 06c0a89): the
+                                                                      * track's mixer volume x level x mute fade, as
+                                                                      * Core_mix_master (and the FX2 aux sends, fxroute.c); pan
+-- 
+2.47.3
+
