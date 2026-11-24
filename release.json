@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "release": {
-    "id": "ffa70884a076c72d",
+    "id": "f2ee565d2711a1f4",
     "product": {
       "name": "hundekraft",
-      "version": "3.3.1",
-      "label": "hundekraft 3.3.1",
-      "slug": "hundekraft-3.3.1"
+      "version": "3.3.2",
+      "label": "hundekraft 3.3.2",
+      "slug": "hundekraft-3.3.2"
     },
     "op1r_commit": "6b77bf3fe2a0a006dc79750b34c03c9ba8d8fe01",
     "experimental": true,
@@ -1364,14 +1364,14 @@
   },
   "devupd": true,
   "runtime_sha256": "43bf788504681c2e2e168d4f70543858425aaca6efc566fffa8d4d9fd70a2424",
-  "base_sha256": "54ea482ec34d4c149dc0b81216a433dab8e2e96463517b771d33c8015d949d49",
+  "base_sha256": "887e9596d036c5fe985e917a1772b86e9b58bf846ed047cdea18c7f03fc46bd0",
   "variants": {
     "200000000000007ff": {
-      "sha256": "208253258ab340c5db95a1951a2089416971da96cae8f7874c5fd0d64ccf9ba5",
+      "sha256": "ca6f4b77e2482d1c32b807dee737e80cdfd402ad273f70e2627ee01b620cf671",
       "sizes": {
         "image_bytes": 0,
         "memory_bytes": 70728,
-        "plugin_arena_bytes": 4119936,
+        "plugin_arena_bytes": 4121984,
         "plugin_arena_estimate": 4980736,
         "plugin_arena_room": 6291456,
         "plugin_arena_foreign": 357728,
@@ -1381,7 +1381,7 @@
         "plugin_decl_room": 1048576,
         "plugin_fx_lease_bytes": 1048576,
         "plugin_file_max": 1048576,
-        "plugin_file_bytes": 5217300,
+        "plugin_file_bytes": 5219892,
         "branding_bytes": 64,
         "branding_address": "0x1ef0000"
       },
@@ -3202,8 +3202,8 @@
       },
       "core": {
         "start": 31457280,
-        "len": 483124,
-        "crc": 2066339031
+        "len": 487392,
+        "crc": 1168736303
       }
     }
   },
@@ -3297,10 +3297,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 10158,
+        "arena": 10174,
         "artCache": true,
         "path": "content/c64arp.knl",
-        "packed": 10387
+        "packed": 10397
       },
       {
         "name": "chimera",
@@ -3325,10 +3325,10 @@
         "claimsKnown": true,
         "priority": 200,
         "source": "knl",
-        "arena": 48626,
+        "arena": 49338,
         "artCache": false,
         "path": "content/chord.knl",
-        "packed": 20420
+        "packed": 20799
       },
       {
         "name": "clouds",
@@ -3366,10 +3366,10 @@
         "claimsKnown": true,
         "priority": 420,
         "source": "knl",
-        "arena": 9370,
+        "arena": 9422,
         "artCache": false,
         "path": "content/countin.knl",
-        "packed": 7919
+        "packed": 7957
       },
       {
         "name": "crush",
@@ -3405,10 +3405,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 101678,
+        "arena": 101858,
         "artCache": false,
         "path": "content/dots.knl",
-        "packed": 15232
+        "packed": 15288
       },
       {
         "name": "drift",
@@ -3470,10 +3470,10 @@
         "claimsKnown": true,
         "priority": 1000,
         "source": "knl",
-        "arena": 22286,
+        "arena": 22490,
         "artCache": false,
         "path": "content/euclid.knl",
-        "packed": 12299
+        "packed": 12363
       },
       {
         "name": "eva",
@@ -3779,10 +3779,10 @@
         "claimsKnown": true,
         "priority": 400,
         "source": "knl",
-        "arena": 5570,
+        "arena": 5818,
         "artCache": false,
         "path": "content/markers.knl",
-        "packed": 3850
+        "packed": 3930
       },
       {
         "name": "mbira",
@@ -3849,10 +3849,10 @@
         "claimsKnown": true,
         "priority": null,
         "source": "knl",
-        "arena": 55230,
+        "arena": 55262,
         "artCache": false,
         "path": "content/moai.knl",
-        "packed": 29554
+        "packed": 29599
       },
       {
         "name": "monolit",
@@ -4039,10 +4039,10 @@
         "claimsKnown": true,
         "priority": 80,
         "source": "knl",
-        "arena": 1118,
+        "arena": 1366,
         "artCache": false,
         "path": "content/plocctrl.knl",
-        "packed": 1120
+        "packed": 1219
       },
       {
         "name": "punch",
@@ -4052,7 +4052,7 @@
         "claimsKnown": true,
         "priority": 410,
         "source": "knl",
-        "arena": 4434,
+        "arena": 4466,
         "artCache": false,
         "settings": [
           {
@@ -4081,7 +4081,7 @@
           }
         ],
         "path": "content/punch.knl",
-        "packed": 3293
+        "packed": 3349
       },
       {
         "name": "quad",
@@ -4107,10 +4107,10 @@
         "claimsKnown": true,
         "priority": 150,
         "source": "knl",
-        "arena": 27718,
+        "arena": 27866,
         "artCache": true,
         "path": "content/quant.knl",
-        "packed": 8049
+        "packed": 8083
       },
       {
         "name": "rackverb",
@@ -4225,10 +4225,10 @@
         "claimsKnown": true,
         "priority": 550,
         "source": "knl",
-        "arena": 41126,
+        "arena": 41302,
         "artCache": false,
         "path": "content/samplerplus.knl",
-        "packed": 16364
+        "packed": 16459
       },
       {
         "name": "sampletools",
@@ -4756,14 +4756,14 @@
   },
   "package": {
     "limit": 15000000,
-    "base": 11071788,
-    "ratio": 0.8658
+    "base": 11073894,
+    "ratio": 0.866
   },
   "core": {
     "start": 31457280,
-    "len": 483124,
-    "crc": 2066339031
+    "len": 487392,
+    "crc": 1168736303
   },
   "plugin_max": 1048576,
-  "cores_sha256": "7b5585a5cfcb4f5213cadb431169c274f31cd118c41a6329a58781a3b3ac5054"
+  "cores_sha256": "7aaa8fa7fed7fb70095f955532a2df6a508db3109bc86fa38571b1ebae731f52"
 }

@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.3.2
+
+Fixes:
+
+- Each tape keeps its own tempo when you restart the OP-1. The tempo is saved as soon as you change it and when you power off, and starting up no longer copies the last tape's tempo onto tape 1. 3.3.1 may have saved some tapes with the wrong tempo: set those once and they stay.
+- After a count-in, the metronome level on the tempo screen no longer drops to 0.
+- QUANT keeps clicking through a take when the tape is stopped.
+- STEFAN keeps each track's position, loop points and speed, and which track is selected, when you restart the OP-1.
+- With STEFAN switched off, the tape page no longer shows STEFAN's screen after an update prompt.
+- Copying a drum kit with an apostrophe (') in its name or folder over in disk mode no longer crashes the OP-1.
+- An OP-1 with full flash starts again instead of stopping before the first screen.
+- Letting go of a key no longer does something on a page that didn't see you press it, and pressing DRUM shows the right drum page straight away.
+- sampler+ ping-pong loops keep turning when the play position is past the loop end or the loop is very short.
+- If the master effect you used has been removed, the OP-1 no longer starts with a wrong master effect selected.
+- MOAI's cutoff no longer glitches when it slides down to 0, and a few rare timing faults in punch-in, tape markers and Dots are fixed.
+- With PLOC installed, pushing blue on another synth no longer closes page 2 again when you let go, and switching sounds no longer clears another synth's pages.
+
 ## 3.3.1
 
 Highlights:
