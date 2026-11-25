@@ -297,6 +297,10 @@ function pluginArena(c, own = []) {
   const need = Math.ceil(total / t.align) * t.align;
   return {need, percent: Math.round(1000 * need / t.max) / 10, over: Math.max(0, need - t.max)};
 }
+// A plugin the OP-1 reports still takes memory after the next update unless it is off there (now, or stored for the
+// next boot: kennel.off) or this page will remove it (a pending removal goes with the same update)
+const stillOn = r => !/off|removed/.test(r.state || '') && !(r.name && deviceInventory?.off?.includes(r.name)) &&
+  !ownState.removals.some(x => removalMatches(x, r));
 // your own files' arena needs (kn_load.c kn_peek: load size + call stubs + alignment pad; an .op1p's image + bss + 3),
 // and the ones the connected OP-1 reports that aren't listed here (only their size is known)
 function ownArena() {
@@ -311,7 +315,7 @@ function ownArena() {
       out.push([load + 3 + 12 * imports + align - 1, new TextDecoder().decode(d).includes('_op1_screen_draw_cached')]);
     } catch { out.push([d.length, false]); }
   }
-  for (const r of observedOwn) if (!listed.has(r.name) && !/off|removed/.test(r.state || '')) out.push([r.size || 0, false]);
+  for (const r of observedOwn) if (!listed.has(r.name) && stillOn(r)) out.push([r.size || 0, false]);
   return out;
 }
 const ARENA_ORANGE = 92;                                         // the bar's colours: green up to 92 %, orange above, red over 100 %
@@ -357,7 +361,7 @@ function ownScreens() {
   const listed = new Map(ownFiles.filter(([p]) => !opusPath(p)).map(([p, d]) => [pluginInfo(p, d).name, d]));   // .opmod: no screen record
   let n = 0;
   for (const d of listed.values()) { const svg = d[0] === 0x3C ? d.indexOf(0) : 0; n += Math.max(b.own_min, Math.ceil(Math.max(svg, 0) * b.own_svg_factor)); }
-  for (const r of observedOwn) if (!listed.has(r.name) && !/off|removed/.test(r.state || '')) n += Math.max(b.own_min, Math.ceil((r.size || 0) * b.own_size_factor));
+  for (const r of observedOwn) if (!listed.has(r.name) && stillOn(r)) n += Math.max(b.own_min, Math.ceil((r.size || 0) * b.own_size_factor));
   return n;
 }
 // The main-page tick for a workshop plugin file (content/<file>), or null: the review's On / Off follows it
@@ -830,6 +834,13 @@ async function settlePlan(inv, wanted, opts, full = false) {
     return {...plan, reviewedInventory: current, managesOwn: manageOwn};
   }
 }
+// The send's memory checks (screens, plugin arena): the reason it can't go, or ''. Run again after the inventory read,
+// since what the OP-1 reports (and which of it is off or being removed) is only known then.
+function memoryOver() {
+  if (screenMemory(choices(), ownScreens()).over) return 'That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit. Nothing has been sent.';
+  if (pluginArena(choices(), ownArena())?.over) return 'Too much for the OP–1’s plugin memory: the last plugins wouldn’t load. Untick one or two first. Nothing has been sent.';
+  return '';
+}
 // Plugin management remains build-free with a matching core; otherwise prepare and review a full update.
 async function sendToOp1() {
   let ownOnly = true;
@@ -839,9 +850,7 @@ async function sendToOp1() {
     unresolvedUpdate();
     return;
   }
-  const screens = screenMemory(choices(), ownScreens());
-  if (screens.over) { ownStatus('That’s a bit more than the OP–1 has room for. Untick a plugin or two and it will fit. Nothing has been sent.', true); return; }
-  if (pluginArena(choices(), ownArena())?.over) { ownStatus('Too much for the OP–1’s plugin memory: the last plugins wouldn’t load. Untick one or two first. Nothing has been sent.', true); return; }
+  if (memoryOver()) { ownStatus(memoryOver(), true); return; }
   const own = ownFiles.map(([p, d]) => [p, d]);
   let expectedPlan = null;
   let files = ownOnly ? own : pushFiles, total = files.reduce((n, [, d]) => n + d.length, 0), port, sent = 0, extra = {}, pluginsOnly = false;
@@ -862,6 +871,8 @@ async function sendToOp1() {
     observeConnection(port); connectionState(inv);
     const recheck = () => readInventory(port, {log});
     showInventory(inv);
+    const over = memoryOver();                                  // again, with what this OP-1 really has
+    if (over) { ownStatus(over, true); pushStatus(over, true); updateStage(null); return; }
     if (ownOnly) {
       const target = targetCore();
       const coreMatches = sameCore(target, inv?.core);
