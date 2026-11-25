@@ -1,0 +1,373 @@
+diff --git a/ext/kennel/synth_sdk/plugins/trigguard/plugin.json b/ext/kennel/synth_sdk/plugins/trigguard/plugin.json
+index 637f477..02918d1 100644
+--- a/ext/kennel/synth_sdk/plugins/trigguard/plugin.json
++++ b/ext/kennel/synth_sdk/plugins/trigguard/plugin.json
+@@ -5,18 +5,22 @@
+   "sources": ["trigguard.c"],
+   "loadable": true,
+   "author": "Hundekraft",
+-  "version": "1",
++  "version": "2",
+   "claims": [],
+   "settings_title": "TRIGGER GUARD",
+   "settings": [
+     { "id": "on", "label": "TRIG. GUARD", "type": "onoff", "default": 1,
+-      "help": "Stops a worn key from playing its note twice. It only watches the 24 note keys." },
++      "help": "Stops a worn key from playing its note twice. It watches the 24 note keys; KNOB GUARD below does the encoder pushes." },
+     { "id": "ms", "label": "WINDOW MS", "type": "number", "min": 10, "max": 300, "step": 10, "default": 50,
+       "help": "Press a key again this soon after letting go and it counts as a bounce." },
+     { "id": "windows", "label": "WINDOWS", "type": "choice", "default": 0,
+       "choices": [ {"label": "PER NOTE"}, {"label": "ALL"} ],
+       "help": "PER NOTE times each key on its own. ALL shares one window, so a quick press on another key is dropped too." },
+     { "id": "release", "label": "HOLD RELEASE", "type": "onoff", "default": 1,
+-      "help": "Holds each release back for the window, so a bounce can't cut the note short. Off lets go at once." }
++      "help": "Holds each release back for the window, so a bounce can't cut the note short. Off lets go at once." },
++    { "id": "knobs", "label": "KNOB GUARD", "type": "onoff", "default": 1,
++      "help": "Stops a worn encoder switch from pushing twice, which flips a page 2 straight back." },
++    { "id": "kms", "label": "KNOB MS", "type": "number", "min": 1, "max": 60, "step": 1, "default": 15,
++      "help": "Push an encoder again this soon after letting go and it counts as a bounce." }
+   ]
+ }
+diff --git a/ext/kennel/synth_sdk/plugins/trigguard/test/knob_guard_test.c b/ext/kennel/synth_sdk/plugins/trigguard/test/knob_guard_test.c
+new file mode 100644
+index 0000000..599ce2c
+--- /dev/null
++++ b/ext/kennel/synth_sdk/plugins/trigguard/test/knob_guard_test.c
+@@ -0,0 +1,122 @@
++/* Host test of trigguard.c: the encoder pushes (the recorded chatter, a bounce on release, two deliberate pushes,
++ * the guard off, a shorter window), and the note keys unchanged from trigguard. Times in tenths of a ms.
++ *   gcc -O2 -Wall -DOP1_HOST -I <synth_sdk> plugins/trigguard/test/knob_guard_test.c -o /tmp/kg_test && /tmp/kg_test
++ * (needs harness/op1_host.h; the guard uses none of its mocks)
++ * Copyright (C) 2026 Jason Bunting. GPL-3.0-or-later with the OP-1 firmware permission. */
++#include <stdio.h>
++#include <string.h>
++#include <stdint.h>
++#include "op1_feature.h"
++#include "op1_keyfilter.h"
++
++op1_key_filter_t op1_key_filter;
++static int32_t set_on = 1, set_ms = 50, set_windows = 0, set_release = 1, set_knobs = 1, set_kms = 15;
++int32_t op1_setting_value(const char *feature, const char *id)
++{
++    if (strcmp(feature, "trigguard")) return 0;
++    if (!strcmp(id, "on")) return set_on;
++    if (!strcmp(id, "ms")) return set_ms;
++    if (!strcmp(id, "windows")) return set_windows;
++    if (!strcmp(id, "release")) return set_release;
++    if (!strcmp(id, "knobs")) return set_knobs;
++    if (!strcmp(id, "kms")) return set_kms;
++    return 0;
++}
++static int pushed;                                   /* wake events waiting in the "queue" */
++int op1_key_push(int code, int down) { (void)code; (void)down; pushed++; return 1; }
++
++#include "../trigguard.c"
++
++#define BLUE 0x3B
++#define ORANGE 0x3E
++#define NOTE 0x16
++static char out[256];
++static int nout, failures;
++static void deliver(int code, int pressed)
++{
++    nout += snprintf(out + nout, sizeof out - (size_t)nout, "%s%c%02X", nout ? " " : "", pressed ? 'd' : 'u', code);
++}
++static void at(uint32_t tenths) { tg_host_cycles = (uint64_t)tenths * (CYC_MS / 10); }
++static void ev(uint32_t tenths, int code, int pressed) { at(tenths); tg_key(code, pressed, 0, deliver); }
++static void service(uint32_t tenths)                 /* a main-loop pass, then its wake event if it pushed one */
++{
++    at(tenths);
++    pushed = 0;
++    tg_event(OP1_EV_SERVICE, 0);
++    if (pushed) tg_key(TG_TOKEN_CODE, TG_TOKEN, 1, deliver);
++}
++static void reset(void)
++{
++    memset(down, 0, sizeof down); memset(held, 0, sizeof held); memset(swallow, 0, sizeof swallow);
++    memset(due, 0, sizeof due); memset(last_up, 0, sizeof last_up);
++    any_up_set = 0; tg_pending = 0; tg_token = 0;
++    nout = 0; out[0] = 0;
++    tg_read_settings();
++}
++static void expect(const char *want, const char *what)
++{
++    if (strcmp(out, want)) { printf("FAIL: %s\n  want: %s\n  got:  %s\n", what, want, out); failures++; }
++}
++
++int main(void)
++{
++    tg_event(OP1_EV_BOOT_DONE, 0);
++    if (op1_key_filter.fn != tg_key) { printf("FAIL: filter not installed\n"); failures++; }
++
++    /* the chatter recorded on orange (research/pushprobe): d, u +0.2 ms, d +0.3 ms, u +88.2 ms */
++    reset();
++    ev(0, ORANGE, 1); ev(2, ORANGE, 0); ev(5, ORANGE, 1); ev(887, ORANGE, 0);
++    service(900); service(1037); service(1038);
++    expect("d3E u3E", "orange's recorded chatter is one push");
++
++    /* a bounce on release: d, u at 120 ms, d +0.4 ms, u +0.3 ms */
++    reset();
++    ev(0, BLUE, 1); ev(1200, BLUE, 0); ev(1204, BLUE, 1); ev(1207, BLUE, 0);
++    service(1300); service(1358);
++    expect("d3B u3B", "a bounce on release is one push");
++
++    /* two deliberate pushes 150 ms apart both count */
++    reset();
++    ev(0, BLUE, 1); ev(800, BLUE, 0); ev(2300, BLUE, 1); ev(3100, BLUE, 0); service(3260);
++    expect("d3B u3B d3B u3B", "two deliberate pushes are two");
++
++    /* the held release goes out when the window has passed, not before */
++    reset();
++    ev(0, BLUE, 1); ev(800, BLUE, 0); service(900);
++    expect("d3B", "the release is held inside the window");
++    service(951);
++    expect("d3B u3B", "the release goes out after 15 ms");
++
++    /* knob guard off: the chatter passes as it came */
++    set_knobs = 0; reset();
++    ev(0, ORANGE, 1); ev(2, ORANGE, 0); ev(5, ORANGE, 1); ev(887, ORANGE, 0);
++    expect("d3E u3E d3E u3E", "knob guard off passes everything");
++    set_knobs = 1;
++
++    /* a 1 ms window still catches the 0.3 ms chatter */
++    set_kms = 1; reset();
++    ev(0, ORANGE, 1); ev(2, ORANGE, 0); ev(5, ORANGE, 1); ev(887, ORANGE, 0); service(898);
++    expect("d3E u3E", "1 ms window catches sub-millisecond chatter");
++    set_kms = 15;
++
++    /* the knobs don't use the note keys' settings: release hold off and WINDOWS ALL leave them alone */
++    set_release = 0; set_windows = 1; reset();
++    ev(0, NOTE, 1); ev(500, NOTE, 0);                  /* a note release: passes at once, starts the shared window */
++    ev(510, BLUE, 1); ev(1200, BLUE, 0); ev(1203, BLUE, 1); ev(1205, BLUE, 0); service(1400);
++    expect("d16 u16 d3B u3B", "knobs keep their own rule beside the notes' settings");
++    set_release = 1; set_windows = 0;
++
++    /* note keys as trigguard: a bounce inside 50 ms is dropped, the note continues */
++    reset();
++    ev(0, NOTE, 1); ev(1000, NOTE, 0); ev(1100, NOTE, 1); ev(2000, NOTE, 0); service(2400); service(2501);
++    expect("d16 u16", "a note key's bounce is dropped as in trigguard");
++
++    /* other keys pass untouched */
++    reset();
++    ev(0, 0x06, 1); ev(1, 0x06, 0); ev(2, 0x06, 1);
++    expect("d06 u06 d06", "T1 passes untouched");
++
++    if (failures) { printf("%d failed\n", failures); return 1; }
++    printf("all passed (dropped: notes %u, knobs %u)\n", tg_dropped, kg_dropped);
++    return 0;
++}
+diff --git a/ext/kennel/synth_sdk/plugins/trigguard/trigguard.c b/ext/kennel/synth_sdk/plugins/trigguard/trigguard.c
+index 72b36cc..608c9c9 100644
+--- a/ext/kennel/synth_sdk/plugins/trigguard/trigguard.c
++++ b/ext/kennel/synth_sdk/plugins/trigguard/trigguard.c
+@@ -1,13 +1,20 @@
+-/* "trigguard": the trigger guard, a bounce guard for the keyboard's 24 note keys (plan: OP1-Emulator
+- * docs/trigger-guard-preset-tools-plan-2026-11-09.md, section 1). A worn key switch bounces: one press arrives as
+- * press, release, press within a few ms, and the OP-1 plays, records and sends the note twice. Our own design (kennel
+- * branch keyguard, 2026-11-09, then core code; a feature plugin since 2026-11-14).
++/* "trigguard": the trigger guard, a bounce guard for the keyboard's 24 note keys and the four encoder pushes
++ * (plan: OP1-Emulator docs/trigger-guard-preset-tools-plan-2026-11-09.md, section 1). A worn key switch bounces: one
++ * press arrives as press, release, press within a few ms, and the OP-1 plays, records and sends the note twice.
++ * Our own design (kennel branch keyguard, 2026-11-09, then core code; a feature plugin since 2026-11-14).
+  *
+  * Where: the core's key filter (op1_keyfilter.h): dispatcher.c's key_event_hook calls tg_key first with every key
+  * event, before every consumer (menu, the core's pages, the features, synth, drums, sequencers, USB MIDI out, CC
+- * feedback, key holds); what passes goes on through `deliver`. Only the note keys (R246 key_is_note_key 0x019C316C:
+- * 0x0D-0x0F, 0x16-0x20, 0x27-0x2A, 0x30-0x35) are guarded; jacks (0x38+), encoders, Shift, transport and mode keys
+- * pass untouched, and so does every event kennel pushed itself (marked: MIDI keys, the CC map, op1_stock_seq_key).
++ * feedback, key holds); what passes goes on through `deliver`. The note keys (R246 key_is_note_key 0x019C316C:
++ * 0x0D-0x0F, 0x16-0x20, 0x27-0x2A, 0x30-0x35) and the encoder pushes (0x3B-0x3E) are guarded; jacks (the other codes
++ * from 0x38), Shift, transport and mode keys pass untouched, and so does every event kennel pushed itself (marked:
++ * MIDI keys, the CC map, op1_stock_seq_key).
++ *
++ * Encoder pushes ("knobs", KNOB GUARD, and "kms", KNOB MS, 1..60, default 15): a worn push switch chatters too
++ * (measured: down, up 0.2 ms later, down 0.3 ms after that, the real up 88 ms later), and the core flips an engine's
++ * page 2 on every encoder down, so a chatter flips it twice or back on release. They follow the rule below with their
++ * own window, always with the release held (a page flips on the down, so holding the up costs nothing); WINDOWS ALL
++ * and HOLD RELEASE are the note keys' only.
+  *
+  * Rule, window W ms (setting "ms", default 50, 10..300):
+  *   HOLD RELEASE on (default): a note key's release is held back for W. A press of the same key inside W drops both
+@@ -34,8 +41,14 @@
+ #define TG_MS_DEFAULT 50
+ #define TG_MS_MIN  10
+ #define TG_MS_MAX  300
++#define KG_MS_DEFAULT 15                                         /* encoder pushes */
++#define KG_MS_MIN  1
++#define KG_MS_MAX  60
+ #define TG_TOKEN_CODE 0x3F                                       /* the main loop's wake event: 0x3F | 0xA6 << 8 */
+ #define TG_TOKEN   0xA6                                          /* (kennel's MIDI param key is 0xA5) */
++#define NOTES      24
++#define KEYS       28                                            /* 24 note keys, then the four encoder pushes */
++#define FEAT       "trigguard"
+ 
+ #ifdef OP1_HOST
+ uint64_t tg_host_cycles;                                         /* harness/keyguard_test.c sets the clock */
+@@ -53,24 +66,25 @@ static uint64_t now(void)
+ }
+ #endif
+ 
+-/* code -> note key index + 1 (0: not a note key), from key_is_note_key */
+-static const uint8_t note_idx[0x40] = {
++/* code -> guarded key index + 1 (0: not guarded): the note keys from key_is_note_key, then the encoder pushes */
++static const uint8_t key_idx[0x40] = {
+     [0x0D] = 1, [0x0E] = 2, [0x0F] = 3,
+     [0x16] = 4, [0x17] = 5, [0x18] = 6, [0x19] = 7, [0x1A] = 8, [0x1B] = 9, [0x1C] = 10, [0x1D] = 11, [0x1E] = 12,
+     [0x1F] = 13, [0x20] = 14,
+     [0x27] = 15, [0x28] = 16, [0x29] = 17, [0x2A] = 18,
+-    [0x30] = 19, [0x31] = 20, [0x32] = 21, [0x33] = 22, [0x34] = 23, [0x35] = 24 };
+-static uint8_t key_code[24];                                     /* index -> code */
++    [0x30] = 19, [0x31] = 20, [0x32] = 21, [0x33] = 22, [0x34] = 23, [0x35] = 24,
++    [0x3B] = 25, [0x3C] = 26, [0x3D] = 27, [0x3E] = 28 };
++static uint8_t key_code[KEYS];                                   /* index -> code */
+ 
+ /* settings (written on the main loop, read on the KeyHandler) */
+-static volatile uint8_t tg_on = 1, tg_rel = 1, tg_all;
+-static volatile uint16_t tg_ms = TG_MS_DEFAULT;
++static volatile uint8_t tg_on = 1, tg_rel = 1, tg_all, kg_on = 1;
++static volatile uint16_t tg_ms = TG_MS_DEFAULT, kg_ms = KG_MS_DEFAULT;
+ 
+-/* per note key (KeyHandler thread) */
+-static uint8_t down[24];                                         /* consumers saw the press and not yet its release */
+-static uint8_t held[24];                                         /* a release is held back until due[] */
+-static uint8_t swallow[24];                                      /* drop the next release (its press was dropped) */
+-static uint64_t due[24], last_up[24];                            /* last_up: the last release consumers saw */
++/* per guarded key (KeyHandler thread) */
++static uint8_t down[KEYS];                                       /* consumers saw the press and not yet its release */
++static uint8_t held[KEYS];                                       /* a release is held back until due[] */
++static uint8_t swallow[KEYS];                                    /* drop the next release (its press was dropped) */
++static uint64_t due[KEYS], last_up[KEYS];                        /* last_up: the last release consumers saw */
+ static uint64_t any_up;                                          /* WINDOWS ALL: when the last note-key release came */
+ static uint8_t any_up_set;
+ 
+@@ -78,27 +92,34 @@ static uint8_t any_up_set;
+ static volatile uint8_t tg_pending;                              /* a held release waits */
+ static volatile uint32_t tg_due32;                               /* the earliest due time, low 32 bits of the clock */
+ static volatile uint8_t tg_token;                                /* a wake event is in the queue */
+-volatile uint32_t tg_dropped;                                    /* events dropped since boot (debugger, tests) */
++volatile uint32_t tg_dropped;                                    /* note-key events dropped since boot */
++volatile uint32_t kg_dropped;                                    /* encoder-push events dropped since boot */
+ 
+-static uint64_t window(void) { return (uint64_t)tg_ms * CYC_MS; }
++static int is_knob(int i) { return i >= NOTES; }
++static int guard_on(int i) { return is_knob(i) ? kg_on : tg_on; }
++static int hold_rel(int i) { return is_knob(i) ? 1 : tg_rel; }
++static uint64_t window(int i) { return (uint64_t)(is_knob(i) ? kg_ms : tg_ms) * CYC_MS; }
++static void dropped(int i, int n) { if (is_knob(i)) kg_dropped += (uint32_t)n; else tg_dropped += (uint32_t)n; }
+ 
+ static void publish(void)                                        /* the earliest held release for the main loop */
+ {
+     int any = 0;
+     uint64_t m = 0;
+-    for (int i = 0; i < 24; i++) if (held[i] && (!any || due[i] < m)) { m = due[i]; any = 1; }
++    for (int i = 0; i < KEYS; i++) if (held[i] && (!any || due[i] < m)) { m = due[i]; any = 1; }
+     tg_due32 = (uint32_t)m;
+     tg_pending = (uint8_t)any;
+ }
+ 
+-/* due held releases (all of them when the guard or the release hold is off), in time order */
++/* due held releases (all of a key's when its guard or its release hold is off), in time order */
+ static void flush(uint64_t t, op1_key_deliver deliver)
+ {
+     if (!tg_pending) return;
+-    const int all = !tg_on || !tg_rel;
+     for (;;) {
+         int k = -1;
+-        for (int i = 0; i < 24; i++) if (held[i] && (all || due[i] <= t) && (k < 0 || due[i] < due[k])) k = i;
++        for (int i = 0; i < KEYS; i++) {
++            const int all = !guard_on(i) || !hold_rel(i);
++            if (held[i] && (all || due[i] <= t) && (k < 0 || due[i] < due[k])) k = i;
++        }
+         if (k < 0) break;
+         held[k] = 0; down[k] = 0; last_up[k] = t;
+         deliver(key_code[k], 0);
+@@ -109,7 +130,7 @@ static void flush(uint64_t t, op1_key_deliver deliver)
+ /* the key filter (KeyHandler): every key event */
+ static void tg_key(int code, int pressed, int marked, op1_key_deliver deliver)
+ {
+-    if (!key_code[0]) for (int c = 0; c < 0x40; c++) if (note_idx[c]) key_code[note_idx[c] - 1] = (uint8_t)c;
++    if (!key_code[0]) for (int c = 0; c < 0x40; c++) if (key_idx[c]) key_code[key_idx[c] - 1] = (uint8_t)c;
+     if (code == TG_TOKEN_CODE && pressed == TG_TOKEN) {          /* our own wake event: never passed on */
+         tg_token = 0;
+         flush(now(), deliver);
+@@ -118,52 +139,55 @@ static void tg_key(int code, int pressed, int marked, op1_key_deliver deliver)
+     const uint64_t t = now();
+     flush(t, deliver);                                           /* releases that came due go first */
+     tg_token = 0;                                                /* a wake event lost to a queue reset never blocks the next */
+-    const int i = code >= 0 && code < 0x40 ? note_idx[code] - 1 : -1;
++    const int i = code >= 0 && code < 0x40 ? key_idx[code] - 1 : -1;
+     if (marked || i < 0) { deliver(code, pressed); return; }
+     pressed = pressed != 0;
+-    if (!pressed && swallow[i]) { swallow[i] = 0; tg_dropped++; return; }
+-    if (!tg_on) {
++    if (!pressed && swallow[i]) { swallow[i] = 0; dropped(i, 1); return; }
++    if (!guard_on(i)) {
+         down[i] = (uint8_t)pressed;
+         if (!pressed) last_up[i] = t;
+         deliver(code, pressed);
+         return;
+     }
+     if (pressed) {
+-        if (held[i]) { held[i] = 0; publish(); tg_dropped += 2; return; }      /* bounce: the note continues */
+-        if (down[i]) { tg_dropped++; return; }                                  /* a second press, no release */
+-        if (!tg_rel && last_up[i] && t - last_up[i] < window()) {               /* bounce, releases not held */
+-            swallow[i] = 1; tg_dropped++; return;
++        if (held[i]) { held[i] = 0; publish(); dropped(i, 2); return; }           /* bounce: the key stays down */
++        if (down[i]) { dropped(i, 1); return; }                                   /* a second press, no release */
++        if (!hold_rel(i) && last_up[i] && t - last_up[i] < window(i)) {           /* bounce, releases not held */
++            swallow[i] = 1; dropped(i, 1); return;
+         }
+-        if (tg_all && any_up_set && t - any_up < window()) {                    /* ALL: inside the shared window */
+-            swallow[i] = 1; tg_dropped++; return;
++        if (!is_knob(i) && tg_all && any_up_set && t - any_up < window(i)) {      /* ALL: inside the shared window */
++            swallow[i] = 1; dropped(i, 1); return;
+         }
+         down[i] = 1;
+         deliver(code, 1);
+         return;
+     }
+-    if (held[i]) { tg_dropped++; return; }                       /* a second release */
+-    any_up = t; any_up_set = 1;                                  /* a real release: the shared window starts */
+-    if (down[i] && tg_rel) { held[i] = 1; due[i] = t + window(); publish(); return; }
++    if (held[i]) { dropped(i, 1); return; }                      /* a second release */
++    if (!is_knob(i)) { any_up = t; any_up_set = 1; }             /* a real note release: the shared window starts */
++    if (down[i] && hold_rel(i)) { held[i] = 1; due[i] = t + window(i); publish(); return; }
+     down[i] = 0; last_up[i] = t;                                 /* not held (or its press came before we knew): pass */
+     deliver(code, 0);
+ }
+ 
+-/* main loop: wake the KeyHandler when a held release is due (at once when the guard or the hold went off) */
++/* main loop: wake the KeyHandler when a held release is due (at once when a guard or the hold went off) */
+ static void tg_service(void)
+ {
+     if (!tg_pending || tg_token) return;
+-    if (tg_on && tg_rel && (int32_t)((uint32_t)now() - tg_due32) < 0) return;
++    if (tg_on && tg_rel && kg_on && (int32_t)((uint32_t)now() - tg_due32) < 0) return;
+     tg_token = 1;
+     if (!op1_key_push(TG_TOKEN_CODE, TG_TOKEN)) tg_token = 0;   /* queue full: the next pass tries again */
+ }
+ 
+ static void tg_read_settings(void)
+ {
+-    tg_on = op1_setting_value("trigguard", "on") != 0;
+-    const int32_t ms = op1_setting_value("trigguard", "ms");
++    tg_on = op1_setting_value(FEAT, "on") != 0;
++    const int32_t ms = op1_setting_value(FEAT, "ms");
+     tg_ms = (uint16_t)(ms < TG_MS_MIN ? TG_MS_MIN : ms > TG_MS_MAX ? TG_MS_MAX : ms);
+-    tg_all = op1_setting_value("trigguard", "windows") == 1;
+-    tg_rel = op1_setting_value("trigguard", "release") != 0;
++    tg_all = op1_setting_value(FEAT, "windows") == 1;
++    tg_rel = op1_setting_value(FEAT, "release") != 0;
++    kg_on = op1_setting_value(FEAT, "knobs") != 0;
++    const int32_t kms = op1_setting_value(FEAT, "kms");
++    kg_ms = (uint16_t)(kms < KG_MS_MIN ? KG_MS_MIN : kms > KG_MS_MAX ? KG_MS_MAX : kms);
+ }
+ 
+ static void tg_event(int id, int32_t arg)
+@@ -178,5 +202,4 @@ static void tg_event(int id, int32_t arg)
+         tg_service();
+ }
+ 
+-const op1_feature_t FEATURE_trigguard = { .api = OP1_FEATURE_API, .priority = 1000, .name = "trigguard",
+-                                          .event = tg_event };
++const op1_feature_t FEATURE_trigguard = { .api = OP1_FEATURE_API, .priority = 1000, .name = FEAT, .event = tg_event };
