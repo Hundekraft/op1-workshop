@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "update": "trigguard knob guard",
+  "trigguard_plugin_version": 2,
+  "base": "Hundekraft 3.3.2 corresponding source",
+  "base_archive_url": "https://raw.githubusercontent.com/Hundekraft/op1-workshop/main/source/hundekraft-3.3.2-source.tar.gz",
+  "base_archive_sha256": "eabeb668bc577e10633400ada35ff5ac8be6ef1318796c0318f03a878990a97f",
+  "patch": "trigguard-knob-guard-hundekraft-3.3.2-update.patch",
+  "patch_sha256": "e82beb94ee01d99253f0421dc06f086509cc6236462fc1faffd14a9d8eef6768",
+  "files": {
+    "ext/kennel/synth_sdk/plugins/trigguard/trigguard.c": {
+      "before": "909c5120cdfeadd258b7640efd09f3a01ee4247b63876e3517c865c6d92920d5",
+      "after": "e3c3e111bc22adc3f445a2ca1a848cd66d63641d703ee6707f1ca517b25d6add"
+    },
+    "ext/kennel/synth_sdk/plugins/trigguard/plugin.json": {
+      "before": "ae30ad670d300842d9b42ddfd27247f5fe6e34ffc640326d54b9861590a9a75d",
+      "after": "ef78747abad2e52ff96ff03b640883acae16498c9b38afe80e042bdc77ff6671"
+    },
+    "ext/kennel/synth_sdk/plugins/trigguard/test/knob_guard_test.c": {
+      "before": null,
+      "after": "6e4f36f5174dabbcb3f9cbe22f5ce3fe4f20789eb2d006250148fb8ef08bad87"
+    }
+  },
+  "validation": {
+    "host_test_cases": 9,
+    "host_test_passed": true,
+    "blackfin_object_compiled": true,
+    "full_Hundekraft_build_tested": false,
+    "hardware_tested": true,
+    "hardware_tested_as": "the same guard code as a renamed loadable copy (pushguard) on Hundekraft 3.3.1; trigguard.c is identical in 3.3.1 and 3.3.2",
+    "installable_package": false
+  }
+}
