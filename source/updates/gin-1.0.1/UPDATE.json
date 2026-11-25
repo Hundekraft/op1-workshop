@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "gin_version": "1.0.1",
+  "core_commit": "7e941d389a21d7b6b108e2ef5e319d3966af24f4",
+  "base": "Hundekraft 3.3.2 corresponding source",
+  "base_archive_url": "https://raw.githubusercontent.com/Hundekraft/op1-workshop/main/source/hundekraft-3.3.2-source.tar.gz",
+  "base_archive_sha256": "eabeb668bc577e10633400ada35ff5ac8be6ef1318796c0318f03a878990a97f",
+  "patch": "gin-1.0.1-hundekraft-3.3.2-update.patch",
+  "patch_sha256": "360d2d19df3cfb370ebad541f9bdf10173644d70b2339204ee1b2e9199f328a1",
+  "files": {
+    "ext/kennel/synth_sdk/plugins/gin/vendor/third_party/libpo32/core/src/po32_synth.c": {
+      "before": "1eb287ef953590603835e7347f2adc17c9af51d9915840784746e060502630c8",
+      "after": "5df1b368b9a5c42ee6717e927ec1f1b0c29db92f5c4be8b7d43e86887716e7e9"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/third_party/libpo32/core/include/po32_synth.h": {
+      "before": "4c03d9a99f0d15d7dac657a1af8482e3e563310e6b460bee825705b53276710e",
+      "after": "ecfeae93f799d43c0b545cfdc420574b64b003921c6ede0afacbb76defeac417"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/src/tonic/integer/gin_prepare.c": {
+      "before": "ed91440da0c0f8921258aa7bd8c4b1c95d091ab2660b70c65a143ffe82558c42",
+      "after": "399f16ee43d65407afefb05f732735e51f21dccad3e7ff69dcaae0b3cf13f759"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/sdk/synth_sdk/plugins/gin/gin_integer.h": {
+      "before": "1319e54d9fda9e8269d0ecef448ce83ac3d05e6b7bd410489601181499083fa7",
+      "after": "206f5c2f93347eb6bc7a45d2048a06a8045fb423d130d33badcd1fa91e615ae5"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/bootstrap/third_party/libpo32/core/src/po32_synth.c": {
+      "before": "27e46b18cfe2b1450877dd1685edb21b86cec4b78af651709e8d312b00d23688",
+      "after": "2e674e9a83ad1226fff6c7d0944db0ca3e87ead7fa4e9d58c6e54cb39ccaa2ae"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/bootstrap/third_party/libpo32/core/include/po32_synth.h": {
+      "before": "4c03d9a99f0d15d7dac657a1af8482e3e563310e6b460bee825705b53276710e",
+      "after": "ecfeae93f799d43c0b545cfdc420574b64b003921c6ede0afacbb76defeac417"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/bootstrap/src/tonic/integer/gin_prepare.c": {
+      "before": "cf9ea1c924e1ceb580a057992ac3cd719d7bb10b5b8f0d14fb97e36cc840ceaa",
+      "after": "58fc9fded78261c35df1ccbd366c86832bef44f426d5d181f43e0cf489e5633b"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/bootstrap/src/tonic/integer/gin_integer.h": {
+      "before": "705bd2bbfa79b276cd564009d0ab22cad5efe3b21628e76884ef2db840d39cc7",
+      "after": "796911e8260db6f7e14a61461ea59ea3c9692161afe41ff5366191bb4c804224"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/sdk/synth_sdk/plugins/gin/gin_integer.c": {
+      "before": "d0fb98e41247026fe11bbb37a658a9f7e2a7f7294e4de489adb3179288b4dc03",
+      "after": "51d390e400e6dc379fe936c7ce7641d7ba5e398984aabfc3de42dd0df52b18ed"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/src/tonic/integer/gin_integer.h": {
+      "before": "11acf249ad0307847d356c0499b70adc7d683366e5682d32be6fd7cee549897d",
+      "after": "5f8822dae3ff1ceb76dee6c5161c6319f7df10b1be6e51cc8261047b31ed8586"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/plugin.json": {
+      "before": "5c16cbf84b4f5295a97acc9bd505d2691500e6e96907df972188999e3a152723",
+      "after": "48c715b9058ae7788c666bbdcab8871e30ddb0f3c7678d7b5297f7fa46f5e622"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/prepare.py": {
+      "before": "3a6a9db81711e36229cb5b02f905c271ed666ddde83f960cc87e510067f68b3b",
+      "after": "f41e1933e8b388ab8ee192d47bd10127bb3bb7542ff8abafd534c7fdaaa0d9bb"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/src/tonic/ui_native/gin_tip_qr.inc": {
+      "before": null,
+      "after": "fdfab2a16bc99598880020dd3fbbd38383eaebeb898cd9613d14f2ed6777eb72"
+    },
+    "ext/kennel/synth_sdk/plugins/gin/vendor/src/tonic/ui_native/gin_screen.c": {
+      "before": "b84c1b6d7e6404e9012ebda5d197bbb38cd098ae87a8a128851ec37a8c1b7d16",
+      "after": "9c94b069bfaa588d89b1578679b46afce1104146edfd143318bd516f34b602cf"
+    }
+  },
+  "validation": {
+    "core_arithmetic_block_profiles": 4,
+    "native_fast_block_profiles": 2,
+    "restart_attacks_per_profile": 219,
+    "burst_thresholds_per_profile": 301,
+    "non_mod_factory_morph_cases_per_block_mode": 793,
+    "non_mod_prepared_pcm_byte_exact": true,
+    "target_object_compiler": "bfin-elf GCC8.5.0 BF524",
+    "full_Hundekraft_GCC13_build_tested": false,
+    "hardware_tested": false,
+    "installable_package": false
+  }
+}
